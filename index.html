@@ -34,47 +34,43 @@
 </head>
 
 <body class="bg-gray-900 text-white" x-data="{ lang: 'es' }">
-    <!-- Language Toggle -->
-    <div class="fixed top-4 right-4 z-50">
-        <button @click="lang = lang === 'es' ? 'en' : 'es'"
-            class="bg-purple-600/80 backdrop-blur-sm px-4 py-2 rounded-lg hover:bg-purple-600 transition">
-            <span x-text="lang === 'es' ? 'View in English' : 'Ver en Español'"></span>
-        </button>
-    </div>
-
     <!-- Navbar -->
-    <nav class="fixed w-full bg-gray-900/95 backdrop-blur-sm z-40 border-b border-gray-800">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <a href="#home" class="text-2xl font-bold flex items-center">
-                    <i class="fas fa-infinity text-purple-400 mr-2"></i>
-                    <span class="hidden md:inline">Fabián M.</span>
+<nav class="fixed w-full bg-gray-900/95 backdrop-blur-sm z-40 border-b border-gray-800">
+    <div class="container mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold flex items-center">
+                <i class="fas fa-infinity text-purple-400 mr-2"></i>
+                <span class="hidden md:inline">Fabián M.</span>
+            </a>
+            <div class="flex items-center space-x-8"> <!-- Quitamos la clase hidden md:flex -->
+                <a href="#home" class="hidden md:block hover:text-purple-400 transition">
+                    <span x-show="lang === 'es'">Inicio</span>
+                    <span x-show="lang === 'en'">Home</span>
                 </a>
-                <div class="hidden md:flex md:items-center md:space-x-8">
-                    <a href="#home" class="hover:text-purple-400 transition">
-                        <span x-show="lang === 'es'">Inicio</span>
-                        <span x-show="lang === 'en'">Home</span>
-                    </a>
-                    <a href="#about" class="hover:text-purple-400 transition">
-                        <span x-show="lang === 'es'">Sobre mí</span>
-                        <span x-show="lang === 'en'">About</span>
-                    </a>
-                    <a href="#skills" class="hover:text-purple-400 transition">
-                        <span x-show="lang === 'es'">Habilidades</span>
-                        <span x-show="lang === 'en'">Skills</span>
-                    </a>
-                    <a href="#certifications" class="hover:text-purple-400 transition">
-                        <span x-show="lang === 'es'">Certificaciones</span>
-                        <span x-show="lang === 'en'">Certifications</span>
-                    </a>
-                    <a href="#contact" class="hover:text-purple-400 transition">
-                        <span x-show="lang === 'es'">Contacto</span>
-                        <span x-show="lang === 'en'">Contact</span>
-                    </a>
-                </div>
+                <a href="#about" class="hidden md:block hover:text-purple-400 transition">
+                    <span x-show="lang === 'es'">Sobre mí</span>
+                    <span x-show="lang === 'en'">About</span>
+                </a>
+                <a href="#skills" class="hidden md:block hover:text-purple-400 transition">
+                    <span x-show="lang === 'es'">Habilidades</span>
+                    <span x-show="lang === 'en'">Skills</span>
+                </a>
+                <a href="#certifications" class="hidden md:block hover:text-purple-400 transition">
+                    <span x-show="lang === 'es'">Certificaciones</span>
+                    <span x-show="lang === 'en'">Certifications</span>
+                </a>
+                <a href="#contact" class="hidden md:block hover:text-purple-400 transition">
+                    <span x-show="lang === 'es'">Contacto</span>
+                    <span x-show="lang === 'en'">Contact</span>
+                </a>
+                <button @click="lang = lang === 'es' ? 'en' : 'es'" 
+                    class="bg-purple-600/80 backdrop-blur-sm px-4 py-2 rounded-lg hover:bg-purple-600 transition">
+                    <span x-text="lang === 'es' ? 'View in English' : 'Ver en Español'"></span>
+                </button>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <!-- Hero Section -->
     <section id="home" class="gradient-bg min-h-screen flex items-center pt-16">
@@ -88,8 +84,8 @@
                     Fabián M.
                 </h1>
                 <p class="text-xl text-gray-300">
-                    <span x-show="lang === 'es'">Ingeniero DevOps y Desarrollador de Software</span>
-                    <span x-show="lang === 'en'">DevOps Engineer & Software Developer</span>
+                    <span x-show="lang === 'es'">Ingeniero DevOps y Analista Programador Computacional</span>
+                    <span x-show="lang === 'en'">DevOps Engineer & Computer Programmer Analyst</span>
                 </p>
                 <div class="flex space-x-4">
                     <a href="https://linkedin.com/in/fabianimv" target="_blank"
