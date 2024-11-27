@@ -35,42 +35,46 @@
 
 <body class="bg-gray-900 text-white" x-data="{ lang: 'es' }">
     <!-- Navbar -->
-<nav class="fixed w-full bg-gray-900/95 backdrop-blur-sm z-40 border-b border-gray-800">
-    <div class="container mx-auto px-6 py-4">
-        <div class="flex justify-between items-center">
-            <a href="#home" class="text-2xl font-bold flex items-center">
-                <i class="fas fa-infinity text-purple-400 mr-2"></i>
-                <span class="hidden md:inline">Fabián M.</span>
-            </a>
-            <div class="flex items-center space-x-8"> 
-                <a href="#home" class="hidden md:block hover:text-purple-400 transition">
-                    <span x-show="lang === 'es'">Inicio</span>
-                    <span x-show="lang === 'en'">Home</span>
+    <nav class="fixed w-full bg-gray-900/95 backdrop-blur-sm z-40 border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#home" class="text-2xl font-bold flex items-center">
+                    <i class="fas fa-infinity text-purple-400 mr-2"></i>
+                    <span class="hidden md:inline">Fabián M.</span>
                 </a>
-                <a href="#about" class="hidden md:block hover:text-purple-400 transition">
-                    <span x-show="lang === 'es'">Sobre mí</span>
-                    <span x-show="lang === 'en'">About</span>
-                </a>
-                <a href="#skills" class="hidden md:block hover:text-purple-400 transition">
-                    <span x-show="lang === 'es'">Habilidades</span>
-                    <span x-show="lang === 'en'">Skills</span>
-                </a>
-                <a href="#certifications" class="hidden md:block hover:text-purple-400 transition">
-                    <span x-show="lang === 'es'">Certificaciones</span>
-                    <span x-show="lang === 'en'">Certifications</span>
-                </a>
-                <a href="#contact" class="hidden md:block hover:text-purple-400 transition">
-                    <span x-show="lang === 'es'">Contacto</span>
-                    <span x-show="lang === 'en'">Contact</span>
-                </a>
-                <button @click="lang = lang === 'es' ? 'en' : 'es'" 
-                    class="bg-purple-600/80 backdrop-blur-sm px-4 py-2 rounded-lg hover:bg-purple-600 transition">
-                    <span x-text="lang === 'es' ? 'View in English' : 'Ver en Español'"></span>
-                </button>
+                <div class="flex items-center space-x-8">
+                    <a href="#home" class="hidden md:block hover:text-purple-400 transition">
+                        <span x-show="lang === 'es'">Inicio</span>
+                        <span x-show="lang === 'en'">Home</span>
+                    </a>
+                    <a href="#about" class="hidden md:block hover:text-purple-400 transition">
+                        <span x-show="lang === 'es'">Sobre mí</span>
+                        <span x-show="lang === 'en'">About</span>
+                    </a>
+                    <a href="#skills" class="hidden md:block hover:text-purple-400 transition">
+                        <span x-show="lang === 'es'">Habilidades</span>
+                        <span x-show="lang === 'en'">Skills</span>
+                    </a>
+                    <a href="#projects" class="hidden md:block hover:text-purple-400 transition">
+                        <span x-show="lang === 'es'">Proyectos</span>
+                        <span x-show="lang === 'en'">Projects</span>
+                    </a>
+                    <a href="#certifications" class="hidden md:block hover:text-purple-400 transition">
+                        <span x-show="lang === 'es'">Certificaciones</span>
+                        <span x-show="lang === 'en'">Certifications</span>
+                    </a>
+                    <a href="#contact" class="hidden md:block hover:text-purple-400 transition">
+                        <span x-show="lang === 'es'">Contacto</span>
+                        <span x-show="lang === 'en'">Contact</span>
+                    </a>
+                    <button @click="lang = lang === 'es' ? 'en' : 'es'"
+                        class="bg-purple-600/80 backdrop-blur-sm px-4 py-2 rounded-lg hover:bg-purple-600 transition">
+                        <span x-text="lang === 'es' ? 'View in English' : 'Ver en Español'"></span>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <!-- Hero Section -->
     <section id="home" class="gradient-bg min-h-screen flex items-center pt-16">
@@ -148,87 +152,162 @@
             </div>
         </div>
     </section>
-<!-- Skills Section -->
-<section id="skills" class="py-16 bg-gray-900">
-    <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold mb-12 text-center">
-            <span x-show="lang === 'es'">Stack Tecnológico</span>
-            <span x-show="lang === 'en'">Tech Stack</span>
-        </h2>
-        <div class="grid md:grid-cols-2 gap-12">
-            <!-- Cloud & DevOps -->
-            <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
-                <h3 class="text-xl font-bold mb-6 flex items-center">
-                    <i class="fas fa-cloud mr-3 text-purple-400"></i>
-                    Cloud & DevOps
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex items-center">
-                        <i class="fab fa-aws text-orange-400 w-8"></i>
-                        <span class="ml-3">AWS</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fab fa-docker text-blue-400 w-8"></i>
-                        <span class="ml-3">Docker</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-dharmachakra text-blue-500 w-8"></i>
-                        <span class="ml-3">Kubernetes</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-cube text-purple-500 w-8"></i>
-                        <span class="ml-3">Terraform</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fab fa-jenkins text-red-400 w-8"></i>
-                        <span class="ml-3">Jenkins</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-chart-line text-orange-500 w-8"></i>
-                        <span class="ml-3">Grafana</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-dog text-purple-400 w-8"></i>
-                        <span class="ml-3">Datadog</span>
-                    </li>
-                </ul>
-            </div>
 
-            <!-- Development & Collaboration -->
-            <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
-                <h3 class="text-xl font-bold mb-6 flex items-center">
-                    <i class="fas fa-code mr-3 text-pink-400"></i>
-                    <span x-show="lang === 'es'">Desarrollo y Colaboración</span>
-                    <span x-show="lang === 'en'">Development & Collaboration</span>
-                </h3>
-                <ul class="space-y-4">
-                    <li class="flex items-center">
-                        <i class="fab fa-git-alt text-orange-500 w-8"></i>
-                        <span class="ml-3">Git</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fab fa-github text-gray-300 w-8"></i>
-                        <span class="ml-3">GitHub</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fab fa-jira text-blue-400 w-8"></i>
-                        <span class="ml-3">Jira</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-book text-blue-300 w-8"></i>
-                        <span class="ml-3">Confluence</span>
-                    </li>
-                </ul>
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 text-center">
+                <span x-show="lang === 'es'">Stack Tecnológico</span>
+                <span x-show="lang === 'en'">Tech Stack</span>
+            </h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Cloud & DevOps -->
+                <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
+                    <h3 class="text-xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-cloud mr-3 text-purple-400"></i>
+                        Cloud & DevOps
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center">
+                            <i class="fab fa-aws text-orange-400 w-8"></i>
+                            <span class="ml-3">AWS</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-docker text-blue-400 w-8"></i>
+                            <span class="ml-3">Docker</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-dharmachakra text-blue-500 w-8"></i>
+                            <span class="ml-3">Kubernetes</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-cube text-purple-500 w-8"></i>
+                            <span class="ml-3">Terraform</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-jenkins text-red-400 w-8"></i>
+                            <span class="ml-3">Jenkins</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-chart-line text-orange-500 w-8"></i>
+                            <span class="ml-3">Grafana</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-dog text-purple-400 w-8"></i>
+                            <span class="ml-3">Datadog</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Development & Collaboration -->
+                <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
+                    <h3 class="text-xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-code mr-3 text-pink-400"></i>
+                        <span x-show="lang === 'es'">Desarrollo y Colaboración</span>
+                        <span x-show="lang === 'en'">Development & Collaboration</span>
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center">
+                            <i class="fab fa-git-alt text-orange-500 w-8"></i>
+                            <span class="ml-3">Git</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-github text-gray-300 w-8"></i>
+                            <span class="ml-3">GitHub</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-jira text-blue-400 w-8"></i>
+                            <span class="ml-3">Jira</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-book text-blue-300 w-8"></i>
+                            <span class="ml-3">Confluence</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 bg-gray-800/50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 text-center">
+                <span x-show="lang === 'es'">Proyectos</span>
+                <span x-show="lang === 'en'">Projects</span>
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8">
+
+                <!-- Ferremás Project -->
+                <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-purple-400">Ferremás</h3>
+                        <a href="https://ferremas.vercel.app/" target="_blank" 
+                           class="text-purple-400 hover:text-purple-300 transition">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-badge"><i class="fab fa-react mr-1"></i> React</span>
+                        <span class="skill-badge"><i class="fab fa-bootstrap mr-1"></i> Bootstrap</span>  
+                    </div>
+                </div>
+
+                <!-- True Q Project -->
+                <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
+                    <div class="flex items-center justify-between mb-4">  
+                        <h3 class="text-xl font-bold text-purple-400">True Q</h3>
+                        <a href="https://trueq-vercel.vercel.app/" target="_blank"
+                           class="text-purple-400 hover:text-purple-300 transition">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-badge"><i class="fab fa-react mr-1"></i> React</span>
+                        <span class="skill-badge"><i class="fab fa-bootstrap mr-1"></i> Bootstrap</span>
+                    </div>
+                </div>
+
+                <!-- Psicóloga Valeria Améstica Project -->
+                <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-purple-400">Psicóloga Valeria Amestica</h3>
+                        <a href="https://psivaleriamestica.com/" target="_blank"
+                           class="text-purple-400 hover:text-purple-300 transition">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-badge"><i class="fab fa-html5 mr-1"></i> HTML</span>
+                        <span class="skill-badge"><i class="fab fa-css3 mr-1"></i> CSS</span>
+                        <span class="skill-badge"><i class="fab fa-js mr-1"></i> JavaScript</span>
+                    </div>
+                </div>
+
+                <!-- BYF Project -->
+                <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-purple-400">BYF</h3>
+                        <a href="https://byf.vercel.app/" target="_blank"
+                           class="text-purple-400 hover:text-purple-300 transition">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="skill-badge"><i class="fab fa-react mr-1"></i> React</span>
+                        <span class="skill-badge"><i class="fab fa-bootstrap mr-1"></i> Bootstrap</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
 
 <!-- Certifications -->
 <section id="certifications" class="py-16 bg-gray-800/50">
     <div class="container mx-auto px-6">
         <h2 class="text-3xl font-bold mb-12 text-center">
-            <span x-show="lang === 'es'">Certificaciones Destacadas</span>
+            <span x-show="lang === 'es'">Certificaciones</span>
             <span x-show="lang === 'en'">Featured Certifications</span>
         </h2>
         <div class="grid md:grid-cols-2 gap-12">
