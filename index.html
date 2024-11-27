@@ -145,87 +145,137 @@
             </div>
         </div>
     </section>
+<!-- Skills Section -->
+<section id="skills" class="py-16 bg-gray-900">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold mb-12 text-center">
+            <span x-show="lang === 'es'">Stack Tecnológico</span>
+            <span x-show="lang === 'en'">Tech Stack</span>
+        </h2>
+        <div class="grid md:grid-cols-2 gap-12">
+            <!-- Cloud & DevOps -->
+            <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
+                <h3 class="text-xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-cloud mr-3 text-purple-400"></i>
+                    Cloud & DevOps
+                </h3>
+                <ul class="space-y-4">
+                    <li class="flex items-center">
+                        <i class="fab fa-aws text-orange-400 w-8"></i>
+                        <span class="ml-3">AWS</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fab fa-docker text-blue-400 w-8"></i>
+                        <span class="ml-3">Docker</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-dharmachakra text-blue-500 w-8"></i>
+                        <span class="ml-3">Kubernetes</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-cube text-purple-500 w-8"></i>
+                        <span class="ml-3">Terraform</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fab fa-jenkins text-red-400 w-8"></i>
+                        <span class="ml-3">Jenkins</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-chart-line text-orange-500 w-8"></i>
+                        <span class="ml-3">Grafana</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-dog text-purple-400 w-8"></i>
+                        <span class="ml-3">Datadog</span>
+                    </li>
+                </ul>
+            </div>
 
-    <!-- Skills Section -->
-    <section id="skills" class="py-16 bg-gray-900">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 text-center">
-                <span x-show="lang === 'es'">Stack Tecnológico</span>
-                <span x-show="lang === 'en'">Tech Stack</span>
-            </h2>
-            <div class="grid md:grid-cols-2 gap-12">
-                <!-- Cloud & DevOps -->
-                <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
-                    <h3 class="text-xl font-bold mb-4 flex items-center">
-                        <i class="fas fa-cloud mr-3 text-purple-400"></i>
-                        Cloud & DevOps
-                    </h3>
-                    <div>
-                        <span class="skill-badge">AWS</span>
-                        <span class="skill-badge">Docker</span>
-                        <span class="skill-badge">Kubernetes</span>
-                        <span class="skill-badge">Terraform</span>
-                        <span class="skill-badge">Jenkins</span>
-                        <span class="skill-badge">Grafana</span>
-                        <span class="skill-badge">Datadog</span>
-                    </div>
-                </div>
-
-                <!-- Development & Collaboration -->
-                <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
-                    <h3 class="text-xl font-bold mb-4 flex items-center">
-                        <i class="fas fa-code mr-3 text-pink-400"></i>
-                        <span x-show="lang === 'es'">Desarrollo y Colaboración</span>
-                        <span x-show="lang === 'en'">Development & Collaboration</span>
-                    </h3>
-                    <div>
-                        <span class="skill-badge">Git</span>
-                        <span class="skill-badge">GitHub</span>
-                        <span class="skill-badge">Jira</span>
-                        <span class="skill-badge">Confluence</span>
-                    </div>
-                </div>
+            <!-- Development & Collaboration -->
+            <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
+                <h3 class="text-xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-code mr-3 text-pink-400"></i>
+                    <span x-show="lang === 'es'">Desarrollo y Colaboración</span>
+                    <span x-show="lang === 'en'">Development & Collaboration</span>
+                </h3>
+                <ul class="space-y-4">
+                    <li class="flex items-center">
+                        <i class="fab fa-git-alt text-orange-500 w-8"></i>
+                        <span class="ml-3">Git</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fab fa-github text-gray-300 w-8"></i>
+                        <span class="ml-3">GitHub</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fab fa-jira text-blue-400 w-8"></i>
+                        <span class="ml-3">Jira</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-book text-blue-300 w-8"></i>
+                        <span class="ml-3">Confluence</span>
+                    </li>
+                </ul>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Certifications -->
-    <section id="certifications" class="py-16 bg-gray-800/50">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 text-center">
-                <span x-show="lang === 'es'">Certificaciones Destacadas</span>
-                <span x-show="lang === 'en'">Featured Certifications</span>
-            </h2>
-            <div class="grid md:grid-cols-2 gap-12">
-                <!-- Cloud -->
-                <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
-                    <h3 class="text-xl font-bold mb-4 flex items-center">
-                        <i class="fas fa-cloud mr-3 text-purple-400"></i>
-                        Cloud
-                    </h3>
-                    <ul class="list-disc list-inside space-y-2">
-                        <li>Oracle Cloud Infrastructure Foundations Associate</li>
-                        <li>Microsoft Certified: Azure AI Fundamentals</li>
-                        <li>AWS Educate (Serverless, Machine Learning, Cloud Ops)</li>
-                        <li>Multiple Google Cloud Skill Badges (Infrastructure, Kubernetes, Networking)</li>
-                    </ul>
-                </div>
+<!-- Certifications -->
+<section id="certifications" class="py-16 bg-gray-800/50">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold mb-12 text-center">
+            <span x-show="lang === 'es'">Certificaciones Destacadas</span>
+            <span x-show="lang === 'en'">Featured Certifications</span>
+        </h2>
+        <div class="grid md:grid-cols-2 gap-12">
+            <!-- Cloud -->
+            <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
+                <h3 class="text-xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-cloud mr-3 text-purple-400"></i>
+                    Cloud
+                </h3>
+                <ul class="space-y-4">
+                    <li class="flex items-center">
+                        <i class="fab fa-oracle text-red-400 w-8"></i>
+                        <span class="ml-3">Oracle Cloud Infrastructure Foundations Associate</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fab fa-microsoft text-blue-400 w-8"></i>
+                        <span class="ml-3">Microsoft Certified: Azure AI Fundamentals</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fab fa-aws text-orange-400 w-8"></i>
+                        <span class="ml-3">AWS Educate (Serverless, Machine Learning, Cloud Ops)</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fab fa-google text-blue-500 w-8"></i>
+                        <span class="ml-3">Multiple Google Cloud Skill Badges</span>
+                    </li>
+                </ul>
+            </div>
 
-                <!-- Methodologies -->
-                <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
-                    <h3 class="text-xl font-bold mb-4 flex items-center">
-                        <i class="fas fa-users mr-3 text-pink-400"></i>
-                        <span x-show="lang === 'es'">Metodologías</span>
-                        <span x-show="lang === 'en'">Methodologies</span>
-                    </h3>
-                    <ul class="list-disc list-inside space-y-2">
-                        <li>Scrum Foundation Professional</li>
-                        <li>Data Science (FCFM, Universidad de Chile)</li>
-                    </ul>
-                </div>
+            <!-- Methodologies -->
+            <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
+                <h3 class="text-xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-users mr-3 text-pink-400"></i>
+                    <span x-show="lang === 'es'">Metodologías</span>
+                    <span x-show="lang === 'en'">Methodologies</span>
+                </h3>
+                <ul class="space-y-4">
+                    <li class="flex items-center">
+                        <i class="fas fa-certificate text-yellow-400 w-8"></i>
+                        <span class="ml-3">Scrum Foundation Professional</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-brain text-blue-400 w-8"></i>
+                        <span class="ml-3">Data Science (FCFM, Universidad de Chile)</span>
+                    </li>
+                </ul>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Contact -->
     <section id="contact" class="py-16 gradient-bg">
