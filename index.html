@@ -9,235 +9,227 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
         [x-cloak] { display: none !important; }
-        .tech-icon { transition: all 0.3s ease; }
-        .tech-icon:hover { transform: translateY(-5px); }
-        .gradient-bg { background: linear-gradient(120deg, #1a202c 0%, #2d3748 100%); }
+        .gradient-bg { background: linear-gradient(120deg, #4C1D95 0%, #7C3AED 100%); }
         .card-hover { transition: all 0.3s ease; }
-        .card-hover:hover { transform: scale(1.02); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(124,58,237,0.4); }
+        .skill-badge { @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800 mr-2 mb-2; }
     </style>
 </head>
 <body class="bg-gray-900 text-white" x-data="{ lang: 'es' }">
-    <div x-data="translations">
-        <!-- Language Toggle -->
-        <div class="fixed top-4 right-4 z-50">
-            <button @click="lang = lang === 'es' ? 'en' : 'es'" 
-                    class="bg-blue-600/80 backdrop-blur-sm px-4 py-2 rounded-lg hover:bg-blue-600 transition">
-                <span x-text="lang === 'es' ? 'View in English' : 'Ver en Español'"></span>
-            </button>
+    <!-- Language Toggle -->
+    <div class="fixed top-4 right-4 z-50">
+        <button @click="lang = lang === 'es' ? 'en' : 'es'" 
+                class="bg-purple-600/80 backdrop-blur-sm px-4 py-2 rounded-lg hover:bg-purple-600 transition">
+            <span x-text="lang === 'es' ? 'View in English' : 'Ver en Español'"></span>
+        </button>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full bg-gray-900/95 backdrop-blur-sm z-40 border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold">FM</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="hover:text-purple-400 transition">
+                        <span x-show="lang === 'es'">Inicio</span>
+                        <span x-show="lang === 'en'">Home</span>
+                    </a>
+                    <a href="#about" class="hover:text-purple-400 transition">
+                        <span x-show="lang === 'es'">Sobre mí</span>
+                        <span x-show="lang === 'en'">About</span>
+                    </a>
+                    <a href="#skills" class="hover:text-purple-400 transition">
+                        <span x-show="lang === 'es'">Habilidades</span>
+                        <span x-show="lang === 'en'">Skills</span>
+                    </a>
+                    <a href="#certifications" class="hover:text-purple-400 transition">
+                        <span x-show="lang === 'es'">Certificaciones</span>
+                        <span x-show="lang === 'en'">Certifications</span>
+                    </a>
+                    <a href="#contact" class="hover:text-purple-400 transition">
+                        <span x-show="lang === 'es'">Contacto</span>
+                        <span x-show="lang === 'en'">Contact</span>
+                    </a>  
+                </div>
+            </div>
         </div>
+    </nav>
 
-        <!-- Navbar -->
-        <nav class="fixed w-full bg-gray-900/95 backdrop-blur-sm z-40 border-b border-gray-800">
-            <div class="container mx-auto px-6 py-4">
-                <div class="flex justify-between items-center">
-                    <div class="text-2xl font-bold">FM</div>
-                    <div class="hidden md:flex space-x-8">
-                        <a href="#home" class="hover:text-blue-400 transition" x-text="t('nav.home')"></a>
-                        <a href="#about" class="hover:text-blue-400 transition" x-text="t('nav.about')"></a>
-                        <a href="#skills" class="hover:text-blue-400 transition" x-text="t('nav.skills')"></a>
-                        <a href="#certifications" class="hover:text-blue-400 transition" x-text="t('nav.certs')"></a>
-                        <a href="#contact" class="hover:text-blue-400 transition" x-text="t('nav.contact')"></a>
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg min-h-screen flex items-center pt-16">
+        <div class="container mx-auto px-6 py-16 grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <h1 class="text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
+                    <span x-show="lang === 'es'">¡Hola!</span>
+                    <span x-show="lang === 'en'">Hello!</span>
+                    <br>
+                    Fabián M.
+                </h1>
+                <p class="text-xl text-gray-300">
+                    <span x-show="lang === 'es'">Ingeniero DevOps y Desarrollador de Software</span>
+                    <span x-show="lang === 'en'">DevOps Engineer & Software Developer</span>
+                </p>
+                <div class="flex space-x-4">
+                    <a href="https://linkedin.com/in/fabianimv" target="_blank" 
+                       class="bg-purple-600/80 backdrop-blur-sm px-6 py-3 rounded-lg hover:bg-purple-600 transition flex items-center">
+                        <i class="fab fa-linkedin mr-2"></i>LinkedIn
+                    </a>
+                    <a href="mailto:fabianignaciomv@gmail.com" 
+                       class="bg-pink-600/80 backdrop-blur-sm px-6 py-3 rounded-lg hover:bg-pink-600 transition flex items-center">
+                        <i class="fas fa-envelope mr-2"></i>Email
+                    </a>
+                </div>
+            </div>
+            <div class="flex justify-center">
+                <img src="./profilepic.jpeg" 
+                     alt="Fabián M." 
+                     class="rounded-full w-64 h-64 object-cover border-4 border-purple-500/30 shadow-xl shadow-purple-500/20">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-gray-800/50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 text-center">
+                <span x-show="lang === 'es'">Sobre mí</span>
+                <span x-show="lang === 'en'">About me</span>
+            </h2>
+            <div class="max-w-4xl mx-auto space-y-6">
+                <p class="text-xl">
+                    <span x-show="lang === 'es'">Ingeniero DevOps y Analista Programador Computacional especializado en AWS, Docker y Kubernetes. Me apasiona la optimización de sistemas y la automatización de procesos.</span>
+                    <span x-show="lang === 'en'">DevOps Engineer and Computer Programming Analyst specialized in AWS, Docker, and Kubernetes. I'm passionate about system optimization and process automation.</span>
+                </p>
+                <p class="text-xl">
+                    <span x-show="lang === 'es'">Actualmente enfocado en:</span>
+                    <span x-show="lang === 'en'">Currently focused on:</span>
+                </p>
+                <ul class="list-disc list-inside space-y-2 text-xl">
+                    <li>
+                        <span x-show="lang === 'es'">Creación y optimización de dashboards de observabilidad</span>
+                        <span x-show="lang === 'en'">Creating and optimizing observability dashboards</span>
+                    </li>
+                    <li>
+                        <span x-show="lang === 'es'">Automatización de despliegues</span>
+                        <span x-show="lang === 'en'">Automating deployments</span>
+                    </li>
+                    <li>
+                        <span x-show="lang === 'es'">Implementación de prácticas DevOps</span>
+                        <span x-show="lang === 'en'">Implementing DevOps practices</span>
+                    </li>
+                    <li>
+                        <span x-show="lang === 'es'">Monitoreo y mejora continua de sistemas</span>
+                        <span x-show="lang === 'en'">Monitoring and continuous improvement of systems</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 text-center">
+                <span x-show="lang === 'es'">Stack Tecnológico</span>
+                <span x-show="lang === 'en'">Tech Stack</span>
+            </h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Cloud & DevOps -->
+                <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-cloud mr-3 text-purple-400"></i>
+                        Cloud & DevOps
+                    </h3>
+                    <div>
+                        <span class="skill-badge">AWS</span>
+                        <span class="skill-badge">Docker</span>
+                        <span class="skill-badge">Kubernetes</span>  
+                        <span class="skill-badge">Terraform</span>
+                        <span class="skill-badge">Jenkins</span>
+                        <span class="skill-badge">Grafana</span>
+                        <span class="skill-badge">Datadog</span>
+                    </div>
+                </div>
+
+                <!-- Development & Collaboration -->
+                <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-code mr-3 text-pink-400"></i>
+                        <span x-show="lang === 'es'">Desarrollo y Colaboración</span>
+                        <span x-show="lang === 'en'">Development & Collaboration</span>
+                    </h3>
+                    <div>
+                        <span class="skill-badge">Git</span>
+                        <span class="skill-badge">GitHub</span>
+                        <span class="skill-badge">Jira</span>
+                        <span class="skill-badge">Confluence</span>
                     </div>
                 </div>
             </div>
-        </nav>
+        </div>
+    </section>
 
-        <!-- Hero Section -->
-        <section id="home" class="gradient-bg min-h-screen flex items-center pt-16">
-            <div class="container mx-auto px-6 py-16 grid md:grid-cols-2 gap-12 items-center">
-                <div class="space-y-6">
-                    <h1 class="text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-                        <span x-text="t('hero.greeting')"></span><br>
-                        Fabián M.
-                    </h1>
-                    <p class="text-xl text-gray-300" x-text="t('hero.role')"></p>
-                    <div class="flex space-x-4">
-                        <a href="https://linkedin.com/in/fabianimv" target="_blank" 
-                           class="bg-blue-600/80 backdrop-blur-sm px-6 py-3 rounded-lg hover:bg-blue-600 transition flex items-center">
-                            <i class="fab fa-linkedin mr-2"></i>LinkedIn
-                        </a>
-                        <a href="mailto:fabianignaciomv@gmail.com" 
-                           class="bg-red-600/80 backdrop-blur-sm px-6 py-3 rounded-lg hover:bg-blue-600 transition flex items-center">
-                            <i class="fas fa-envelope mr-2"></i>Email
-                        </a>
-                    </div>
+    <!-- Certifications -->
+    <section id="certifications" class="py-16 bg-gray-800/50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 text-center">
+                <span x-show="lang === 'es'">Certificaciones Destacadas</span>
+                <span x-show="lang === 'en'">Featured Certifications</span>
+            </h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Cloud -->
+                <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-cloud mr-3 text-purple-400"></i>
+                        Cloud
+                    </h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Oracle Cloud Infrastructure Foundations Associate</li>
+                        <li>Microsoft Certified: Azure AI Fundamentals</li>
+                        <li>AWS Educate (Serverless, Machine Learning, Cloud Ops)</li>
+                        <li>Multiple Google Cloud Skill Badges (Infrastructure, Kubernetes, Networking)</li>
+                    </ul>
                 </div>
-                <div class="flex justify-center">
-                    <img src="./profilepic.jpeg" 
-                         alt="Fabián M." 
-                         class="rounded-full w-64 h-64 object-cover border-4 border-blue-500/30 shadow-xl shadow-blue-500/20">
-                </div>
-            </div>
-        </section>
 
-        <!-- About Section -->
-        <section id="about" class="py-16 bg-gray-800/50">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold mb-12 text-center" x-text="t('sections.about')"></h2>
-                <div class="max-w-4xl mx-auto space-y-6">
-                    <p class="text-xl" x-text="t('about.p1')"></p>
-                    <p class="text-xl" x-text="t('about.p2')"></p>
-                    <ul class="list-disc list-inside space-y-2 text-xl">
-                        <li x-text="t('about.focus1')"></li>
-                        <li x-text="t('about.focus2')"></li>
-                        <li x-text="t('about.focus3')"></li>
-                        <li x-text="t('about.focus4')"></li>
+                <!-- Methodologies -->
+                <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-users mr-3 text-pink-400"></i>
+                        <span x-show="lang === 'es'">Metodologías</span>
+                        <span x-show="lang === 'en'">Methodologies</span>
+                    </h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Scrum Foundation Professional</li>
+                        <li>Data Science (FCFM, Universidad de Chile)</li>
                     </ul>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Skills Section -->
-        <section id="skills" class="py-16 bg-gray-900">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold mb-12 text-center" x-text="t('sections.skills')"></h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Cloud & DevOps -->
-                    <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
-                        <h3 class="text-xl font-bold mb-6 flex items-center">
-                            <i class="fas fa-cloud mr-3 text-blue-400"></i>
-                            Cloud & DevOps
-                        </h3>
-                        <div class="grid grid-cols-2 gap-4">
-                            <span class="badge">AWS</span>
-                            <span class="badge">Docker</span>
-                            <span class="badge">Kubernetes</span>  
-                            <span class="badge">Terraform</span>
-                            <span class="badge">Jenkins</span>
-                        </div>
-                    </div>
-
-                    <!-- Monitoring & Observability -->
-                    <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
-                        <h3 class="text-xl font-bold mb-6 flex items-center">
-                            <i class="fas fa-chart-line mr-3 text-green-400"></i>
-                            <span x-text="t('sections.monitoring')"></span>
-                        </h3>
-                        <div class="grid grid-cols-2 gap-4">
-                            <span class="badge">Grafana</span>
-                            <span class="badge">Datadog</span>
-                        </div>
-                    </div>
-
-                    <!-- Development & Collaboration -->
-                    <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
-                        <h3 class="text-xl font-bold mb-6 flex items-center">
-                            <i class="fas fa-code mr-3 text-pink-400"></i>
-                            <span x-text="t('sections.development')"></span>
-                        </h3>
-                        <div class="grid grid-cols-2 gap-4">
-                            <span class="badge">Git</span>
-                            <span class="badge">GitHub</span>
-                            <span class="badge">Jira</span>
-                            <span class="badge">Confluence</span>
-                        </div>
-                    </div>
-                </div>
+    <!-- Contact -->
+    <section id="contact" class="py-16 gradient-bg">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 text-center">
+                <span x-show="lang === 'es'">Contacto</span>
+                <span x-show="lang === 'en'">Contact</span>
+            </h2>
+            <div class="flex flex-col items-center space-y-4">
+                <a href="mailto:fabianignaciomv@gmail.com" class="flex items-center space-x-3 text-white hover:text-pink-200">
+                    <i class="fas fa-envelope"></i>
+                    <span>fabianignaciomv@gmail.com</span>
+                </a>
+                <a href="https://linkedin.com/in/fabianimv" target="_blank" class="flex items-center space-x-3 text-white hover:text-pink-200">
+                    <i class="fab fa-linkedin"></i>
+                    <span>linkedin.com/in/fabianimv</span>
+                </a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Certifications -->
-        <section id="certifications" class="py-16">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold mb-12 text-center" x-text="t('sections.certs')"></h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Cloud -->
-                    <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-cloud text-3xl text-blue-400 mr-4"></i>
-                            <h3 class="text-xl font-bold">Cloud</h3>
-                        </div>
-                        <ul class="space-y-2">
-                            <li>Oracle Cloud Infrastructure Foundations Associate</li>
-                            <li>Microsoft Certified: Azure AI Fundamentals</li>
-                            <li>AWS Educate (Serverless, Machine Learning, Cloud Ops)</li>
-                            <li>Multiple Google Cloud Skill Badges (Infrastructure, Kubernetes, Networking)</li>
-                        </ul>
-                    </div>
-
-                    <!-- DevOps -->
-                    <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-infinity text-3xl text-purple-400 mr-4"></i>
-                            <h3 class="text-xl font-bold">DevOps</h3>
-                        </div>
-                        <ul class="space-y-2">
-                            <li>Introduction to Kubernetes (The Linux Foundation)</li>
-                            <li>Introduction to Jenkins (The Linux Foundation)</li>
-                        </ul>
-                    </div>
-
-                    <!-- Methodologies -->
-                    <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-users text-3xl text-green-400 mr-4"></i>
-                            <h3 class="text-xl font-bold">Methodologies</h3>
-                        </div>
-                        <ul class="space-y-2">
-                            <li>Scrum Foundation Professional</li>
-                            <li>Data Science (FCFM, Universidad de Chile)</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact -->
-        <section id="contact" class="py-16 bg-gray-800/50">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl font-bold mb-12 text-center" x-text="t('sections.contact')"></h2>
-                <div class="flex flex-col items-center space-y-4">
-                    <a href="mailto:fabianignaciomv@gmail.com" class="flex items-center space-x-3 text-gray-300 hover:text-white">
-                        <i class="fas fa-envelope"></i>
-                        <span>fabianignaciomv@gmail.com</span>
-                    </a>
-                    <a href="https://linkedin.com/in/fabianimv" target="_blank" class="flex items-center space-x-3 text-gray-300 hover:text-white">
-                        <i class="fab fa-linkedin"></i>
-                        <span>linkedin.com/in/fabianimv</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="py-6 text-center text-gray-400">
-            <p x-text="t('footer')"></p>
-        </footer>
-    </div>
-
-    <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('translations', () => ({
-                t(key) {
-                    const texts = {
-                        es: {
-                            'nav.home': 'Inicio',
-                            'nav.about': 'Sobre mí',
-                            'nav.skills': 'Habilidades',
-                            'nav.certs': 'Certificaciones',
-                            'nav.contact': 'Contacto',
-                            'hero.greeting': '¡Hola!',
-                            'hero.role': 'DevOps Engineer & Software Developer',
-                            'sections.about': 'Sobre mí',
-                            'about.p1': 'Ingeniero DevOps y Analista Programador Computacional especializado en AWS, Docker y Kubernetes. Me apasiona la optimización de sistemas y la automatización de procesos.',
-                            'about.p2': 'Actualmente enfocado en:',
-                            'about.focus1': 'Creación y optimización de dashboards de observabilidad',
-                            'about.focus2': 'Automatización de despliegues',
-                            'about.focus3': 'Implementación de prácticas DevOps',
-                            'about.focus4': 'Monitoreo y mejora continua de sistemas', 
-                            'sections.skills': 'Stack Tecnológico',
-                            'sections.monitoring': 'Monitoring & Observability',
-                            'sections.development': 'Development & Collaboration',
-                            'sections.certs': 'Certificaciones Destacadas',  
-                            'sections.contact': 'Contacto',
-                            'footer': '© 2024 Fabián M. All rights reserved.'
-                        }
-                    };
-                    const lang = this.$root.lang;
-                    return texts[lang][key] || key;
-                }
-            }));
-        });
-    </script>
+    <!-- Footer -->
+    <footer class="py-6 text-center text-gray-400">
+        <p>© 2024 Fabián M. All rights reserved.</p>
+    </footer>
 </body>
 </html>
