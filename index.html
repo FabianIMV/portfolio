@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fabián M. - DevOps Engineer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+        .tech-icon { transition: all 0.3s ease; }
+        .tech-icon:hover { transform: translateY(-5px); }
+        .gradient-bg { background: linear-gradient(120deg, #1a202c 0%, #2d3748 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: scale(1.02); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+    </style>
+</head>
+<body class="bg-gray-900 text-white" x-data="{ lang: 'es' }">
+    <div x-data="translations">
+        <!-- Language Toggle -->
+        <div class="fixed top-4 right-4 z-50">
+            <button @click="lang = lang === 'es' ? 'en' : 'es'" 
+                    class="bg-blue-600/80 backdrop-blur-sm px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+                <span x-text="lang === 'es' ? 'View in English' : 'Ver en Español'"></span>
+            </button>
+        </div>
+
+        <!-- Navbar -->
+        <nav class="fixed w-full bg-gray-900/95 backdrop-blur-sm z-40 border-b border-gray-800">
+            <div class="container mx-auto px-6 py-4">
+                <div class="flex justify-between items-center">
+                    <div class="text-2xl font-bold">FM</div>
+                    <div class="hidden md:flex space-x-8">
+                        <a href="#home" class="hover:text-blue-400 transition" x-text="t('nav.home')"></a>
+                        <a href="#about" class="hover:text-blue-400 transition" x-text="t('nav.about')"></a>
+                        <a href="#skills" class="hover:text-blue-400 transition" x-text="t('nav.skills')"></a>
+                        <a href="#certifications" class="hover:text-blue-400 transition" x-text="t('nav.certs')"></a>
+                        <a href="#contact" class="hover:text-blue-400 transition" x-text="t('nav.contact')"></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="gradient-bg min-h-screen flex items-center pt-16">
+            <div class="container mx-auto px-6 py-16 grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <h1 class="text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                        <span x-text="t('hero.greeting')"></span><br>
+                        Fabián M.
+                    </h1>
+                    <p class="text-xl text-gray-300" x-text="t('hero.role')"></p>
+                    <div class="flex space-x-4">
+                        <a href="https://linkedin.com/in/fabianimv" target="_blank" 
+                           class="bg-blue-600/80 backdrop-blur-sm px-6 py-3 rounded-lg hover:bg-blue-600 transition flex items-center">
+                            <i class="fab fa-linkedin mr-2"></i>LinkedIn
+                        </a>
+                        <a href="mailto:fabianignaciomv@gmail.com" 
+                           class="bg-red-600/80 backdrop-blur-sm px-6 py-3 rounded-lg hover:bg-blue-600 transition flex items-center">
+                            <i class="fas fa-envelope mr-2"></i>Email
+                        </a>
+                    </div>
+                </div>
+                <div class="flex justify-center">
+                    <img src="https://media.licdn.com/dms/image/v2/C4E03AQHLeEg1xT_tmw/profile-displayphoto-shrink_400_400/0/1654796543066?e=1738195200&v=beta&t=flwes_d-yF1NgytBFSAuOOOkO187WHmkyx1TQ0FFbv8" 
+                         alt="Fabián M." 
+                         class="rounded-full w-64 h-64 object-cover border-4 border-blue-500/30 shadow-xl shadow-blue-500/20">
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-16 bg-gray-800/50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold mb-12 text-center" x-text="t('sections.about')"></h2>
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <p class="text-xl" x-text="t('about.p1')"></p>
+                    <p class="text-xl" x-text="t('about.p2')"></p>
+                    <ul class="list-disc list-inside space-y-2 text-xl">
+                        <li x-text="t('about.focus1')"></li>
+                        <li x-text="t('about.focus2')"></li>
+                        <li x-text="t('about.focus3')"></li>
+                        <li x-text="t('about.focus4')"></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-16 bg-gray-900">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold mb-12 text-center" x-text="t('sections.skills')"></h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Cloud & DevOps -->
+                    <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
+                        <h3 class="text-xl font-bold mb-6 flex items-center">
+                            <i class="fas fa-cloud mr-3 text-blue-400"></i>
+                            Cloud & DevOps
+                        </h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <span class="badge">AWS</span>
+                            <span class="badge">Docker</span>
+                            <span class="badge">Kubernetes</span>  
+                            <span class="badge">Terraform</span>
+                            <span class="badge">Jenkins</span>
+                        </div>
+                    </div>
+
+                    <!-- Monitoring & Observability -->
+                    <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
+                        <h3 class="text-xl font-bold mb-6 flex items-center">
+                            <i class="fas fa-chart-line mr-3 text-green-400"></i>
+                            <span x-text="t('sections.monitoring')"></span>
+                        </h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <span class="badge">Grafana</span>
+                            <span class="badge">Datadog</span>
+                        </div>
+                    </div>
+
+                    <!-- Development & Collaboration -->
+                    <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
+                        <h3 class="text-xl font-bold mb-6 flex items-center">
+                            <i class="fas fa-code mr-3 text-pink-400"></i>
+                            <span x-text="t('sections.development')"></span>
+                        </h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <span class="badge">Git</span>
+                            <span class="badge">GitHub</span>
+                            <span class="badge">Jira</span>
+                            <span class="badge">Confluence</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section id="certifications" class="py-16">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold mb-12 text-center" x-text="t('sections.certs')"></h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Cloud -->
+                    <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-cloud text-3xl text-blue-400 mr-4"></i>
+                            <h3 class="text-xl font-bold">Cloud</h3>
+                        </div>
+                        <ul class="space-y-2">
+                            <li>Oracle Cloud Infrastructure Foundations Associate</li>
+                            <li>Microsoft Certified: Azure AI Fundamentals</li>
+                            <li>AWS Educate (Serverless, Machine Learning, Cloud Ops)</li>
+                            <li>Multiple Google Cloud Skill Badges (Infrastructure, Kubernetes, Networking)</li>
+                        </ul>
+                    </div>
+
+                    <!-- DevOps -->
+                    <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-infinity text-3xl text-purple-400 mr-4"></i>
+                            <h3 class="text-xl font-bold">DevOps</h3>
+                        </div>
+                        <ul class="space-y-2">
+                            <li>Introduction to Kubernetes (The Linux Foundation)</li>
+                            <li>Introduction to Jenkins (The Linux Foundation)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Methodologies -->
+                    <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-users text-3xl text-green-400 mr-4"></i>
+                            <h3 class="text-xl font-bold">Methodologies</h3>
+                        </div>
+                        <ul class="space-y-2">
+                            <li>Scrum Foundation Professional</li>
+                            <li>Data Science (FCFM, Universidad de Chile)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="py-16 bg-gray-800/50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold mb-12 text-center" x-text="t('sections.contact')"></h2>
+                <div class="flex flex-col items-center space-y-4">
+                    <a href="mailto:fabianignaciomv@gmail.com" class="flex items-center space-x-3 text-gray-300 hover:text-white">
+                        <i class="fas fa-envelope"></i>
+                        <span>fabianignaciomv@gmail.com</span>
+                    </a>
+                    <a href="https://linkedin.com/in/fabianimv" target="_blank" class="flex items-center space-x-3 text-gray-300 hover:text-white">
+                        <i class="fab fa-linkedin"></i>
+                        <span>linkedin.com/in/fabianimv</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-6 text-center text-gray-400">
+            <p x-text="t('footer')"></p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('translations', () => ({
+                t(key) {
+                    const texts = {
+                        es: {
+                            'nav.home': 'Inicio',
+                            'nav.about': 'Sobre mí',
+                            'nav.skills': 'Habilidades',
+                            'nav.certs': 'Certificaciones',
+                            'nav.contact': 'Contacto',
+                            'hero.greeting': '¡Hola!',
+                            'hero.role': 'DevOps Engineer & Software Developer',
+                            'sections.about': 'Sobre mí',
+                            'about.p1': 'Ingeniero DevOps y Analista Programador Computacional especializado en AWS, Docker y Kubernetes. Me apasiona la optimización de sistemas y la automatización de procesos.',
+                            'about.p2': 'Actualmente enfocado en:',
+                            'about.focus1': 'Creación y optimización de dashboards de observabilidad',
+                            'about.focus2': 'Automatización de despliegues',
+                            'about.focus3': 'Implementación de prácticas DevOps',
+                            'about.focus4': 'Monitoreo y mejora continua de sistemas', 
+                            'sections.skills': 'Stack Tecnológico',
+                            'sections.monitoring': 'Monitoring & Observability',
+                            'sections.development': 'Development & Collaboration',
+                            'sections.certs': 'Certificaciones Destacadas',  
+                            'sections.contact': 'Contacto',
+                            'footer': '© 2024 Fabián M. All rights reserved.'
+                        }
+                    };
+                    const lang = this.$root.lang;
+                    return texts[lang][key] || key;
+                }
+            }));
+        });
+    </script>
+</body>
+</html>
