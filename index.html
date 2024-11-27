@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,18 +10,34 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
-        [x-cloak] { display: none !important; }
-        .gradient-bg { background: linear-gradient(120deg, #4C1D95 0%, #7C3AED 100%); }
-        .card-hover { transition: all 0.3s ease; }
-        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(124,58,237,0.4); }
-        .skill-badge { @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800 mr-2 mb-2; }
+        [x-cloak] {
+            display: none !important;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(120deg, #4C1D95 0%, #7C3AED 100%);
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
+        }
+
+        .skill-badge {
+            @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800 mr-2 mb-2;
+        }
     </style>
 </head>
+
 <body class="bg-gray-900 text-white" x-data="{ lang: 'es' }">
     <!-- Language Toggle -->
     <div class="fixed top-4 right-4 z-50">
-        <button @click="lang = lang === 'es' ? 'en' : 'es'" 
-                class="bg-purple-600/80 backdrop-blur-sm px-4 py-2 rounded-lg hover:bg-purple-600 transition">
+        <button @click="lang = lang === 'es' ? 'en' : 'es'"
+            class="bg-purple-600/80 backdrop-blur-sm px-4 py-2 rounded-lg hover:bg-purple-600 transition">
             <span x-text="lang === 'es' ? 'View in English' : 'Ver en Español'"></span>
         </button>
     </div>
@@ -53,7 +70,7 @@
                     <a href="#contact" class="hover:text-purple-400 transition">
                         <span x-show="lang === 'es'">Contacto</span>
                         <span x-show="lang === 'en'">Contact</span>
-                    </a>  
+                    </a>
                 </div>
             </div>
         </div>
@@ -63,7 +80,8 @@
     <section id="home" class="gradient-bg min-h-screen flex items-center pt-16">
         <div class="container mx-auto px-6 py-16 grid md:grid-cols-2 gap-12 items-center">
             <div class="space-y-6">
-                <h1 class="text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
+                <h1
+                    class="text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
                     <span x-show="lang === 'es'">¡Hola!</span>
                     <span x-show="lang === 'en'">Hello!</span>
                     <br>
@@ -74,20 +92,19 @@
                     <span x-show="lang === 'en'">DevOps Engineer & Software Developer</span>
                 </p>
                 <div class="flex space-x-4">
-                    <a href="https://linkedin.com/in/fabianimv" target="_blank" 
-                       class="bg-purple-600/80 backdrop-blur-sm px-6 py-3 rounded-lg hover:bg-purple-600 transition flex items-center">
+                    <a href="https://linkedin.com/in/fabianimv" target="_blank"
+                        class="bg-purple-600/80 backdrop-blur-sm px-6 py-3 rounded-lg hover:bg-purple-600 transition flex items-center">
                         <i class="fab fa-linkedin mr-2"></i>LinkedIn
                     </a>
-                    <a href="mailto:fabianignaciomv@gmail.com" 
-                       class="bg-pink-600/80 backdrop-blur-sm px-6 py-3 rounded-lg hover:bg-pink-600 transition flex items-center">
+                    <a href="mailto:fabianignaciomv@gmail.com"
+                        class="bg-pink-600/80 backdrop-blur-sm px-6 py-3 rounded-lg hover:bg-pink-600 transition flex items-center">
                         <i class="fas fa-envelope mr-2"></i>Email
                     </a>
                 </div>
             </div>
             <div class="flex justify-center">
-                <img src="./profilepic.jpeg" 
-                     alt="Fabián M." 
-                     class="rounded-full w-64 h-64 object-cover border-4 border-purple-500/30 shadow-xl shadow-purple-500/20">
+                <img src="./profilepic.jpeg" alt="Fabián M."
+                    class="rounded-full w-64 h-64 object-cover border-4 border-purple-500/30 shadow-xl shadow-purple-500/20">
             </div>
         </div>
     </section>
@@ -101,8 +118,11 @@
             </h2>
             <div class="max-w-4xl mx-auto space-y-6">
                 <p class="text-xl">
-                    <span x-show="lang === 'es'">Ingeniero DevOps y Analista Programador Computacional especializado en AWS, Docker y Kubernetes. Me apasiona la optimización de sistemas y la automatización de procesos.</span>
-                    <span x-show="lang === 'en'">DevOps Engineer and Computer Programming Analyst specialized in AWS, Docker, and Kubernetes. I'm passionate about system optimization and process automation.</span>
+                    <span x-show="lang === 'es'">Ingeniero DevOps y Analista Programador Computacional especializado en
+                        AWS, Docker y Kubernetes. Me apasiona la optimización de sistemas y la automatización de
+                        procesos.</span>
+                    <span x-show="lang === 'en'">DevOps Engineer and Computer Programming Analyst specialized in AWS,
+                        Docker, and Kubernetes. I'm passionate about system optimization and process automation.</span>
                 </p>
                 <p class="text-xl">
                     <span x-show="lang === 'es'">Actualmente enfocado en:</span>
@@ -147,7 +167,7 @@
                     <div>
                         <span class="skill-badge">AWS</span>
                         <span class="skill-badge">Docker</span>
-                        <span class="skill-badge">Kubernetes</span>  
+                        <span class="skill-badge">Kubernetes</span>
                         <span class="skill-badge">Terraform</span>
                         <span class="skill-badge">Jenkins</span>
                         <span class="skill-badge">Grafana</span>
@@ -219,11 +239,13 @@
                 <span x-show="lang === 'en'">Contact</span>
             </h2>
             <div class="flex flex-col items-center space-y-4">
-                <a href="mailto:fabianignaciomv@gmail.com" class="flex items-center space-x-3 text-white hover:text-pink-200">
+                <a href="mailto:fabianignaciomv@gmail.com"
+                    class="flex items-center space-x-3 text-white hover:text-pink-200">
                     <i class="fas fa-envelope"></i>
                     <span>fabianignaciomv@gmail.com</span>
                 </a>
-                <a href="https://linkedin.com/in/fabianimv" target="_blank" class="flex items-center space-x-3 text-white hover:text-pink-200">
+                <a href="https://linkedin.com/in/fabianimv" target="_blank"
+                    class="flex items-center space-x-3 text-white hover:text-pink-200">
                     <i class="fab fa-linkedin"></i>
                     <span>linkedin.com/in/fabianimv</span>
                 </a>
@@ -236,4 +258,5 @@
         <p>© 2024 Fabián M. All rights reserved.</p>
     </footer>
 </body>
+
 </html>
