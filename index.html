@@ -169,7 +169,7 @@
                 <span x-show="lang === 'es'">Stack Tecnológico</span>
                 <span x-show="lang === 'en'">Tech Stack</span>
             </h2>
-            <div class="grid md:grid-cols-2 gap-12">
+            <div class="grid md:grid-cols-3 gap-12">
                 <!-- Cloud & DevOps -->
                 <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
                     <h3 class="text-xl font-bold mb-6 flex items-center">
@@ -177,6 +177,10 @@
                         Cloud & DevOps
                     </h3>
                     <ul class="space-y-4">
+                        <!-- Cloud Platforms -->
+                        <li class="flex items-center">
+                            <span class="text-sm uppercase text-gray-400">Cloud Platforms</span>
+                        </li>
                         <li class="flex items-center">
                             <i class="fab fa-aws text-orange-400 w-8"></i>
                             <span class="ml-3">AWS</span>
@@ -188,6 +192,15 @@
                         <li class="flex items-center">
                             <i class="fab fa-microsoft text-blue-400 w-8"></i>
                             <span class="ml-3">Microsoft Azure</span>
+                        </li>
+
+                        <!-- Separador visual -->
+                        <li class="py-2">
+                            <div class="border-t border-gray-700"></div>
+                        </li>
+                        <!-- DevOps Tools -->
+                        <li class="flex items-center">
+                            <span class="text-sm uppercase text-gray-400">DevOps Tools</span>
                         </li>
                         <li class="flex items-center">
                             <i class="fab fa-docker text-blue-400 w-8"></i>
@@ -205,15 +218,15 @@
                             <i class="fab fa-jenkins text-red-400 w-8"></i>
                             <span class="ml-3">Jenkins</span>
                         </li>
+
                         <!-- Separador visual -->
                         <li class="py-2">
                             <div class="border-t border-gray-700"></div>
                         </li>
-                        <!-- Título de subsección -->
+                        <!-- Monitoring & Observability -->
                         <li class="flex items-center">
                             <span class="text-sm uppercase text-gray-400">Monitoring & Observability</span>
                         </li>
-                        <!-- Herramientas de monitoreo -->
                         <li class="flex items-center">
                             <i class="fas fa-chart-line text-orange-500 w-8"></i>
                             <span class="ml-3">Grafana</span>
@@ -238,6 +251,10 @@
                             <i class="fas fa-dog text-purple-400 w-8"></i>
                             <span class="ml-3">Datadog</span>
                         </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-chart-bar text-yellow-400 w-8"></i>
+                            <span class="ml-3">Power BI</span>
+                        </li>
                     </ul>
                 </div>
 
@@ -249,7 +266,23 @@
                         <span x-show="lang === 'en'">Development & Collaboration</span>
                     </h3>
                     <ul class="space-y-4">
+                        <!-- Development Tools -->
+                        <li class="flex items-center">
+                            <span class="text-sm uppercase text-gray-400">Development Tools</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-code text-blue-500 w-8"></i>
+                            <span class="ml-3">Visual Studio</span>
+                        </li>
+
+                        <!-- Separador visual -->
+                        <li class="py-2">
+                            <div class="border-t border-gray-700"></div>
+                        </li>
                         <!-- Version Control -->
+                        <li class="flex items-center">
+                            <span class="text-sm uppercase text-gray-400">Version Control</span>
+                        </li>
                         <li class="flex items-center">
                             <i class="fab fa-git-alt text-orange-500 w-8"></i>
                             <span class="ml-3">Git</span>
@@ -267,12 +300,10 @@
                         <li class="py-2">
                             <div class="border-t border-gray-700"></div>
                         </li>
-                        <!-- Título de subsección -->
+                        <!-- Project Management -->
                         <li class="flex items-center">
                             <span class="text-sm uppercase text-gray-400">Project Management</span>
                         </li>
-
-                        <!-- Herramientas de colaboración -->
                         <li class="flex items-center">
                             <i class="fab fa-jira text-blue-400 w-8"></i>
                             <span class="ml-3">Jira</span>
@@ -286,12 +317,77 @@
                             <span class="ml-3">Agile Methodologies</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-comments text-yellow-400 w-8"></i>
-                            <span class="ml-3">Team Collaboration</span>
-                        </li>
-                        <li class="flex items-center">
                             <i class="fas fa-project-diagram text-pink-400 w-8"></i>
                             <span class="ml-3">Project Planning</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- System Administration -->
+                <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700">
+                    <h3 class="text-xl font-bold mb-6 flex items-center">
+                        <i class="fas fa-server mr-3 text-green-400"></i>
+                        <span x-show="lang === 'es'">Sistemas y Administración</span>
+                        <span x-show="lang === 'en'">Systems & Administration</span>
+                    </h3>
+                    <ul class="space-y-4">
+                        <!-- Operating Systems -->
+                        <li class="flex items-center">
+                            <span class="text-sm uppercase text-gray-400">Operating Systems</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-linux text-orange-500 w-8"></i>
+                            <span class="ml-3">Linux (Ubuntu, RHEL, CentOS)</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-windows text-blue-400 w-8"></i>
+                            <span class="ml-3">Windows Server</span>
+                        </li>
+
+                        <!-- Separador visual -->
+                        <li class="py-2">
+                            <div class="border-t border-gray-700"></div>
+                        </li>
+                        <!-- Tools & Scripting -->
+                        <li class="flex items-center">
+                            <span class="text-sm uppercase text-gray-400">Tools & Virtualization</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-terminal text-green-400 w-8"></i>
+                            <span class="ml-3">Bash Scripting</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-desktop text-purple-400 w-8"></i>
+                            <span class="ml-3">VMware</span>
+                        </li>
+
+                        <!-- Separador visual -->
+                        <li class="py-2">
+                            <div class="border-t border-gray-700"></div>
+                        </li>
+                        <!-- Data Management -->
+                        <li class="flex items-center">
+                            <span class="text-sm uppercase text-gray-400">Data Management</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-database text-red-400 w-8"></i>
+                            <span class="ml-3">Oracle Database</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-database text-blue-400 w-8"></i>
+                            <span class="ml-3">PostgreSQL</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-database text-orange-400 w-8"></i>
+                            <span class="ml-3">MySQL</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-exchange-alt text-green-400 w-8"></i>
+                            <span class="ml-3">ETL Processes</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-cube text-blue-400 w-8"></i>
+                            <span class="ml-3">OLAP Cubes</span>
                         </li>
                     </ul>
                 </div>
