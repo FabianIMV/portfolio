@@ -202,11 +202,21 @@
                     <span class="inline gradient-text">Fabián M.</span>
                 </a>
                 
-                <!-- Mobile menu button -->
-                <button @click="mobileMenu = !mobileMenu" class="md:hidden text-white focus:outline-none">
-                    <i x-show="!mobileMenu" class="fas fa-bars text-xl"></i>
-                    <i x-show="mobileMenu" class="fas fa-times text-xl"></i>
-                </button>
+                <!-- Mobile controls -->
+<div class="md:hidden flex items-center space-x-2">
+    <!-- Language toggle button -->
+    <button @click="lang = lang === 'es' ? 'en' : 'es'"
+        class="bg-purple-600/80 backdrop-blur-sm px-3 py-2 rounded-lg hover:bg-purple-600 transition text-sm">
+        <span x-show="lang === 'es'">Switch to English</span>
+        <span x-show="lang === 'en'">Cambiar a Español</span>
+    </button>
+    
+    <!-- Mobile menu button -->
+    <button @click="mobileMenu = !mobileMenu" class="text-white focus:outline-none">
+        <i x-show="!mobileMenu" class="fas fa-bars text-xl"></i>
+        <i x-show="mobileMenu" class="fas fa-times text-xl"></i>
+    </button>
+</div>
                 
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
@@ -245,52 +255,46 @@
                 </div>
             </div>
             
-            <!-- Mobile Navigation Menu -->
-            <div x-show="mobileMenu" 
-                 x-transition:enter="transition ease-out duration-200"
-                 x-transition:enter-start="opacity-0 transform -translate-y-4"
-                 x-transition:enter-end="opacity-100 transform translate-y-0"
-                 x-transition:leave="transition ease-in duration-150"
-                 x-transition:leave-start="opacity-100 transform translate-y-0"
-                 x-transition:leave-end="opacity-0 transform -translate-y-4"
-                 class="md:hidden mt-4 bg-gray-800/90 backdrop-blur-sm rounded-lg p-4 border border-gray-700 shadow-lg">
-                <div class="flex flex-col space-y-3">
-                    <a href="#home" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
-                        <span x-show="lang === 'es'">Inicio</span>
-                        <span x-show="lang === 'en'">Home</span>
-                    </a>
-                    <a href="#about" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
-                        <span x-show="lang === 'es'">Sobre mí</span>
-                        <span x-show="lang === 'en'">About</span>
-                    </a>
-                    <a href="#experience" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
-                        <span x-show="lang === 'es'">Experiencia</span>
-                        <span x-show="lang === 'en'">Experience</span>
-                    </a>
-                    <a href="#skills" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
-                        <span x-show="lang === 'es'">Habilidades</span>
-                        <span x-show="lang === 'en'">Skills</span>
-                    </a>
-                    <a href="#projects" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
-                        <span x-show="lang === 'es'">Proyectos</span>
-                        <span x-show="lang === 'en'">Projects</span>
-                    </a>
-                    <a href="#certifications" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
-                        <span x-show="lang === 'es'">Certificaciones</span>
-                        <span x-show="lang === 'en'">Certifications</span>
-                    </a>
-                    <a href="#contact" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
-                        <span x-show="lang === 'es'">Contacto</span>
-                        <span x-show="lang === 'en'">Contact</span>
-                    </a>
-                    <div class="pt-2 border-t border-gray-700">
-                        <button @click="lang = lang === 'es' ? 'en' : 'es'; mobileMenu = false"
-                            class="w-full bg-purple-600/80 py-2 px-4 rounded-lg hover:bg-purple-600 transition text-center">
-                            <span x-text="lang === 'es' ? 'Switch to English' : 'Cambiar a Español'"></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+<!-- Mobile Navigation Menu -->
+<div x-show="mobileMenu" 
+     x-transition:enter="transition ease-out duration-200"
+     x-transition:enter-start="opacity-0 transform -translate-y-4"
+     x-transition:enter-end="opacity-100 transform translate-y-0"
+     x-transition:leave="transition ease-in duration-150"
+     x-transition:leave-start="opacity-100 transform translate-y-0"
+     x-transition:leave-end="opacity-0 transform -translate-y-4"
+     class="md:hidden mt-4 bg-gray-800/90 backdrop-blur-sm rounded-lg p-4 border border-gray-700 shadow-lg">
+    <div class="flex flex-col space-y-3">
+        <a href="#home" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
+            <span x-show="lang === 'es'">Inicio</span>
+            <span x-show="lang === 'en'">Home</span>
+        </a>
+        <a href="#about" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
+            <span x-show="lang === 'es'">Sobre mí</span>
+            <span x-show="lang === 'en'">About</span>
+        </a>
+        <a href="#experience" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
+            <span x-show="lang === 'es'">Experiencia</span>
+            <span x-show="lang === 'en'">Experience</span>
+        </a>
+        <a href="#skills" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
+            <span x-show="lang === 'es'">Habilidades</span>
+            <span x-show="lang === 'en'">Skills</span>
+        </a>
+        <a href="#projects" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
+            <span x-show="lang === 'es'">Proyectos</span>
+            <span x-show="lang === 'en'">Projects</span>
+        </a>
+        <a href="#certifications" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
+            <span x-show="lang === 'es'">Certificaciones</span>
+            <span x-show="lang === 'en'">Certifications</span>
+        </a>
+        <a href="#contact" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
+            <span x-show="lang === 'es'">Contacto</span>
+            <span x-show="lang === 'en'">Contact</span>
+        </a>
+    </div>
+</div>
         </div>
     </nav>
 
@@ -353,26 +357,13 @@
             <!-- Tech Stack Icons -->
             <div class="mt-16 pt-8 border-t border-purple-900/30" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
                 <div class="flex flex-wrap justify-center items-center gap-6 md:gap-10">
-                    
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" />
-                      
-                    
-            
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecloud/googlecloud-original.svg" />
-                      
-                    
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="AWS" />
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecloud/googlecloud-original.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Google Cloud" />
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Kubernetes">
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Docker">
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Terraform">
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Grafana">
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Prometheus">
-                    
-                    <!-- Datadog (You'll replace this with your Datadog icon) -->
-                    <img src="path/to/datadog-icon.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Datadog">
-                    
-                    <!-- Loki (You'll replace this with your Loki icon) -->
-                    <img src="path/to/loki-icon.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Loki">
-                    
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Python">
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Jenkins">
                 </div>
@@ -938,7 +929,7 @@
                 <!-- Proyecto 2: Ferremás -->
                 <div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="300">
                     <div class="h-48 bg-gradient-to-br from-blue-900 to-purple-900 rounded-lg mb-4 overflow-hidden">
-                        <img src="https://api.placeholder.com/400/300" alt="Ferremás Project" class="w-full h-full object-cover">
+                        <img src="https://ferremas.vercel.app/static/media/logoferremas.ec0d9dbd910783e34e013bf79f999af4.svg" alt="Ferremás Project" class="w-full h-full object-cover">
                     </div>
                     <h3 class="text-xl font-bold mb-2 text-purple-300">Ferremás</h3>
                     <p class="text-gray-300 mb-4">
@@ -958,7 +949,7 @@
                 <!-- Proyecto 3: True Q -->
                 <div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="400">
                     <div class="h-48 bg-gradient-to-br from-indigo-900 to-pink-900 rounded-lg mb-4 overflow-hidden">
-                        <img src="https://api.placeholder.com/400/300" alt="True Q Project" class="w-full h-full object-cover">
+                        <img src="https://trueq-vercel.vercel.app/assets/trueqbanner.svg" alt="True Q Project" class="w-full h-full object-cover">
                     </div>
                     <h3 class="text-xl font-bold mb-2 text-purple-300">True Q</h3>
                     <p class="text-gray-300 mb-4">
@@ -978,7 +969,7 @@
                 <!-- Proyecto 4: Psicóloga Valeria Améstica -->
                 <div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="500">
                     <div class="h-48 bg-gradient-to-br from-pink-900 to-purple-900 rounded-lg mb-4 overflow-hidden">
-                        <img src="https://api.placeholder.com/400/300" alt="Psicóloga Valeria Améstica Project" class="w-full h-full object-cover">
+                        <img src="https://psivaleriamestica.com/wp-content/uploads/2024/08/cropped-logo-psicologa-v4-mas-pequena-300x300.webp" alt="Psicóloga Valeria Améstica Project" class="w-full h-full object-cover">
                     </div>
                     <h3 class="text-xl font-bold mb-2 text-purple-300">Psicóloga Valeria Amestica</h3>
                     <p class="text-gray-300 mb-4">
@@ -999,12 +990,12 @@
                 <!-- Proyecto 5: BYF -->
                 <div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="600">
                     <div class="h-48 bg-gradient-to-br from-purple-900 to-blue-900 rounded-lg mb-4 overflow-hidden">
-                        <img src="https://api.placeholder.com/400/300" alt="BYF Project" class="w-full h-full object-cover">
+                        <img src="https://byf.vercel.app/_next/image?url=%2Fimages%2Fbyf.ico&w=128&q=75" alt="BYF Project" class="w-full h-full object-cover">
                     </div>
                     <h3 class="text-xl font-bold mb-2 text-purple-300">BYF</h3>
                     <p class="text-gray-300 mb-4">
-                        <span x-show="lang === 'es'">Sistema de gestión para una empresa de construcción y remodelación.</span>
-                        <span x-show="lang === 'en'">Management system for a construction and remodeling company.</span>
+                        <span x-show="lang === 'es'">Pagina web para local de comida rápida.</span>
+                        <span x-show="lang === 'en'">Website for a fast food restaurant.</span>
                     </p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="skill-badge"><i class="fab fa-react mr-1"></i> React</span>
@@ -1395,7 +1386,7 @@
                         <i class="fas fa-server text-purple-400 mr-2"></i>
                         <span class="gradient-text">Fabián M.</span>
                     </a>
-                    <p class="text-gray-500 mt-2">© 2025 Fabián M.. All rights reserved.</p>
+                    <p class="text-gray-500 mt-2">© 2025 Fabián M. All rights reserved.</p>
                 </div>
                 
                 <div class="flex space-x-4">
