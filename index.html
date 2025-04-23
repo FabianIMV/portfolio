@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fabián Muñoz - SRE Engineer</title>
+    <title>Fabián M. - SRE Engineer</title>
     <link rel="icon" type="image/x-icon" href="./icon.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -199,7 +199,7 @@
             <div class="flex justify-between items-center">
                 <a href="#home" class="text-2xl font-bold flex items-center">
                     <i class="fas fa-server text-purple-400 mr-2"></i>
-                    <span class="hidden md:inline gradient-text">Fabián Muñoz</span>
+                    <span class="inline gradient-text">Fabián M.</span>
                 </a>
                 
                 <!-- Mobile menu button -->
@@ -305,12 +305,25 @@
         <div class="gradient-bg absolute inset-0 opacity-80 z-0"></div>
         
         <div class="container mx-auto px-4 sm:px-6 py-16 relative z-10">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="space-y-6" data-aos="fade-right" data-aos-duration="1000">
-                    <h1 class="text-5xl md:text-6xl font-bold">
+            <!-- Mobile-first layout -->
+            <div class="flex flex-col sm:grid sm:grid-cols-2 gap-8 items-center">
+                <!-- Profile Image - Appears first on mobile -->
+                <div class="flex justify-center order-1 sm:order-2" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-purple-600 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+                        <img src="./profilepic.jpeg" alt="Fabián M." class="relative z-10 profile-image rounded-full w-48 h-48 sm:w-64 sm:h-64 object-cover border-4 border-purple-500/30 
+                            shadow-[0_0_50px_0px_rgba(168,85,247,0.3),0_0_30px_0px_rgba(168,85,247,0.3)] 
+                            hover:shadow-[0_0_70px_0px_rgba(168,85,247,0.45),0_0_40px_0px_rgba(168,85,247,0.45)]
+                            transition-shadow duration-300 ease-in-out">
+                    </div>
+                </div>
+                
+                <!-- Text Content -->
+                <div class="space-y-6 text-center sm:text-left order-2 sm:order-1" data-aos="fade-right" data-aos-duration="1000">
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold">
                         <span x-show="lang === 'es'">¡Hola! Soy</span>
                         <span x-show="lang === 'en'">Hi! I'm</span>
-                        <div class="mt-2 gradient-text">Fabián Muñoz</div>
+                        <div class="mt-2 gradient-text">Fabián</div>
                     </h1>
                     <p class="text-xl md:text-2xl text-gray-300">
                         <span x-show="lang === 'es'">Ingeniero SRE • Monitoring • Observability</span>
@@ -320,7 +333,7 @@
                         <span x-show="lang === 'es'">Especialista en sistemas de monitoreo, observabilidad y automatización para infraestructuras críticas.</span>
                         <span x-show="lang === 'en'">Specialist in monitoring systems, observability, and automation for critical infrastructures.</span>
                     </p>
-                    <div class="flex flex-wrap gap-4 pt-4">
+                    <div class="flex flex-wrap justify-center sm:justify-start gap-4 pt-4">
                         <a href="https://linkedin.com/in/fabianimv" target="_blank"
                             class="bg-purple-600/80 hover:bg-purple-500 backdrop-blur-sm px-4 py-3 rounded-lg transition-all duration-300 flex items-center shadow-lg shadow-purple-900/20">
                             <i class="fab fa-linkedin mr-2"></i>LinkedIn
@@ -335,29 +348,35 @@
                         </a>
                     </div>
                 </div>
-                
-                <div class="flex justify-center" data-aos="fade-left" data-aos-duration="1000">
-                    <div class="relative">
-                        <div class="absolute inset-0 bg-purple-600 rounded-full blur-3xl opacity-20 animate-pulse"></div>
-                        <img src="./profilepic.jpeg" alt="Fabián Muñoz" class="relative z-10 profile-image rounded-full w-64 h-64 object-cover border-4 border-purple-500/30 
-                            shadow-[0_0_50px_0px_rgba(168,85,247,0.3),0_0_30px_0px_rgba(168,85,247,0.3)] 
-                            hover:shadow-[0_0_70px_0px_rgba(168,85,247,0.45),0_0_40px_0px_rgba(168,85,247,0.45)]
-                            transition-shadow duration-300 ease-in-out">
-                    </div>
-                </div>
             </div>
             
             <!-- Tech Stack Icons -->
             <div class="mt-16 pt-8 border-t border-purple-900/30" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
                 <div class="flex flex-wrap justify-center items-center gap-6 md:gap-10">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="AWS">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Kubernetes">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Docker">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Terraform">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Grafana">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Prometheus">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Python">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Jenkins">
+                    <div class="tech-icon w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
+                        <i class="fab fa-aws text-orange-400 text-3xl"></i>
+                    </div>
+                    <div class="tech-icon w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
+                        <i class="fas fa-dharmachakra text-blue-500 text-3xl"></i>
+                    </div>
+                    <div class="tech-icon w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
+                        <i class="fab fa-docker text-blue-400 text-3xl"></i>
+                    </div>
+                    <div class="tech-icon w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
+                        <i class="fas fa-cube text-purple-500 text-3xl"></i>
+                    </div>
+                    <div class="tech-icon w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-orange-500 text-3xl"></i>
+                    </div>
+                    <div class="tech-icon w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
+                        <i class="fas fa-fire text-red-500 text-3xl"></i>
+                    </div>
+                    <div class="tech-icon w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
+                        <i class="fab fa-python text-blue-400 text-3xl"></i>
+                    </div>
+                    <div class="tech-icon w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
+                        <i class="fab fa-jenkins text-red-400 text-3xl"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1377,9 +1396,9 @@
                 <div class="mb-4 md:mb-0">
                     <a href="#home" class="text-xl font-bold flex items-center">
                         <i class="fas fa-server text-purple-400 mr-2"></i>
-                        <span class="gradient-text">Fabián Muñoz</span>
+                        <span class="gradient-text">Fabián M.</span>
                     </a>
-                    <p class="text-gray-500 mt-2">© 2025 Fabián Muñoz. All rights reserved.</p>
+                    <p class="text-gray-500 mt-2">© 2025 Fabián M.. All rights reserved.</p>
                 </div>
                 
                 <div class="flex space-x-4">
