@@ -17,7 +17,7 @@
         }
 
         .gradient-bg {
-            background: linear-gradient(140deg, #2E1065 0%, #4C1D95 50%, #7C3AED 100%);
+            background: linear-gradient(140deg, #1E1B4B 0%, #3730A3 50%, #7C3AED 100%);
         }
 
         .gradient-text {
@@ -32,25 +32,21 @@
         }
 
         .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
-        }
-
-        .skill-badge {
-            @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800 mr-2 mb-2;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.3);
         }
 
         .project-card {
-            background: rgba(30, 30, 46, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(124, 58, 237, 0.1);
+            background: rgba(30, 30, 46, 0.7);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(124, 58, 237, 0.2);
             transition: all 0.4s ease;
         }
 
         .project-card:hover {
-            border-color: rgba(124, 58, 237, 0.5);
-            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
-            transform: translateY(-5px);
+            border-color: rgba(124, 58, 237, 0.6);
+            box-shadow: 0 15px 35px rgba(124, 58, 237, 0.4);
+            transform: translateY(-8px);
         }
 
         .rotating-circles {
@@ -61,13 +57,13 @@
             left: 0;
             overflow: hidden;
             z-index: 0;
-            opacity: 0.2;
+            opacity: 0.15;
         }
 
         .circle {
             position: absolute;
             border-radius: 50%;
-            border: 2px solid rgba(124, 58, 237, 0.3);
+            border: 2px solid rgba(124, 58, 237, 0.4);
         }
 
         .circle-1 {
@@ -95,24 +91,20 @@
         }
 
         @keyframes rotate {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .tech-icon {
             transition: all 0.3s ease;
-            filter: grayscale(40%);
-            opacity: 0.8;
+            filter: grayscale(30%);
+            opacity: 0.9;
         }
 
         .tech-icon:hover {
             filter: grayscale(0%);
             opacity: 1;
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.1);
         }
 
         .timeline-item {
@@ -131,6 +123,7 @@
             height: 1rem;
             border-radius: 50%;
             background: #7C3AED;
+            box-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
         }
 
         .timeline-item:last-child {
@@ -162,15 +155,9 @@
         }
 
         @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-            100% {
-                transform: translateY(0px);
-            }
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
         }
 
         .custom-scrollbar::-webkit-scrollbar {
@@ -189,6 +176,26 @@
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: #7C3AED;
         }
+
+        .honest-badge {
+            background: linear-gradient(45deg, #059669, #047857);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .learning-badge {
+            background: linear-gradient(45deg, #D97706, #B45309);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
     </style>
 </head>
 
@@ -203,20 +210,18 @@
                 </a>
                 
                 <!-- Mobile controls -->
-<div class="md:hidden flex items-center space-x-2">
-    <!-- Language toggle button -->
-    <button @click="lang = lang === 'es' ? 'en' : 'es'"
-        class="bg-purple-600/80 backdrop-blur-sm px-3 py-2 rounded-lg hover:bg-purple-600 transition text-sm">
-        <span x-show="lang === 'es'">Switch to English</span>
-        <span x-show="lang === 'en'">Cambiar a Español</span>
-    </button>
-    
-    <!-- Mobile menu button -->
-    <button @click="mobileMenu = !mobileMenu" class="text-white focus:outline-none">
-        <i x-show="!mobileMenu" class="fas fa-bars text-xl"></i>
-        <i x-show="mobileMenu" class="fas fa-times text-xl"></i>
-    </button>
-</div>
+                <div class="md:hidden flex items-center space-x-2">
+                    <button @click="lang = lang === 'es' ? 'en' : 'es'"
+                        class="bg-purple-600/80 backdrop-blur-sm px-3 py-2 rounded-lg hover:bg-purple-600 transition text-sm">
+                        <span x-show="lang === 'es'">EN</span>
+                        <span x-show="lang === 'en'">ES</span>
+                    </button>
+                    
+                    <button @click="mobileMenu = !mobileMenu" class="text-white focus:outline-none">
+                        <i x-show="!mobileMenu" class="fas fa-bars text-xl"></i>
+                        <i x-show="mobileMenu" class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
                 
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
@@ -240,61 +245,53 @@
                         <span x-show="lang === 'es'">Proyectos</span>
                         <span x-show="lang === 'en'">Projects</span>
                     </a>
-                    <a href="#certifications" class="nav-link hover:text-purple-400 transition">
-                        <span x-show="lang === 'es'">Certificaciones</span>
-                        <span x-show="lang === 'en'">Certifications</span>
-                    </a>
                     <a href="#contact" class="nav-link hover:text-purple-400 transition">
                         <span x-show="lang === 'es'">Contacto</span>
                         <span x-show="lang === 'en'">Contact</span>
                     </a>
                     <button @click="lang = lang === 'es' ? 'en' : 'es'"
                         class="bg-purple-600/80 backdrop-blur-sm px-4 py-2 rounded-lg hover:bg-purple-600 transition">
-                        <span x-text="lang === 'es' ? 'Switch to English' : 'Cambiar a Español'" class="font-medium"></span>
+                        <span x-text="lang === 'es' ? 'EN' : 'ES'" class="font-medium"></span>
                     </button>
                 </div>
             </div>
             
-<!-- Mobile Navigation Menu -->
-<div x-show="mobileMenu" 
-     x-transition:enter="transition ease-out duration-200"
-     x-transition:enter-start="opacity-0 transform -translate-y-4"
-     x-transition:enter-end="opacity-100 transform translate-y-0"
-     x-transition:leave="transition ease-in duration-150"
-     x-transition:leave-start="opacity-100 transform translate-y-0"
-     x-transition:leave-end="opacity-0 transform -translate-y-4"
-     class="md:hidden mt-4 bg-gray-800/90 backdrop-blur-sm rounded-lg p-4 border border-gray-700 shadow-lg">
-    <div class="flex flex-col space-y-3">
-        <a href="#home" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
-            <span x-show="lang === 'es'">Inicio</span>
-            <span x-show="lang === 'en'">Home</span>
-        </a>
-        <a href="#about" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
-            <span x-show="lang === 'es'">Sobre mí</span>
-            <span x-show="lang === 'en'">About</span>
-        </a>
-        <a href="#experience" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
-            <span x-show="lang === 'es'">Experiencia</span>
-            <span x-show="lang === 'en'">Experience</span>
-        </a>
-        <a href="#skills" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
-            <span x-show="lang === 'es'">Habilidades</span>
-            <span x-show="lang === 'en'">Skills</span>
-        </a>
-        <a href="#projects" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
-            <span x-show="lang === 'es'">Proyectos</span>
-            <span x-show="lang === 'en'">Projects</span>
-        </a>
-        <a href="#certifications" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
-            <span x-show="lang === 'es'">Certificaciones</span>
-            <span x-show="lang === 'en'">Certifications</span>
-        </a>
-        <a href="#contact" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
-            <span x-show="lang === 'es'">Contacto</span>
-            <span x-show="lang === 'en'">Contact</span>
-        </a>
-    </div>
-</div>
+            <!-- Mobile Navigation Menu -->
+            <div x-show="mobileMenu" 
+                 x-transition:enter="transition ease-out duration-200"
+                 x-transition:enter-start="opacity-0 transform -translate-y-4"
+                 x-transition:enter-end="opacity-100 transform translate-y-0"
+                 x-transition:leave="transition ease-in duration-150"
+                 x-transition:leave-start="opacity-100 transform translate-y-0"
+                 x-transition:leave-end="opacity-0 transform -translate-y-4"
+                 class="md:hidden mt-4 bg-gray-800/90 backdrop-blur-sm rounded-lg p-4 border border-gray-700 shadow-lg">
+                <div class="flex flex-col space-y-3">
+                    <a href="#home" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
+                        <span x-show="lang === 'es'">Inicio</span>
+                        <span x-show="lang === 'en'">Home</span>
+                    </a>
+                    <a href="#about" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
+                        <span x-show="lang === 'es'">Sobre mí</span>
+                        <span x-show="lang === 'en'">About</span>
+                    </a>
+                    <a href="#experience" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
+                        <span x-show="lang === 'es'">Experiencia</span>
+                        <span x-show="lang === 'en'">Experience</span>
+                    </a>
+                    <a href="#skills" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
+                        <span x-show="lang === 'es'">Habilidades</span>
+                        <span x-show="lang === 'en'">Skills</span>
+                    </a>
+                    <a href="#projects" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
+                        <span x-show="lang === 'es'">Proyectos</span>
+                        <span x-show="lang === 'en'">Projects</span>
+                    </a>
+                    <a href="#contact" @click="mobileMenu = false" class="py-2 px-4 hover:bg-purple-900/30 rounded-md transition">
+                        <span x-show="lang === 'es'">Contacto</span>
+                        <span x-show="lang === 'en'">Contact</span>
+                    </a>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -309,9 +306,8 @@
         <div class="gradient-bg absolute inset-0 opacity-80 z-0"></div>
         
         <div class="container mx-auto px-4 sm:px-6 py-16 relative z-10">
-            <!-- Mobile-first layout -->
             <div class="flex flex-col sm:grid sm:grid-cols-2 gap-8 items-center">
-                <!-- Profile Image - Appears first on mobile -->
+                <!-- Profile Image -->
                 <div class="flex justify-center order-1 sm:order-2" data-aos="fade-left" data-aos-duration="1000">
                     <div class="relative">
                         <div class="absolute inset-0 bg-purple-600 rounded-full blur-3xl opacity-20 animate-pulse"></div>
@@ -330,12 +326,12 @@
                         <div class="mt-2 gradient-text">Fabián</div>
                     </h1>
                     <p class="text-xl md:text-2xl text-gray-300">
-                        <span x-show="lang === 'es'">Ingeniero SRE • Monitoring • Observability</span>
-                        <span x-show="lang === 'en'">SRE Engineer • Monitoring • Observability</span>
+                        <span x-show="lang === 'es'">Site Reliability Engineer</span>
+                        <span x-show="lang === 'en'">Site Reliability Engineer</span>
                     </p>
                     <p class="text-lg text-gray-400">
-                        <span x-show="lang === 'es'">Especialista en sistemas de monitoreo, observabilidad y automatización para infraestructuras críticas.</span>
-                        <span x-show="lang === 'en'">Specialist in monitoring systems, observability, and automation for critical infrastructures.</span>
+                        <span x-show="lang === 'es'">Experiencia en análisis de incidentes, post-mortem, y mejora de correlación de monitoreo en infraestructuras empresariales.</span>
+                        <span x-show="lang === 'en'">Experience in incident analysis, post-mortem investigations, and improving monitoring correlation in enterprise infrastructures.</span>
                     </p>
                     <div class="flex flex-wrap justify-center sm:justify-start gap-4 pt-4">
                         <a href="https://linkedin.com/in/fabianimv" target="_blank"
@@ -358,7 +354,6 @@
             <div class="mt-16 pt-8 border-t border-purple-900/30" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
                 <div class="flex flex-wrap justify-center items-center gap-6 md:gap-10">
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="AWS" />
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecloud/googlecloud-original.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Google Cloud" />
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Kubernetes">
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Docker">
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Terraform">
@@ -368,6 +363,7 @@
                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Jenkins">
                 </div>
             </div>
+        </div>
     </section>
 
     <!-- About Section -->
@@ -380,34 +376,52 @@
             
             <div class="max-w-4xl mx-auto space-y-8">
                 <div class="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 shadow-xl" data-aos="fade-up" data-aos-delay="200">
-                    <p class="text-lg">
+                    <p class="text-lg text-gray-300 mb-6">
                         <span x-show="lang === 'es'">
-                            Ingeniero SRE con experiencia sólida en observabilidad y monitoreo de sistemas críticos para entornos empresariales de alta disponibilidad. Especialista en detección temprana de problemas y mejora de cobertura de monitoreo en infraestructuras complejas.
+                            Site Reliability Engineer con experiencia sólida en observabilidad y monitoreo de sistemas críticos para entornos empresariales de alta disponibilidad. Experimentado en análisis de incidentes, investigaciones post-mortem, y mejora de correlación de monitoreo en infraestructuras complejas.
                         </span>
                         <span x-show="lang === 'en'">
-                            SRE Engineer with solid experience in observability and monitoring of critical systems for high-availability enterprise environments. Specialist in early problem detection and improving monitoring coverage in complex infrastructures.
+                            Site Reliability Engineer with solid experience in observability and monitoring of critical systems for high-availability enterprise environments. Experienced in incident analysis, post-mortem investigations, and improving monitoring correlation in complex infrastructures.
                         </span>
                     </p>
                     
+                    <div class="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4 mb-6">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-info-circle text-blue-400 mr-2"></i>
+                            <span class="font-semibold text-blue-300">
+                                <span x-show="lang === 'es'">Transparencia profesional</span>
+                                <span x-show="lang === 'en'">Professional transparency</span>
+                            </span>
+                        </div>
+                        <p class="text-sm text-blue-200">
+                            <span x-show="lang === 'es'">
+                                Con 2.9 años de experiencia, actualmente liderando mi primer proyecto crítico. Mi enfoque está en el crecimiento continuo y el aprendizaje constante en el ecosistema SRE.
+                            </span>
+                            <span x-show="lang === 'en'">
+                                With 2.9 years of experience, currently leading my first critical project. My focus is on continuous growth and constant learning in the SRE ecosystem.
+                            </span>
+                        </p>
+                    </div>
+                    
                     <div class="mt-6 pt-6 border-t border-gray-700">
                         <h3 class="text-xl font-semibold mb-4 text-purple-300">
-                            <span x-show="lang === 'es'">Actualmente enfocado en:</span>
-                            <span x-show="lang === 'en'">Currently focused on:</span>
+                            <span x-show="lang === 'es'">Actualmente trabajando en:</span>
+                            <span x-show="lang === 'en'">Currently working on:</span>
                         </h3>
                         
                         <ul class="space-y-3">
                             <li class="flex items-start">
-                                <i class="fas fa-chart-line text-purple-400 mt-1 mr-3"></i>
+                                <i class="fas fa-search text-purple-400 mt-1 mr-3"></i>
                                 <span>
-                                    <span x-show="lang === 'es'">Creación y optimización de dashboards de observabilidad</span>
-                                    <span x-show="lang === 'en'">Creating and optimizing observability dashboards</span>
+                                    <span x-show="lang === 'es'">Análisis de incidentes y correlación usando BigPanda</span>
+                                    <span x-show="lang === 'en'">Incident analysis and correlation using BigPanda</span>
                                 </span>
                             </li>
                             <li class="flex items-start">
-                                <i class="fas fa-robot text-purple-400 mt-1 mr-3"></i>
+                                <i class="fas fa-chart-line text-purple-400 mt-1 mr-3"></i>
                                 <span>
-                                    <span x-show="lang === 'es'">Automatización de despliegues con CI/CD</span>
-                                    <span x-show="lang === 'en'">Automating deployments with CI/CD</span>
+                                    <span x-show="lang === 'es'">Optimización de dashboards de observabilidad con Grafana</span>
+                                    <span x-show="lang === 'en'">Optimizing observability dashboards with Grafana</span>
                                 </span>
                             </li>
                             <li class="flex items-start">
@@ -418,99 +432,13 @@
                                 </span>
                             </li>
                             <li class="flex items-start">
-                                <i class="fas fa-heartbeat text-purple-400 mt-1 mr-3"></i>
+                                <i class="fas fa-graduation-cap text-purple-400 mt-1 mr-3"></i>
                                 <span>
-                                    <span x-show="lang === 'es'">Monitoreo y mejora continua de sistemas críticos</span>
-                                    <span x-show="lang === 'en'">Monitoring and continuous improvement of critical systems</span>
-                                </span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-server text-purple-400 mt-1 mr-3"></i>
-                                <span>
-                                    <span x-show="lang === 'es'">Gestión de infraestructura cloud en AWS</span>
-                                    <span x-show="lang === 'en'">Cloud infrastructure management in AWS</span>
+                                    <span x-show="lang === 'es'">Finalizando Ingeniería en Informática (4to año)</span>
+                                    <span x-show="lang === 'en'">Completing Computer Engineering degree (4th year)</span>
                                 </span>
                             </li>
                         </ul>
-                    </div>
-                </div>
-                
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 shadow-xl" data-aos="fade-up" data-aos-delay="300">
-                        <h3 class="text-xl font-semibold mb-4 flex items-center text-purple-300">
-                            <i class="fas fa-graduation-cap text-purple-400 mr-3"></i>
-                            <span x-show="lang === 'es'">Educación</span>
-                            <span x-show="lang === 'en'">Education</span>
-                        </h3>
-                        
-                        <ul class="space-y-4">
-                            <li>
-                                <div class="font-medium">Ingeniería en Informática</div>
-                                <div class="text-gray-400">Instituto Profesional Duoc UC, 2022-2026</div>
-                                <div class="text-sm text-gray-500">
-                                    <span x-show="lang === 'es'">Cursando 4to año</span>
-                                    <span x-show="lang === 'en'">Currently in 4th year</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="font-medium">Analista Programador Computacional</div>
-                                <div class="text-gray-400">Instituto Profesional Duoc UC, 2022-2024</div>
-                                <div class="text-sm text-gray-500">
-                                    <span x-show="lang === 'es'">Proyecto final: Aplicación de Intercambios "True Q"</span>
-                                    <span x-show="lang === 'en'">Final project: Exchange Application "True Q"</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 shadow-xl" data-aos="fade-up" data-aos-delay="400">
-                        <h3 class="text-xl font-semibold mb-4 flex items-center text-purple-300">
-                            <i class="fas fa-language text-purple-400 mr-3"></i>
-                            <span x-show="lang === 'es'">Idiomas & Herramientas</span>
-                            <span x-show="lang === 'en'">Languages & Tools</span>
-                        </h3>
-                        
-                        <div class="space-y-4">
-                            <div>
-                                <div class="mb-1 font-medium">
-                                    <span x-show="lang === 'es'">Español</span>
-                                    <span x-show="lang === 'en'">Spanish</span>
-                                </div>
-                                <div class="w-full bg-gray-700 rounded-full h-2">
-                                    <div class="bg-purple-500 h-2 rounded-full" style="width: 100%"></div>
-                                </div>
-                                <div class="mt-1 text-sm text-gray-400">
-                                    <span x-show="lang === 'es'">Nativo</span>
-                                    <span x-show="lang === 'en'">Native</span>
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <div class="mb-1 font-medium">
-                                    <span x-show="lang === 'es'">Inglés</span>
-                                    <span x-show="lang === 'en'">English</span>
-                                </div>
-                                <div class="w-full bg-gray-700 rounded-full h-2">
-                                    <div class="bg-purple-500 h-2 rounded-full" style="width: 75%"></div>
-                                </div>
-                                <div class="mt-1 text-sm text-gray-400">B2 - Intermedio avanzado</div>
-                            </div>
-                            
-                            <div class="pt-4">
-                                <div class="mb-2 font-medium">
-                                    <span x-show="lang === 'es'">Herramientas principales</span>
-                                    <span x-show="lang === 'en'">Main tools</span>
-                                </div>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Datadog</span>
-                                    <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Grafana</span>
-                                    <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Prometheus</span>
-                                    <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Terraform</span>
-                                    <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">AWS</span>
-                                    <span class="px-3 py-1 bg-gray-700 rounded-full text-sm">Jenkins</span>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -532,7 +460,7 @@
                             <i class="fas fa-server text-purple-400 text-xl"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold">Ingeniero Site Reliability Engineer (SRE)</h3>
+                            <h3 class="text-xl font-bold">Site Reliability Engineer (SRE)</h3>
                             <div class="text-purple-300">Innfinit</div>
                             <div class="text-sm text-gray-400">Noviembre 2022 - Presente</div>
                         </div>
@@ -541,37 +469,41 @@
                     <div class="space-y-6">
                         <!-- Proyecto 1 -->
                         <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
-                            <h4 class="text-lg font-semibold text-purple-300">
+                            <h4 class="text-lg font-semibold text-purple-300 flex items-center">
                                 <span x-show="lang === 'es'">PROYECTO: Monitoreo CN/Delta (Liderazgo)</span>
                                 <span x-show="lang === 'en'">PROJECT: CN/Delta Monitoring (Leadership)</span>
+                                <span class="honest-badge">
+                                    <span x-show="lang === 'es'">Actual</span>
+                                    <span x-show="lang === 'en'">Current</span>
+                                </span>
                             </h4>
                             <ul class="mt-3 space-y-2">
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
                                     <span>
-                                        <span x-show="lang === 'es'">Lidero implementación de arquitectura de observabilidad para infraestructura empresarial con múltiples servicios críticos.</span>
-                                        <span x-show="lang === 'en'">Leading the implementation of observability architecture for enterprise infrastructure with multiple critical services.</span>
+                                        <span x-show="lang === 'es'">Liderando implementación de arquitectura de observabilidad para infraestructura empresarial con servicios críticos</span>
+                                        <span x-show="lang === 'en'">Leading implementation of observability architecture for enterprise infrastructure with critical services</span>
                                     </span>
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
                                     <span>
-                                        <span x-show="lang === 'es'">Aumento cobertura de métricas mediante configuración de Kubernetes con Prometheus Operator y kube-state-metrics.</span>
-                                        <span x-show="lang === 'en'">Increasing metrics coverage through Kubernetes configuration with Prometheus Operator and kube-state-metrics.</span>
+                                        <span x-show="lang === 'es'">Configurando monitoreo para entornos Kubernetes usando Prometheus Operator (entornos test/lab)</span>
+                                        <span x-show="lang === 'en'">Configuring monitoring for Kubernetes environments using Prometheus Operator (test/lab environments)</span>
                                     </span>
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
                                     <span>
-                                        <span x-show="lang === 'es'">Desarrollo dashboards en Grafana Cloud para monitoreo de componentes clave: Kubernetes, RabbitMQ, Redis, AWS RDS y S3.</span>
-                                        <span x-show="lang === 'en'">Developing dashboards in Grafana Cloud for monitoring key components: Kubernetes, RabbitMQ, Redis, AWS RDS, and S3.</span>
+                                        <span x-show="lang === 'es'">Desarrollando dashboards en Grafana Cloud para componentes: Kubernetes, RabbitMQ, Redis, AWS RDS y S3</span>
+                                        <span x-show="lang === 'en'">Developing dashboards in Grafana Cloud for components: Kubernetes, RabbitMQ, Redis, AWS RDS, and S3</span>
                                     </span>
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
                                     <span>
-                                        <span x-show="lang === 'es'">Implemento sistema de alertas con umbrales optimizados y runbooks detallados para minimizar falsos positivos.</span>
-                                        <span x-show="lang === 'en'">Implementing alert system with optimized thresholds and detailed runbooks to minimize false positives.</span>
+                                        <span x-show="lang === 'es'">Gestionando proyecto con equipo reducido, entregando resultados de calidad en tiempo y forma</span>
+                                        <span x-show="lang === 'en'">Managing project with reduced team, delivering quality results on time and as specified</span>
                                     </span>
                                 </li>
                             </ul>
@@ -580,29 +512,43 @@
                         <!-- Proyecto 2 -->
                         <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
                             <h4 class="text-lg font-semibold text-purple-300">
-                                <span x-show="lang === 'es'">PROYECTO: Implementación y Escalamiento de Plataforma de Observabilidad Integral</span>
-                                <span x-show="lang === 'en'">PROJECT: Implementation and Scaling of Comprehensive Observability Platform</span>
+                                <span x-show="lang === 'es'">PROYECTO: Análisis e Investigación de Incidentes SRE</span>
+                                <span x-show="lang === 'en'">PROJECT: SRE Incident Analysis & Correlation</span>
                             </h4>
                             <ul class="mt-3 space-y-2">
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
                                     <span>
-                                        <span x-show="lang === 'es'">Diseño arquitectura de alta disponibilidad con Grafana y Prometheus, migrando soluciones de monitoreo desde Datadog.</span>
-                                        <span x-show="lang === 'en'">Designing high-availability architecture with Grafana and Prometheus, migrating monitoring solutions from Datadog.</span>
+                                        <span x-show="lang === 'es'">Trabajando en análisis de causa raíz e investigaciones post-mortem usando plataforma BigPanda</span>
+                                        <span x-show="lang === 'en'">Working on root cause analysis and post-mortem investigations using BigPanda platform</span>
                                     </span>
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
                                     <span>
-                                        <span x-show="lang === 'es'">Configuro monitores sintéticos para validar disponibilidad y experiencia de usuario en aplicaciones críticas.</span>
-                                        <span x-show="lang === 'en'">Configuring synthetic monitors to validate availability and user experience in critical applications.</span>
+                                        <span x-show="lang === 'es'">Revisando tickets de incidentes y cambios en ServiceNow para identificación de patrones</span>
+                                        <span x-show="lang === 'en'">Reviewing incident and change tickets in ServiceNow for pattern identification</span>
                                     </span>
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
                                     <span>
-                                        <span x-show="lang === 'es'">Implemento sistema centralizado de logs con Loki y Network Logs Concentrator para correlación de eventos.</span>
-                                        <span x-show="lang === 'en'">Implementing centralized log system with Loki and Network Logs Concentrator for event correlation.</span>
+                                        <span x-show="lang === 'es'">Analizando monitoreo existente en Splunk y apoyando migración a Datadog</span>
+                                        <span x-show="lang === 'en'">Analyzing existing monitoring in Splunk and supporting migration to Datadog</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Optimizando lógica de correlación de monitoreo para mejorar reducción de ruido</span>
+                                        <span x-show="lang === 'en'">Optimizing monitoring correlation logic to improve noise reduction</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Creando documentación técnica estandarizada en Confluence</span>
+                                        <span x-show="lang === 'en'">Creating standardized technical documentation in Confluence</span>
                                     </span>
                                 </li>
                             </ul>
@@ -611,52 +557,34 @@
                         <!-- Proyecto 3 -->
                         <div class="timeline-item" data-aos="fade-up" data-aos-delay="500">
                             <h4 class="text-lg font-semibold text-purple-300">
-                                <span x-show="lang === 'es'">PROYECTO: SRE Service Analysis</span>
-                                <span x-show="lang === 'en'">PROJECT: SRE Service Analysis</span>
+                                <span x-show="lang === 'es'">PROYECTO: Implementación de Plataforma de Observabilidad</span>
+                                <span x-show="lang === 'en'">PROJECT: Observability Platform Implementation</span>
                             </h4>
                             <ul class="mt-3 space-y-2">
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
                                     <span>
-                                        <span x-show="lang === 'es'">Implemento sistema de monitoreo para detección temprana de incidentes utilizando Datadog APM y trazas distribuidas.</span>
-                                        <span x-show="lang === 'en'">Implementing monitoring system for early incident detection using Datadog APM and distributed traces.</span>
+                                        <span x-show="lang === 'es'">Construyendo arquitectura HA con Grafana y Prometheus para monitoreo de producción</span>
+                                        <span x-show="lang === 'en'">Building HA architecture with Grafana and Prometheus for production monitoring</span>
                                     </span>
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
                                     <span>
-                                        <span x-show="lang === 'es'">Desarrollo framework de investigación técnica para identificar causas raíz en microservicios críticos.</span>
-                                        <span x-show="lang === 'en'">Developing technical investigation framework to identify root causes in critical microservices.</span>
+                                        <span x-show="lang === 'es'">Configurando monitores para validar disponibilidad en aplicaciones críticas</span>
+                                        <span x-show="lang === 'en'">Configuring monitors to validate availability in critical applications</span>
                                     </span>
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
                                     <span>
-                                        <span x-show="lang === 'es'">Creo y mantengo documentación técnica estandarizada en Confluence para agilizar resolución de incidentes recurrentes.</span>
-                                        <span x-show="lang === 'en'">Creating and maintaining standardized technical documentation in Confluence to streamline resolution of recurring incidents.</span>
+                                        <span x-show="lang === 'es'">Implementando sistema centralizado de logs con Loki para correlación de eventos</span>
+                                        <span x-show="lang === 'en'">Implementing centralized log system with Loki for event correlation</span>
                                     </span>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                </div>
-                
-                <div class="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 shadow-xl mt-8" data-aos="fade-up" data-aos-delay="600">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 bg-gray-700 rounded-lg flex items-center justify-center mr-4">
-                            <i class="fas fa-headset text-purple-400 text-xl"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold">Técnico de Soporte Integral</h3>
-                            <div class="text-purple-300">Recontti SM</div>
-                            <div class="text-sm text-gray-400">Marzo 2019 - Noviembre 2022</div>
-                        </div>
-                    </div>
-                    
-                    <p class="text-gray-300">
-                        <span x-show="lang === 'es'">Apoyo integral al Proyecto Los Bronces Integrado, colaborando con departamentos administrativos y de RRHH con Nubox, prevención de riesgos, maquinaria, adquisiciones y operaciones.</span>
-                        <span x-show="lang === 'en'">Comprehensive support to the Los Bronces Integrado Project, collaborating with administrative and HR departments with Nubox, risk prevention, machinery, procurement, and operations.</span>
-                    </p>
                 </div>
             </div>
         </div>
@@ -671,228 +599,194 @@
             </h2>
             
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Cloud & SRE -->
+                <!-- Observability & Monitoring -->
                 <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700 shadow-xl" data-aos="fade-up" data-aos-delay="200">
                     <h3 class="text-xl font-bold mb-6 flex items-center">
-                        <i class="fas fa-cloud mr-3 text-purple-400"></i>
-                        Cloud & SRE
+                        <i class="fas fa-chart-line mr-3 text-purple-400"></i>
+                        <span x-show="lang === 'es'">Observabilidad & Monitoreo</span>
+                        <span x-show="lang === 'en'">Observability & Monitoring</span>
                     </h3>
                     <ul class="space-y-4">
-                        <!-- Cloud Platforms -->
-                        <li class="flex items-center">
-                            <span class="text-sm uppercase text-gray-400">Cloud Platforms</span>
+                        <li class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-dog text-purple-400 w-8"></i>
+                                <span class="ml-3">Datadog APM</span>
+                            </div>
+                            <span class="honest-badge">
+                                <span x-show="lang === 'es'">Sólido</span>
+                                <span x-show="lang === 'en'">Solid</span>
+                            </span>
                         </li>
-                        <li class="flex items-center">
-                            <i class="fab fa-aws text-orange-400 w-8"></i>
-                            <span class="ml-3">AWS (EC2, RDS, S3, VPC, Lambda)</span>
+                        <li class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-chart-line text-orange-500 w-8"></i>
+                                <span class="ml-3">Grafana Cloud</span>
+                            </div>
+                            <span class="honest-badge">
+                                <span x-show="lang === 'es'">Sólido</span>
+                                <span x-show="lang === 'en'">Solid</span>
+                            </span>
                         </li>
-                        <li class="flex items-center">
-                            <i class="fab fa-google text-blue-500 w-8"></i>
-                            <span class="ml-3">Google Cloud Platform (GCP)</span>
+                        <li class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-fire text-red-500 w-8"></i>
+                                <span class="ml-3">Prometheus</span>
+                            </div>
+                            <span class="honest-badge">
+                                <span x-show="lang === 'es'">Sólido</span>
+                                <span x-show="lang === 'en'">Solid</span>
+                            </span>
                         </li>
-                        <li class="flex items-center">
-                            <i class="fab fa-microsoft text-blue-400 w-8"></i>
-                            <span class="ml-3">Microsoft Azure</span>
+                        <li class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-exclamation-triangle text-yellow-400 w-8"></i>
+                                <span class="ml-3">BigPanda</span>
+                            </div>
+                            <span class="honest-badge">
+                                <span x-show="lang === 'es'">Actual</span>
+                                <span x-show="lang === 'en'">Current</span>
+                            </span>
                         </li>
-
-                        <!-- Separador visual -->
-                        <li class="py-2">
-                            <div class="border-t border-gray-700"></div>
+                        <li class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-search text-purple-400 w-8"></i>
+                                <span class="ml-3">Splunk</span>
+                            </div>
+                            <span class="learning-badge">
+                                <span x-show="lang === 'es'">Básico</span>
+                                <span x-show="lang === 'en'">Basic</span>
+                            </span>
                         </li>
-                        <!-- SRE Tools -->
-                        <li class="flex items-center">
-                            <span class="text-sm uppercase text-gray-400">SRE Tools</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fab fa-docker text-blue-400 w-8"></i>
-                            <span class="ml-3">Docker</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-dharmachakra text-blue-500 w-8"></i>
-                            <span class="ml-3">Kubernetes</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-cube text-purple-500 w-8"></i>
-                            <span class="ml-3">Terraform</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fab fa-jenkins text-red-400 w-8"></i>
-                            <span class="ml-3">Jenkins</span>
-                        </li>
-
-                        <!-- Separador visual -->
-                        <li class="py-2">
-                            <div class="border-t border-gray-700"></div>
-                        </li>
-                        <!-- Monitoring & Observability -->
-                        <li class="flex items-center">
-                            <span class="text-sm uppercase text-gray-400">Monitoring & Observability</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-chart-line text-orange-500 w-8"></i>
-                            <span class="ml-3">Grafana</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-fire text-red-500 w-8"></i>
-                            <span class="ml-3">Prometheus</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-box text-gray-300 w-8"></i>
-                            <span class="ml-3">Blackbox Exporter</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-stream text-blue-400 w-8"></i>
-                            <span class="ml-3">Loki</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-dog text-purple-400 w-8"></i>
-                            <span class="ml-3">Datadog APM</span>
+                        <li class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-cog text-blue-400 w-8"></i>
+                                <span class="ml-3">ServiceNow</span>
+                            </div>
+                            <span class="learning-badge">
+                                <span x-show="lang === 'es'">Básico</span>
+                                <span x-show="lang === 'en'">Basic</span>
+                            </span>
                         </li>
                     </ul>
                 </div>
 
-                <!-- Development & Collaboration -->
+                <!-- Cloud & Infrastructure -->
                 <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700 shadow-xl" data-aos="fade-up" data-aos-delay="300">
                     <h3 class="text-xl font-bold mb-6 flex items-center">
-                        <i class="fas fa-code mr-3 text-pink-400"></i>
-                        <span x-show="lang === 'es'">Desarrollo y Colaboración</span>
-                        <span x-show="lang === 'en'">Development & Collaboration</span>
+                        <i class="fas fa-cloud mr-3 text-blue-400"></i>
+                        Cloud & Infrastructure
                     </h3>
                     <ul class="space-y-4">
-                        <!-- Programming -->
-                        <li class="flex items-center">
-                            <span class="text-sm uppercase text-gray-400">Languages & Frameworks</span>
+                        <li class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fab fa-aws text-orange-400 w-8"></i>
+                                <span class="ml-3">AWS</span>
+                            </div>
+                            <span class="honest-badge">
+                                <span x-show="lang === 'es'">Sólido</span>
+                                <span x-show="lang === 'en'">Solid</span>
+                            </span>
                         </li>
-                        <li class="flex items-center">
-                            <i class="fab fa-python text-blue-400 w-8"></i>
-                            <span class="ml-3">Python</span>
+                        <li class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-cube text-purple-500 w-8"></i>
+                                <span class="ml-3">Terraform</span>
+                            </div>
+                            <span class="honest-badge">
+                                <span x-show="lang === 'es'">Sólido</span>
+                                <span x-show="lang === 'en'">Solid</span>
+                            </span>
                         </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-terminal text-green-400 w-8"></i>
-                            <span class="ml-3">Bash</span>
+                        <li class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-dharmachakra text-blue-500 w-8"></i>
+                                <span class="ml-3">Kubernetes</span>
+                            </div>
+                            <span class="learning-badge">
+                                <span x-show="lang === 'es'">Test/Lab</span>
+                                <span x-show="lang === 'en'">Test/Lab</span>
+                            </span>
                         </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-file-code text-purple-400 w-8"></i>
-                            <span class="ml-3">YAML/HCL</span>
+                        <li class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fab fa-docker text-blue-400 w-8"></i>
+                                <span class="ml-3">Docker</span>
+                            </div>
+                            <span class="learning-badge">
+                                <span x-show="lang === 'es'">Test/Lab</span>
+                                <span x-show="lang === 'en'">Test/Lab</span>
+                            </span>
                         </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-database text-orange-400 w-8"></i>
-                            <span class="ml-3">SQL</span>
-                        </li>
-
-                        <!-- Separador visual -->
-                        <li class="py-2">
-                            <div class="border-t border-gray-700"></div>
-                        </li>
-                        <!-- Version Control -->
-                        <li class="flex items-center">
-                            <span class="text-sm uppercase text-gray-400">Version Control</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fab fa-git-alt text-orange-500 w-8"></i>
-                            <span class="ml-3">Git</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fab fa-github text-gray-300 w-8"></i>
-                            <span class="ml-3">GitHub</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-code-branch text-purple-400 w-8"></i>
-                            <span class="ml-3">GitHub Actions</span>
-                        </li>
-
-                        <!-- Separador visual -->
-                        <li class="py-2">
-                            <div class="border-t border-gray-700"></div>
-                        </li>
-                        <!-- Project Management -->
-                        <li class="flex items-center">
-                            <span class="text-sm uppercase text-gray-400">Project Management</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fab fa-jira text-blue-400 w-8"></i>
-                            <span class="ml-3">Jira</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-book text-blue-300 w-8"></i>
-                            <span class="ml-3">Confluence</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-tasks text-green-400 w-8"></i>
-                            <span class="ml-3">Scrum</span>
+                        <li class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fab fa-jenkins text-red-400 w-8"></i>
+                                <span class="ml-3">Jenkins</span>
+                            </div>
+                            <span class="honest-badge">
+                                <span x-show="lang === 'es'">Sólido</span>
+                                <span x-show="lang === 'en'">Solid</span>
+                            </span>
                         </li>
                     </ul>
                 </div>
 
-                <!-- System Administration -->
+                <!-- Development & Tools -->
                 <div class="bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl card-hover border border-gray-700 shadow-xl" data-aos="fade-up" data-aos-delay="400">
                     <h3 class="text-xl font-bold mb-6 flex items-center">
-                        <i class="fas fa-server mr-3 text-green-400"></i>
-                        <span x-show="lang === 'es'">Sistemas y Administración</span>
-                        <span x-show="lang === 'en'">Systems & Administration</span>
+                        <i class="fas fa-code mr-3 text-green-400"></i>
+                        <span x-show="lang === 'es'">Desarrollo & Herramientas</span>
+                        <span x-show="lang === 'en'">Development & Tools</span>
                     </h3>
                     <ul class="space-y-4">
-                        <!-- Operating Systems -->
-                        <li class="flex items-center">
-                            <span class="text-sm uppercase text-gray-400">Operating Systems</span>
+                        <li class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fab fa-python text-blue-400 w-8"></i>
+                                <span class="ml-3">Python</span>
+                            </div>
+                            <span class="honest-badge">
+                                <span x-show="lang === 'es'">Sólido</span>
+                                <span x-show="lang === 'en'">Solid</span>
+                            </span>
                         </li>
-                        <li class="flex items-center">
-                            <i class="fab fa-linux text-orange-500 w-8"></i>
-                            <span class="ml-3">Linux (Ubuntu, RHEL, CentOS)</span>
+                        <li class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-terminal text-green-400 w-8"></i>
+                                <span class="ml-3">Bash</span>
+                            </div>
+                            <span class="honest-badge">
+                                <span x-show="lang === 'es'">Sólido</span>
+                                <span x-show="lang === 'en'">Solid</span>
+                            </span>
                         </li>
-                        <li class="flex items-center">
-                            <i class="fab fa-windows text-blue-400 w-8"></i>
-                            <span class="ml-3">Windows Server</span>
+                        <li class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fab fa-git-alt text-orange-500 w-8"></i>
+                                <span class="ml-3">Git/GitHub</span>
+                            </div>
+                            <span class="honest-badge">
+                                <span x-show="lang === 'es'">Sólido</span>
+                                <span x-show="lang === 'en'">Solid</span>
+                            </span>
                         </li>
-                        <li class="flex items-center">
-                            <i class="fab fa-apple text-gray-300 w-8"></i>
-                            <span class="ml-3">macOS</span>
+                        <li class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fab fa-jira text-blue-400 w-8"></i>
+                                <span class="ml-3">Jira/Confluence</span>
+                            </div>
+                            <span class="honest-badge">
+                                <span x-show="lang === 'es'">Sólido</span>
+                                <span x-show="lang === 'en'">Solid</span>
+                            </span>
                         </li>
-
-                        <!-- Separador visual -->
-                        <li class="py-2">
-                            <div class="border-t border-gray-700"></div>
-                        </li>
-                        <!-- Tools & Virtualization -->
-                        <li class="flex items-center">
-                            <span class="text-sm uppercase text-gray-400">Tools & Virtualization</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-desktop text-purple-400 w-8"></i>
-                            <span class="ml-3">VMware</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-network-wired text-green-400 w-8"></i>
-                            <span class="ml-3">SNMP</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-bell text-yellow-400 w-8"></i>
-                            <span class="ml-3">PagerDuty</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-exclamation-triangle text-red-400 w-8"></i>
-                            <span class="ml-3">Big Panda</span>
-                        </li>
-
-                        <!-- Separador visual -->
-                        <li class="py-2">
-                            <div class="border-t border-gray-700"></div>
-                        </li>
-                        <!-- Data Management -->
-                        <li class="flex items-center">
-                            <span class="text-sm uppercase text-gray-400">Data Management</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-database text-red-400 w-8"></i>
-                            <span class="ml-3">Oracle Database</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-database text-blue-400 w-8"></i>
-                            <span class="ml-3">PostgreSQL</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-database text-orange-400 w-8"></i>
-                            <span class="ml-3">MySQL</span>
+                        <li class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-database text-orange-400 w-8"></i>
+                                <span class="ml-3">SQL</span>
+                            </div>
+                            <span class="honest-badge">
+                                <span x-show="lang === 'es'">Sólido</span>
+                                <span x-show="lang === 'en'">Solid</span>
+                            </span>
                         </li>
                     </ul>
                 </div>
@@ -909,56 +803,43 @@
             </h2>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Proyecto 1: Observability Platform -->
+                <!-- Proyecto SRE -->
                 <div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="200">
                     <div class="h-48 bg-gradient-to-br from-purple-900 to-indigo-900 rounded-lg mb-4 flex items-center justify-center">
-                        <i class="fas fa-chart-line text-6xl text-purple-300"></i>
+                        <i class="fas fa-server text-6xl text-purple-300"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-purple-300">Observability Platform</h3>
+                    <h3 class="text-xl font-bold mb-2 text-purple-300 flex items-center">
+                        <span x-show="lang === 'es'">Monitoreo CN/Delta</span>
+                        <span x-show="lang === 'en'">CN/Delta Monitoring</span>
+                        <span class="honest-badge ml-2">
+                            <span x-show="lang === 'es'">En curso</span>
+                            <span x-show="lang === 'en'">Ongoing</span>
+                        </span>
+                    </h3>
                     <p class="text-gray-300 mb-4">
-                        <span x-show="lang === 'es'">Plataforma de observabilidad completa con Grafana, Prometheus y Loki para monitoreo de servicios críticos.</span>
-                        <span x-show="lang === 'en'">Complete observability platform with Grafana, Prometheus, and Loki for critical service monitoring.</span>
+                        <span x-show="lang === 'es'">Proyecto de observabilidad empresarial que lidero actualmente, implementando arquitectura con Grafana, Prometheus y Kubernetes.</span>
+                        <span x-show="lang === 'en'">Enterprise observability project I'm currently leading, implementing architecture with Grafana, Prometheus, and Kubernetes.</span>
                     </p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="skill-badge"><i class="fas fa-chart-line mr-1"></i> Grafana</span>
-                        <span class="skill-badge"><i class="fas fa-fire mr-1"></i> Prometheus</span>
-                        <span class="skill-badge"><i class="fas fa-stream mr-1"></i> Loki</span>
+                        <span class="px-3 py-1 bg-purple-900/30 text-purple-300 rounded-full text-sm">Grafana</span>
+                        <span class="px-3 py-1 bg-purple-900/30 text-purple-300 rounded-full text-sm">Prometheus</span>
+                        <span class="px-3 py-1 bg-purple-900/30 text-purple-300 rounded-full text-sm">K8s</span>
                     </div>
                 </div>
                 
-                <!-- Proyecto 2: Ferremás -->
+                <!-- Proyecto 2: True Q -->
                 <div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="300">
-                    <div class="h-48 bg-gradient-to-br from-blue-900 to-purple-900 rounded-lg mb-4 overflow-hidden">
-                        <img src="https://ferremas.vercel.app/static/media/logoferremas.ec0d9dbd910783e34e013bf79f999af4.svg" alt="Ferremás Project" class="w-full h-full object-cover">
-                    </div>
-                    <h3 class="text-xl font-bold mb-2 text-purple-300">Ferremás</h3>
-                    <p class="text-gray-300 mb-4">
-                        <span x-show="lang === 'es'">Aplicación web para gestión de inventario de ferreterías locales.</span>
-                        <span x-show="lang === 'en'">Web application for local hardware store inventory management.</span>
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="skill-badge"><i class="fab fa-react mr-1"></i> React</span>
-                        <span class="skill-badge"><i class="fab fa-bootstrap mr-1"></i> Bootstrap</span>
-                    </div>
-                    <a href="https://ferremas.vercel.app/" target="_blank" class="inline-flex items-center text-purple-400 hover:text-purple-300">
-                        <span>Ver proyecto</span>
-                        <i class="fas fa-external-link-alt ml-2"></i>
-                    </a>
-                </div>
-                
-                <!-- Proyecto 3: True Q -->
-                <div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="400">
                     <div class="h-48 bg-gradient-to-br from-indigo-900 to-pink-900 rounded-lg mb-4 overflow-hidden">
                         <img src="https://trueq-vercel.vercel.app/assets/trueqbanner.svg" alt="True Q Project" class="w-full h-full object-cover">
                     </div>
                     <h3 class="text-xl font-bold mb-2 text-purple-300">True Q</h3>
                     <p class="text-gray-300 mb-4">
-                        <span x-show="lang === 'es'">Plataforma de intercambios desarrollada como proyecto final para Duoc UC.</span>
-                        <span x-show="lang === 'en'">Exchange platform developed as a final project for Duoc UC.</span>
+                        <span x-show="lang === 'es'">Plataforma de intercambios desarrollada como proyecto final para Duoc UC. Nota: 60/70</span>
+                        <span x-show="lang === 'en'">Exchange platform developed as final project for Duoc UC. Grade: 60/70</span>
                     </p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="skill-badge"><i class="fab fa-react mr-1"></i> React</span>
-                        <span class="skill-badge"><i class="fab fa-bootstrap mr-1"></i> Bootstrap</span>
+                        <span class="px-3 py-1 bg-blue-900/30 text-blue-300 rounded-full text-sm">React</span>
+                        <span class="px-3 py-1 bg-blue-900/30 text-blue-300 rounded-full text-sm">Bootstrap</span>
                     </div>
                     <a href="https://trueq-vercel.vercel.app/" target="_blank" class="inline-flex items-center text-purple-400 hover:text-purple-300">
                         <span>Ver proyecto</span>
@@ -966,20 +847,40 @@
                     </a>
                 </div>
                 
-                <!-- Proyecto 4: Psicóloga Valeria Améstica -->
+                <!-- Proyecto 3: Ferremás -->
+                <div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="400">
+                    <div class="h-48 bg-gradient-to-br from-blue-900 to-purple-900 rounded-lg mb-4 overflow-hidden">
+                        <img src="https://ferremas.vercel.app/static/media/logoferremas.ec0d9dbd910783e34e013bf79f999af4.svg" alt="Ferremás Project" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-purple-300">Ferremás</h3>
+                    <p class="text-gray-300 mb-4">
+                        <span x-show="lang === 'es'">Aplicación web para gestión de inventario de ferreterías locales. Proyecto académico.</span>
+                        <span x-show="lang === 'en'">Web application for local hardware store inventory management. Academic project.</span>
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-blue-900/30 text-blue-300 rounded-full text-sm">React</span>
+                        <span class="px-3 py-1 bg-blue-900/30 text-blue-300 rounded-full text-sm">Bootstrap</span>
+                    </div>
+                    <a href="https://ferremas.vercel.app/" target="_blank" class="inline-flex items-center text-purple-400 hover:text-purple-300">
+                        <span>Ver proyecto</span>
+                        <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- Proyecto 4: Psicóloga -->
                 <div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="500">
                     <div class="h-48 bg-gradient-to-br from-pink-900 to-purple-900 rounded-lg mb-4 overflow-hidden">
                         <img src="https://psivaleriamestica.com/wp-content/uploads/2024/08/cropped-logo-psicologa-v4-mas-pequena-300x300.webp" alt="Psicóloga Valeria Améstica Project" class="w-full h-full object-cover">
                     </div>
                     <h3 class="text-xl font-bold mb-2 text-purple-300">Psicóloga Valeria Amestica</h3>
                     <p class="text-gray-300 mb-4">
-                        <span x-show="lang === 'es'">Sitio web profesional para servicios de psicología con sistema de agenda.</span>
-                        <span x-show="lang === 'en'">Professional website for psychology services with appointment system.</span>
+                        <span x-show="lang === 'es'">Sitio web profesional para servicios de psicología. Proyecto freelance real.</span>
+                        <span x-show="lang === 'en'">Professional website for psychology services. Real freelance project.</span>
                     </p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="skill-badge"><i class="fab fa-html5 mr-1"></i> HTML</span>
-                        <span class="skill-badge"><i class="fab fa-css3 mr-1"></i> CSS</span>
-                        <span class="skill-badge"><i class="fab fa-js mr-1"></i> JavaScript</span>
+                        <span class="px-3 py-1 bg-orange-900/30 text-orange-300 rounded-full text-sm">HTML</span>
+                        <span class="px-3 py-1 bg-blue-900/30 text-blue-300 rounded-full text-sm">CSS</span>
+                        <span class="px-3 py-1 bg-yellow-900/30 text-yellow-300 rounded-full text-sm">JavaScript</span>
                     </div>
                     <a href="https://psivaleriamestica.com/" target="_blank" class="inline-flex items-center text-purple-400 hover:text-purple-300">
                         <span>Ver proyecto</span>
@@ -994,12 +895,12 @@
                     </div>
                     <h3 class="text-xl font-bold mb-2 text-purple-300">BYF</h3>
                     <p class="text-gray-300 mb-4">
-                        <span x-show="lang === 'es'">Pagina web para local de comida rápida.</span>
-                        <span x-show="lang === 'en'">Website for a fast food restaurant.</span>
+                        <span x-show="lang === 'es'">Sitio web para local de comida rápida. Proyecto personal de práctica.</span>
+                        <span x-show="lang === 'en'">Website for a fast food restaurant. Personal practice project.</span>
                     </p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="skill-badge"><i class="fab fa-react mr-1"></i> React</span>
-                        <span class="skill-badge"><i class="fab fa-bootstrap mr-1"></i> Bootstrap</span>
+                        <span class="px-3 py-1 bg-blue-900/30 text-blue-300 rounded-full text-sm">React</span>
+                        <span class="px-3 py-1 bg-blue-900/30 text-blue-300 rounded-full text-sm">Bootstrap</span>
                     </div>
                     <a href="https://byf.vercel.app/" target="_blank" class="inline-flex items-center text-purple-400 hover:text-purple-300">
                         <span>Ver proyecto</span>
@@ -1007,248 +908,23 @@
                     </a>
                 </div>
                 
-                <!-- Proyecto 6: Terraform Monitoring as Code -->
+                <!-- Proyecto 6: Portfolio -->
                 <div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="700">
                     <div class="h-48 bg-gradient-to-br from-indigo-900 to-purple-900 rounded-lg mb-4 flex items-center justify-center">
-                        <i class="fas fa-code-branch text-6xl text-purple-300"></i>
+                        <i class="fas fa-user text-6xl text-purple-300"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-purple-300">Terraform Monitoring as Code</h3>
+                    <h3 class="text-xl font-bold mb-2 text-purple-300">
+                        <span x-show="lang === 'es'">Portfolio Personal</span>
+                        <span x-show="lang === 'en'">Personal Portfolio</span>
+                    </h3>
                     <p class="text-gray-300 mb-4">
-                        <span x-show="lang === 'es'">Implementación de monitoreo como código utilizando Terraform para despliegues automatizados.</span>
-                        <span x-show="lang === 'en'">Implementation of monitoring as code using Terraform for automated deployments.</span>
+                        <span x-show="lang === 'es'">Este mismo sitio web, desarrollado con enfoque en honestidad y transparencia profesional.</span>
+                        <span x-show="lang === 'en'">This very website, developed with a focus on honesty and professional transparency.</span>
                     </p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="skill-badge"><i class="fas fa-cube mr-1"></i> Terraform</span>
-                        <span class="skill-badge"><i class="fab fa-aws mr-1"></i> AWS</span>
-                        <span class="skill-badge"><i class="fas fa-fire mr-1"></i> Prometheus</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Certifications Section -->
-    <section id="certifications" class="py-20 bg-gray-800/30">
-        <div class="container mx-auto px-4 sm:px-6">
-            <h2 class="text-3xl font-bold mb-12 text-center gradient-text" data-aos="fade-up">
-                <span x-show="lang === 'es'">Certificaciones</span>
-                <span x-show="lang === 'en'">Certifications</span>
-            </h2>
-            
-            <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-                <!-- Cloud Certifications -->
-                <div class="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl card-hover border border-gray-700 shadow-xl" data-aos="fade-up" data-aos-delay="200">
-                    <h3 class="text-xl font-bold mb-6 flex items-center">
-                        <i class="fas fa-cloud mr-3 text-purple-400"></i>
-                        Cloud
-                    </h3>
-                    <ul class="space-y-6">
-                        <li class="flex items-start">
-                            <div class="bg-red-900/30 p-2 rounded-lg mr-4">
-                                <i class="fab fa-oracle text-red-400 text-2xl"></i>
-                            </div>
-                            <div>
-                                <div class="font-semibold">Oracle Cloud Infrastructure Foundations Associate</div>
-                                <div class="text-sm text-gray-400">Oracle</div>
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="bg-blue-900/30 p-2 rounded-lg mr-4">
-                                <i class="fab fa-microsoft text-blue-400 text-2xl"></i>
-                            </div>
-                            <div>
-                                <div class="font-semibold">Microsoft Certified: Azure AI Fundamentals</div>
-                                <div class="text-sm text-gray-400">Microsoft</div>
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="bg-orange-900/30 p-2 rounded-lg mr-4">
-                                <i class="fab fa-aws text-orange-400 text-2xl"></i>
-                            </div>
-                            <div>
-                                <div class="font-semibold">AWS Educate</div>
-                                <div class="text-sm text-gray-400">Serverless, Machine Learning, Cloud Ops</div>
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="bg-blue-900/30 p-2 rounded-lg mr-4">
-                                <i class="fab fa-google text-blue-500 text-2xl"></i>
-                            </div>
-                            <div>
-                                <div class="font-semibold">Google Cloud Skill Badges</div>
-                                <div class="text-sm text-gray-400">Multiple badges in Cloud Technologies</div>
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="bg-indigo-900/30 p-2 rounded-lg mr-4">
-                                <i class="fab fa-linux text-indigo-400 text-2xl"></i>
-                            </div>
-                            <div>
-                                <div class="font-semibold">Getting Started with OpenTofu</div>
-                                <div class="text-sm text-gray-400">The Linux Foundation</div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Methodologies Certifications -->
-                <div class="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl card-hover border border-gray-700 shadow-xl" data-aos="fade-up" data-aos-delay="300">
-                    <h3 class="text-xl font-bold mb-6 flex items-center">
-                        <i class="fas fa-users mr-3 text-pink-400"></i>
-                        <span x-show="lang === 'es'">Metodologías</span>
-                        <span x-show="lang === 'en'">Methodologies</span>
-                    </h3>
-                    <ul class="space-y-6">
-                        <li class="flex items-start">
-                            <div class="bg-yellow-900/30 p-2 rounded-lg mr-4">
-                                <i class="fas fa-certificate text-yellow-400 text-2xl"></i>
-                            </div>
-                            <div>
-                                <div class="font-semibold">Scrum Foundation Professional</div>
-                                <div class="text-sm text-gray-400">CertiProf</div>
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="bg-blue-900/30 p-2 rounded-lg mr-4">
-                                <i class="fas fa-brain text-blue-400 text-2xl"></i>
-                            </div>
-                            <div>
-                                <div class="font-semibold">Data Science</div>
-                                <div class="text-sm text-gray-400">FCFM, Universidad de Chile</div>
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="bg-green-900/30 p-2 rounded-lg mr-4">
-                                <i class="fas fa-network-wired text-green-400 text-2xl"></i>
-                            </div>
-                            <div>
-                                <div class="font-semibold">Google Cloud Network Skill Badge</div>
-                                <div class="text-sm text-gray-400">Google Cloud</div>
-                            </div>
-                        </li>
-                        <li class="flex items-start">
-                            <div class="bg-purple-900/30 p-2 rounded-lg mr-4">
-                                <i class="fas fa-project-diagram text-purple-400 text-2xl"></i>
-                            </div>
-                            <div>
-                                <div class="font-semibold">DevOps Essentials</div>
-                                <div class="text-sm text-gray-400">Duoc UC</div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Hire Me Section -->
-    <section id="why-hire-me" class="py-20 bg-gray-900 relative overflow-hidden">
-        <div class="rotating-circles">
-            <div class="circle circle-1"></div>
-            <div class="circle circle-2"></div>
-        </div>
-        
-        <div class="container mx-auto px-4 sm:px-6 relative z-10">
-            <h2 class="text-3xl font-bold mb-12 text-center gradient-text" data-aos="fade-up">
-                <span x-show="lang === 'es'">¿Por qué Contratarme?</span>
-                <span x-show="lang === 'en'">Why Hire Me?</span>
-            </h2>
-            
-            <div class="max-w-6xl mx-auto">
-                <!-- Cards Grid -->
-                <div class="grid md:grid-cols-3 gap-6">
-                    <!-- Card 1 -->
-                    <div class="group relative overflow-hidden bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 transition-all duration-300 hover:scale-105 hover:border-purple-500 shadow-xl" data-aos="fade-up" data-aos-delay="200">
-                        <div class="relative z-10">
-                            <div class="mb-4 text-orange-400">
-                                <i class="fas fa-fire text-4xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold mb-3 text-white">
-                                <span x-show="lang === 'es'">Pasión por Aprender</span>
-                                <span x-show="lang === 'en'">Passion for Learning</span>
-                            </h3>
-                            <p class="text-gray-300">
-                                <span x-show="lang === 'es'">Me mantengo constantemente actualizado con las últimas tecnologías a través de cursos online, documentación técnica y proyectos personales. Mi curiosidad me impulsa a buscar nuevos desafíos.</span>
-                                <span x-show="lang === 'en'">I stay constantly updated with the latest technologies through online courses, technical documentation, and personal projects. My curiosity drives me to seek new challenges.</span>
-                            </p>
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-pink-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-
-                    <!-- Card 2 -->
-                    <div class="group relative overflow-hidden bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 transition-all duration-300 hover:scale-105 hover:border-purple-500 shadow-xl" data-aos="fade-up" data-aos-delay="300">
-                        <div class="relative z-10">
-                            <div class="mb-4 text-yellow-400">
-                                <i class="fas fa-lightbulb text-4xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold mb-3 text-white">
-                                <span x-show="lang === 'es'">Mentalidad de Solución</span>
-                                <span x-show="lang === 'en'">Solution Mindset</span>
-                            </h3>
-                            <p class="text-gray-300">
-                                <span x-show="lang === 'es'">Cada problema es una oportunidad para aprender. Me destaco por encontrar soluciones creativas y estar dispuesto a investigar hasta encontrar la mejor respuesta.</span>
-                                <span x-show="lang === 'en'">Every problem is an opportunity to learn. I excel at finding creative solutions and am willing to research until I find the best answer.</span>
-                            </p>
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-pink-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-
-                    <!-- Card 3 -->
-                    <div class="group relative overflow-hidden bg-gray-800/50 backdrop-blur-sm p-6 rounded-xl border border-gray-700 transition-all duration-300 hover:scale-105 hover:border-purple-500 shadow-xl" data-aos="fade-up" data-aos-delay="400">
-                        <div class="relative z-10">
-                            <div class="mb-4 text-blue-400">
-                                <i class="fas fa-code text-4xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold mb-3 text-white">
-                                <span x-show="lang === 'es'">Proyectos Reales</span>
-                                <span x-show="lang === 'en'">Real Projects</span>
-                            </h3>
-                            <p class="text-gray-300">
-                                <span x-show="lang === 'es'">De ideas que surgen en mi mente, creo y desarrollo proyectos completos que cobran vida en la web. Mi portafolio es testimonio de cómo transformo inspiraciones espontáneas en aplicaciones reales y funcionales.</span>
-                                <span x-show="lang === 'en'">From ideas that spark in my mind, I create and develop complete projects that come to life on the web. My portfolio stands as testimony to how I transform spontaneous inspirations into real, functional applications.</span>
-                            </p>
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-pink-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                </div>
-
-                <!-- Personal Statement -->
-                <div class="mt-16 text-center bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700 shadow-xl" data-aos="fade-up" data-aos-delay="500">
-                    <div class="mb-6 flex justify-center">
-                        <i class="fas fa-quote-left text-5xl text-purple-500/30"></i>
-                    </div>
-                    <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-                        <span x-show="lang === 'es'">
-                            "Estoy cimentando las bases de una carrera profesional sólida, donde mi compromiso con la excelencia y mi capacidad de aprendizaje rápido me convierten en un candidato valioso que aportará crecimiento e innovación a tu equipo."
-                        </span>
-                        <span x-show="lang === 'en'">
-                            "I am building the foundations of a solid professional career, where my commitment to excellence and quick learning ability make me a valuable candidate who will bring growth and innovation to your team."
-                        </span>
-                    </p>
-
-                    <!-- Quality Tags -->
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <div class="flex items-center bg-gray-800/80 backdrop-blur-sm px-4 py-2 rounded-full border border-purple-700/30 hover:border-purple-500/60 transition-all duration-300">
-                            <i class="fas fa-book text-purple-400 mr-2"></i>
-                            <span class="text-sm text-gray-300">
-                                <span x-show="lang === 'es'">Comprometido con el aprendizaje continuo</span>
-                                <span x-show="lang === 'en'">Committed to continuous learning</span>
-                            </span>
-                        </div>
-                        <div class="flex items-center bg-gray-800/80 backdrop-blur-sm px-4 py-2 rounded-full border border-purple-700/30 hover:border-purple-500/60 transition-all duration-300">
-                            <i class="fas fa-bullseye text-pink-400 mr-2"></i>
-                            <span class="text-sm text-gray-300">
-                                <span x-show="lang === 'es'">Enfocado en objetivos y resultados</span>
-                                <span x-show="lang === 'en'">Focused on goals and results</span>
-                            </span>
-                        </div>
-                        <div class="flex items-center bg-gray-800/80 backdrop-blur-sm px-4 py-2 rounded-full border border-purple-700/30 hover:border-purple-500/60 transition-all duration-300">
-                            <i class="fas fa-heart text-red-400 mr-2"></i>
-                            <span class="text-sm text-gray-300">
-                                <span x-show="lang === 'es'">Apasionado por la tecnología y la innovación</span>
-                                <span x-show="lang === 'en'">Passionate about technology and innovation</span>
-                            </span>
-                        </div>
+                        <span class="px-3 py-1 bg-blue-900/30 text-blue-300 rounded-full text-sm">HTML5</span>
+                        <span class="px-3 py-1 bg-purple-900/30 text-purple-300 rounded-full text-sm">Tailwind</span>
+                        <span class="px-3 py-1 bg-green-900/30 text-green-300 rounded-full text-sm">Alpine.js</span>
                     </div>
                 </div>
             </div>
@@ -1316,8 +992,8 @@
                     <!-- Location & Status -->
                     <div class="space-y-6">
                         <h3 class="text-xl font-semibold text-purple-300 mb-4">
-                            <span x-show="lang === 'es'">Ubicación</span>
-                            <span x-show="lang === 'en'">Location</span>
+                            <span x-show="lang === 'es'">Situación Actual</span>
+                            <span x-show="lang === 'en'">Current Status</span>
                         </h3>
                         
                         <div class="flex items-center">
@@ -1339,12 +1015,28 @@
                             </div>
                             <div>
                                 <div class="text-sm text-gray-400">
-                                    <span x-show="lang === 'es'">Disponibilidad</span>
-                                    <span x-show="lang === 'en'">Availability</span>
+                                    <span x-show="lang === 'es'">Estado</span>
+                                    <span x-show="lang === 'en'">Status</span>
                                 </div>
                                 <div>
-                                    <span x-show="lang === 'es'">Disponible para nuevas oportunidades</span>
-                                    <span x-show="lang === 'en'">Available for new opportunities</span>
+                                    <span x-show="lang === 'es'">Empleado actualmente en Innfinit</span>
+                                    <span x-show="lang === 'en'">Currently employed at Innfinit</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-purple-900/30 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-graduation-cap text-purple-300"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400">
+                                    <span x-show="lang === 'es'">Estudios</span>
+                                    <span x-show="lang === 'en'">Education</span>
+                                </div>
+                                <div>
+                                    <span x-show="lang === 'es'">Finalizando Ingeniería en Informática (4to año)</span>
+                                    <span x-show="lang === 'en'">Completing Computer Engineering (4th year)</span>
                                 </div>
                             </div>
                         </div>
@@ -1355,22 +1047,43 @@
                             </div>
                             <div>
                                 <div class="text-sm text-gray-400">
-                                    <span x-show="lang === 'es'">Modalidad de trabajo</span>
-                                    <span x-show="lang === 'en'">Work mode</span>
+                                    <span x-show="lang === 'es'">Interés</span>
+                                    <span x-show="lang === 'en'">Interest</span>
                                 </div>
                                 <div>
-                                    <span x-show="lang === 'es'">Remoto / Híbrido / Presencial</span>
-                                    <span x-show="lang === 'en'">Remote / Hybrid / On-site</span>
+                                    <span x-show="lang === 'es'">Abierto a nuevas oportunidades SRE</span>
+                                    <span x-show="lang === 'en'">Open to new SRE opportunities</span>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="pt-6">
                             <a href="mailto:fabianignaciomv@gmail.com" class="block w-full bg-purple-600 hover:bg-purple-500 text-white py-3 px-4 rounded-lg text-center transition-all duration-300 shadow-lg shadow-purple-900/30">
-                                <span x-show="lang === 'es'">Contáctame</span>
-                                <span x-show="lang === 'en'">Contact me</span>
+                                <span x-show="lang === 'es'">Conversemos</span>
+                                <span x-show="lang === 'en'">Let's talk</span>
                             </a>
                         </div>
+                    </div>
+                </div>
+                
+                <!-- Honesty Statement -->
+                <div class="mt-8 pt-8 border-t border-gray-700">
+                    <div class="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-heart text-green-400 mr-2"></i>
+                            <span class="font-semibold text-green-300">
+                                <span x-show="lang === 'es'">Compromiso con la honestidad</span>
+                                <span x-show="lang === 'en'">Commitment to honesty</span>
+                            </span>
+                        </div>
+                        <p class="text-sm text-green-200">
+                            <span x-show="lang === 'es'">
+                                Este portafolio refleja mi experiencia real y actual. Creo que la transparencia construye mejores relaciones profesionales y permite encontrar oportunidades que realmente se alineen con mis habilidades y objetivos de crecimiento.
+                            </span>
+                            <span x-show="lang === 'en'">
+                                This portfolio reflects my real and current experience. I believe transparency builds better professional relationships and allows finding opportunities that truly align with my skills and growth objectives.
+                            </span>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1386,7 +1099,7 @@
                         <i class="fas fa-server text-purple-400 mr-2"></i>
                         <span class="gradient-text">Fabián M.</span>
                     </a>
-                    <p class="text-gray-500 mt-2">© 2025 Fabián M. All rights reserved.</p>
+                    <p class="text-gray-500 mt-2">© 2025 Fabián M. Portafolio honesto y transparente.</p>
                 </div>
                 
                 <div class="flex space-x-4">
@@ -1406,7 +1119,11 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            AOS.init();
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 100
+            });
         });
     </script>
 </body>
