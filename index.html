@@ -5,20 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Title shown in the browser tab -->
-<title>Fabián M. - SRE Engineer</title>
+    <title>Fabián M. - SRE Engineer</title>
 
-<!-- SEO metadata for Google and social media -->
-<meta name="description" content="Portfolio of Fabián Muñoz, SRE Engineer specialized in cloud monitoring, golden signals, and infrastructure reliability.">
-<meta property="og:title" content="Fabián Muñoz - Portfolio">
-<meta property="og:description" content="Explore projects, experience, and professional background in cloud observability, reliability engineering, and automation.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://fabianimv.github.io/portfolio">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Fabián Muñoz - Portfolio">
-<meta name="twitter:description" content="Discover Fabián's work in SRE, cloud infrastructure, and modern monitoring practices.">
+    <!-- SEO metadata for Google and social media -->
+    <meta name="description"
+        content="Portfolio of Fabián Muñoz, SRE Engineer specialized in cloud monitoring, golden signals, and infrastructure reliability.">
+    <meta property="og:title" content="Fabián Muñoz - Portfolio">
+    <meta property="og:description"
+        content="Explore projects, experience, and professional background in cloud observability, reliability engineering, and automation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fabianimv.github.io/portfolio">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Fabián Muñoz - Portfolio">
+    <meta name="twitter:description"
+        content="Discover Fabián's work in SRE, cloud infrastructure, and modern monitoring practices.">
 
     <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-<link rel="alternate icon" href="./favicon.png" type="image/png">
+    <link rel="alternate icon" href="./favicon.png" type="image/png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -689,7 +692,7 @@
                                 </li>
                             </ul>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -912,41 +915,87 @@
             </h2>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-<!-- Proyecto GitHub: YouTube Music Playlist Creator -->
-<div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="800">
-    <div class="h-48 bg-gradient-to-br from-red-900 to-purple-900 rounded-lg mb-4 flex items-center justify-center">
-        <i class="fab fa-youtube text-6xl text-red-300"></i>
-    </div>
-    <h3 class="text-xl font-bold mb-2 text-purple-300 flex items-center">
-        <span x-show="lang === 'es'">YouTube Music Playlist Creator</span>
-        <span x-show="lang === 'en'">YouTube Music Playlist Creator</span>
-        <span class="honest-badge ml-2">
-            <span x-show="lang === 'es'">Open Source</span>
-            <span x-show="lang === 'en'">Open Source</span>
-        </span>
-    </h3>
-    <p class="text-gray-300 mb-4">
-        <span x-show="lang === 'es'">Herramienta de automatización para crear playlists de YouTube Music desde setlists de conciertos. Script en Python con 40+ estrellas en GitHub.</span>
-        <span x-show="lang === 'en'">Automation tool to create YouTube Music playlists from concert setlists. Python script with 40+ GitHub stars.</span>
-    </p>
-    <div class="flex flex-wrap gap-2 mb-4">
-        <span class="px-3 py-1 bg-blue-900/30 text-blue-300 rounded-full text-sm">Python</span>
-        <span class="px-3 py-1 bg-red-900/30 text-red-300 rounded-full text-sm">YouTube API</span>
-        <span class="px-3 py-1 bg-purple-900/30 text-purple-300 rounded-full text-sm">Automation</span>
-    </div>
-    <div class="flex gap-2">
-        <a href="https://github.com/FabianIMV/automated-ytmusic-playlist-creator" target="_blank"
-            class="inline-flex items-center text-purple-400 hover:text-purple-300">
-            <i class="fab fa-github mr-2"></i>
-            <span>GitHub</span>
-        </a>
-        <a href="https://github.com/FabianIMV/automated-ytmusic-playlist-creator#readme" target="_blank"
-            class="inline-flex items-center text-purple-400 hover:text-purple-300 ml-4">
-            <i class="fas fa-book mr-2"></i>
-            <span>Docs</span>
-        </a>
-    </div>
-</div>
+                <!-- Proyecto GitHub: YouTube Music Playlist Creator -->
+                <div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="800">
+                    <div
+                        class="h-48 bg-gradient-to-br from-red-900 to-purple-900 rounded-lg mb-4 flex items-center justify-center">
+                        <i class="fab fa-youtube text-6xl text-red-300"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-purple-300 flex items-center">
+                        <span x-show="lang === 'es'">YouTube Music Playlist Creator</span>
+                        <span x-show="lang === 'en'">YouTube Music Playlist Creator</span>
+                        <span class="honest-badge ml-2">
+                            <span x-show="lang === 'es'">Open Source</span>
+                            <span x-show="lang === 'en'">Open Source</span>
+                        </span>
+                    </h3>
+                    <p class="text-gray-300 mb-4">
+                        <span x-show="lang === 'es'">Herramienta de automatización para crear playlists de YouTube Music
+                            desde setlists de conciertos. Script en Python con 40+ estrellas en GitHub.</span>
+                        <span x-show="lang === 'en'">Automation tool to create YouTube Music playlists from concert
+                            setlists. Python script with 40+ GitHub stars.</span>
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-blue-900/30 text-blue-300 rounded-full text-sm">Python</span>
+                        <span class="px-3 py-1 bg-red-900/30 text-red-300 rounded-full text-sm">YouTube API</span>
+                        <span class="px-3 py-1 bg-purple-900/30 text-purple-300 rounded-full text-sm">Automation</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <a href="https://github.com/FabianIMV/automated-ytmusic-playlist-creator" target="_blank"
+                            class="inline-flex items-center text-purple-400 hover:text-purple-300">
+                            <i class="fab fa-github mr-2"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://github.com/FabianIMV/automated-ytmusic-playlist-creator#readme" target="_blank"
+                            class="inline-flex items-center text-purple-400 hover:text-purple-300 ml-4">
+                            <i class="fas fa-book mr-2"></i>
+                            <span>Docs</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Proyecto: Dashboard Chile Grafana -->
+                <div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="900">
+                    <div
+                        class="h-48 bg-gradient-to-br from-orange-900 to-red-900 rounded-lg mb-4 flex items-center justify-center">
+                        <i class="fas fa-chart-line text-6xl text-orange-300"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-purple-300 flex items-center">
+                        <span x-show="lang === 'es'">Dashboard Chile - Datos Oficiales</span>
+                        <span x-show="lang === 'en'">Chile Dashboard - Official Data</span>
+                        <span class="honest-badge ml-2">
+                            <span x-show="lang === 'es'">Tiempo Real</span>
+                            <span x-show="lang === 'en'">Real Time</span>
+                        </span>
+                    </h3>
+                    <p class="text-gray-300 mb-4">
+                        <span x-show="lang === 'es'">Dashboard interactivo de Grafana con datos oficiales de Chile en
+                            tiempo real. Integra APIs públicas chilenas para mostrar clima, sismos, indicadores
+                            económicos y métricas ambientales con variables de filtrado por ciudad.</span>
+                        <span x-show="lang === 'en'">Interactive Grafana dashboard with official Chilean real-time data.
+                            Integrates public Chilean APIs to display weather, earthquakes, economic indicators and
+                            environmental metrics with city filtering variables.</span>
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-orange-900/30 text-orange-300 rounded-full text-sm">Grafana</span>
+                        <span class="px-3 py-1 bg-blue-900/30 text-blue-300 rounded-full text-sm">Infinity Plugin</span>
+                        <span class="px-3 py-1 bg-green-900/30 text-green-300 rounded-full text-sm">APIs REST</span>
+                        <span class="px-3 py-1 bg-purple-900/30 text-purple-300 rounded-full text-sm">JSON</span>
+                        <span class="px-3 py-1 bg-red-900/30 text-red-300 rounded-full text-sm">Data Viz</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <a href="https://github.com/tu-usuario/chile-dashboard-grafana" target="_blank"
+                            class="inline-flex items-center text-purple-400 hover:text-purple-300">
+                            <i class="fab fa-github mr-2"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="#" target="_blank"
+                            class="inline-flex items-center text-purple-400 hover:text-purple-300 ml-4">
+                            <i class="fas fa-chart-bar mr-2"></i>
+                            <span>Demo</span>
+                        </a>
+                    </div>
+                </div>
 
                 <!-- Proyecto 2: True Q -->
                 <div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="300">
