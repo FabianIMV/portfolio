@@ -225,6 +225,29 @@
             font-weight: 600;
             margin-left: 0.5rem;
         }
+
+.chat-bubble-user {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+.chat-bubble-ai {
+    background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%);
+}
+.typing-animation {
+    animation: typing 1.5s infinite;
+}
+@keyframes typing {
+    0%, 20% { opacity: 1; }
+    50% { opacity: 0.5; }
+    80%, 100% { opacity: 1; }
+}
+.ai-pulse {
+    animation: ai-pulse 2s infinite;
+}
+@keyframes ai-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(124, 58, 237, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0); }
+}
     </style>
 </head>
 
@@ -1287,7 +1310,61 @@
             </div>
         </div>
     </section>
+<!-- AI CHATBOT - AGREGAR ANTES DEL FOOTER -->
 
+<!-- Floating AI Chat Button -->
+<div id="aiChatButton" class="fixed bottom-6 right-6 z-50">
+    <button onclick="toggleAIChat()" class="ai-pulse bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-full p-4 shadow-2xl transition-all duration-300 transform hover:scale-110">
+        <i class="fas fa-robot text-2xl"></i>
+    </button>
+    <!-- Tooltip -->
+    <div class="absolute bottom-16 right-0 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 pointer-events-none transition-opacity duration-300">
+        ¡Pregúntame sobre Fabián!
+    </div>
+</div>
+
+<!-- AI Chat Widget -->
+<div id="aiChatWidget" class="fixed bottom-20 right-6 w-80 h-96 bg-gray-800/95 backdrop-blur-sm rounded-lg shadow-2xl border border-purple-500/30 z-50 hidden flex flex-col">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-purple-600 to-blue-600 p-4 rounded-t-lg flex justify-between items-center">
+        <div class="flex items-center">
+            <i class="fas fa-robot mr-2 animate-pulse"></i>
+            <span class="font-bold">AI Assistant</span>
+        </div>
+        <button onclick="toggleAIChat()" class="text-white hover:text-gray-300 transition-colors">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Chat Messages -->
+    <div id="aiChatMessages" class="flex-1 p-4 overflow-y-auto space-y-3 custom-scrollbar">
+        <div class="flex">
+            <div class="chat-bubble-ai text-white p-3 rounded-lg max-w-xs text-sm">
+                ¡Hola! 👋 Soy el asistente AI de Fabián. Puedo ayudarte con información sobre su experiencia en SRE, proyectos y habilidades técnicas. ¿En qué te puedo ayudar?
+            </div>
+        </div>
+    </div>
+
+    <!-- Input Area -->
+    <div class="p-4 border-t border-gray-700">
+        <div class="flex space-x-2">
+            <input 
+                type="text" 
+                id="aiChatInput" 
+                placeholder="Escribe tu pregunta..."
+                class="flex-1 bg-gray-700 text-white border border-gray-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+                onkeypress="handleAIKeyPress(event)"
+            />
+            <button 
+                onclick="sendAIMessage()" 
+                class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 flex items-center justify-center"
+            >
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+</div>
+    
     <!-- Footer -->
     <footer class="py-8 bg-gray-900 border-t border-gray-800">
         <div class="container mx-auto px-4 sm:px-6">
@@ -1326,6 +1403,108 @@
                 offset: 100
             });
         });
+        let aiChatOpen = false;
+
+function toggleAIChat() {
+    const widget = document.getElementById('aiChatWidget');
+    const button = document.getElementById('aiChatButton');
+    aiChatOpen = !aiChatOpen;
+    
+    if (aiChatOpen) {
+        widget.classList.remove('hidden');
+        widget.classList.add('flex');
+        button.querySelector('.fa-robot').classList.add('animate-spin');
+        setTimeout(() => {
+            button.querySelector('.fa-robot').classList.remove('animate-spin');
+        }, 500);
+    } else {
+        widget.classList.add('hidden');
+        widget.classList.remove('flex');
+    }
+}
+
+function handleAIKeyPress(event) {
+    if (event.key === 'Enter') {
+        sendAIMessage();
+    }
+}
+
+async function sendAIMessage() {
+    const input = document.getElementById('aiChatInput');
+    const message = input.value.trim();
+    
+    if (!message) return;
+
+    addAIMessage(message, 'user');
+    input.value = '';
+    showAITyping();
+
+    setTimeout(async () => {
+        const response = await getAIResponse(message);
+        hideAITyping();
+        addAIMessage(response, 'ai');
+    }, 1000 + Math.random() * 1000);
+}
+
+function addAIMessage(message, type) {
+    const messagesContainer = document.getElementById('aiChatMessages');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'flex ' + (type === 'user' ? 'justify-end' : '');
+    
+    const bubbleClass = type === 'user' ? 'chat-bubble-user' : 'chat-bubble-ai';
+    messageDiv.innerHTML = `
+        <div class="${bubbleClass} text-white p-3 rounded-lg max-w-xs text-sm">
+            ${message}
+        </div>
+    `;
+    
+    messagesContainer.appendChild(messageDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function showAITyping() {
+    const messagesContainer = document.getElementById('aiChatMessages');
+    const typingDiv = document.createElement('div');
+    typingDiv.id = 'aiTypingIndicator';
+    typingDiv.className = 'flex';
+    typingDiv.innerHTML = `
+        <div class="chat-bubble-ai text-white p-3 rounded-lg">
+            <span class="typing-animation">●</span>
+            <span class="typing-animation" style="animation-delay: 0.2s">●</span>
+            <span class="typing-animation" style="animation-delay: 0.4s">●</span>
+        </div>
+    `;
+    messagesContainer.appendChild(typingDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function hideAITyping() {
+    const typingIndicator = document.getElementById('aiTypingIndicator');
+    if (typingIndicator) {
+        typingIndicator.remove();
+    }
+}
+
+async function getAIResponse(message) {
+    const lowerMessage = message.toLowerCase();
+    
+    const responses = {
+        'hola': '¡Hola! 👋 ¿En qué puedo ayudarte a conocer más sobre Fabián?',
+        'experiencia': 'Fabián tiene 2.9 años de experiencia como SRE en Innfinit, especializado en observabilidad y monitoreo de sistemas críticos. 📊',
+        'proyectos': 'Sus proyectos destacados incluyen: 🎵 YouTube Music Playlist Creator (40+ stars), 📊 Dashboard Chile en Grafana, y varios proyectos web.',
+        'habilidades': 'Maneja: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python.',
+        'contacto': 'Contacto: 📧 fabianignaciomv@gmail.com, 💼 LinkedIn: linkedin.com/in/fabianimv',
+        'sre': 'Como SRE se especializa en: 🎯 Golden signals monitoring, 📋 Gestión SLI/SLO, 🔍 Análisis de incidentes con BigPanda.'
+    };
+
+    for (const [key, response] of Object.entries(responses)) {
+        if (lowerMessage.includes(key)) {
+            return response;
+        }
+    }
+
+    return '🤖 ¿Te interesa algo específico sobre la experiencia SRE de Fabián? Pregúntame sobre: experiencia, proyectos, habilidades, contacto o SRE.';
+}
     </script>
 </body>
 
