@@ -1310,7 +1310,7 @@
             </div>
         </div>
     </section>
-<!-- AI CHATBOT - AGREGAR ANTES DEL FOOTER -->
+<!-- AI CHATBOT - VERSIÓN BILINGÜE -->
 
 <!-- Floating AI Chat Button -->
 <div id="aiChatButton" class="fixed bottom-6 right-6 z-50">
@@ -1319,7 +1319,8 @@
     </button>
     <!-- Tooltip -->
     <div class="absolute bottom-16 right-0 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 pointer-events-none transition-opacity duration-300">
-        ¡Pregúntame sobre Fabián!
+        <span x-show="lang === 'es'">¡Pregúntame sobre Fabián!</span>
+        <span x-show="lang === 'en'">Ask me about Fabián!</span>
     </div>
 </div>
 
@@ -1340,7 +1341,8 @@
     <div id="aiChatMessages" class="flex-1 p-4 overflow-y-auto space-y-3 custom-scrollbar">
         <div class="flex">
             <div class="chat-bubble-ai text-white p-3 rounded-lg max-w-xs text-sm">
-                ¡Hola! 👋 Soy el asistente AI de Fabián. Puedo ayudarte con información sobre su experiencia en SRE, proyectos y habilidades técnicas. ¿En qué te puedo ayudar?
+                <span x-show="lang === 'es'">¡Hola! 👋 Soy el asistente AI de Fabián. Puedo ayudarte con información sobre su experiencia en SRE, proyectos y habilidades técnicas. ¿En qué te puedo ayudar?</span>
+                <span x-show="lang === 'en'">Hi! 👋 I'm Fabián's AI assistant. I can help you with information about his SRE experience, projects and technical skills. How can I help you?</span>
             </div>
         </div>
     </div>
@@ -1351,7 +1353,6 @@
             <input 
                 type="text" 
                 id="aiChatInput" 
-                placeholder="Escribe tu pregunta..."
                 class="flex-1 bg-gray-700 text-white border border-gray-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
                 onkeypress="handleAIKeyPress(event)"
             />
@@ -1396,14 +1397,49 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            AOS.init({
-                duration: 800,
-                once: true,
-                offset: 100
-            });
-        });
-        let aiChatOpen = false;
+   document.addEventListener('DOMContentLoaded', function () {
+    AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100
+    });
+
+    // Actualizar placeholder del input cuando cambie el idioma
+    updateChatPlaceholder();
+});
+
+let aiChatOpen = false;
+
+// Función para actualizar el placeholder según el idioma
+function updateChatPlaceholder() {
+    const input = document.getElementById('aiChatInput');
+    const currentLang = document.querySelector('[x-data]').__x.$data.lang;
+    
+    if (input) {
+        if (currentLang === 'es') {
+            input.placeholder = 'Escribe tu pregunta...';
+        } else {
+            input.placeholder = 'Type your question...';
+        }
+    }
+}
+
+// Observar cambios en el idioma
+const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+            updateChatPlaceholder();
+        }
+    });
+});
+
+// Iniciar observación cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', function() {
+    const langElements = document.querySelectorAll('[x-show*="lang"]');
+    langElements.forEach(element => {
+        observer.observe(element, { attributes: true, attributeFilter: ['style'] });
+    });
+});
 
 function toggleAIChat() {
     const widget = document.getElementById('aiChatWidget');
@@ -1417,6 +1453,7 @@ function toggleAIChat() {
         setTimeout(() => {
             button.querySelector('.fa-robot').classList.remove('animate-spin');
         }, 500);
+        updateChatPlaceholder();
     } else {
         widget.classList.add('hidden');
         widget.classList.remove('flex');
@@ -1426,6 +1463,15 @@ function toggleAIChat() {
 function handleAIKeyPress(event) {
     if (event.key === 'Enter') {
         sendAIMessage();
+    }
+}
+
+function getCurrentLang() {
+    // Obtener el idioma actual de Alpine.js
+    try {
+        return document.querySelector('[x-data]').__x.$data.lang || 'en';
+    } catch {
+        return 'en';
     }
 }
 
@@ -1487,23 +1533,93 @@ function hideAITyping() {
 
 async function getAIResponse(message) {
     const lowerMessage = message.toLowerCase();
+    const currentLang = getCurrentLang();
     
-    const responses = {
+    // Respuestas en español
+    const responsesES = {
         'hola': '¡Hola! 👋 ¿En qué puedo ayudarte a conocer más sobre Fabián?',
-        'experiencia': 'Fabián tiene 2.9 años de experiencia como SRE en Innfinit, especializado en observabilidad y monitoreo de sistemas críticos. 📊',
-        'proyectos': 'Sus proyectos destacados incluyen: 🎵 YouTube Music Playlist Creator (40+ stars), 📊 Dashboard Chile en Grafana, y varios proyectos web.',
-        'habilidades': 'Maneja: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python.',
-        'contacto': 'Contacto: 📧 fabianignaciomv@gmail.com, 💼 LinkedIn: linkedin.com/in/fabianimv',
-        'sre': 'Como SRE se especializa en: 🎯 Golden signals monitoring, 📋 Gestión SLI/SLO, 🔍 Análisis de incidentes con BigPanda.'
+        'hello': '¡Hola! 👋 ¿En qué puedo ayudarte a conocer más sobre Fabián?',
+        'experiencia': 'Fabián tiene 2.9 años de experiencia como SRE en Innfinit, especializado en observabilidad y monitoreo de sistemas críticos. Actualmente lidera el proyecto CN/Delta de arquitectura de observabilidad. 📊',
+        'experience': 'Fabián tiene 2.9 años de experiencia como SRE en Innfinit, especializado en observabilidad y monitoreo de sistemas críticos. 📊',
+        'proyectos': 'Sus proyectos destacados incluyen: 🎵 YouTube Music Playlist Creator (40+ stars en GitHub), 📊 Dashboard Chile en Grafana con datos oficiales en tiempo real, y varios proyectos web como True Q y Ferremás.',
+        'projects': 'Sus proyectos destacados incluyen: 🎵 YouTube Music Playlist Creator (40+ stars), 📊 Dashboard Chile en Grafana, y varios proyectos web.',
+        'habilidades': 'Maneja tecnologías como: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python, y herramientas de CI/CD como Jenkins.',
+        'skills': 'Maneja: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python.',
+        'contacto': 'Puedes contactar a Fabián en: 📧 fabianignaciomv@gmail.com, 💼 LinkedIn: linkedin.com/in/fabianimv, o 🐱 GitHub: github.com/FabianIMV',
+        'contact': 'Contacto: 📧 fabianignaciomv@gmail.com, 💼 LinkedIn: linkedin.com/in/fabianimv',
+        'educacion': 'Está finalizando Ingeniería en Informática (4to año) y trabaja en Innfinit como SRE desde noviembre 2022. 🎓',
+        'education': 'Está finalizando Ingeniería en Informática (4to año) y trabaja en Innfinit como SRE desde noviembre 2022. 🎓',
+        'sre': 'Como SRE, Fabián se especializa en: 🎯 Golden signals monitoring (latencia, tráfico, errores, saturación), 📋 Gestión SLI/SLO, 🔍 Análisis de incidentes con BigPanda, y ⚡ Optimización de MTTR.',
+        'monitoring': 'Se especializa en monitoreo con Grafana, Prometheus, BigPanda para correlación de incidentes, y está implementando golden signals en infraestructuras empresariales críticas. 📊',
+        'aws': 'Tiene experiencia sólida con AWS, incluyendo servicios como RDS, S3, y implementación de monitoreo para infraestructuras cloud empresariales. ☁️',
+        'kubernetes': 'Actualmente configura monitoreo para entornos Kubernetes usando Prometheus Operator en entornos de test/lab para el proyecto CN/Delta. ⚓',
+        'github': 'Su proyecto más popular en GitHub es el YouTube Music Playlist Creator con 40+ estrellas. También puedes ver sus otros proyectos en github.com/FabianIMV 🌟',
+        'grafana': 'Experto en Grafana Cloud, desarrollando dashboards para componentes como Kubernetes, RabbitMQ, Redis, AWS RDS y S3. También creó un dashboard público con datos oficiales de Chile. 📈'
     };
 
+    // Respuestas en inglés
+    const responsesEN = {
+        'hola': 'Hello! 👋 How can I help you learn more about Fabián?',
+        'hello': 'Hello! 👋 How can I help you learn more about Fabián?',
+        'experiencia': 'Fabián has 2.9 years of experience as SRE at Innfinit, specialized in observability and monitoring of critical systems. Currently leading the CN/Delta observability architecture project. 📊',
+        'experience': 'Fabián has 2.9 years of experience as SRE at Innfinit, specialized in observability and monitoring of critical systems. Currently leading the CN/Delta observability architecture project. 📊',
+        'proyectos': 'His featured projects include: 🎵 YouTube Music Playlist Creator (40+ GitHub stars), 📊 Chile Dashboard in Grafana with real-time official data, and various web projects like True Q and Ferremás.',
+        'projects': 'His featured projects include: 🎵 YouTube Music Playlist Creator (40+ GitHub stars), 📊 Chile Dashboard in Grafana with real-time official data, and various web projects like True Q and Ferremás.',
+        'habilidades': 'He handles technologies like: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python, and CI/CD tools like Jenkins.',
+        'skills': 'He handles technologies like: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python, and CI/CD tools like Jenkins.',
+        'contacto': 'You can contact Fabián at: 📧 fabianignaciomv@gmail.com, 💼 LinkedIn: linkedin.com/in/fabianimv, or 🐱 GitHub: github.com/FabianIMV',
+        'contact': 'You can contact Fabián at: 📧 fabianignaciomv@gmail.com, 💼 LinkedIn: linkedin.com/in/fabianimv, or 🐱 GitHub: github.com/FabianIMV',
+        'educacion': 'He\'s completing Computer Engineering (4th year) and has been working at Innfinit as SRE since November 2022. 🎓',
+        'education': 'He\'s completing Computer Engineering (4th year) and has been working at Innfinit as SRE since November 2022. 🎓',
+        'sre': 'As SRE, Fabián specializes in: 🎯 Golden signals monitoring (latency, traffic, errors, saturation), 📋 SLI/SLO management, 🔍 Incident analysis with BigPanda, and ⚡ MTTR optimization.',
+        'monitoring': 'He specializes in monitoring with Grafana, Prometheus, BigPanda for incident correlation, and is implementing golden signals in critical enterprise infrastructures. 📊',
+        'aws': 'He has solid experience with AWS, including services like RDS, S3, and implementing monitoring for enterprise cloud infrastructures. ☁️',
+        'kubernetes': 'Currently configuring monitoring for Kubernetes environments using Prometheus Operator in test/lab environments for the CN/Delta project. ⚓',
+        'github': 'His most popular GitHub project is the YouTube Music Playlist Creator with 40+ stars. You can also see his other projects at github.com/FabianIMV 🌟',
+        'grafana': 'Expert in Grafana Cloud, developing dashboards for components like Kubernetes, RabbitMQ, Redis, AWS RDS and S3. Also created a public dashboard with official Chilean data. 📈'
+    };
+
+    // Seleccionar el conjunto de respuestas según el idioma
+    const responses = currentLang === 'es' ? responsesES : responsesEN;
+
+    // Buscar respuesta por palabras clave
     for (const [key, response] of Object.entries(responses)) {
         if (lowerMessage.includes(key)) {
             return response;
         }
     }
 
-    return '🤖 ¿Te interesa algo específico sobre la experiencia SRE de Fabián? Pregúntame sobre: experiencia, proyectos, habilidades, contacto o SRE.';
+    // Respuestas para preguntas comunes según idioma
+    if (lowerMessage.includes('años') || lowerMessage.includes('edad') || lowerMessage.includes('years') || lowerMessage.includes('age')) {
+        return currentLang === 'es' 
+            ? 'Fabián tiene 2.9 años de experiencia profesional en SRE. Está finalizando su 4to año de Ingeniería en Informática. 🎯'
+            : 'Fabián has 2.9 years of professional SRE experience. He\'s completing his 4th year of Computer Engineering. 🎯';
+    }
+
+    if (lowerMessage.includes('innfinit')) {
+        return currentLang === 'es'
+            ? 'Innfinit es donde Fabián trabaja actualmente como SRE desde noviembre 2022. Ahí lidera proyectos de observabilidad y monitoreo para infraestructuras empresariales críticas. 🏢'
+            : 'Innfinit is where Fabián currently works as SRE since November 2022. There he leads observability and monitoring projects for critical enterprise infrastructures. 🏢';
+    }
+
+    if (lowerMessage.includes('trabajo') || lowerMessage.includes('empleo') || lowerMessage.includes('work') || lowerMessage.includes('job')) {
+        return currentLang === 'es'
+            ? 'Fabián está empleado actualmente en Innfinit como SRE, pero está abierto a nuevas oportunidades que le permitan crecer en el ecosistema SRE. 💼'
+            : 'Fabián is currently employed at Innfinit as SRE, but is open to new opportunities that allow him to grow in the SRE ecosystem. 💼';
+    }
+
+    // Respuestas por defecto según idioma
+    const defaultResponses = currentLang === 'es' ? [
+        '🤖 Interesante pregunta. Te recomiendo revisar las secciones de Experiencia, Proyectos y Habilidades del portfolio para más detalles.',
+        '💡 ¿Te interesa algo específico sobre la experiencia SRE de Fabián? Puedo contarte sobre sus proyectos, habilidades técnicas o experiencia laboral.',
+        '🔍 Puedo ayudarte con información sobre: experiencia, proyectos, habilidades, contacto, educación, o sus especialidades en SRE.'
+    ] : [
+        '🤖 Interesting question. I recommend checking the Experience, Projects and Skills sections of the portfolio for more details.',
+        '💡 Are you interested in something specific about Fabián\'s SRE experience? I can tell you about his projects, technical skills or work experience.',
+        '🔍 I can help you with information about: experience, projects, skills, contact, education, or his SRE specialties.'
+    ];
+    
+    return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
 }
     </script>
 </body>
