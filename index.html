@@ -2084,21 +2084,55 @@ function hideAITyping() {
     }
 }
 
-async function getAIResponse(message) {
-    const currentLang = getCurrentLang();
+// Función para detectar idioma del mensaje
+function detectLanguage(message) {
+    const lowerMessage = message.toLowerCase();
 
+    // Palabras clave en español
+    const spanishWords = ['hola', 'que', 'qué', 'como', 'cómo', 'donde', 'dónde', 'cuando', 'cuándo',
+                          'por', 'para', 'con', 'sin', 'sobre', 'cuéntame', 'dime', 'háblame',
+                          'tienes', 'eres', 'trabajas', 'proyectos', 'experiencia', 'tecnologías', 'estudias'];
+
+    // Palabras clave en inglés
+    const englishWords = ['hello', 'hi', 'what', 'how', 'where', 'when', 'tell', 'about',
+                          'you', 'your', 'work', 'projects', 'experience', 'technologies', 'study'];
+
+    let spanishScore = 0;
+    let englishScore = 0;
+
+    // Contar palabras en español
+    spanishWords.forEach(word => {
+        if (lowerMessage.includes(word)) spanishScore++;
+    });
+
+    // Contar palabras en inglés
+    englishWords.forEach(word => {
+        if (lowerMessage.includes(word)) englishScore++;
+    });
+
+    // Si hay empate o no se detecta idioma, usar la configuración del sitio
+    if (spanishScore === englishScore) {
+        return getCurrentLang();
+    }
+
+    return spanishScore > englishScore ? 'es' : 'en';
+}
+
+async function getAIResponse(message) {
+    // Detectar idioma del mensaje automáticamente
+    const detectedLang = detectLanguage(message);
 
     try {
         // Verificar que tenemos la API key
         if (!window.GEMINI_CONFIG || !window.GEMINI_CONFIG.apiKey) {
-            return getBasicResponse(message, currentLang);
+            return getBasicResponse(message, detectedLang);
         }
 
         // Crear contexto sobre el portfolio
-        const portfolioContext = getPortfolioContext(currentLang);
+        const portfolioContext = getPortfolioContext(detectedLang);
 
         // Preparar el prompt para Gemini
-        const systemPrompt = currentLang === 'es'
+        const systemPrompt = detectedLang === 'es'
             ? `Eres un asistente personal de Fabián Muñoz. Responde de manera amigable y conversacional sobre su experiencia, proyectos y habilidades. Usa emojis ocasionalmente. Mantén las respuestas MUY concisas (máximo 40 palabras). Para saludos simples, responde brevemente y pregunta en qué puedes ayudar. NO exageres su experiencia - es un desarrollador en crecimiento, no un experto senior.
 
 Contexto del portfolio:
@@ -2152,7 +2186,7 @@ Always respond in English, even if the question is in Spanish.`;
 
     } catch (error) {
         // Fallback a respuestas básicas si falla la API
-        return getBasicResponse(message, currentLang);
+        return getBasicResponse(message, detectedLang);
     }
 }
 
