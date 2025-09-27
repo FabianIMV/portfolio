@@ -33,7 +33,26 @@
         }
 
         .gradient-bg {
-            background: linear-gradient(140deg, #1E1B4B 0%, #3730A3 50%, #7C3AED 100%);
+            background: linear-gradient(140deg, #0F0F23 0%, #1E1B4B 25%, #3730A3 50%, #7C3AED 75%, #A855F7 100%);
+        }
+
+        .glass-morphism {
+            background: rgba(30, 30, 46, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(124, 58, 237, 0.2);
+        }
+
+        .text-shadow {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hover-glow {
+            transition: all 0.3s ease;
+        }
+
+        .hover-glow:hover {
+            box-shadow: 0 0 30px rgba(124, 58, 237, 0.4), 0 0 60px rgba(124, 58, 237, 0.2);
+            transform: translateY(-2px);
         }
 
         .gradient-text {
@@ -53,16 +72,16 @@
         }
 
         .project-card {
-            background: rgba(30, 30, 46, 0.7);
-            backdrop-filter: blur(15px);
+            background: rgba(30, 30, 46, 0.8);
+            backdrop-filter: blur(20px);
             border: 1px solid rgba(124, 58, 237, 0.2);
-            transition: all 0.4s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .project-card:hover {
-            border-color: rgba(124, 58, 237, 0.6);
-            box-shadow: 0 15px 35px rgba(124, 58, 237, 0.4);
-            transform: translateY(-8px);
+            border-color: rgba(124, 58, 237, 0.8);
+            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.4), 0 0 0 1px rgba(168, 85, 247, 0.2);
+            transform: translateY(-12px) scale(1.02);
         }
 
         .rotating-circles {
@@ -253,56 +272,56 @@
 
 <body class="bg-gray-900 text-white custom-scrollbar" x-data="{ lang: 'en', mobileMenu: false }" x-cloak>
     <!-- Navbar -->
-    <nav class="fixed w-full bg-gray-900/95 backdrop-blur-sm z-40 border-b border-gray-800">
+    <nav class="fixed w-full glass-morphism backdrop-blur-md z-40 border-b border-purple-500/20">
         <div class="container mx-auto px-4 sm:px-6 py-4">
             <div class="flex justify-between items-center">
-                <a href="#home" class="text-2xl font-bold flex items-center">
+                <a href="#home" class="text-2xl font-bold flex items-center hover-glow rounded-lg px-3 py-2">
                     <i class="fas fa-server text-purple-400 mr-2"></i>
                     <span class="inline gradient-text">Fabián M.</span>
                 </a>
 
                 <!-- Mobile controls -->
-                <div class="md:hidden flex items-center space-x-2">
+                <div class="md:hidden flex items-center space-x-3">
                     <button @click="lang = lang === 'es' ? 'en' : 'es'"
-                        class="bg-purple-600/80 backdrop-blur-sm px-3 py-2 rounded-lg hover:bg-purple-600 transition text-sm">
+                        class="glass-morphism hover:bg-purple-600/50 px-4 py-2 rounded-xl transition-all duration-300 text-sm font-medium hover-glow">
                         <span x-show="lang === 'es'">EN</span>
                         <span x-show="lang === 'en'">ES</span>
                     </button>
 
-                    <button @click="mobileMenu = !mobileMenu" class="text-white focus:outline-none">
-                        <i x-show="!mobileMenu" class="fas fa-bars text-xl"></i>
-                        <i x-show="mobileMenu" class="fas fa-times text-xl"></i>
+                    <button @click="mobileMenu = !mobileMenu" class="glass-morphism p-3 rounded-xl hover:bg-gray-700/50 transition-all duration-300 hover-glow">
+                        <i x-show="!mobileMenu" class="fas fa-bars text-lg"></i>
+                        <i x-show="mobileMenu" class="fas fa-times text-lg"></i>
                     </button>
                 </div>
 
                 <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="nav-link hover:text-purple-400 transition">
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#home" class="nav-link hover:text-purple-400 transition px-3 py-2 rounded-lg hover-glow">
                         <span x-show="lang === 'es'">Inicio</span>
                         <span x-show="lang === 'en'">Home</span>
                     </a>
-                    <a href="#about" class="nav-link hover:text-purple-400 transition">
+                    <a href="#about" class="nav-link hover:text-purple-400 transition px-3 py-2 rounded-lg hover-glow">
                         <span x-show="lang === 'es'">Sobre mí</span>
                         <span x-show="lang === 'en'">About</span>
                     </a>
-                    <a href="#experience" class="nav-link hover:text-purple-400 transition">
+                    <a href="#experience" class="nav-link hover:text-purple-400 transition px-3 py-2 rounded-lg hover-glow">
                         <span x-show="lang === 'es'">Experiencia</span>
                         <span x-show="lang === 'en'">Experience</span>
                     </a>
-                    <a href="#skills" class="nav-link hover:text-purple-400 transition">
+                    <a href="#skills" class="nav-link hover:text-purple-400 transition px-3 py-2 rounded-lg hover-glow">
                         <span x-show="lang === 'es'">Habilidades</span>
                         <span x-show="lang === 'en'">Skills</span>
                     </a>
-                    <a href="#projects" class="nav-link hover:text-purple-400 transition">
+                    <a href="#projects" class="nav-link hover:text-purple-400 transition px-3 py-2 rounded-lg hover-glow">
                         <span x-show="lang === 'es'">Proyectos</span>
                         <span x-show="lang === 'en'">Projects</span>
                     </a>
-                    <a href="#contact" class="nav-link hover:text-purple-400 transition">
+                    <a href="#contact" class="nav-link hover:text-purple-400 transition px-3 py-2 rounded-lg hover-glow">
                         <span x-show="lang === 'es'">Contacto</span>
                         <span x-show="lang === 'en'">Contact</span>
                     </a>
                     <button @click="lang = lang === 'es' ? 'en' : 'es'"
-                        class="bg-purple-600/80 backdrop-blur-sm px-4 py-2 rounded-lg hover:bg-purple-600 transition">
+                        class="glass-morphism hover:bg-purple-600/50 px-4 py-2 rounded-xl transition-all duration-300 text-sm font-medium hover-glow ml-4">
                         <span x-text="lang === 'es' ? 'EN' : 'ES'" class="font-medium"></span>
                     </button>
                 </div>
@@ -571,146 +590,176 @@
                     </div>
 
                     <div class="space-y-6">
-                        <!-- Proyecto 1 -->
+                        <!-- Proyecto Actual: Site Monitoring Optimization ---->
                         <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
                             <h4 class="text-lg font-semibold text-purple-300 flex items-center">
-                                <span x-show="lang === 'es'">PROYECTO: Monitoreo CN/Delta (Liderazgo)</span>
-                                <span x-show="lang === 'en'">PROJECT: CN/Delta Monitoring (Leadership)</span>
+                                <span x-show="lang === 'es'">PROYECTO: Site Monitoring Optimization & Incident Correlation - Liberty Mutual US</span>
+                                <span x-show="lang === 'en'">PROJECT: Site Monitoring Optimization & Incident Correlation - Liberty Mutual US</span>
                                 <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Actual</span>
-                                    <span x-show="lang === 'en'">Current</span>
+                                    <span x-show="lang === 'es'">Oct 2024 - Presente</span>
+                                    <span x-show="lang === 'en'">Oct 2024 - Present</span>
                                 </span>
                             </h4>
                             <ul class="mt-3 space-y-2">
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
                                     <span>
-                                        <span x-show="lang === 'es'">Liderando implementación de arquitectura de
-                                            observabilidad para infraestructura empresarial con servicios
-                                            críticos</span>
-                                        <span x-show="lang === 'en'">Leading implementation of observability
-                                            architecture for enterprise infrastructure with critical services</span>
+                                        <span x-show="lang === 'es'">Conduciendo análisis de root cause y investigaciones post-mortem usando plataforma BigPanda</span>
+                                        <span x-show="lang === 'en'">Conducting root cause analysis and post-mortem investigations using BigPanda platform</span>
                                     </span>
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
                                     <span>
-                                        <span x-show="lang === 'es'">Configurando monitoreo para entornos Kubernetes
-                                            usando Prometheus Operator (entornos test/lab)</span>
-                                        <span x-show="lang === 'en'">Configuring monitoring for Kubernetes environments
-                                            using Prometheus Operator (test/lab environments)</span>
+                                        <span x-show="lang === 'es'">Optimizando monitoreo de servicios e infraestructura web usando dashboards Grafana</span>
+                                        <span x-show="lang === 'en'">Optimizing service and web infrastructure monitoring using Grafana dashboards</span>
                                     </span>
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
                                     <span>
-                                        <span x-show="lang === 'es'">Desarrollando dashboards en Grafana Cloud para
-                                            componentes: Kubernetes, RabbitMQ, Redis, AWS RDS y S3</span>
-                                        <span x-show="lang === 'en'">Developing dashboards in Grafana Cloud for
-                                            components: Kubernetes, RabbitMQ, Redis, AWS RDS, and S3</span>
+                                        <span x-show="lang === 'es'">Analizando Splunk monitoring y soportando migración Datadog para mejorar observabilidad</span>
+                                        <span x-show="lang === 'en'">Analyzing Splunk monitoring and supporting Datadog migration to enhance observability</span>
                                     </span>
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
                                     <span>
-                                        <span x-show="lang === 'es'">Gestionando proyecto con equipo reducido,
-                                            entregando resultados de calidad en tiempo y forma</span>
-                                        <span x-show="lang === 'en'">Managing project with reduced team, delivering
-                                            quality results on time and as specified</span>
+                                        <span x-show="lang === 'es'">Operando lógica correlation Splunk y estándares globales para mejorar reducción de ruido y detección</span>
+                                        <span x-show="lang === 'en'">Operating Splunk correlation logic and global standards to improve noise reduction and detection</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Creando documentación estandarizada Confluence para resolver expedita e mejorar MTTR</span>
+                                        <span x-show="lang === 'en'">Creating standardized Confluence documentation for expedite resolution and improve MTTR</span>
                                     </span>
                                 </li>
                             </ul>
                         </div>
 
-                        <!-- Proyecto 2 -->
+                        <!-- SRE High Availability Observability Platform ---->
                         <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
                             <h4 class="text-lg font-semibold text-purple-300">
-                                <span x-show="lang === 'es'">PROYECTO: Análisis y Correlación SRE</span>
-                                <span x-show="lang === 'en'">PROJECT: SRE Analysis & Correlation</span>
+                                <span x-show="lang === 'es'">PROYECTO: SRE - High Availability Observability Platform - Red Salud</span>
+                                <span x-show="lang === 'en'">PROJECT: SRE - High Availability Observability Platform - Red Salud</span>
+                                <span class="text-sm bg-green-900/30 text-green-300 px-3 py-1 rounded-full ml-2">
+                                    <span x-show="lang === 'es'">Ago 2024 - Oct 2024</span>
+                                    <span x-show="lang === 'en'">Aug 2024 - Oct 2024</span>
+                                </span>
                             </h4>
                             <ul class="mt-3 space-y-2">
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
                                     <span>
-                                        <span x-show="lang === 'es'">Conduciendo análisis de causa raíz e
-                                            investigaciones post-mortem usando plataforma correlación BigPanda</span>
-                                        <span x-show="lang === 'en'">Conducting root cause analysis and post-mortem
-                                            investigations using BigPanda correlation platform</span>
+                                        <span x-show="lang === 'es'">Implementó arquitectura de alta disponibilidad con Grafana y Prometheus para monitoreo de producción</span>
+                                        <span x-show="lang === 'en'">Implemented high-availability architecture with Grafana and Prometheus for production monitoring</span>
                                     </span>
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
                                     <span>
-                                        <span x-show="lang === 'es'">Contribuyendo a monitoreo golden signals (latencia,
-                                            tráfico, errores, saturación) para servicios financieros
-                                            empresariales</span>
-                                        <span x-show="lang === 'en'">Contributing to golden signals monitoring (latency,
-                                            traffic, errors, saturation) for enterprise financial services</span>
+                                        <span x-show="lang === 'es'">Desarrolló dashboards para visibilidad y experiencia de usuario en aplicaciones críticas</span>
+                                        <span x-show="lang === 'en'">Developed dashboards for visibility and user experience in critical applications</span>
                                     </span>
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
                                     <span>
-                                        <span x-show="lang === 'es'">Apoyando desarrollo framework SLI/SLO bajo guía
-                                            senior</span>
-                                        <span x-show="lang === 'en'">Supporting SLI/SLO framework development under
-                                            senior guidance</span>
+                                        <span x-show="lang === 'es'">Implementó logging centralizado con Loki</span>
+                                        <span x-show="lang === 'en'">Implemented centralized logging with Loki</span>
                                     </span>
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
                                     <span>
-                                        <span x-show="lang === 'es'">Analizando monitoreo Splunk y apoyando migración
-                                            Datadog para mejorar visibilidad confiabilidad servicios</span>
-                                        <span x-show="lang === 'en'">Analyzing Splunk monitoring and supporting Datadog
-                                            migration to enhance service reliability visibility</span>
+                                        <span x-show="lang === 'es'">Configuró canales alertas (Slack, Teams, Telegram) con objetivos críticos de disponibilidad</span>
+                                        <span x-show="lang === 'en'">Configured alert channels (Slack, Teams, Telegram) with critical availability objectives</span>
                                     </span>
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
                                     <span>
-                                        <span x-show="lang === 'es'">Creando documentación estandarizada Confluence para
-                                            agilizar resolución y mejorar MTTR</span>
-                                        <span x-show="lang === 'en'">Creating standardized documentation in Confluence
-                                            to expedite resolution and improve MTTR</span>
+                                        <span x-show="lang === 'es'">Construyó infraestructura modular optimizando recursos mientras mantiene capacidad de crecimiento</span>
+                                        <span x-show="lang === 'en'">Built modular infrastructure optimizing resources while maintaining capacity for growth</span>
                                     </span>
                                 </li>
                             </ul>
                         </div>
 
-                        <!-- Proyecto 3 -->
+                        <!-- SRE Delta Compliance Monitoring Leadership ---->
                         <div class="timeline-item" data-aos="fade-up" data-aos-delay="500">
                             <h4 class="text-lg font-semibold text-purple-300">
-                                <span x-show="lang === 'es'">PROYECTO: Implementación de Plataforma de
-                                    Observabilidad</span>
-                                <span x-show="lang === 'en'">PROJECT: Observability Platform Implementation</span>
+                                <span x-show="lang === 'es'">PROYECTO: SRE - Delta Compliance Monitoring Leadership - Sovos</span>
+                                <span x-show="lang === 'en'">PROJECT: SRE - Delta Compliance Monitoring Leadership - Sovos</span>
+                                <span class="text-sm bg-blue-900/30 text-blue-300 px-3 py-1 rounded-full ml-2">
+                                    <span x-show="lang === 'es'">Ago 2024 - Ago 2024</span>
+                                    <span x-show="lang === 'en'">Aug 2024 - Aug 2024</span>
+                                </span>
                             </h4>
                             <ul class="mt-3 space-y-2">
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
                                     <span>
-                                        <span x-show="lang === 'es'">Construyendo arquitectura HA con Grafana y
-                                            Prometheus para monitoreo de producción</span>
-                                        <span x-show="lang === 'en'">Building HA architecture with Grafana and
-                                            Prometheus for production monitoring</span>
+                                        <span x-show="lang === 'es'">Lideró equipo para crear dashboards para Kubernetes, RabbitMQ, HapiJs, AWS RDS, S3</span>
+                                        <span x-show="lang === 'en'">Led team to create dashboards for Kubernetes, RabbitMQ, HapiJs, AWS RDS, S3</span>
                                     </span>
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
                                     <span>
-                                        <span x-show="lang === 'es'">Configurando monitores para validar disponibilidad
-                                            en aplicaciones críticas</span>
-                                        <span x-show="lang === 'en'">Configuring monitors to validate availability in
-                                            critical applications</span>
+                                        <span x-show="lang === 'es'">Desarrolló y configuró métricas personalizadas usando Prometheus Operator y table-stakes métricas (HeatMap)</span>
+                                        <span x-show="lang === 'en'">Developed and configured custom metrics using Prometheus Operator and table-stakes metrics (HeatMap)</span>
                                     </span>
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
                                     <span>
-                                        <span x-show="lang === 'es'">Implementando sistema centralizado de logs con Loki
-                                            para correlación de eventos</span>
-                                        <span x-show="lang === 'en'">Implementing centralized log system with Loki for
-                                            event correlation</span>
+                                        <span x-show="lang === 'es'">Implementó sistema de alertas optimizadas con outlooks detallados para minimizar falsos positivos</span>
+                                        <span x-show="lang === 'en'">Implemented optimized alert system with detailed outlooks to minimize false positives</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Trabajó con reducción equipos, entregó resultados calidad mejorada</span>
+                                        <span x-show="lang === 'en'">Worked with reduced teams, delivered improved quality results</span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Site Reliability Engineer FRRB ---->
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="600">
+                            <h4 class="text-lg font-semibold text-purple-300">
+                                <span x-show="lang === 'es'">PROYECTO: Site Reliability Engineer (2+ años experiencia)</span>
+                                <span x-show="lang === 'en'">PROJECT: Site Reliability Engineer (2+ years experience)</span>
+                                <span class="text-sm bg-blue-900/30 text-blue-300 px-3 py-1 rounded-full ml-2">
+                                    <span x-show="lang === 'es'">Nov 2022 - Presente</span>
+                                    <span x-show="lang === 'en'">Nov 2022 - Present</span>
+                                </span>
+                            </h4>
+                            <ul class="mt-3 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Resolución de problemas - Grafana, Prometheus - Big Panda - Comunicación - PageDuty</span>
+                                        <span x-show="lang === 'en'">Problem resolution - Grafana, Prometheus - Big Panda - Communication - PageDuty</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Herramientas de plataforma OCP (OpenShift Container Platform) - Conocimiento administración del cliente, Splunk, Integración con entrega continua (CI/CD)</span>
+                                        <span x-show="lang === 'en'">OCP (OpenShift Container Platform) platform tools - Client administration knowledge, Splunk, Continuous integration delivery (CI/CD)</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Terraform - Cloud - Datadog - Amazon Web Services</span>
+                                        <span x-show="lang === 'en'">Terraform - Cloud - Datadog - Amazon Web Services</span>
                                     </span>
                                 </li>
                             </ul>
@@ -974,6 +1023,48 @@
                             <i class="fas fa-book mr-2"></i>
                             <span>Docs</span>
                         </a>
+                    </div>
+                </div>
+
+                <!-- Proyecto: NutriCombat App -->
+                <div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="850">
+                    <div class="h-48 bg-gradient-to-br from-green-900 to-blue-900 rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-green-800/80 to-blue-800/80"></div>
+                        <div class="relative z-10 text-center">
+                            <i class="fas fa-dumbbell text-5xl text-green-300 mb-2"></i>
+                            <i class="fas fa-utensils text-3xl text-blue-300"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-purple-300 flex items-center">
+                        <span x-show="lang === 'es'">NutriCombat</span>
+                        <span x-show="lang === 'en'">NutriCombat</span>
+                        <span class="learning-badge ml-2">
+                            <span x-show="lang === 'es'">En Desarrollo</span>
+                            <span x-show="lang === 'en'">In Development</span>
+                        </span>
+                    </h3>
+                    <p class="text-gray-300 mb-4">
+                        <span x-show="lang === 'es'">Progressive Web App especializada para atletas de deportes de combate. Manejo de corte de peso, nutrición personalizada con IA (Gemini), y planes específicos para competencias oficiales.</span>
+                        <span x-show="lang === 'en'">Specialized Progressive Web App for combat sports athletes. Weight cutting management, AI-powered nutrition (Gemini), and specific plans for official competitions.</span>
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-blue-900/30 text-blue-300 rounded-full text-sm">React Native</span>
+                        <span class="px-3 py-1 bg-purple-900/30 text-purple-300 rounded-full text-sm">Expo</span>
+                        <span class="px-3 py-1 bg-orange-900/30 text-orange-300 rounded-full text-sm">AWS Lambda</span>
+                        <span class="px-3 py-1 bg-green-900/30 text-green-300 rounded-full text-sm">Supabase</span>
+                        <span class="px-3 py-1 bg-red-900/30 text-red-300 rounded-full text-sm">Gemini AI</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <a href="https://github.com/FabianIMV/nutricombat" target="_blank"
+                            class="inline-flex items-center text-purple-400 hover:text-purple-300">
+                            <i class="fab fa-github mr-2"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <div class="inline-flex items-center text-gray-500 cursor-not-allowed ml-4">
+                            <i class="fas fa-mobile-alt mr-2"></i>
+                            <span x-show="lang === 'es'">Próximamente</span>
+                            <span x-show="lang === 'en'">Coming Soon</span>
+                        </div>
                     </div>
                 </div>
 
@@ -1541,8 +1632,8 @@ async function getAIResponse(message) {
         'hello': '¡Hola! 👋 ¿En qué puedo ayudarte a conocer más sobre Fabián?',
         'experiencia': 'Fabián tiene 2.9 años de experiencia como SRE en Innfinit, especializado en observabilidad y monitoreo de sistemas críticos. Actualmente lidera el proyecto CN/Delta de arquitectura de observabilidad. 📊',
         'experience': 'Fabián tiene 2.9 años de experiencia como SRE en Innfinit, especializado en observabilidad y monitoreo de sistemas críticos. 📊',
-        'proyectos': 'Sus proyectos destacados incluyen: 🎵 YouTube Music Playlist Creator (40+ stars en GitHub), 📊 Dashboard Chile en Grafana con datos oficiales en tiempo real, y varios proyectos web como True Q y Ferremás.',
-        'projects': 'Sus proyectos destacados incluyen: 🎵 YouTube Music Playlist Creator (40+ stars), 📊 Dashboard Chile en Grafana, y varios proyectos web.',
+        'proyectos': 'Sus proyectos destacados incluyen: 🎵 YouTube Music Playlist Creator (40+ stars en GitHub), 🥊 NutriCombat - PWA para atletas de combate con IA (Gemini), 📊 Dashboard Chile en Grafana con datos oficiales en tiempo real, y varios proyectos web como True Q y Ferremás.',
+        'projects': 'Sus proyectos destacados incluyen: 🎵 YouTube Music Playlist Creator (40+ stars), 🥊 NutriCombat - PWA para atletas de combate con IA, 📊 Dashboard Chile en Grafana, y varios proyectos web.',
         'habilidades': 'Maneja tecnologías como: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python, y herramientas de CI/CD como Jenkins.',
         'skills': 'Maneja: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python.',
         'contacto': 'Puedes contactar a Fabián en: 📧 fabianignaciomv@gmail.com, 💼 LinkedIn: linkedin.com/in/fabianimv, o 🐱 GitHub: github.com/FabianIMV',
@@ -1563,8 +1654,8 @@ async function getAIResponse(message) {
         'hello': 'Hello! 👋 How can I help you learn more about Fabián?',
         'experiencia': 'Fabián has 2.9 years of experience as SRE at Innfinit, specialized in observability and monitoring of critical systems. Currently leading the CN/Delta observability architecture project. 📊',
         'experience': 'Fabián has 2.9 years of experience as SRE at Innfinit, specialized in observability and monitoring of critical systems. Currently leading the CN/Delta observability architecture project. 📊',
-        'proyectos': 'His featured projects include: 🎵 YouTube Music Playlist Creator (40+ GitHub stars), 📊 Chile Dashboard in Grafana with real-time official data, and various web projects like True Q and Ferremás.',
-        'projects': 'His featured projects include: 🎵 YouTube Music Playlist Creator (40+ GitHub stars), 📊 Chile Dashboard in Grafana with real-time official data, and various web projects like True Q and Ferremás.',
+        'proyectos': 'His featured projects include: 🎵 YouTube Music Playlist Creator (40+ GitHub stars), 🥊 NutriCombat - PWA for combat athletes with AI (Gemini), 📊 Chile Dashboard in Grafana with real-time official data, and various web projects like True Q and Ferremás.',
+        'projects': 'His featured projects include: 🎵 YouTube Music Playlist Creator (40+ GitHub stars), 🥊 NutriCombat - PWA for combat athletes with AI, 📊 Chile Dashboard in Grafana with real-time official data, and various web projects like True Q and Ferremás.',
         'habilidades': 'He handles technologies like: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python, and CI/CD tools like Jenkins.',
         'skills': 'He handles technologies like: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python, and CI/CD tools like Jenkins.',
         'contacto': 'You can contact Fabián at: 📧 fabianignaciomv@gmail.com, 💼 LinkedIn: linkedin.com/in/fabianimv, or 🐱 GitHub: github.com/FabianIMV',
