@@ -4,8 +4,11 @@ name: Build and Deploy with API Key
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build-and-deploy:
@@ -13,7 +16,7 @@ jobs:
 
     steps:
     - name: Checkout 🛎️
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Build with API Key
       env:
@@ -27,3 +30,4 @@ jobs:
       with:
         folder: .
         branch: gh-pages
+        token: ${{ secrets.GITHUB_TOKEN }}
