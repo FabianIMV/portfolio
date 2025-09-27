@@ -2099,13 +2099,13 @@ async function getAIResponse(message) {
 
         // Preparar el prompt para Gemini
         const systemPrompt = currentLang === 'es'
-            ? `Eres un asistente personal de Fabián Muñoz. Responde de manera amigable y profesional sobre su experiencia, proyectos y habilidades. Usa emojis ocasionalmente. Mantén las respuestas concisas (máximo 100 palabras).
+            ? `Eres un asistente personal de Fabián Muñoz. Responde de manera amigable y conversacional sobre su experiencia, proyectos y habilidades. Usa emojis ocasionalmente. Mantén las respuestas MUY concisas (máximo 40 palabras). Para saludos simples, responde brevemente y pregunta en qué puedes ayudar. NO exageres su experiencia - es un desarrollador en crecimiento, no un experto senior.
 
 Contexto del portfolio:
 ${portfolioContext}
 
 Responde siempre en español, incluso si la pregunta está en inglés.`
-            : `You are Fabián Muñoz's personal assistant. Respond in a friendly and professional manner about his experience, projects, and skills. Use emojis occasionally. Keep responses concise (max 100 words).
+            : `You are Fabián Muñoz's personal assistant. Respond in a friendly and conversational manner about his experience, projects, and skills. Use emojis occasionally. Keep responses VERY concise (max 40 words). For simple greetings, respond briefly and ask how you can help. DON'T exaggerate his experience - he's a growing developer, not a senior expert.
 
 Portfolio context:
 ${portfolioContext}
@@ -2123,7 +2123,7 @@ Always respond in English, even if the question is in Spanish.`;
             }],
             generationConfig: {
                 temperature: 0.7,
-                maxOutputTokens: 150,
+                maxOutputTokens: 60,
                 topP: 0.8,
                 topK: 40
             }
@@ -2161,47 +2161,45 @@ function getPortfolioContext(lang) {
     if (lang === 'es') {
         return `
 EXPERIENCIA:
-- Site Reliability Engineer en Innfinit
-- Especialista en observabilidad y monitoreo de sistemas críticos
-- Líder de proyectos de arquitectura de observabilidad CN/Delta
-- Enfoque en golden signals, SLI/SLO y optimización de confiabilidad
+- SRE en Innfinit desde noviembre 2022
+- Enfocado en observabilidad y monitoreo
+- Participando en proyectos de arquitectura CN/Delta
+- Aprendiendo sobre golden signals y SLI/SLO
 
 TECNOLOGÍAS:
 - ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform
 - 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda
-- 🐍 Python, Jenkins, CI/CD
+- 🐍 Python (nivel intermedio), Jenkins, CI/CD
 
-PROYECTOS DESTACADOS:
-- 🎵 YouTube Music Playlist Creator (40+ stars en GitHub)
-- 🥊 NutriCombat - PWA para atletas de combate con IA
-- 📊 Chile Dashboard en Grafana con datos oficiales en tiempo real
-- 💼 Proyectos web como True Q y Ferremás
+PROYECTOS:
+- 🎵 YouTube Music Playlist Creator (40+ stars)
+- 🥊 NutriCombat - PWA con IA
+- 📊 Chile Dashboard en Grafana
+- 💼 Proyectos web True Q y Ferremás
 
 EDUCACIÓN:
-- Estudiante de Ingeniería en Computación (4to año)
-- Trabajando en Innfinit como SRE desde noviembre 2022`;
+- Estudiante de Ingeniería en Computación (4to año)`;
     } else {
         return `
 EXPERIENCE:
-- Site Reliability Engineer at Innfinit
-- Specialist in observability and monitoring of critical systems
-- Leader of CN/Delta observability architecture projects
-- Focus on golden signals, SLI/SLO and reliability optimization
+- SRE at Innfinit since November 2022
+- Focused on observability and monitoring
+- Participating in CN/Delta architecture projects
+- Learning about golden signals and SLI/SLO
 
 TECHNOLOGIES:
 - ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform
 - 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda
-- 🐍 Python, Jenkins, CI/CD
+- 🐍 Python (intermediate level), Jenkins, CI/CD
 
-FEATURED PROJECTS:
-- 🎵 YouTube Music Playlist Creator (40+ GitHub stars)
-- 🥊 NutriCombat - PWA for combat athletes with AI
-- 📊 Chile Dashboard in Grafana with real-time official data
-- 💼 Web projects like True Q and Ferremás
+PROJECTS:
+- 🎵 YouTube Music Playlist Creator (40+ stars)
+- 🥊 NutriCombat - PWA with AI
+- 📊 Chile Dashboard in Grafana
+- 💼 Web projects True Q and Ferremás
 
 EDUCATION:
-- Computer Engineering student (4th year)
-- Working at Innfinit as SRE since November 2022`;
+- Computer Engineering student (4th year)`;
     }
 }
 
