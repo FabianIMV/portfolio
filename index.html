@@ -27,6 +27,8 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <!-- Gemini API Configuration -->
+    <script src="./config.js"></script>
     <style>
         [x-cloak] {
             display: none !important;
@@ -2087,9 +2089,13 @@ async function getAIResponse(message) {
 
     try {
         // Verificar que tenemos la API key
+        console.log('GEMINI_CONFIG:', window.GEMINI_CONFIG);
         if (!window.GEMINI_CONFIG || !window.GEMINI_CONFIG.apiKey) {
+            console.log('No API key found, using fallback');
             return getBasicResponse(message, currentLang);
         }
+
+        console.log('Using Gemini API with key:', window.GEMINI_CONFIG.apiKey ? 'Present' : 'Missing');
 
         // Crear contexto sobre el portfolio
         const portfolioContext = getPortfolioContext(currentLang);
