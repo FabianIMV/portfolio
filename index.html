@@ -2118,9 +2118,23 @@ function detectLanguage(message) {
     return spanishScore > englishScore ? 'es' : 'en';
 }
 
+// Variable global para persistir el idioma de la conversación
+let conversationLanguage = null;
+
+// Función para reiniciar el idioma de la conversación (opcional)
+function resetConversationLanguage() {
+    conversationLanguage = null;
+}
+
 async function getAIResponse(message) {
-    // Detectar idioma del mensaje automáticamente
-    const detectedLang = detectLanguage(message);
+    // Detectar idioma del mensaje automáticamente solo si no tenemos uno establecido
+    let detectedLang;
+    if (conversationLanguage === null) {
+        detectedLang = detectLanguage(message);
+        conversationLanguage = detectedLang; // Persistir el idioma detectado
+    } else {
+        detectedLang = conversationLanguage; // Usar el idioma ya establecido
+    }
 
     try {
         // Verificar que tenemos la API key
@@ -2133,18 +2147,18 @@ async function getAIResponse(message) {
 
         // Preparar el prompt para Gemini
         const systemPrompt = detectedLang === 'es'
-            ? `Eres un asistente personal de Fabián Muñoz. Responde de manera amigable y conversacional sobre su experiencia, proyectos y habilidades. Usa emojis ocasionalmente. Mantén las respuestas MUY concisas (máximo 40 palabras). Para saludos simples, responde brevemente y pregunta en qué puedes ayudar. NO exageres su experiencia - es un desarrollador en crecimiento, no un experto senior.
+            ? `Eres un asistente personal de Fabián Muñoz. Responde de manera amigable y conversacional sobre su experiencia, proyectos y habilidades. Usa emojis ocasionalmente. Mantén las respuestas concisas (máximo 50 palabras). NO repitas saludos en cada respuesta. Enfócate en responder la pregunta específica. Para contacto, dirige a LinkedIn o formulario de contacto.
 
 Contexto del portfolio:
 ${portfolioContext}
 
-Responde siempre en español, incluso si la pregunta está en inglés.`
-            : `You are Fabián Muñoz's personal assistant. Respond in a friendly and conversational manner about his experience, projects, and skills. Use emojis occasionally. Keep responses VERY concise (max 40 words). For simple greetings, respond briefly and ask how you can help. DON'T exaggerate his experience - he's a growing developer, not a senior expert.
+Responde siempre en español, siendo directo y útil.`
+            : `You are Fabián Muñoz's personal assistant. Respond in a friendly and conversational manner about his experience, projects, and skills. Use emojis occasionally. Keep responses concise (max 50 words). DON'T repeat greetings in every response. Focus on answering the specific question. For contact, direct to LinkedIn or contact form.
 
 Portfolio context:
 ${portfolioContext}
 
-Always respond in English, even if the question is in Spanish.`;
+Always respond in English, being direct and helpful.`;
 
         // Llamar a Gemini API
         const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
@@ -2216,7 +2230,12 @@ PROYECTOS:
 - 🎵 YouTube Music Playlist Creator (40+ stars)
 - 🥊 NutriCombat - PWA con IA
 - 📊 Chile Dashboard en Grafana con datos oficiales
-- 💼 Proyectos web True Q y Ferremás`;
+- 💼 Proyectos web True Q y Ferremás
+
+CONTACTO:
+- 💼 LinkedIn: https://linkedin.com/in/fabianimv
+- 📧 Para contacto directo, usar el formulario de contacto del sitio
+- 🌐 Portfolio: https://fabianimv.github.io/portfolio
     } else {
         return `
 PROFESSIONAL PROFILE:
@@ -2241,7 +2260,12 @@ PROJECTS:
 - 🎵 YouTube Music Playlist Creator (40+ stars)
 - 🥊 NutriCombat - PWA with AI
 - 📊 Chile Dashboard in Grafana with official data
-- 💼 Web projects True Q and Ferremás`;
+- 💼 Web projects True Q y Ferremás
+
+CONTACT:
+- 💼 LinkedIn: https://linkedin.com/in/fabianimv
+- 📧 For direct contact, use the site's contact form
+- 🌐 Portfolio: https://fabianimv.github.io/portfolio
     }
 }
 
@@ -2259,8 +2283,8 @@ function getBasicResponse(message, currentLang) {
         'projects': 'Sus proyectos destacados incluyen: 🎵 YouTube Music Playlist Creator (40+ stars), 🥊 NutriCombat - PWA para atletas de combate con IA, 📊 Dashboard Chile en Grafana.',
         'habilidades': 'Maneja: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python.',
         'skills': 'Maneja: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python.',
-        'contacto': 'Contacto: 📧 fabianignaciomv@gmail.com, 💼 LinkedIn: linkedin.com/in/fabianimv, 🐱 GitHub: github.com/FabianIMV',
-        'contact': 'Contacto: 📧 fabianignaciomv@gmail.com, 💼 LinkedIn: linkedin.com/in/fabianimv',
+        'contacto': 'Contacto: 💼 LinkedIn: https://linkedin.com/in/fabianimv o usa el formulario de contacto del sitio 📧',
+        'contact': 'Contacto: 💼 LinkedIn: https://linkedin.com/in/fabianimv o usa el formulario de contacto del sitio 📧',
     };
 
     // Respuestas en inglés
@@ -2273,8 +2297,8 @@ function getBasicResponse(message, currentLang) {
         'projects': 'His featured projects include: 🎵 YouTube Music Playlist Creator (40+ stars), 🥊 NutriCombat - PWA for combat athletes with AI.',
         'habilidades': 'He handles: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python.',
         'skills': 'He handles: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🐍 Python.',
-        'contacto': 'Contact: 📧 fabianignaciomv@gmail.com, 💼 LinkedIn: linkedin.com/in/fabianimv, 🐱 GitHub: github.com/FabianIMV',
-        'contact': 'Contact: 📧 fabianignaciomv@gmail.com, 💼 LinkedIn: linkedin.com/in/fabianimv',
+        'contacto': 'Contact: 💼 LinkedIn: https://linkedin.com/in/fabianimv or use the site contact form 📧',
+        'contact': 'Contact: 💼 LinkedIn: https://linkedin.com/in/fabianimv or use the site contact form 📧',
     };
 
     // Seleccionar el conjunto de respuestas según el idioma
