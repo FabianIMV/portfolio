@@ -1937,8 +1937,10 @@
     initScrollProgress();
     initTiltEffect();
 
-    // Actualizar placeholder del input cuando cambie el idioma
-    updateChatPlaceholder();
+    // Esperar a que Alpine.js esté listo antes de actualizar el placeholder
+    setTimeout(() => {
+        updateChatPlaceholder();
+    }, 100);
 });
 
 let aiChatOpen = false;
@@ -1946,12 +1948,22 @@ let aiChatOpen = false;
 // Función para actualizar el placeholder según el idioma
 function updateChatPlaceholder() {
     const input = document.getElementById('aiChatInput');
-    const currentLang = document.querySelector('[x-data]').__x.$data.lang;
-    
+
     if (input) {
-        if (currentLang === 'es') {
-            input.placeholder = 'Escribe tu pregunta...';
-        } else {
+        try {
+            // Intentar obtener el idioma de Alpine.js
+            const alpineElement = document.querySelector('[x-data]');
+            const currentLang = alpineElement && alpineElement.__x && alpineElement.__x.$data
+                ? alpineElement.__x.$data.lang
+                : 'en'; // Default a inglés si Alpine no está listo
+
+            if (currentLang === 'es') {
+                input.placeholder = 'Escribe tu pregunta...';
+            } else {
+                input.placeholder = 'Type your question...';
+            }
+        } catch (error) {
+            // Si hay error, usar inglés por defecto
             input.placeholder = 'Type your question...';
         }
     }
@@ -1961,17 +1973,23 @@ function updateChatPlaceholder() {
 const langObserver = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
         if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
-            updateChatPlaceholder();
+            // Pequeño delay para asegurar que Alpine.js haya procesado el cambio
+            setTimeout(() => {
+                updateChatPlaceholder();
+            }, 50);
         }
     });
 });
 
 // Iniciar observación cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
-    const langElements = document.querySelectorAll('[x-show*="lang"]');
-    langElements.forEach(element => {
-        langObserver.observe(element, { attributes: true, attributeFilter: ['style'] });
-    });
+    // Esperar un poco más para que Alpine.js esté completamente inicializado
+    setTimeout(() => {
+        const langElements = document.querySelectorAll('[x-show*="lang"]');
+        langElements.forEach(element => {
+            langObserver.observe(element, { attributes: true, attributeFilter: ['style'] });
+        });
+    }, 200);
 });
 
 function toggleAIChat() {
