@@ -1927,6 +1927,14 @@
     </footer>
 
     <script>
+// Variable global para persistir el idioma de la conversación
+let conversationLanguage = null;
+
+// Función para reiniciar el idioma de la conversación (opcional)
+function resetConversationLanguage() {
+    conversationLanguage = null;
+}
+
    document.addEventListener('DOMContentLoaded', function () {
     AOS.init({
         duration: 800,
@@ -2116,14 +2124,6 @@ function detectLanguage(message) {
     }
 
     return spanishScore > englishScore ? 'es' : 'en';
-}
-
-// Variable global para persistir el idioma de la conversación
-let conversationLanguage = null;
-
-// Función para reiniciar el idioma de la conversación (opcional)
-function resetConversationLanguage() {
-    conversationLanguage = null;
 }
 
 async function getAIResponse(message) {
