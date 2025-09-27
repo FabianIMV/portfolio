@@ -2089,13 +2089,9 @@ async function getAIResponse(message) {
 
     try {
         // Verificar que tenemos la API key
-        console.log('GEMINI_CONFIG:', window.GEMINI_CONFIG);
         if (!window.GEMINI_CONFIG || !window.GEMINI_CONFIG.apiKey) {
-            console.log('No API key found, using fallback');
             return getBasicResponse(message, currentLang);
         }
-
-        console.log('Using Gemini API with key:', window.GEMINI_CONFIG.apiKey ? 'Present' : 'Missing');
 
         // Crear contexto sobre el portfolio
         const portfolioContext = getPortfolioContext(currentLang);
