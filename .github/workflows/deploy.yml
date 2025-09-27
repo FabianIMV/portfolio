@@ -1,5 +1,5 @@
 # .github/workflows/deploy.yml
-name: Build and Deploy with API Key
+name: Deploy Portfolio to GitHub Pages
 
 on:
   push:
@@ -12,6 +12,9 @@ permissions:
 
 jobs:
   build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
 
     steps:
@@ -25,9 +28,14 @@ jobs:
         # Crear el archivo de configuración con la API key
         echo "window.GEMINI_CONFIG = { apiKey: '$GEMINI_API_KEY' };" > config.js
 
-    - name: Deploy 🚀
-      uses: JamesIves/github-pages-deploy-action@v4
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
       with:
-        folder: .
-        branch: gh-pages
-        token: ${{ secrets.GITHUB_TOKEN }}
+        path: '.'
+
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
