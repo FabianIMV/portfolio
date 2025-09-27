@@ -2119,10 +2119,9 @@ ${portfolioContext}
 
 Always respond in English, even if the question is in Spanish.`;
 
-        // Llamar a Gemini API
-        // Probar diferentes endpoints
-        const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=' + window.GEMINI_CONFIG.apiKey;
-        console.log('Calling API URL:', apiUrl.replace(window.GEMINI_CONFIG.apiKey, 'HIDDEN_KEY'));
+        // Llamar a Gemini API usando el formato del curl que funciona
+        const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+        console.log('Calling API URL:', apiUrl);
 
         const requestBody = {
             contents: [{
@@ -2144,6 +2143,7 @@ Always respond in English, even if the question is in Spanish.`;
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'X-goog-api-key': window.GEMINI_CONFIG.apiKey
             },
             body: JSON.stringify(requestBody)
         });
