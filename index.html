@@ -2120,7 +2120,7 @@ ${portfolioContext}
 Always respond in English, even if the question is in Spanish.`;
 
         // Llamar a Gemini API
-        const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + window.GEMINI_CONFIG.apiKey, {
+        const response = await fetch('https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=' + window.GEMINI_CONFIG.apiKey, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
