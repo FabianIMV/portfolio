@@ -27,8 +27,8 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-    <!-- Gemini API Configuration (optional) -->
-    <script src="./config.js" onerror="console.log('config.js not found - using fallback mode')"></script>
+    <!-- Gemini API Configuration -->
+    <script src="./config.js"></script>
     <style>
         [x-cloak] {
             display: none !important;
@@ -2087,13 +2087,6 @@ function hideAITyping() {
 async function getAIResponse(message) {
     const currentLang = getCurrentLang();
 
-    // Mensaje especial para debug (temporal)
-    if (message.toLowerCase().includes('debug') || message.toLowerCase().includes('status')) {
-        const status = window.GEMINI_CONFIG
-            ? (window.GEMINI_CONFIG.apiKey ? 'API Key Present ✅' : 'API Key Missing ❌')
-            : 'Config Not Loaded ❌';
-        return `Debug Info: ${status}`;
-    }
 
     try {
         // Verificar que tenemos la API key
@@ -2119,9 +2112,8 @@ ${portfolioContext}
 
 Always respond in English, even if the question is in Spanish.`;
 
-        // Llamar a Gemini API usando el formato del curl que funciona
+        // Llamar a Gemini API
         const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
-        console.log('Calling API URL:', apiUrl);
 
         const requestBody = {
             contents: [{
@@ -2137,8 +2129,6 @@ Always respond in English, even if the question is in Spanish.`;
             }
         };
 
-        console.log('Request body:', requestBody);
-
         const response = await fetch(apiUrl, {
             method: 'POST',
             headers: {
@@ -2148,13 +2138,8 @@ Always respond in English, even if the question is in Spanish.`;
             body: JSON.stringify(requestBody)
         });
 
-        console.log('Response status:', response.status);
-        console.log('Response headers:', [...response.headers.entries()]);
-
         if (!response.ok) {
-            const errorText = await response.text();
-            console.log('Error response body:', errorText);
-            throw new Error(`HTTP error! status: ${response.status}, body: ${errorText}`);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
@@ -2166,7 +2151,6 @@ Always respond in English, even if the question is in Spanish.`;
         }
 
     } catch (error) {
-        console.error('Error calling Gemini API:', error);
         // Fallback a respuestas básicas si falla la API
         return getBasicResponse(message, currentLang);
     }
