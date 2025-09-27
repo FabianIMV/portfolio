@@ -27,8 +27,8 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-    <!-- Gemini API Configuration -->
-    <script src="./config.js"></script>
+    <!-- Gemini API Configuration (optional) -->
+    <script src="./config.js" onerror="console.log('config.js not found - using fallback mode')"></script>
     <style>
         [x-cloak] {
             display: none !important;
@@ -2086,6 +2086,14 @@ function hideAITyping() {
 
 async function getAIResponse(message) {
     const currentLang = getCurrentLang();
+
+    // Mensaje especial para debug (temporal)
+    if (message.toLowerCase().includes('debug') || message.toLowerCase().includes('status')) {
+        const status = window.GEMINI_CONFIG
+            ? (window.GEMINI_CONFIG.apiKey ? 'API Key Present ✅' : 'API Key Missing ❌')
+            : 'Config Not Loaded ❌';
+        return `Debug Info: ${status}`;
+    }
 
     try {
         // Verificar que tenemos la API key
