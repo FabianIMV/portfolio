@@ -225,6 +225,245 @@
             background: #7C3AED;
         }
 
+        /* Modern enhancements */
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap');
+
+        * {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .mono-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Enhanced particle system */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(124, 58, 237, 0.6);
+            border-radius: 50%;
+            animation: float-particle 20s infinite ease-in-out;
+        }
+
+        @keyframes float-particle {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Magnetic button effect */
+        .magnetic-btn {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .magnetic-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Glitch text effect */
+        .glitch {
+            position: relative;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            animation: glitch-1 0.5s infinite;
+            color: #ff0040;
+            z-index: -1;
+        }
+
+        .glitch::after {
+            animation: glitch-2 0.5s infinite;
+            color: #00ff9f;
+            z-index: -2;
+        }
+
+        @keyframes glitch-1 {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+
+        @keyframes glitch-2 {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(2px, -2px); }
+            40% { transform: translate(2px, 2px); }
+            60% { transform: translate(-2px, -2px); }
+            80% { transform: translate(-2px, 2px); }
+        }
+
+        /* Enhanced glassmorphism */
+        .glass-morphism-v2 {
+            background: rgba(15, 15, 35, 0.25);
+            backdrop-filter: blur(25px) saturate(1.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow:
+                0 8px 32px 0 rgba(31, 38, 135, 0.37),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        /* Morphing shapes */
+        .morphing-shape {
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation: morph 8s ease-in-out infinite;
+        }
+
+        @keyframes morph {
+            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+        }
+
+        /* Neon glow effects */
+        .neon-border {
+            border: 2px solid #7c3aed;
+            box-shadow:
+                0 0 5px #7c3aed,
+                0 0 10px #7c3aed,
+                0 0 15px #7c3aed,
+                0 0 20px #7c3aed,
+                inset 0 0 5px #7c3aed;
+            animation: neon-pulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes neon-pulse {
+            from {
+                box-shadow:
+                    0 0 5px #7c3aed,
+                    0 0 10px #7c3aed,
+                    0 0 15px #7c3aed,
+                    0 0 20px #7c3aed,
+                    inset 0 0 5px #7c3aed;
+            }
+            to {
+                box-shadow:
+                    0 0 2px #7c3aed,
+                    0 0 5px #7c3aed,
+                    0 0 8px #7c3aed,
+                    0 0 12px #7c3aed,
+                    inset 0 0 2px #7c3aed;
+            }
+        }
+
+        /* Floating action button */
+        .fab {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .fab:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 12px 32px rgba(102, 126, 234, 0.6);
+        }
+
+        /* Progress scroll indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1001;
+        }
+
+        .scroll-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #7c3aed 100%);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        /* Enhanced cards with tilt effect */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: all 0.1s ease;
+        }
+
+        /* Typewriter effect */
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid #7c3aed;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation:
+                typing 3.5s steps(40, end),
+                blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #7c3aed; }
+        }
+
+        /* Advanced hover states */
+        .interactive-element {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interactive-element::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .interactive-element:hover::before {
+            left: 100%;
+        }
+
         .honest-badge {
             background: linear-gradient(45deg, #059669, #047857);
             color: white;
@@ -271,6 +510,19 @@
 </head>
 
 <body class="bg-gray-900 text-white custom-scrollbar" x-data="{ lang: 'en', mobileMenu: false }" x-cloak>
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress">
+        <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+    </div>
+
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Floating Action Button -->
+    <div class="fab" onclick="scrollToTop()">
+        <i class="fas fa-rocket text-white text-xl"></i>
+    </div>
+
     <!-- Navbar -->
     <nav class="fixed w-full glass-morphism backdrop-blur-md z-40 border-b border-purple-500/20">
         <div class="container mx-auto px-4 sm:px-6 py-4">
@@ -401,11 +653,11 @@
                     <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold">
                         <span x-show="lang === 'es'">¡Hola! Soy</span>
                         <span x-show="lang === 'en'">Hi! I'm</span>
-                        <div class="mt-2 gradient-text">Fabián</div>
+                        <div class="mt-2 gradient-text glitch" data-text="Fabián">Fabián</div>
                     </h1>
-                    <p class="text-xl md:text-2xl text-gray-300">
-                        <span x-show="lang === 'es'">Site Reliability Engineer</span>
-                        <span x-show="lang === 'en'">Site Reliability Engineer</span>
+                    <p class="text-xl md:text-2xl text-gray-300 mono-font">
+                        <span x-show="lang === 'es'" class="typewriter">Site Reliability Engineer</span>
+                        <span x-show="lang === 'en'" class="typewriter">Site Reliability Engineer</span>
                     </p>
                     <p class="text-lg text-gray-400">
                         <span x-show="lang === 'es'">Desarrollando expertise en golden signals monitoring, gestión
@@ -416,15 +668,15 @@
                     </p>
                     <div class="flex flex-wrap justify-center sm:justify-start gap-4 pt-4">
                         <a href="https://linkedin.com/in/fabianimv" target="_blank"
-                            class="bg-purple-600/80 hover:bg-purple-500 backdrop-blur-sm px-4 py-3 rounded-lg transition-all duration-300 flex items-center shadow-lg shadow-purple-900/20">
+                            class="magnetic-btn interactive-element glass-morphism-v2 hover:bg-purple-500/20 px-6 py-3 rounded-lg transition-all duration-300 flex items-center shadow-lg shadow-purple-900/20 neon-border">
                             <i class="fab fa-linkedin mr-2"></i>LinkedIn
                         </a>
                         <a href="https://github.com/FabianIMV/" target="_blank"
-                            class="bg-gray-800/80 hover:bg-gray-700 backdrop-blur-sm px-4 py-3 rounded-lg border border-purple-500/30 hover:border-purple-500/60 transition-all duration-300 flex items-center shadow-lg shadow-purple-900/10">
+                            class="magnetic-btn interactive-element glass-morphism-v2 hover:bg-gray-700/20 px-6 py-3 rounded-lg border border-purple-500/30 hover:border-purple-500/60 transition-all duration-300 flex items-center shadow-lg shadow-purple-900/10">
                             <i class="fab fa-github mr-2"></i>GitHub
                         </a>
                         <a href="mailto:fabianignaciomv@gmail.com"
-                            class="bg-gray-800/80 hover:bg-gray-700 backdrop-blur-sm px-4 py-3 rounded-lg border border-purple-500/30 hover:border-purple-500/60 transition-all duration-300 flex items-center shadow-lg shadow-purple-900/10">
+                            class="magnetic-btn interactive-element glass-morphism-v2 hover:bg-gray-700/20 px-6 py-3 rounded-lg border border-purple-500/30 hover:border-purple-500/60 transition-all duration-300 flex items-center shadow-lg shadow-purple-900/10">
                             <i class="fas fa-envelope mr-2"></i>Email
                         </a>
                     </div>
@@ -493,12 +745,14 @@
                         </div>
                         <p class="text-sm text-blue-200">
                             <span x-show="lang === 'es'">
-                                Con 2.9 años de experiencia, actualmente liderando mi primer proyecto crítico. Mi
-                                enfoque está en el crecimiento continuo y el aprendizaje constante en el ecosistema SRE.
+                                Especializado en observabilidad y monitoreo de sistemas críticos, con enfoque en
+                                ingeniería de confiabilidad y automatización. Apasionado por el crecimiento continuo
+                                y la innovación en arquitecturas cloud-native.
                             </span>
                             <span x-show="lang === 'en'">
-                                With 2.9 years of experience, currently leading my first critical project. My focus is
-                                on continuous growth and constant learning in the SRE ecosystem.
+                                Specialized in observability and monitoring of critical systems, with focus on
+                                reliability engineering and automation. Passionate about continuous growth
+                                and innovation in cloud-native architectures.
                             </span>
                         </p>
                     </div>
@@ -988,7 +1242,7 @@
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Proyecto GitHub: YouTube Music Playlist Creator -->
-                <div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="800">
+                <div class="project-card tilt-card interactive-element p-6 rounded-xl" data-aos="fade-up" data-aos-delay="800">
                     <div
                         class="h-48 bg-gradient-to-br from-red-900 to-purple-900 rounded-lg mb-4 flex items-center justify-center">
                         <i class="fab fa-youtube text-6xl text-red-300"></i>
@@ -1027,7 +1281,7 @@
                 </div>
 
                 <!-- Proyecto: NutriCombat App -->
-                <div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="850">
+                <div class="project-card tilt-card interactive-element p-6 rounded-xl" data-aos="fade-up" data-aos-delay="850">
                     <div class="h-48 bg-gradient-to-br from-green-900 to-blue-900 rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-br from-green-800/80 to-blue-800/80"></div>
                         <div class="relative z-10 text-center">
@@ -1069,7 +1323,7 @@
                 </div>
 
                 <!-- Proyecto: Dashboard Chile Grafana -->
-                <div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="900">
+                <div class="project-card tilt-card interactive-element p-6 rounded-xl" data-aos="fade-up" data-aos-delay="900">
                     <div
                         class="h-48 bg-gradient-to-br from-orange-900 to-red-900 rounded-lg mb-4 flex items-center justify-center">
                         <i class="fas fa-chart-line text-6xl text-orange-300"></i>
@@ -1495,6 +1749,11 @@
         offset: 100
     });
 
+    // Initialize new features
+    initParticles();
+    initScrollProgress();
+    initTiltEffect();
+
     // Actualizar placeholder del input cuando cambie el idioma
     updateChatPlaceholder();
 });
@@ -1652,8 +1911,8 @@ async function getAIResponse(message) {
     const responsesEN = {
         'hola': 'Hello! 👋 How can I help you learn more about Fabián?',
         'hello': 'Hello! 👋 How can I help you learn more about Fabián?',
-        'experiencia': 'Fabián has 2.9 years of experience as SRE at Innfinit, specialized in observability and monitoring of critical systems. Currently leading the CN/Delta observability architecture project. 📊',
-        'experience': 'Fabián has 2.9 years of experience as SRE at Innfinit, specialized in observability and monitoring of critical systems. Currently leading the CN/Delta observability architecture project. 📊',
+        'experiencia': 'Fabián es especialista en SRE en Innfinit, enfocado en observabilidad y monitoreo de sistemas críticos. Lidera proyectos de arquitectura de observabilidad CN/Delta y optimización de confiabilidad. 📊',
+        'experience': 'Fabián is an SRE specialist at Innfinit, focused on observability and monitoring of critical systems. Leads CN/Delta observability architecture projects and reliability optimization. 📊',
         'proyectos': 'His featured projects include: 🎵 YouTube Music Playlist Creator (40+ GitHub stars), 🥊 NutriCombat - PWA for combat athletes with AI (Gemini), 📊 Chile Dashboard in Grafana with real-time official data, and various web projects like True Q and Ferremás.',
         'projects': 'His featured projects include: 🎵 YouTube Music Playlist Creator (40+ GitHub stars), 🥊 NutriCombat - PWA for combat athletes with AI, 📊 Chile Dashboard in Grafana with real-time official data, and various web projects like True Q and Ferremás.',
         'habilidades': 'He handles technologies like: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python, and CI/CD tools like Jenkins.',
@@ -1709,9 +1968,185 @@ async function getAIResponse(message) {
         '💡 Are you interested in something specific about Fabián\'s SRE experience? I can tell you about his projects, technical skills or work experience.',
         '🔍 I can help you with information about: experience, projects, skills, contact, education, or his SRE specialties.'
     ];
-    
+
     return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
 }
+
+// ===== NEW INTERACTIVE FEATURES =====
+
+// Scroll to top function
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// Initialize floating particles
+function initParticles() {
+    const particlesContainer = document.getElementById('particles');
+    const particleCount = 15;
+
+    for (let i = 0; i < particleCount; i++) {
+        createParticle(particlesContainer);
+    }
+
+    // Create new particles periodically
+    setInterval(() => {
+        if (particlesContainer.children.length < particleCount) {
+            createParticle(particlesContainer);
+        }
+    }, 3000);
+}
+
+function createParticle(container) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+
+    // Random size and position
+    const size = Math.random() * 4 + 2;
+    particle.style.width = size + 'px';
+    particle.style.height = size + 'px';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+    particle.style.animationDelay = Math.random() * 5 + 's';
+
+    container.appendChild(particle);
+
+    // Remove particle after animation
+    setTimeout(() => {
+        if (particle.parentNode) {
+            particle.parentNode.removeChild(particle);
+        }
+    }, 25000);
+}
+
+// Initialize scroll progress bar
+function initScrollProgress() {
+    const progressBar = document.getElementById('scrollProgressBar');
+
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+
+        progressBar.style.width = Math.min(scrollPercent, 100) + '%';
+    });
+}
+
+// Initialize 3D tilt effect for cards
+function initTiltEffect() {
+    const tiltCards = document.querySelectorAll('.tilt-card');
+
+    tiltCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        });
+    });
+}
+
+// Enhanced magnetic button effect
+document.querySelectorAll('.magnetic-btn').forEach(button => {
+    button.addEventListener('mousemove', (e) => {
+        const rect = button.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        const distance = Math.sqrt(x * x + y * y);
+        const maxDistance = 100;
+
+        if (distance < maxDistance) {
+            const force = (maxDistance - distance) / maxDistance;
+            const translateX = x * force * 0.3;
+            const translateY = y * force * 0.3;
+
+            button.style.transform = `translate(${translateX}px, ${translateY}px) scale(1.05)`;
+        }
+    });
+
+    button.addEventListener('mouseleave', () => {
+        button.style.transform = 'translate(0px, 0px) scale(1)';
+    });
+});
+
+// Dynamic background effects
+function createMorphingShape() {
+    const shape = document.createElement('div');
+    shape.className = 'morphing-shape fixed pointer-events-none opacity-10';
+    shape.style.width = Math.random() * 200 + 100 + 'px';
+    shape.style.height = Math.random() * 200 + 100 + 'px';
+    shape.style.left = Math.random() * 100 + '%';
+    shape.style.top = Math.random() * 100 + '%';
+    shape.style.zIndex = '0';
+
+    document.body.appendChild(shape);
+
+    setTimeout(() => {
+        if (shape.parentNode) {
+            shape.remove();
+        }
+    }, 15000);
+}
+
+// Create morphing shapes periodically
+setInterval(createMorphingShape, 8000);
+
+// Enhanced glitch effect activation
+document.querySelectorAll('.glitch').forEach(element => {
+    let glitchTimeout;
+
+    element.addEventListener('mouseenter', () => {
+        element.style.animation = 'none';
+        element.offsetHeight; // Trigger reflow
+        element.style.animation = null;
+
+        // Activate glitch effect randomly
+        if (Math.random() > 0.7) {
+            element.classList.add('glitch-active');
+            clearTimeout(glitchTimeout);
+            glitchTimeout = setTimeout(() => {
+                element.classList.remove('glitch-active');
+            }, 1000);
+        }
+    });
+});
+
+// Add smooth reveal animations to elements on scroll
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// Observe all project cards and sections for animation
+document.querySelectorAll('.project-card, .timeline-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+});
     </script>
 </body>
 
