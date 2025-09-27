@@ -2089,12 +2089,12 @@ function detectLanguage(message) {
     const lowerMessage = message.toLowerCase();
 
     // Palabras clave en español
-    const spanishWords = ['hola', 'que', 'qué', 'como', 'cómo', 'donde', 'dónde', 'cuando', 'cuándo',
-                          'por', 'para', 'con', 'sin', 'sobre', 'cuéntame', 'dime', 'háblame',
+    const spanishWords = ['hola', 'que', 'qué', 'quien', 'quién', 'como', 'cómo', 'donde', 'dónde', 'cuando', 'cuándo',
+                          'por', 'para', 'con', 'sin', 'sobre', 'cuéntame', 'dime', 'háblame', 'es', 'está',
                           'tienes', 'eres', 'trabajas', 'proyectos', 'experiencia', 'tecnologías', 'estudias'];
 
     // Palabras clave en inglés
-    const englishWords = ['hello', 'hi', 'what', 'how', 'where', 'when', 'tell', 'about',
+    const englishWords = ['hello', 'hi', 'what', 'who', 'how', 'where', 'when', 'tell', 'about', 'is', 'are',
                           'you', 'your', 'work', 'projects', 'experience', 'technologies', 'study'];
 
     let spanishScore = 0;
