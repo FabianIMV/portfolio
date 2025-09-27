@@ -2083,51 +2083,151 @@ function hideAITyping() {
 }
 
 async function getAIResponse(message) {
-    const lowerMessage = message.toLowerCase();
     const currentLang = getCurrentLang();
-    
+
+    try {
+        // Verificar que tenemos la API key
+        if (!window.GEMINI_CONFIG || !window.GEMINI_CONFIG.apiKey) {
+            return getBasicResponse(message, currentLang);
+        }
+
+        // Crear contexto sobre el portfolio
+        const portfolioContext = getPortfolioContext(currentLang);
+
+        // Preparar el prompt para Gemini
+        const systemPrompt = currentLang === 'es'
+            ? `Eres un asistente personal de Fabián Muñoz. Responde de manera amigable y profesional sobre su experiencia, proyectos y habilidades. Usa emojis ocasionalmente. Mantén las respuestas concisas (máximo 100 palabras).
+
+Contexto del portfolio:
+${portfolioContext}
+
+Responde siempre en español, incluso si la pregunta está en inglés.`
+            : `You are Fabián Muñoz's personal assistant. Respond in a friendly and professional manner about his experience, projects, and skills. Use emojis occasionally. Keep responses concise (max 100 words).
+
+Portfolio context:
+${portfolioContext}
+
+Always respond in English, even if the question is in Spanish.`;
+
+        // Llamar a Gemini API
+        const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + window.GEMINI_CONFIG.apiKey, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                contents: [{
+                    parts: [{
+                        text: `${systemPrompt}\n\nUsuario: ${message}`
+                    }]
+                }],
+                generationConfig: {
+                    temperature: 0.7,
+                    maxOutputTokens: 150,
+                    topP: 0.8,
+                    topK: 40
+                }
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+            return data.candidates[0].content.parts[0].text;
+        } else {
+            throw new Error('No response content received');
+        }
+
+    } catch (error) {
+        console.error('Error calling Gemini API:', error);
+        // Fallback a respuestas básicas si falla la API
+        return getBasicResponse(message, currentLang);
+    }
+}
+
+// Función para obtener contexto del portfolio
+function getPortfolioContext(lang) {
+    if (lang === 'es') {
+        return `
+EXPERIENCIA:
+- Site Reliability Engineer en Innfinit
+- Especialista en observabilidad y monitoreo de sistemas críticos
+- Líder de proyectos de arquitectura de observabilidad CN/Delta
+- Enfoque en golden signals, SLI/SLO y optimización de confiabilidad
+
+TECNOLOGÍAS:
+- ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform
+- 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda
+- 🐍 Python, Jenkins, CI/CD
+
+PROYECTOS DESTACADOS:
+- 🎵 YouTube Music Playlist Creator (40+ stars en GitHub)
+- 🥊 NutriCombat - PWA para atletas de combate con IA
+- 📊 Chile Dashboard en Grafana con datos oficiales en tiempo real
+- 💼 Proyectos web como True Q y Ferremás
+
+EDUCACIÓN:
+- Estudiante de Ingeniería en Computación (4to año)
+- Trabajando en Innfinit como SRE desde noviembre 2022`;
+    } else {
+        return `
+EXPERIENCE:
+- Site Reliability Engineer at Innfinit
+- Specialist in observability and monitoring of critical systems
+- Leader of CN/Delta observability architecture projects
+- Focus on golden signals, SLI/SLO and reliability optimization
+
+TECHNOLOGIES:
+- ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform
+- 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda
+- 🐍 Python, Jenkins, CI/CD
+
+FEATURED PROJECTS:
+- 🎵 YouTube Music Playlist Creator (40+ GitHub stars)
+- 🥊 NutriCombat - PWA for combat athletes with AI
+- 📊 Chile Dashboard in Grafana with real-time official data
+- 💼 Web projects like True Q and Ferremás
+
+EDUCATION:
+- Computer Engineering student (4th year)
+- Working at Innfinit as SRE since November 2022`;
+    }
+}
+
+// Respuestas básicas de fallback
+function getBasicResponse(message, currentLang) {
+    const lowerMessage = message.toLowerCase();
+
     // Respuestas en español
     const responsesES = {
         'hola': '¡Hola! 👋 ¿En qué puedo ayudarte a conocer más sobre Fabián?',
         'hello': '¡Hola! 👋 ¿En qué puedo ayudarte a conocer más sobre Fabián?',
-        'experiencia': 'Fabián tiene 2.9 años de experiencia como SRE en Innfinit, especializado en observabilidad y monitoreo de sistemas críticos. Actualmente lidera el proyecto CN/Delta de arquitectura de observabilidad. 📊',
-        'experience': 'Fabián tiene 2.9 años de experiencia como SRE en Innfinit, especializado en observabilidad y monitoreo de sistemas críticos. 📊',
-        'proyectos': 'Sus proyectos destacados incluyen: 🎵 YouTube Music Playlist Creator (40+ stars en GitHub), 🥊 NutriCombat - PWA para atletas de combate con IA (Gemini), 📊 Dashboard Chile en Grafana con datos oficiales en tiempo real, y varios proyectos web como True Q y Ferremás.',
-        'projects': 'Sus proyectos destacados incluyen: 🎵 YouTube Music Playlist Creator (40+ stars), 🥊 NutriCombat - PWA para atletas de combate con IA, 📊 Dashboard Chile en Grafana, y varios proyectos web.',
-        'habilidades': 'Maneja tecnologías como: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python, y herramientas de CI/CD como Jenkins.',
+        'experiencia': 'Fabián es especialista en SRE en Innfinit, enfocado en observabilidad y monitoreo de sistemas críticos. Lidera proyectos de arquitectura de observabilidad CN/Delta y optimización de confiabilidad. 📊',
+        'experience': 'Fabián es especialista en SRE en Innfinit, enfocado en observabilidad y monitoreo de sistemas críticos. 📊',
+        'proyectos': 'Sus proyectos destacados incluyen: 🎵 YouTube Music Playlist Creator (40+ stars), 🥊 NutriCombat - PWA para atletas de combate con IA, 📊 Dashboard Chile en Grafana, y varios proyectos web.',
+        'projects': 'Sus proyectos destacados incluyen: 🎵 YouTube Music Playlist Creator (40+ stars), 🥊 NutriCombat - PWA para atletas de combate con IA, 📊 Dashboard Chile en Grafana.',
+        'habilidades': 'Maneja: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python.',
         'skills': 'Maneja: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python.',
-        'contacto': 'Puedes contactar a Fabián en: 📧 fabianignaciomv@gmail.com, 💼 LinkedIn: linkedin.com/in/fabianimv, o 🐱 GitHub: github.com/FabianIMV',
+        'contacto': 'Contacto: 📧 fabianignaciomv@gmail.com, 💼 LinkedIn: linkedin.com/in/fabianimv, 🐱 GitHub: github.com/FabianIMV',
         'contact': 'Contacto: 📧 fabianignaciomv@gmail.com, 💼 LinkedIn: linkedin.com/in/fabianimv',
-        'educacion': 'Está finalizando Ingeniería en Informática (4to año) y trabaja en Innfinit como SRE desde noviembre 2022. 🎓',
-        'education': 'Está finalizando Ingeniería en Informática (4to año) y trabaja en Innfinit como SRE desde noviembre 2022. 🎓',
-        'sre': 'Como SRE, Fabián se especializa en: 🎯 Golden signals monitoring (latencia, tráfico, errores, saturación), 📋 Gestión SLI/SLO, 🔍 Análisis de incidentes con BigPanda, y ⚡ Optimización de MTTR.',
-        'monitoring': 'Se especializa en monitoreo con Grafana, Prometheus, BigPanda para correlación de incidentes, y está implementando golden signals en infraestructuras empresariales críticas. 📊',
-        'aws': 'Tiene experiencia sólida con AWS, incluyendo servicios como RDS, S3, y implementación de monitoreo para infraestructuras cloud empresariales. ☁️',
-        'kubernetes': 'Actualmente configura monitoreo para entornos Kubernetes usando Prometheus Operator en entornos de test/lab para el proyecto CN/Delta. ⚓',
-        'github': 'Su proyecto más popular en GitHub es el YouTube Music Playlist Creator con 40+ estrellas. También puedes ver sus otros proyectos en github.com/FabianIMV 🌟',
-        'grafana': 'Experto en Grafana Cloud, desarrollando dashboards para componentes como Kubernetes, RabbitMQ, Redis, AWS RDS y S3. También creó un dashboard público con datos oficiales de Chile. 📈'
     };
 
     // Respuestas en inglés
     const responsesEN = {
         'hola': 'Hello! 👋 How can I help you learn more about Fabián?',
         'hello': 'Hello! 👋 How can I help you learn more about Fabián?',
-        'experiencia': 'Fabián es especialista en SRE en Innfinit, enfocado en observabilidad y monitoreo de sistemas críticos. Lidera proyectos de arquitectura de observabilidad CN/Delta y optimización de confiabilidad. 📊',
-        'experience': 'Fabián is an SRE specialist at Innfinit, focused on observability and monitoring of critical systems. Leads CN/Delta observability architecture projects and reliability optimization. 📊',
-        'proyectos': 'His featured projects include: 🎵 YouTube Music Playlist Creator (40+ GitHub stars), 🥊 NutriCombat - PWA for combat athletes with AI (Gemini), 📊 Chile Dashboard in Grafana with real-time official data, and various web projects like True Q and Ferremás.',
-        'projects': 'His featured projects include: 🎵 YouTube Music Playlist Creator (40+ GitHub stars), 🥊 NutriCombat - PWA for combat athletes with AI, 📊 Chile Dashboard in Grafana with real-time official data, and various web projects like True Q and Ferremás.',
-        'habilidades': 'He handles technologies like: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python, and CI/CD tools like Jenkins.',
-        'skills': 'He handles technologies like: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python, and CI/CD tools like Jenkins.',
-        'contacto': 'You can contact Fabián at: 📧 fabianignaciomv@gmail.com, 💼 LinkedIn: linkedin.com/in/fabianimv, or 🐱 GitHub: github.com/FabianIMV',
-        'contact': 'You can contact Fabián at: 📧 fabianignaciomv@gmail.com, 💼 LinkedIn: linkedin.com/in/fabianimv, or 🐱 GitHub: github.com/FabianIMV',
-        'educacion': 'He\'s completing Computer Engineering (4th year) and has been working at Innfinit as SRE since November 2022. 🎓',
-        'education': 'He\'s completing Computer Engineering (4th year) and has been working at Innfinit as SRE since November 2022. 🎓',
-        'sre': 'As SRE, Fabián specializes in: 🎯 Golden signals monitoring (latency, traffic, errors, saturation), 📋 SLI/SLO management, 🔍 Incident analysis with BigPanda, and ⚡ MTTR optimization.',
-        'monitoring': 'He specializes in monitoring with Grafana, Prometheus, BigPanda for incident correlation, and is implementing golden signals in critical enterprise infrastructures. 📊',
-        'aws': 'He has solid experience with AWS, including services like RDS, S3, and implementing monitoring for enterprise cloud infrastructures. ☁️',
-        'kubernetes': 'Currently configuring monitoring for Kubernetes environments using Prometheus Operator in test/lab environments for the CN/Delta project. ⚓',
-        'github': 'His most popular GitHub project is the YouTube Music Playlist Creator with 40+ stars. You can also see his other projects at github.com/FabianIMV 🌟',
-        'grafana': 'Expert in Grafana Cloud, developing dashboards for components like Kubernetes, RabbitMQ, Redis, AWS RDS and S3. Also created a public dashboard with official Chilean data. 📈'
+        'experiencia': 'Fabián is an SRE specialist at Innfinit, focused on observability and monitoring of critical systems. 📊',
+        'experience': 'Fabián is an SRE specialist at Innfinit, focused on observability and monitoring of critical systems. 📊',
+        'proyectos': 'His featured projects include: 🎵 YouTube Music Playlist Creator (40+ stars), 🥊 NutriCombat - PWA for combat athletes with AI, 📊 Chile Dashboard.',
+        'projects': 'His featured projects include: 🎵 YouTube Music Playlist Creator (40+ stars), 🥊 NutriCombat - PWA for combat athletes with AI.',
+        'habilidades': 'He handles: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python.',
+        'skills': 'He handles: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🐍 Python.',
+        'contacto': 'Contact: 📧 fabianignaciomv@gmail.com, 💼 LinkedIn: linkedin.com/in/fabianimv, 🐱 GitHub: github.com/FabianIMV',
+        'contact': 'Contact: 📧 fabianignaciomv@gmail.com, 💼 LinkedIn: linkedin.com/in/fabianimv',
     };
 
     // Seleccionar el conjunto de respuestas según el idioma
@@ -2138,25 +2238,6 @@ async function getAIResponse(message) {
         if (lowerMessage.includes(key)) {
             return response;
         }
-    }
-
-    // Respuestas para preguntas comunes según idioma
-    if (lowerMessage.includes('años') || lowerMessage.includes('edad') || lowerMessage.includes('years') || lowerMessage.includes('age')) {
-        return currentLang === 'es' 
-            ? 'Fabián tiene 2.9 años de experiencia profesional en SRE. Está finalizando su 4to año de Ingeniería en Informática. 🎯'
-            : 'Fabián has 2.9 years of professional SRE experience. He\'s completing his 4th year of Computer Engineering. 🎯';
-    }
-
-    if (lowerMessage.includes('innfinit')) {
-        return currentLang === 'es'
-            ? 'Innfinit es donde Fabián trabaja actualmente como SRE desde noviembre 2022. Ahí lidera proyectos de observabilidad y monitoreo para infraestructuras empresariales críticas. 🏢'
-            : 'Innfinit is where Fabián currently works as SRE since November 2022. There he leads observability and monitoring projects for critical enterprise infrastructures. 🏢';
-    }
-
-    if (lowerMessage.includes('trabajo') || lowerMessage.includes('empleo') || lowerMessage.includes('work') || lowerMessage.includes('job')) {
-        return currentLang === 'es'
-            ? 'Fabián está empleado actualmente en Innfinit como SRE, pero está abierto a nuevas oportunidades que le permitan crecer en el ecosistema SRE. 💼'
-            : 'Fabián is currently employed at Innfinit as SRE, but is open to new opportunities that allow him to grow in the SRE ecosystem. 💼';
     }
 
     // Respuestas por defecto según idioma
