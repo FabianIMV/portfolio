@@ -2102,45 +2102,62 @@ function hideAITyping() {
     }
 }
 
-// Función para detectar idioma del mensaje
-function detectLanguage(message) {
-    const lowerMessage = message.toLowerCase();
+// Función para detectar idioma del mensaje usando IA
+async function detectLanguage(message) {
+    try {
+        // Si no hay API key, usar detección básica
+        if (!window.GEMINI_CONFIG || !window.GEMINI_CONFIG.apiKey) {
+            return getCurrentLang();
+        }
 
-    // Palabras clave en español
-    const spanishWords = ['hola', 'que', 'qué', 'quien', 'quién', 'como', 'cómo', 'donde', 'dónde', 'cuando', 'cuándo',
-                          'por', 'para', 'con', 'sin', 'sobre', 'cuéntame', 'dime', 'háblame', 'es', 'está',
-                          'tienes', 'eres', 'trabajas', 'proyectos', 'experiencia', 'tecnologías', 'estudias'];
+        const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
 
-    // Palabras clave en inglés
-    const englishWords = ['hello', 'hi', 'what', 'who', 'how', 'where', 'when', 'tell', 'about', 'is', 'are',
-                          'you', 'your', 'work', 'projects', 'experience', 'technologies', 'study'];
+        const requestBody = {
+            contents: [{
+                parts: [{
+                    text: `Detect the language of this message and respond ONLY with "es" for Spanish or "en" for English. Message: "${message}"`
+                }]
+            }]
+        };
 
-    let spanishScore = 0;
-    let englishScore = 0;
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-goog-api-key': window.GEMINI_CONFIG.apiKey
+            },
+            body: JSON.stringify(requestBody)
+        });
 
-    // Contar palabras en español
-    spanishWords.forEach(word => {
-        if (lowerMessage.includes(word)) spanishScore++;
-    });
-
-    // Contar palabras en inglés
-    englishWords.forEach(word => {
-        if (lowerMessage.includes(word)) englishScore++;
-    });
-
-    // Si hay empate o no se detecta idioma, usar la configuración del sitio
-    if (spanishScore === englishScore) {
-        return getCurrentLang();
+        if (response.ok) {
+            const data = await response.json();
+            const detectedLang = data.candidates[0].content.parts[0].text.trim().toLowerCase();
+            return detectedLang === 'es' ? 'es' : 'en';
+        }
+    } catch (error) {
+        console.log('Language detection fallback');
     }
 
-    return spanishScore > englishScore ? 'es' : 'en';
+    // Fallback: usar configuración del sitio
+    return getCurrentLang();
 }
 
 async function getAIResponse(message) {
+    // Verificar si el usuario quiere cambiar de idioma
+    const lowerMessage = message.toLowerCase();
+    if (lowerMessage.includes('habla español') || lowerMessage.includes('speak spanish') || lowerMessage.includes('en español')) {
+        conversationLanguage = 'es';
+        return '¡Perfecto! Ahora te responderé en español. ¿En qué puedo ayudarte? 😊';
+    }
+    if (lowerMessage.includes('speak english') || lowerMessage.includes('habla inglés') || lowerMessage.includes('in english')) {
+        conversationLanguage = 'en';
+        return 'Perfect! Now I\'ll respond in English. How can I help you? 😊';
+    }
+
     // Detectar idioma del mensaje automáticamente solo si no tenemos uno establecido
     let detectedLang;
     if (conversationLanguage === null) {
-        detectedLang = detectLanguage(message);
+        detectedLang = await detectLanguage(message);
         conversationLanguage = detectedLang; // Persistir el idioma detectado
     } else {
         detectedLang = conversationLanguage; // Usar el idioma ya establecido
@@ -2171,7 +2188,7 @@ ${portfolioContext}
 Always respond in English, being direct and helpful.`;
 
         // Llamar a Gemini API
-        const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+        const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
 
         const requestBody = {
             contents: [{
@@ -2181,9 +2198,7 @@ Always respond in English, being direct and helpful.`;
             }],
             generationConfig: {
                 temperature: 0.7,
-                maxOutputTokens: 60,
-                topP: 0.8,
-                topK: 40
+                maxOutputTokens: 60
             }
         };
 
