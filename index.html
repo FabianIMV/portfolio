@@ -2154,13 +2154,15 @@ async function getAIResponse(message) {
         return 'Perfect! Now I\'ll respond in English. How can I help you? 😊';
     }
 
-    // Detectar idioma del mensaje automáticamente solo si no tenemos uno establecido
-    let detectedLang;
-    if (conversationLanguage === null) {
-        detectedLang = await detectLanguage(message);
-        conversationLanguage = detectedLang; // Persistir el idioma detectado
-    } else {
-        detectedLang = conversationLanguage; // Usar el idioma ya establecido
+    // Detectar idioma del mensaje automáticamente en cada mensaje para permitir cambio dinámico
+    let detectedLang = await detectLanguage(message);
+
+    // Si detectamos un idioma diferente al anterior, cambiar automáticamente
+    if (conversationLanguage !== null && conversationLanguage !== detectedLang) {
+        conversationLanguage = detectedLang;
+        console.log(`Idioma cambiado automáticamente a: ${detectedLang}`);
+    } else if (conversationLanguage === null) {
+        conversationLanguage = detectedLang; // Primera vez
     }
 
     try {
