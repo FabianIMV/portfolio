@@ -713,199 +713,17 @@
             margin-left: 0.5rem;
         }
 
-        /* ===== BENTO GRID LAYOUT ===== */
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 1rem;
-            grid-auto-rows: minmax(120px, auto);
-        }
-
-        .bento-item {
-            background: rgba(30, 30, 46, 0.6);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(124, 58, 237, 0.3);
-            border-radius: 1.5rem;
-            padding: 2rem;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            will-change: transform;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .bento-item:hover {
-            transform: translateY(-4px);
-            border-color: rgba(124, 58, 237, 0.6);
-            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.2);
-        }
-
-        .bento-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(124, 58, 237, 0.1), transparent 50%);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .bento-item:hover::before {
-            opacity: 1;
-        }
-
-        /* Bento Grid Areas */
-        .bento-hero { grid-column: span 7; grid-row: span 3; }
-        .bento-profile { grid-column: span 5; grid-row: span 3; }
-        .bento-stats { grid-column: span 3; grid-row: span 2; }
-        .bento-tech { grid-column: span 9; grid-row: span 2; }
-        .bento-cta { grid-column: span 4; grid-row: span 1; }
-        .bento-status { grid-column: span 4; grid-row: span 1; }
-        .bento-contact { grid-column: span 4; grid-row: span 1; }
-
-        /* Mobile responsive */
-        @media (max-width: 1024px) {
-            .bento-grid {
-                grid-template-columns: repeat(6, 1fr);
-            }
-            .bento-hero { grid-column: span 6; grid-row: span 2; }
-            .bento-profile { grid-column: span 6; grid-row: span 2; }
-            .bento-stats { grid-column: span 2; grid-row: span 2; }
-            .bento-tech { grid-column: span 6; grid-row: span 2; }
-            .bento-cta { grid-column: span 2; grid-row: span 1; }
-            .bento-status { grid-column: span 3; grid-row: span 1; }
-            .bento-contact { grid-column: span 3; grid-row: span 1; }
-        }
-
-        @media (max-width: 640px) {
-            .bento-grid {
-                grid-template-columns: 1fr;
-                gap: 0.75rem;
-            }
-            .bento-hero, .bento-profile, .bento-stats, .bento-tech,
-            .bento-cta, .bento-status, .bento-contact {
-                grid-column: span 1;
-                grid-row: span 1;
-            }
-            /* Reduce padding on mobile for bento items */
-            .bento-item {
-                padding: 1.25rem;
-            }
-            /* Optimize text sizes */
-            .bento-hero h1 {
-                font-size: 2rem !important;
-            }
-            .bento-hero p:first-of-type {
-                font-size: 1.25rem !important;
-            }
-            .bento-hero p:last-of-type {
-                font-size: 0.875rem !important;
-            }
-        }
-
-        /* ===== HORIZONTAL SCROLL TIMELINE ===== */
-        .timeline-horizontal {
-            display: flex;
-            gap: 2rem;
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            padding: 2rem 0;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .timeline-horizontal::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .timeline-horizontal::-webkit-scrollbar-track {
-            background: rgba(31, 41, 55, 0.5);
-            border-radius: 10px;
-        }
-
-        .timeline-horizontal::-webkit-scrollbar-thumb {
-            background: #7C3AED;
-            border-radius: 10px;
-        }
-
-        .timeline-card {
-            flex: 0 0 400px;
-            scroll-snap-align: start;
-            background: rgba(30, 30, 46, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(124, 58, 237, 0.3);
-            border-radius: 1rem;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .timeline-card:hover {
-            transform: scale(1.05);
-            border-color: rgba(124, 58, 237, 0.6);
-            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
-        }
-
-        @media (max-width: 768px) {
-            .timeline-card {
-                flex: 0 0 280px;
-                padding: 1rem;
-            }
-            .timeline-horizontal {
-                gap: 1rem;
-                padding: 1rem 0;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .timeline-card {
-                flex: 0 0 260px;
-                padding: 0.875rem;
-            }
-        }
-
-        /* ===== MASONRY LAYOUT ===== */
-        .masonry-grid {
-            column-count: 3;
-            column-gap: 1.5rem;
-        }
-
-        .masonry-item {
-            break-inside: avoid;
-            margin-bottom: 1.5rem;
-        }
-
-        @media (max-width: 1024px) {
-            .masonry-grid {
-                column-count: 2;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .masonry-grid {
-                column-count: 1;
-            }
-        }
-
         /* ===== MOBILE RESPONSIVENESS OPTIMIZATIONS ===== */
         @media (max-width: 768px) {
-            /* PERFORMANCE: Reduce particle count on mobile */
+            /* Reduce particle count on mobile for performance */
             .particles {
-                opacity: 0.2;
-            }
-
-            /* PERFORMANCE: Disable heavy animations on mobile */
-            .mesh-gradient,
-            .aurora {
-                opacity: 0.2;
-                animation: none;
+                opacity: 0.3;
             }
 
             /* Optimize glitch effect for mobile */
             .glitch::before,
             .glitch::after {
-                animation-duration: 1.5s;
+                animation-duration: 1s;
             }
 
             /* Reduce neon intensity on mobile */
@@ -914,30 +732,23 @@
                 box-shadow: 0 0 5px #7c3aed, 0 0 10px #7c3aed;
             }
 
-            /* PERFORMANCE: Simplify floating circles */
+            /* Optimize floating circles */
             .rotating-circles {
-                opacity: 0.03;
+                opacity: 0.05;
             }
 
             .circle-1 {
-                width: 200px;
-                height: 200px;
-                animation-duration: 80s;
+                width: 300px;
+                height: 300px;
             }
 
             .circle-2 {
-                width: 150px;
-                height: 150px;
-                animation-duration: 60s;
+                width: 200px;
+                height: 200px;
             }
 
             .circle-3 {
                 display: none;
-            }
-
-            /* PERFORMANCE: Disable 3D transforms on mobile */
-            .bento-item:hover {
-                transform: none;
             }
 
             /* Mobile-friendly tilt effect */
@@ -962,18 +773,12 @@
 
             /* Optimize glassmorphism for mobile */
             .glass-morphism-v2 {
-                backdrop-filter: blur(10px) saturate(1.3);
+                backdrop-filter: blur(15px) saturate(1.5);
             }
 
             /* Mobile-specific hover states */
             .project-card:hover {
-                transform: translateY(-4px) scale(1.01);
-            }
-
-            /* PERFORMANCE: Disable glow-pulse animation on mobile */
-            .tech-icon:hover {
-                animation: none;
-                filter: grayscale(0%) drop-shadow(0 0 8px rgba(124, 58, 237, 0.5));
+                transform: translateY(-8px) scale(1.01);
             }
 
             /* Reduce morphing shapes on mobile */
@@ -1245,114 +1050,93 @@
         </div>
     </nav>
 
-    <!-- Hero Section - BENTO GRID LAYOUT -->
-    <section id="home" class="min-h-screen pt-20 pb-10 relative overflow-hidden">
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen pt-20 relative overflow-hidden">
         <!-- Animated Mesh Gradient -->
         <div class="mesh-gradient"></div>
+
         <!-- Aurora Effect -->
         <div class="aurora"></div>
+
+        <div class="rotating-circles">
+            <div class="circle circle-1"></div>
+            <div class="circle circle-2"></div>
+            <div class="circle circle-3"></div>
+        </div>
+
         <div class="gradient-bg absolute inset-0 opacity-80 z-0"></div>
 
-        <div class="container mx-auto px-4 sm:px-6 py-10 relative z-10">
-            <div class="bento-grid">
-
-                <!-- Hero Text - Large Left Box -->
-                <div class="bento-item bento-hero flex flex-col justify-center" data-aos="fade-up">
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">
-                        <span x-show="lang === 'es'" class="text-gray-300">¡Hola! Soy</span>
-                        <span x-show="lang === 'en'" class="text-gray-300">Hi! I'm</span>
-                        <div class="gradient-text glitch mt-2" data-text="Fabián Muñoz">Fabián Muñoz</div>
-                    </h1>
-                    <p class="text-2xl sm:text-3xl text-purple-300 mono-font font-semibold mb-4">
-                        Site Reliability Engineer
-                    </p>
-                    <p class="text-base sm:text-lg text-gray-400 leading-relaxed">
-                        <span x-show="lang === 'es'">Especialista en observabilidad, golden signals monitoring y optimización de confiabilidad en infraestructuras críticas.</span>
-                        <span x-show="lang === 'en'">Specialist in observability, golden signals monitoring and reliability optimization in critical infrastructures.</span>
-                    </p>
-                </div>
-
-                <!-- Profile Image - Right Box -->
-                <div class="bento-item bento-profile flex items-center justify-center" data-aos="fade-left" data-aos-delay="100">
+        <div class="container mx-auto px-4 sm:px-6 py-16 relative z-10">
+            <div class="flex flex-col sm:grid sm:grid-cols-2 gap-8 items-center">
+                <!-- Profile Image -->
+                <div class="flex justify-center order-1 sm:order-2" data-aos="fade-left" data-aos-duration="1000">
                     <div class="relative">
-                        <div class="absolute inset-0 bg-purple-600 rounded-3xl blur-3xl opacity-30 animate-pulse"></div>
-                        <img src="./profilepic.jpeg" alt="Fabián M."
-                            class="relative z-10 rounded-3xl w-full max-w-xs object-cover border-4 border-purple-500/40
-                            shadow-[0_0_60px_10px_rgba(168,85,247,0.4)]
-                            hover:shadow-[0_0_80px_15px_rgba(168,85,247,0.6)]
-                            transition-all duration-500 ease-in-out hover:scale-105">
-                    </div>
-                </div>
-
-                <!-- Stats Box -->
-                <div class="bento-item bento-stats text-center" data-aos="fade-up" data-aos-delay="200">
-                    <div class="flex flex-col items-center justify-center h-full">
-                        <i class="fas fa-briefcase text-4xl text-purple-400 mb-3"></i>
-                        <div class="text-3xl font-bold gradient-text">2+</div>
-                        <p class="text-sm text-gray-400 mt-2">
-                            <span x-show="lang === 'es'">Años SRE</span>
-                            <span x-show="lang === 'en'">Years SRE</span>
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Tech Stack - Wide Box -->
-                <div class="bento-item bento-tech" data-aos="fade-up" data-aos-delay="300">
-                    <h3 class="text-lg font-semibold mb-4 text-purple-300">
-                        <span x-show="lang === 'es'">️Stack Principal</span>
-                        <span x-show="lang === 'en'">Main Stack</span>
-                    </h3>
-                    <div class="flex flex-wrap gap-4 items-center justify-center sm:justify-start">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg"
-                            class="tech-icon w-12 h-12" alt="AWS" title="AWS" />
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg"
-                            class="tech-icon w-12 h-12" alt="Grafana" title="Grafana">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg"
-                            class="tech-icon w-12 h-12" alt="Prometheus" title="Prometheus">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg"
-                            class="tech-icon w-12 h-12" alt="Terraform" title="Terraform">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg"
-                            class="tech-icon w-12 h-12" alt="Kubernetes" title="Kubernetes">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
-                            class="tech-icon w-12 h-12" alt="Docker" title="Docker">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-                            class="tech-icon w-12 h-12" alt="Python" title="Python">
-                    </div>
-                </div>
-
-                <!-- LinkedIn CTA -->
-                <div class="bento-item bento-cta flex items-center justify-center" data-aos="fade-up" data-aos-delay="400">
-                    <a href="https://linkedin.com/in/fabianimv" target="_blank"
-                        class="magnetic-btn ripple w-full text-center py-4 px-6 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-2xl">
-                        <i class="fab fa-linkedin mr-2"></i>LinkedIn
-                    </a>
-                </div>
-
-                <!-- Status Box -->
-                <div class="bento-item bento-status flex items-center" data-aos="fade-up" data-aos-delay="500">
-                    <div class="flex items-center">
-                        <div class="w-3 h-3 bg-green-500 rounded-full mr-3 animate-pulse"></div>
-                        <div>
-                            <p class="text-sm font-semibold text-gray-300">
-                                <span x-show="lang === 'es'">Disponible para proyectos</span>
-                                <span x-show="lang === 'en'">Available for projects</span>
-                            </p>
+                        <div class="absolute inset-0 bg-purple-600 rounded-full blur-3xl opacity-20 animate-pulse">
                         </div>
+                        <img src="./profilepic.jpeg" alt="Fabián M." class="relative z-10 profile-image rounded-full w-48 h-48 sm:w-64 sm:h-64 object-cover border-4 border-purple-500/30 
+                            shadow-[0_0_50px_0px_rgba(168,85,247,0.3),0_0_30px_0px_rgba(168,85,247,0.3)] 
+                            hover:shadow-[0_0_70px_0px_rgba(168,85,247,0.45),0_0_40px_0px_rgba(168,85,247,0.45)]
+                            transition-shadow duration-300 ease-in-out">
                     </div>
                 </div>
 
-                <!-- Contact Box -->
-                <div class="bento-item bento-contact flex items-center justify-center gap-3" data-aos="fade-up" data-aos-delay="600">
-                    <a href="https://github.com/FabianIMV/" target="_blank"
-                        class="magnetic-btn ripple flex-1 text-center py-3 px-4 glass-morphism-v2 hover:bg-gray-700/40 rounded-lg border border-purple-500/30 hover:border-purple-500/60 transition-all duration-300">
-                        <i class="fab fa-github text-xl"></i>
-                    </a>
-                    <a href="mailto:fabianignaciomv@gmail.com"
-                        class="magnetic-btn ripple flex-1 text-center py-3 px-4 glass-morphism-v2 hover:bg-gray-700/40 rounded-lg border border-purple-500/30 hover:border-purple-500/60 transition-all duration-300">
-                        <i class="fas fa-envelope text-xl"></i>
-                    </a>
+                <!-- Text Content -->
+                <div class="space-y-6 text-center sm:text-left order-2 sm:order-1" data-aos="fade-right"
+                    data-aos-duration="1000">
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold">
+                        <span x-show="lang === 'es'">¡Hola! Soy</span>
+                        <span x-show="lang === 'en'">Hi! I'm</span>
+                        <div class="mt-2 gradient-text glitch" data-text="Fabián">Fabián</div>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-300 mono-font">
+                        <span x-show="lang === 'es'" class="typewriter">Site Reliability Engineer</span>
+                        <span x-show="lang === 'en'" class="typewriter">Site Reliability Engineer</span>
+                    </p>
+                    <p class="text-lg text-gray-400">
+                        <span x-show="lang === 'es'">Desarrollando expertise en golden signals monitoring, gestión
+                            SLI/SLO, y optimización de confiabilidad de servicios en infraestructuras empresariales
+                            críticas.</span>
+                        <span x-show="lang === 'en'">Developing expertise in golden signals monitoring, SLO management,
+                            and service reliability optimization in critical enterprise infrastructures.</span>
+                    </p>
+                    <div class="flex flex-wrap justify-center sm:justify-start gap-4 pt-4">
+                        <a href="https://linkedin.com/in/fabianimv" target="_blank"
+                            class="magnetic-btn ripple interactive-element glass-morphism-v2 hover:bg-purple-500/20 px-6 py-3 rounded-lg transition-all duration-300 flex items-center shadow-lg shadow-purple-900/20 neon-border">
+                            <i class="fab fa-linkedin mr-2"></i>LinkedIn
+                        </a>
+                        <a href="https://github.com/FabianIMV/" target="_blank"
+                            class="magnetic-btn ripple interactive-element glass-morphism-v2 hover:bg-gray-700/20 px-6 py-3 rounded-lg border border-purple-500/30 hover:border-purple-500/60 transition-all duration-300 flex items-center shadow-lg shadow-purple-900/10">
+                            <i class="fab fa-github mr-2"></i>GitHub
+                        </a>
+                        <a href="mailto:fabianignaciomv@gmail.com"
+                            class="magnetic-btn ripple interactive-element glass-morphism-v2 hover:bg-gray-700/20 px-6 py-3 rounded-lg border border-purple-500/30 hover:border-purple-500/60 transition-all duration-300 flex items-center shadow-lg shadow-purple-900/10">
+                            <i class="fas fa-envelope mr-2"></i>Email
+                        </a>
+                    </div>
                 </div>
+            </div>
 
+            <!-- Tech Stack Icons -->
+            <div class="mt-16 pt-8 border-t border-purple-900/30" data-aos="fade-up" data-aos-duration="800"
+                data-aos-delay="300">
+                <div class="flex flex-wrap justify-center items-center gap-6 md:gap-10">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg"
+                        class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="AWS" />
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg"
+                        class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Kubernetes">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+                        class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Docker">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg"
+                        class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Terraform">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg"
+                        class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Grafana">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg"
+                        class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Prometheus">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                        class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Python">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg"
+                        class="tech-icon w-10 h-10 md:w-12 md:h-12" alt="Jenkins">
+                </div>
             </div>
         </div>
     </section>
@@ -1478,285 +1262,198 @@
                 <span x-show="lang === 'en'">Professional Experience</span>
             </h2>
 
-            <!-- Company Header -->
-            <div class="text-center mb-8" data-aos="fade-up" data-aos-delay="100">
-                <div class="inline-flex items-center bg-gray-800/50 backdrop-blur-sm px-6 py-4 rounded-xl border border-gray-700 shadow-xl">
-                    <div class="w-12 h-12 bg-gray-700 rounded-lg flex items-center justify-center mr-4">
-                        <i class="fas fa-server text-purple-400 text-xl"></i>
-                    </div>
-                    <div class="text-left">
-                        <h3 class="text-xl font-bold">Site Reliability Engineer (SRE)</h3>
-                        <div class="text-purple-300">Innfinit</div>
-                        <div class="text-sm text-gray-400">
-                            <span x-show="lang === 'es'">Noviembre 2022 - Presente</span>
-                            <span x-show="lang === 'en'">November 2022 - Present</span>
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-gray-800/50 backdrop-blur-sm p-8 rounded-xl border border-gray-700 shadow-xl"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gray-700 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-server text-purple-400 text-xl"></i>
                         </div>
+                        <div>
+                            <h3 class="text-xl font-bold">Site Reliability Engineer (SRE)</h3>
+                            <div class="text-purple-300">Innfinit</div>
+                            <div class="text-sm text-gray-400">Noviembre 2022 - Presente</div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Proyecto Actual: Site Monitoring Optimization ---->
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+                            <h4 class="text-lg font-semibold text-purple-300 flex items-center">
+                                <span x-show="lang === 'es'">PROYECTO: Site Monitoring Optimization & Incident Correlation - Liberty Mutual US</span>
+                                <span x-show="lang === 'en'">PROJECT: Site Monitoring Optimization & Incident Correlation - Liberty Mutual US</span>
+                                <span class="honest-badge">
+                                    <span x-show="lang === 'es'">Oct 2024 - Presente</span>
+                                    <span x-show="lang === 'en'">Oct 2024 - Present</span>
+                                </span>
+                            </h4>
+                            <ul class="mt-3 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Conduciendo análisis de root cause y investigaciones post-mortem usando plataforma BigPanda</span>
+                                        <span x-show="lang === 'en'">Conducting root cause analysis and post-mortem investigations using BigPanda platform</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Optimizando monitoreo de servicios e infraestructura web usando dashboards Grafana</span>
+                                        <span x-show="lang === 'en'">Optimizing service and web infrastructure monitoring using Grafana dashboards</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Analizando Splunk monitoring y soportando migración Datadog para mejorar observabilidad</span>
+                                        <span x-show="lang === 'en'">Analyzing Splunk monitoring and supporting Datadog migration to enhance observability</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Operando lógica correlation Splunk y estándares globales para mejorar reducción de ruido y detección</span>
+                                        <span x-show="lang === 'en'">Operating Splunk correlation logic and global standards to improve noise reduction and detection</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Creando documentación estandarizada Confluence para resolver expedita e mejorar MTTR</span>
+                                        <span x-show="lang === 'en'">Creating standardized Confluence documentation for expedite resolution and improve MTTR</span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- SRE High Availability Observability Platform ---->
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
+                            <h4 class="text-lg font-semibold text-purple-300">
+                                <span x-show="lang === 'es'">PROYECTO: SRE - High Availability Observability Platform - Red Salud</span>
+                                <span x-show="lang === 'en'">PROJECT: SRE - High Availability Observability Platform - Red Salud</span>
+                                <span class="text-sm bg-green-900/30 text-green-300 px-3 py-1 rounded-full ml-2">
+                                    <span x-show="lang === 'es'">Ago 2024 - Oct 2024</span>
+                                    <span x-show="lang === 'en'">Aug 2024 - Oct 2024</span>
+                                </span>
+                            </h4>
+                            <ul class="mt-3 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Implementó arquitectura de alta disponibilidad con Grafana y Prometheus para monitoreo de producción</span>
+                                        <span x-show="lang === 'en'">Implemented high-availability architecture with Grafana and Prometheus for production monitoring</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Desarrolló dashboards para visibilidad y experiencia de usuario en aplicaciones críticas</span>
+                                        <span x-show="lang === 'en'">Developed dashboards for visibility and user experience in critical applications</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Implementó logging centralizado con Loki</span>
+                                        <span x-show="lang === 'en'">Implemented centralized logging with Loki</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Configuró canales alertas (Slack, Teams, Telegram) con objetivos críticos de disponibilidad</span>
+                                        <span x-show="lang === 'en'">Configured alert channels (Slack, Teams, Telegram) with critical availability objectives</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Construyó infraestructura modular optimizando recursos mientras mantiene capacidad de crecimiento</span>
+                                        <span x-show="lang === 'en'">Built modular infrastructure optimizing resources while maintaining capacity for growth</span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- SRE Delta Compliance Monitoring Leadership ---->
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="500">
+                            <h4 class="text-lg font-semibold text-purple-300">
+                                <span x-show="lang === 'es'">PROYECTO: SRE - Delta Compliance Monitoring Leadership - Sovos</span>
+                                <span x-show="lang === 'en'">PROJECT: SRE - Delta Compliance Monitoring Leadership - Sovos</span>
+                                <span class="text-sm bg-blue-900/30 text-blue-300 px-3 py-1 rounded-full ml-2">
+                                    <span x-show="lang === 'es'">Ago 2024 - Ago 2024</span>
+                                    <span x-show="lang === 'en'">Aug 2024 - Aug 2024</span>
+                                </span>
+                            </h4>
+                            <ul class="mt-3 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Lideró equipo para crear dashboards para Kubernetes, RabbitMQ, HapiJs, AWS RDS, S3</span>
+                                        <span x-show="lang === 'en'">Led team to create dashboards for Kubernetes, RabbitMQ, HapiJs, AWS RDS, S3</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Desarrolló y configuró métricas personalizadas usando Prometheus Operator y table-stakes métricas (HeatMap)</span>
+                                        <span x-show="lang === 'en'">Developed and configured custom metrics using Prometheus Operator and table-stakes metrics (HeatMap)</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Implementó sistema de alertas optimizadas con outlooks detallados para minimizar falsos positivos</span>
+                                        <span x-show="lang === 'en'">Implemented optimized alert system with detailed outlooks to minimize false positives</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Trabajó con reducción equipos, entregó resultados calidad mejorada</span>
+                                        <span x-show="lang === 'en'">Worked with reduced teams, delivered improved quality results</span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Site Reliability Engineer FRRB ---->
+                        <div class="timeline-item" data-aos="fade-up" data-aos-delay="600">
+                            <h4 class="text-lg font-semibold text-purple-300">
+                                <span x-show="lang === 'es'">PROYECTO: Site Reliability Engineer (2+ años experiencia)</span>
+                                <span x-show="lang === 'en'">PROJECT: Site Reliability Engineer (2+ years experience)</span>
+                                <span class="text-sm bg-blue-900/30 text-blue-300 px-3 py-1 rounded-full ml-2">
+                                    <span x-show="lang === 'es'">Nov 2022 - Presente</span>
+                                    <span x-show="lang === 'en'">Nov 2022 - Present</span>
+                                </span>
+                            </h4>
+                            <ul class="mt-3 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Resolución de problemas - Grafana, Prometheus - Big Panda - Comunicación - PageDuty</span>
+                                        <span x-show="lang === 'en'">Problem resolution - Grafana, Prometheus - Big Panda - Communication - PageDuty</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Herramientas de plataforma OCP (OpenShift Container Platform) - Conocimiento administración del cliente, Splunk, Integración con entrega continua (CI/CD)</span>
+                                        <span x-show="lang === 'en'">OCP (OpenShift Container Platform) platform tools - Client administration knowledge, Splunk, Continuous integration delivery (CI/CD)</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-purple-400 mt-1 mr-3 text-sm"></i>
+                                    <span>
+                                        <span x-show="lang === 'es'">Terraform - Cloud - Datadog - Amazon Web Services</span>
+                                        <span x-show="lang === 'en'">Terraform - Cloud - Datadog - Amazon Web Services</span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+
                     </div>
                 </div>
-            </div>
-
-            <!-- Scroll Instruction -->
-            <div class="text-center mb-4" data-aos="fade-up" data-aos-delay="150">
-                <p class="text-gray-400 text-sm">
-                    <i class="fas fa-arrow-right mr-2"></i>
-                    <span x-show="lang === 'es'">Desliza para ver todos los proyectos</span>
-                    <span x-show="lang === 'en'">Scroll to see all projects</span>
-                    <i class="fas fa-arrow-left ml-2"></i>
-                </p>
-            </div>
-
-            <!-- Horizontal Scroll Timeline -->
-            <div class="timeline-horizontal" data-aos="fade-up" data-aos-delay="200">
-
-                <!-- Card 1: Site Monitoring Optimization -->
-                <div class="timeline-card">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 bg-purple-900/30 rounded-lg flex items-center justify-center mr-3">
-                            <i class="fas fa-chart-bar text-purple-400"></i>
-                        </div>
-                        <div class="flex-1">
-                            <span class="honest-badge text-xs">
-                                <span x-show="lang === 'es'">Actual</span>
-                                <span x-show="lang === 'en'">Current</span>
-                            </span>
-                        </div>
-                    </div>
-                    <h4 class="text-lg font-bold text-purple-300 mb-3">
-                        <span x-show="lang === 'es'">Site Monitoring Optimization & Incident Correlation</span>
-                        <span x-show="lang === 'en'">Site Monitoring Optimization & Incident Correlation</span>
-                    </h4>
-                    <div class="text-sm text-gray-400 mb-3">
-                        <i class="fas fa-building mr-2"></i>Liberty Mutual US
-                    </div>
-                    <div class="text-xs text-gray-500 mb-4">
-                        <i class="fas fa-calendar mr-2"></i>
-                        <span x-show="lang === 'es'">Oct 2024 - Presente</span>
-                        <span x-show="lang === 'en'">Oct 2024 - Present</span>
-                    </div>
-                    <ul class="space-y-2 text-sm">
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-purple-400 mt-1 mr-2 text-xs"></i>
-                            <span>
-                                <span x-show="lang === 'es'">Root cause analysis usando BigPanda</span>
-                                <span x-show="lang === 'en'">Root cause analysis using BigPanda</span>
-                            </span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-purple-400 mt-1 mr-2 text-xs"></i>
-                            <span>
-                                <span x-show="lang === 'es'">Optimización dashboards Grafana</span>
-                                <span x-show="lang === 'en'">Grafana dashboards optimization</span>
-                            </span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-purple-400 mt-1 mr-2 text-xs"></i>
-                            <span>
-                                <span x-show="lang === 'es'">Migración Splunk a Datadog</span>
-                                <span x-show="lang === 'en'">Splunk to Datadog migration</span>
-                            </span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-purple-400 mt-1 mr-2 text-xs"></i>
-                            <span>
-                                <span x-show="lang === 'es'">Lógica correlation para reducción ruido</span>
-                                <span x-show="lang === 'en'">Correlation logic for noise reduction</span>
-                            </span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-purple-400 mt-1 mr-2 text-xs"></i>
-                            <span>
-                                <span x-show="lang === 'es'">Documentación Confluence para MTTR</span>
-                                <span x-show="lang === 'en'">Confluence docs to improve MTTR</span>
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Card 2: High Availability Observability -->
-                <div class="timeline-card">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 bg-green-900/30 rounded-lg flex items-center justify-center mr-3">
-                            <i class="fas fa-server text-green-400"></i>
-                        </div>
-                        <div class="flex-1">
-                            <span class="text-xs bg-green-900/30 text-green-300 px-3 py-1 rounded-full">
-                                <span x-show="lang === 'es'">Completado</span>
-                                <span x-show="lang === 'en'">Completed</span>
-                            </span>
-                        </div>
-                    </div>
-                    <h4 class="text-lg font-bold text-purple-300 mb-3">
-                        <span x-show="lang === 'es'">High Availability Observability Platform</span>
-                        <span x-show="lang === 'en'">High Availability Observability Platform</span>
-                    </h4>
-                    <div class="text-sm text-gray-400 mb-3">
-                        <i class="fas fa-building mr-2"></i>Red Salud
-                    </div>
-                    <div class="text-xs text-gray-500 mb-4">
-                        <i class="fas fa-calendar mr-2"></i>
-                        <span x-show="lang === 'es'">Ago 2024 - Oct 2024</span>
-                        <span x-show="lang === 'en'">Aug 2024 - Oct 2024</span>
-                    </div>
-                    <ul class="space-y-2 text-sm">
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-purple-400 mt-1 mr-2 text-xs"></i>
-                            <span>
-                                <span x-show="lang === 'es'">Arquitectura HA con Grafana y Prometheus</span>
-                                <span x-show="lang === 'en'">HA architecture with Grafana and Prometheus</span>
-                            </span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-purple-400 mt-1 mr-2 text-xs"></i>
-                            <span>
-                                <span x-show="lang === 'es'">Dashboards para apps críticas</span>
-                                <span x-show="lang === 'en'">Dashboards for critical apps</span>
-                            </span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-purple-400 mt-1 mr-2 text-xs"></i>
-                            <span>
-                                <span x-show="lang === 'es'">Logging centralizado con Loki</span>
-                                <span x-show="lang === 'en'">Centralized logging with Loki</span>
-                            </span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-purple-400 mt-1 mr-2 text-xs"></i>
-                            <span>
-                                <span x-show="lang === 'es'">Alertas Slack, Teams, Telegram</span>
-                                <span x-show="lang === 'en'">Alerts via Slack, Teams, Telegram</span>
-                            </span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-purple-400 mt-1 mr-2 text-xs"></i>
-                            <span>
-                                <span x-show="lang === 'es'">Infraestructura modular escalable</span>
-                                <span x-show="lang === 'en'">Scalable modular infrastructure</span>
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Card 3: Delta Compliance Monitoring -->
-                <div class="timeline-card">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 bg-blue-900/30 rounded-lg flex items-center justify-center mr-3">
-                            <i class="fas fa-users text-blue-400"></i>
-                        </div>
-                        <div class="flex-1">
-                            <span class="text-xs bg-blue-900/30 text-blue-300 px-3 py-1 rounded-full">
-                                <span x-show="lang === 'es'">Completado</span>
-                                <span x-show="lang === 'en'">Completed</span>
-                            </span>
-                        </div>
-                    </div>
-                    <h4 class="text-lg font-bold text-purple-300 mb-3">
-                        <span x-show="lang === 'es'">Delta Compliance Monitoring Leadership</span>
-                        <span x-show="lang === 'en'">Delta Compliance Monitoring Leadership</span>
-                    </h4>
-                    <div class="text-sm text-gray-400 mb-3">
-                        <i class="fas fa-building mr-2"></i>Sovos
-                    </div>
-                    <div class="text-xs text-gray-500 mb-4">
-                        <i class="fas fa-calendar mr-2"></i>
-                        <span x-show="lang === 'es'">Ago 2024</span>
-                        <span x-show="lang === 'en'">Aug 2024</span>
-                    </div>
-                    <ul class="space-y-2 text-sm">
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-purple-400 mt-1 mr-2 text-xs"></i>
-                            <span>
-                                <span x-show="lang === 'es'">Liderazgo equipo dashboards K8s, RabbitMQ</span>
-                                <span x-show="lang === 'en'">Team leadership K8s, RabbitMQ dashboards</span>
-                            </span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-purple-400 mt-1 mr-2 text-xs"></i>
-                            <span>
-                                <span x-show="lang === 'es'">Métricas custom Prometheus Operator</span>
-                                <span x-show="lang === 'en'">Custom Prometheus Operator metrics</span>
-                            </span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-purple-400 mt-1 mr-2 text-xs"></i>
-                            <span>
-                                <span x-show="lang === 'es'">HapiJs, AWS RDS, S3 monitoring</span>
-                                <span x-show="lang === 'en'">HapiJs, AWS RDS, S3 monitoring</span>
-                            </span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-purple-400 mt-1 mr-2 text-xs"></i>
-                            <span>
-                                <span x-show="lang === 'es'">Sistema alertas optimizado HeatMap</span>
-                                <span x-show="lang === 'en'">Optimized HeatMap alert system</span>
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Card 4: General SRE Experience -->
-                <div class="timeline-card">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 bg-purple-900/30 rounded-lg flex items-center justify-center mr-3">
-                            <i class="fas fa-cogs text-purple-400"></i>
-                        </div>
-                        <div class="flex-1">
-                            <span class="text-xs bg-purple-900/30 text-purple-300 px-3 py-1 rounded-full">
-                                <span x-show="lang === 'es'">2+ años</span>
-                                <span x-show="lang === 'en'">2+ years</span>
-                            </span>
-                        </div>
-                    </div>
-                    <h4 class="text-lg font-bold text-purple-300 mb-3">
-                        <span x-show="lang === 'es'">Experiencia General SRE</span>
-                        <span x-show="lang === 'en'">General SRE Experience</span>
-                    </h4>
-                    <div class="text-sm text-gray-400 mb-3">
-                        <i class="fas fa-building mr-2"></i>Innfinit
-                    </div>
-                    <div class="text-xs text-gray-500 mb-4">
-                        <i class="fas fa-calendar mr-2"></i>
-                        <span x-show="lang === 'es'">Nov 2022 - Presente</span>
-                        <span x-show="lang === 'en'">Nov 2022 - Present</span>
-                    </div>
-                    <ul class="space-y-2 text-sm">
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-purple-400 mt-1 mr-2 text-xs"></i>
-                            <span>
-                                <span x-show="lang === 'es'">Resolución problemas Grafana, Prometheus</span>
-                                <span x-show="lang === 'en'">Problem solving Grafana, Prometheus</span>
-                            </span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-purple-400 mt-1 mr-2 text-xs"></i>
-                            <span>
-                                <span x-show="lang === 'es'">BigPanda, PageDuty incident management</span>
-                                <span x-show="lang === 'en'">BigPanda, PageDuty incident management</span>
-                            </span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-purple-400 mt-1 mr-2 text-xs"></i>
-                            <span>
-                                <span x-show="lang === 'es'">OpenShift Container Platform (OCP)</span>
-                                <span x-show="lang === 'en'">OpenShift Container Platform (OCP)</span>
-                            </span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-purple-400 mt-1 mr-2 text-xs"></i>
-                            <span>
-                                <span x-show="lang === 'es'">Splunk, CI/CD, administración clientes</span>
-                                <span x-show="lang === 'en'">Splunk, CI/CD, client administration</span>
-                            </span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-purple-400 mt-1 mr-2 text-xs"></i>
-                            <span>
-                                <span x-show="lang === 'es'">Terraform, Cloud, Datadog, AWS</span>
-                                <span x-show="lang === 'en'">Terraform, Cloud, Datadog, AWS</span>
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-
             </div>
         </div>
     </section>
@@ -1976,9 +1673,9 @@
                 <span x-show="lang === 'en'">Projects</span>
             </h2>
 
-            <div class="masonry-grid">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Proyecto GitHub: YouTube Music Playlist Creator -->
-                <div class="masonry-item project-card tilt-card interactive-element p-6 rounded-xl" data-aos="fade-up" data-aos-delay="100">
+                <div class="project-card tilt-card interactive-element p-6 rounded-xl" data-aos="fade-up" data-aos-delay="800">
                     <div
                         class="h-48 bg-gradient-to-br from-red-900 to-purple-900 rounded-lg mb-4 flex items-center justify-center">
                         <i class="fab fa-youtube text-6xl text-red-300"></i>
@@ -2017,7 +1714,7 @@
                 </div>
 
                 <!-- Proyecto: NutriCombat App -->
-                <div class="masonry-item project-card tilt-card interactive-element p-6 rounded-xl" data-aos="fade-up" data-aos-delay="150">
+                <div class="project-card tilt-card interactive-element p-6 rounded-xl" data-aos="fade-up" data-aos-delay="850">
                     <div class="h-48 bg-gradient-to-br from-green-900 to-blue-900 rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
                         <div class="absolute inset-0 bg-gradient-to-br from-green-800/80 to-blue-800/80"></div>
                         <div class="relative z-10 text-center">
@@ -2059,7 +1756,7 @@
                 </div>
 
                 <!-- Proyecto: Dashboard Chile Grafana -->
-                <div class="masonry-item project-card tilt-card interactive-element p-6 rounded-xl" data-aos="fade-up" data-aos-delay="200">
+                <div class="project-card tilt-card interactive-element p-6 rounded-xl" data-aos="fade-up" data-aos-delay="900">
                     <div
                         class="h-48 bg-gradient-to-br from-orange-900 to-red-900 rounded-lg mb-4 flex items-center justify-center">
                         <i class="fas fa-chart-line text-6xl text-orange-300"></i>
@@ -2097,7 +1794,7 @@
                 </div>
 
                 <!-- Proyecto 2: True Q -->
-                <div class="masonry-item project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="250">
+                <div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="300">
                     <div class="h-48 bg-gradient-to-br from-indigo-900 to-pink-900 rounded-lg mb-4 overflow-hidden">
                         <img src="https://trueq-vercel.vercel.app/assets/trueqbanner.svg" alt="True Q Project"
                             class="w-full h-full object-cover">
@@ -2121,7 +1818,7 @@
                 </div>
 
                 <!-- Proyecto 3: Ferremás -->
-                <div class="masonry-item project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="300">
+                <div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="400">
                     <div class="h-48 bg-gradient-to-br from-blue-900 to-purple-900 rounded-lg mb-4 overflow-hidden">
                         <img src="https://ferremas.vercel.app/static/media/logoferremas.ec0d9dbd910783e34e013bf79f999af4.svg"
                             alt="Ferremás Project" class="w-full h-full object-cover">
@@ -2145,7 +1842,7 @@
                 </div>
 
                 <!-- Proyecto 4: Psicóloga -->
-                <div class="masonry-item project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="350">
+                <div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="500">
                     <div class="h-48 bg-gradient-to-br from-pink-900 to-purple-900 rounded-lg mb-4 overflow-hidden">
                         <img src="https://psivaleriamestica.com/wp-content/uploads/2024/08/cropped-logo-psicologa-v4-mas-pequena-300x300.webp"
                             alt="Psicóloga Valeria Améstica Project" class="w-full h-full object-cover">
@@ -2170,7 +1867,7 @@
                 </div>
 
                 <!-- Proyecto 5: BYF -->
-                <div class="masonry-item project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="400">
+                <div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="600">
                     <div class="h-48 bg-gradient-to-br from-purple-900 to-blue-900 rounded-lg mb-4 overflow-hidden">
                         <img src="https://byf.vercel.app/_next/image?url=%2Fimages%2Fbyf.ico&w=128&q=75"
                             alt="BYF Project" class="w-full h-full object-cover">
@@ -2194,7 +1891,7 @@
                 </div>
 
                 <!-- Proyecto 6: Portfolio -->
-                <div class="masonry-item project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="450">
+                <div class="project-card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="700">
                     <div
                         class="h-48 bg-gradient-to-br from-indigo-900 to-purple-900 rounded-lg mb-4 flex items-center justify-center">
                         <i class="fas fa-user text-6xl text-purple-300"></i>
