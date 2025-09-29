@@ -682,6 +682,16 @@
             50% { border-color: #7c3aed; }
         }
 
+        .blinking-cursor {
+            animation: blink 1s step-end infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
         /* Advanced hover states */
         .interactive-element {
             position: relative;
@@ -1264,7 +1274,7 @@
                         <div class="gradient-text glitch mt-2" data-text="Fabián Muñoz">Fabián Muñoz</div>
                     </h1>
                     <p class="text-2xl sm:text-3xl text-purple-300 mono-font font-semibold mb-4">
-                        Site Reliability Engineer
+                        Site Reliability Engineer<span class="blinking-cursor">|</span>
                     </p>
                     <p class="text-base sm:text-lg text-gray-400 leading-relaxed">
                         <span x-show="lang === 'es'">Especialista en observabilidad, golden signals monitoring y optimización de confiabilidad en infraestructuras críticas.</span>
@@ -1384,27 +1394,6 @@
                         </span>
                     </p>
 
-                    <div class="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4 mb-6">
-                        <div class="flex items-center mb-2">
-                            <i class="fas fa-info-circle text-blue-400 mr-2"></i>
-                            <span class="font-semibold text-blue-300">
-                                <span x-show="lang === 'es'">Transparencia profesional</span>
-                                <span x-show="lang === 'en'">Professional transparency</span>
-                            </span>
-                        </div>
-                        <p class="text-sm text-blue-200">
-                            <span x-show="lang === 'es'">
-                                Especializado en observabilidad y monitoreo de sistemas críticos, con enfoque en
-                                ingeniería de confiabilidad y automatización. Apasionado por el crecimiento continuo
-                                y la innovación en arquitecturas cloud-native.
-                            </span>
-                            <span x-show="lang === 'en'">
-                                Specialized in observability and monitoring of critical systems, with focus on
-                                reliability engineering and automation. Passionate about continuous growth
-                                and innovation in cloud-native architectures.
-                            </span>
-                        </p>
-                    </div>
 
                     <div class="mt-6 pt-6 border-t border-gray-700">
                         <h3 class="text-xl font-semibold mb-4 text-purple-300">
@@ -2204,10 +2193,8 @@
                         <span x-show="lang === 'en'">Personal Portfolio</span>
                     </h3>
                     <p class="text-gray-300 mb-4">
-                        <span x-show="lang === 'es'">Este mismo sitio web, desarrollado con enfoque en honestidad y
-                            transparencia profesional.</span>
-                        <span x-show="lang === 'en'">This very website, developed with a focus on honesty and
-                            professional transparency.</span>
+                        <span x-show="lang === 'es'">Este mismo sitio web, desarrollado con HTML5, Tailwind CSS y Alpine.js.</span>
+                        <span x-show="lang === 'en'">This very website, built with HTML5, Tailwind CSS and Alpine.js.</span>
                     </p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="px-3 py-1 bg-blue-900/30 text-blue-300 rounded-full text-sm">HTML5</span>
@@ -2364,30 +2351,6 @@
                     </div>
                 </div>
 
-                <!-- Honesty Statement -->
-                <div class="mt-8 pt-8 border-t border-gray-700">
-                    <div class="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
-                        <div class="flex items-center mb-2">
-                            <i class="fas fa-heart text-green-400 mr-2"></i>
-                            <span class="font-semibold text-green-300">
-                                <span x-show="lang === 'es'">Compromiso con la honestidad</span>
-                                <span x-show="lang === 'en'">Commitment to honesty</span>
-                            </span>
-                        </div>
-                        <p class="text-sm text-green-200">
-                            <span x-show="lang === 'es'">
-                                Este portafolio refleja mi experiencia real y actual. Creo que la transparencia
-                                construye mejores relaciones profesionales y permite encontrar oportunidades que
-                                realmente se alineen con mis habilidades y objetivos de crecimiento.
-                            </span>
-                            <span x-show="lang === 'en'">
-                                This portfolio reflects my real and current experience. I believe transparency builds
-                                better professional relationships and allows finding opportunities that truly align with
-                                my skills and growth objectives.
-                            </span>
-                        </p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
