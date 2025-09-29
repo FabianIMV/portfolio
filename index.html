@@ -50,6 +50,7 @@
 
         .hover-glow {
             transition: all 0.3s ease;
+            will-change: transform, box-shadow;
         }
 
         .hover-glow:hover {
@@ -66,6 +67,7 @@
 
         .card-hover {
             transition: all 0.3s ease;
+            will-change: transform;
         }
 
         .card-hover:hover {
@@ -73,11 +75,42 @@
             box-shadow: 0 20px 40px rgba(124, 58, 237, 0.3);
         }
 
+        /* 3D Tilt effect for cards */
+        .tilt-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.2s ease;
+        }
+
+        .tilt-3d:hover {
+            transform: perspective(1000px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) scale(1.02);
+        }
+
         .project-card {
             background: rgba(30, 30, 46, 0.8);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(124, 58, 237, 0.2);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform, box-shadow;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.2), transparent);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .project-card:active::before {
+            width: 500px;
+            height: 500px;
         }
 
         .project-card:hover {
@@ -137,16 +170,165 @@
             }
         }
 
+        /* Animated mesh gradient background */
+        .mesh-gradient {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            opacity: 0.4;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(124, 58, 237, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(139, 92, 246, 0.2) 0%, transparent 50%);
+            animation: mesh-move 15s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        @keyframes mesh-move {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.95);
+            }
+        }
+
+        /* Aurora effect for hero */
+        .aurora {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .aurora::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: linear-gradient(
+                115deg,
+                transparent 20%,
+                rgba(124, 58, 237, 0.15) 35%,
+                rgba(168, 85, 247, 0.15) 45%,
+                transparent 60%
+            );
+            animation: aurora-drift 20s ease-in-out infinite;
+        }
+
+        @keyframes aurora-drift {
+            0%, 100% {
+                transform: translateX(0) translateY(0) rotate(0deg);
+            }
+            33% {
+                transform: translateX(30%) translateY(-20%) rotate(120deg);
+            }
+            66% {
+                transform: translateX(-20%) translateY(15%) rotate(240deg);
+            }
+        }
+
         .tech-icon {
             transition: all 0.3s ease;
             filter: grayscale(30%);
             opacity: 0.9;
+            will-change: transform, filter;
         }
 
         .tech-icon:hover {
-            filter: grayscale(0%);
+            filter: grayscale(0%) drop-shadow(0 0 10px rgba(124, 58, 237, 0.6));
             opacity: 1;
             transform: translateY(-5px) scale(1.1);
+            animation: glow-pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% {
+                filter: grayscale(0%) drop-shadow(0 0 10px rgba(124, 58, 237, 0.6));
+            }
+            50% {
+                filter: grayscale(0%) drop-shadow(0 0 20px rgba(168, 85, 247, 0.8));
+            }
+        }
+
+        /* Skill bar liquid fill effect */
+        .skill-bar {
+            position: relative;
+            height: 8px;
+            background: rgba(55, 65, 81, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .skill-fill {
+            position: absolute;
+            height: 100%;
+            background: linear-gradient(90deg, #7C3AED, #A855F7, #C084FC);
+            border-radius: 10px;
+            transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: width;
+        }
+
+        .skill-fill::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            animation: shimmer 2s infinite;
+        }
+
+        .skill-fill::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(
+                circle,
+                rgba(255, 255, 255, 0.3) 10%,
+                transparent 10%
+            );
+            background-size: 15px 15px;
+            animation: liquid-wave 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(200%);
+            }
+        }
+
+        @keyframes liquid-wave {
+            0% {
+                transform: translateX(0) translateY(0);
+            }
+            100% {
+                transform: translateX(-15px) translateY(5px);
+            }
         }
 
         .timeline-item {
@@ -166,15 +348,43 @@
             border-radius: 50%;
             background: #7C3AED;
             box-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+            animation: timeline-pulse 2s ease-in-out infinite;
+            will-change: transform, box-shadow;
+        }
+
+        @keyframes timeline-pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+            }
+            50% {
+                transform: scale(1.2);
+                box-shadow: 0 0 20px rgba(124, 58, 237, 0.8);
+            }
         }
 
         .timeline-item:last-child {
             border-left-color: transparent;
         }
 
+        /* Timeline drawing animation */
+        @keyframes draw-line {
+            from {
+                height: 0;
+            }
+            to {
+                height: 100%;
+            }
+        }
+
+        .timeline-line-animated {
+            animation: draw-line 1.5s ease-out forwards;
+        }
+
         .nav-link {
             position: relative;
             transition: all 0.3s ease;
+            will-change: color;
         }
 
         .nav-link::after {
@@ -186,6 +396,7 @@
             left: 0;
             background-color: #8B5CF6;
             transition: width 0.3s ease;
+            will-change: width;
         }
 
         .nav-link:hover::after {
@@ -267,14 +478,40 @@
             100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
         }
 
-        /* Magnetic button effect */
+        /* Magnetic button effect - Enhanced */
         .magnetic-btn {
             position: relative;
             transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+            will-change: transform;
+            cursor: pointer;
         }
 
         .magnetic-btn:hover {
             transform: scale(1.05);
+        }
+
+        /* Ripple effect */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ripple::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .ripple:active::after {
+            width: 300px;
+            height: 300px;
         }
 
         /* Glitch text effect */
@@ -815,6 +1052,12 @@
 
     <!-- Hero Section -->
     <section id="home" class="min-h-screen pt-20 relative overflow-hidden">
+        <!-- Animated Mesh Gradient -->
+        <div class="mesh-gradient"></div>
+
+        <!-- Aurora Effect -->
+        <div class="aurora"></div>
+
         <div class="rotating-circles">
             <div class="circle circle-1"></div>
             <div class="circle circle-2"></div>
@@ -858,15 +1101,15 @@
                     </p>
                     <div class="flex flex-wrap justify-center sm:justify-start gap-4 pt-4">
                         <a href="https://linkedin.com/in/fabianimv" target="_blank"
-                            class="magnetic-btn interactive-element glass-morphism-v2 hover:bg-purple-500/20 px-6 py-3 rounded-lg transition-all duration-300 flex items-center shadow-lg shadow-purple-900/20 neon-border">
+                            class="magnetic-btn ripple interactive-element glass-morphism-v2 hover:bg-purple-500/20 px-6 py-3 rounded-lg transition-all duration-300 flex items-center shadow-lg shadow-purple-900/20 neon-border">
                             <i class="fab fa-linkedin mr-2"></i>LinkedIn
                         </a>
                         <a href="https://github.com/FabianIMV/" target="_blank"
-                            class="magnetic-btn interactive-element glass-morphism-v2 hover:bg-gray-700/20 px-6 py-3 rounded-lg border border-purple-500/30 hover:border-purple-500/60 transition-all duration-300 flex items-center shadow-lg shadow-purple-900/10">
+                            class="magnetic-btn ripple interactive-element glass-morphism-v2 hover:bg-gray-700/20 px-6 py-3 rounded-lg border border-purple-500/30 hover:border-purple-500/60 transition-all duration-300 flex items-center shadow-lg shadow-purple-900/10">
                             <i class="fab fa-github mr-2"></i>GitHub
                         </a>
                         <a href="mailto:fabianignaciomv@gmail.com"
-                            class="magnetic-btn interactive-element glass-morphism-v2 hover:bg-gray-700/20 px-6 py-3 rounded-lg border border-purple-500/30 hover:border-purple-500/60 transition-all duration-300 flex items-center shadow-lg shadow-purple-900/10">
+                            class="magnetic-btn ripple interactive-element glass-morphism-v2 hover:bg-gray-700/20 px-6 py-3 rounded-lg border border-purple-500/30 hover:border-purple-500/60 transition-all duration-300 flex items-center shadow-lg shadow-purple-900/10">
                             <i class="fas fa-envelope mr-2"></i>Email
                         </a>
                     </div>
@@ -2596,6 +2839,64 @@ if ('ontouchstart' in window) {
         });
     });
 }
+
+// ===== ENHANCED MAGNETIC CURSOR EFFECT =====
+document.querySelectorAll('.magnetic-btn').forEach(button => {
+    button.addEventListener('mousemove', function(e) {
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+
+        const moveX = x * 0.3;
+        const moveY = y * 0.3;
+
+        this.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
+    });
+
+    button.addEventListener('mouseleave', function() {
+        this.style.transform = 'translate(0, 0) scale(1)';
+    });
+});
+
+// ===== 3D TILT EFFECT FOR CARDS =====
+document.querySelectorAll('.project-card, .tilt-3d').forEach(card => {
+    card.addEventListener('mousemove', function(e) {
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = (y - centerY) / 10;
+        const rotateY = (centerX - x) / 10;
+
+        this.style.setProperty('--tilt-x', `${rotateX}deg`);
+        this.style.setProperty('--tilt-y', `${rotateY}deg`);
+    });
+
+    card.addEventListener('mouseleave', function() {
+        this.style.setProperty('--tilt-x', '0deg');
+        this.style.setProperty('--tilt-y', '0deg');
+    });
+});
+
+// ===== ANIMATE SKILL BARS ON SCROLL =====
+const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const fills = entry.target.querySelectorAll('.skill-fill');
+            fills.forEach(fill => {
+                const width = fill.getAttribute('data-width') || '0%';
+                fill.style.width = width;
+            });
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.skill-bar').forEach(bar => {
+    skillObserver.observe(bar.parentElement);
+});
     </script>
 </body>
 
