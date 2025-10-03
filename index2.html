@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fabián M. - SRE Engineer | 3D Experience</title>
 
-    <meta name="description" content="Portfolio of Fabián Muñoz, SRE Engineer specialized in observability, golden signals monitoring and reliability optimization in critical infrastructures.">
+    <meta name="description" content="Portfolio 3D de Fabián Muñoz, SRE Engineer especializado en observabilidad y confiabilidad de sistemas.">
     <link rel="icon" href="./favicon.svg" type="image/svg+xml">
 
     <!-- Three.js -->
@@ -145,69 +145,19 @@
             animation: pulse-ring 2s ease-out infinite;
         }
 
-        /* Blinking cursor */
-        .blinking-cursor {
-            animation: blink 1s step-end infinite;
-            margin-left: 2px;
+        /* Typing effect */
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            background: #8b5cf6;
+            margin-left: 4px;
+            animation: blink 1s infinite;
         }
 
         @keyframes blink {
             0%, 50% { opacity: 1; }
             51%, 100% { opacity: 0; }
-        }
-
-        /* Glitch text effect with blue lightning */
-        .glitch {
-            position: relative;
-            animation: glitch-skew 1s infinite linear alternate-reverse;
-        }
-
-        .glitch::before,
-        .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .glitch::before {
-            left: 2px;
-            text-shadow: -2px 0 #4da6ff;
-            clip: rect(24px, 550px, 90px, 0);
-            animation: glitch-1 2s infinite linear alternate-reverse;
-        }
-
-        .glitch::after {
-            left: -2px;
-            text-shadow: -2px 0 #00d4ff;
-            clip: rect(85px, 550px, 140px, 0);
-            animation: glitch-2 2s infinite linear alternate-reverse;
-        }
-
-        @keyframes glitch-1 {
-            0% { clip: rect(132px, 9999px, 101px, 0); }
-            25% { clip: rect(17px, 9999px, 94px, 0); }
-            50% { clip: rect(121px, 9999px, 36px, 0); }
-            75% { clip: rect(75px, 9999px, 78px, 0); }
-            100% { clip: rect(26px, 9999px, 147px, 0); }
-        }
-
-        @keyframes glitch-2 {
-            0% { clip: rect(129px, 9999px, 36px, 0); }
-            25% { clip: rect(17px, 9999px, 98px, 0); }
-            50% { clip: rect(85px, 9999px, 115px, 0); }
-            75% { clip: rect(48px, 9999px, 62px, 0); }
-            100% { clip: rect(103px, 9999px, 74px, 0); }
-        }
-
-        @keyframes glitch-skew {
-            0% { transform: skew(0deg); }
-            10% { transform: skew(-2deg); }
-            20% { transform: skew(2deg); }
-            30% { transform: skew(0deg); }
-            100% { transform: skew(0deg); }
         }
 
         /* Scroll indicator */
@@ -353,29 +303,10 @@
             font-size: 0.75rem;
             font-weight: 600;
         }
-
-        /* Skill badges */
-        .honest-badge {
-            background: linear-gradient(45deg, #059669, #047857);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 0.75rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .learning-badge {
-            background: linear-gradient(45deg, #2563eb, #1d4ed8);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 0.75rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
     </style>
 </head>
 
-<body x-data="{ lang: 'en' }">
+<body x-data="{ lang: 'es' }">
     <!-- Three.js 3D Background -->
     <canvas id="three-canvas"></canvas>
 
@@ -391,32 +322,16 @@
                 <div class="text-2xl font-bold gradient-text">FM.</div>
 
                 <div class="flex items-center gap-6">
-                    <a href="#home" class="text-gray-300 hover:text-white transition">
-                        <span x-show="lang === 'es'">Inicio</span>
-                        <span x-show="lang === 'en'" x-cloak>Home</span>
-                    </a>
-                    <a href="#experience" class="text-gray-300 hover:text-white transition">
-                        <span x-show="lang === 'es'">Experiencia</span>
-                        <span x-show="lang === 'en'" x-cloak>Experience</span>
-                    </a>
-                    <a href="#projects" class="text-gray-300 hover:text-white transition">
-                        <span x-show="lang === 'es'">Proyectos</span>
-                        <span x-show="lang === 'en'" x-cloak>Projects</span>
-                    </a>
-                    <a href="#skills" class="text-gray-300 hover:text-white transition">
-                        <span x-show="lang === 'es'">Skills</span>
-                        <span x-show="lang === 'en'" x-cloak>Skills</span>
-                    </a>
-                    <a href="#contact" class="text-gray-300 hover:text-white transition">
-                        <span x-show="lang === 'es'">Contacto</span>
-                        <span x-show="lang === 'en'" x-cloak>Contact</span>
-                    </a>
+                    <a href="#home" class="text-gray-300 hover:text-white transition">Inicio</a>
+                    <a href="#experience" class="text-gray-300 hover:text-white transition">Experiencia</a>
+                    <a href="#projects" class="text-gray-300 hover:text-white transition">Proyectos</a>
+                    <a href="#contact" class="text-gray-300 hover:text-white transition">Contacto</a>
 
                     <!-- Language Toggle -->
                     <button @click="lang = lang === 'es' ? 'en' : 'es'"
                             class="glass-light px-3 py-1 rounded-full text-sm transition hover:bg-purple-500/20">
-                        <span x-show="lang === 'en'">🇪🇸 ES</span>
-                        <span x-show="lang === 'es'" x-cloak>🇬🇧 EN</span>
+                        <span x-show="lang === 'es'">🇪🇸 ES</span>
+                        <span x-show="lang === 'en'" x-cloak>🇬🇧 EN</span>
                     </button>
                 </div>
             </div>
@@ -430,27 +345,26 @@
         <section id="home" class="min-h-screen flex items-center justify-center px-4 pt-20">
             <div class="text-center max-w-4xl">
                 <div class="floating">
-                    <!-- Profile Photo -->
-                    <img src="./profilepic.jpeg" alt="Fabián M." class="rounded-full w-48 h-48 object-cover border-4 border-purple-500/40 shadow-2xl mb-8 mx-auto floating">
-
                     <h1 class="text-6xl md:text-8xl font-bold mb-6">
-                        <span class="gradient-text neon-glow glitch" data-text="Fabián Muñoz">Fabián Muñoz</span>
+                        <span class="gradient-text neon-glow">Fabián Muñoz</span>
                     </h1>
                     <div class="text-2xl md:text-3xl text-gray-300 mb-8">
                         <span x-show="lang === 'es'">
-                            Site Reliability Engineer<span class="blinking-cursor">|</span>
+                            Site Reliability Engineer<span class="typing-cursor"></span>
                         </span>
                         <span x-show="lang === 'en'" x-cloak>
-                            Site Reliability Engineer<span class="blinking-cursor">|</span>
+                            Site Reliability Engineer<span class="typing-cursor"></span>
                         </span>
                     </div>
 
                     <p class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto">
                         <span x-show="lang === 'es'">
-                            Especialista en observabilidad, golden signals monitoring y optimización de confiabilidad en infraestructuras críticas.
+                            Especialista en observabilidad, monitoreo y confiabilidad de sistemas cloud.
+                            Transformando datos en insights accionables.
                         </span>
                         <span x-show="lang === 'en'" x-cloak>
-                            Specialist in observability, golden signals monitoring and reliability optimization in critical infrastructures.
+                            Specialist in observability, monitoring and cloud systems reliability.
+                            Transforming data into actionable insights.
                         </span>
                     </p>
 
@@ -469,35 +383,19 @@
                 <!-- Tech Icons Orbit -->
                 <div class="mt-20 flex justify-center gap-8 flex-wrap">
                     <div class="tech-item" style="animation: float 3s ease-in-out infinite">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS" class="w-12 h-12">
+                        <i class="fab fa-aws text-4xl text-orange-400"></i>
                         <span class="text-xs text-gray-400">AWS</span>
                     </div>
-                    <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.1s">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/datadog/datadog-original.svg" alt="Datadog" class="w-12 h-12">
-                        <span class="text-xs text-gray-400">Datadog</span>
-                    </div>
                     <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.2s">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" alt="Grafana" class="w-12 h-12">
-                        <span class="text-xs text-gray-400">Grafana</span>
-                    </div>
-                    <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.3s">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg" alt="Prometheus" class="w-12 h-12">
-                        <span class="text-xs text-gray-400">Prometheus</span>
-                    </div>
-                    <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.4s">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" class="w-12 h-12">
+                        <i class="fab fa-docker text-4xl text-blue-400"></i>
                         <span class="text-xs text-gray-400">Docker</span>
                     </div>
-                    <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.5s">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" class="w-12 h-12">
+                    <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.4s">
+                        <i class="fas fa-dharmachakra text-4xl text-blue-500"></i>
                         <span class="text-xs text-gray-400">Kubernetes</span>
                     </div>
                     <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.6s">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform" class="w-12 h-12">
-                        <span class="text-xs text-gray-400">Terraform</span>
-                    </div>
-                    <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.7s">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="w-12 h-12">
+                        <i class="fab fa-python text-4xl text-yellow-400"></i>
                         <span class="text-xs text-gray-400">Python</span>
                     </div>
                 </div>
@@ -521,19 +419,18 @@
                         </div>
                         <div class="flex-1">
                             <h3 class="text-2xl font-bold mb-2">
-                                <span x-show="lang === 'es'">Site Reliability Engineer (SRE)</span>
-                                <span x-show="lang === 'en'" x-cloak>Site Reliability Engineer (SRE)</span>
+                                <span x-show="lang === 'es'">Ingeniero en Observabilidad</span>
+                                <span x-show="lang === 'en'" x-cloak>Observability Engineer</span>
                             </h3>
-                            <p class="text-purple-400 mb-2">
-                                <span x-show="lang === 'es'">Innfinit | Nov 2022 - Oct 2025</span>
-                                <span x-show="lang === 'en'" x-cloak>Innfinit | Nov 2022 - Oct 2025</span>
-                            </p>
+                            <p class="text-purple-400 mb-2">Innfinit | Nov 2022 - Presente</p>
                             <p class="text-gray-400">
                                 <span x-show="lang === 'es'">
-                                    Site Reliability Engineer con experiencia sólida en observabilidad y monitoreo de sistemas críticos para entornos empresariales de alta disponibilidad. Desarrollando expertise en prácticas SRE incluyendo monitoreo de golden signals (latencia, tráfico, errores, saturación), gestión colaborativa de SLOs, y optimización de MTTR a través de análisis de incidentes y correlación de eventos. Participación activa en proyectos de arquitectura CN/Delta y optimización de confiabilidad.
+                                    Especialista en SRE enfocado en observabilidad y monitoreo de sistemas críticos empresariales.
+                                    Participación en proyectos de arquitectura CN/Delta y optimización de confiabilidad.
                                 </span>
                                 <span x-show="lang === 'en'" x-cloak>
-                                    Site Reliability Engineer with solid experience in observability and monitoring of critical systems for high-availability enterprise environments. Developing expertise in SRE practices including golden signals monitoring (latency, traffic, errors, saturation), collaborative SLO management, and MTTR optimization through incident analysis and event correlation. Active participation in CN/Delta architecture projects and reliability optimization.
+                                    SRE specialist focused on observability and monitoring of critical enterprise systems.
+                                    Participation in CN/Delta architecture projects and reliability optimization.
                                 </span>
                             </p>
                             <div class="flex gap-2 mt-4 flex-wrap">
@@ -542,46 +439,6 @@
                                 <span class="tag">BigPanda</span>
                                 <span class="tag">AWS</span>
                                 <span class="tag">Kubernetes</span>
-                                <span class="tag">Terraform</span>
-                                <span class="tag">Python</span>
-                                <span class="tag">Golden Signals</span>
-                                <span class="tag">SLO/SLI</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recomin Card -->
-                <div class="cyber-card mb-8">
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0">
-                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-                                <i class="fas fa-headset text-2xl"></i>
-                            </div>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-2xl font-bold mb-2">
-                                <span x-show="lang === 'es'">Technical Support</span>
-                                <span x-show="lang === 'en'" x-cloak>Technical Support</span>
-                            </h3>
-                            <p class="text-purple-400 mb-2">
-                                <span x-show="lang === 'es'">Recomin SM | Mar 2019 - Nov 2022 · 3 años 9 meses</span>
-                                <span x-show="lang === 'en'" x-cloak>Recomin SM | Mar 2019 - Nov 2022 · 3 yrs 9 mos</span>
-                            </p>
-                            <p class="text-gray-400">
-                                <span x-show="lang === 'es'">
-                                    Soporte integral para el Proyecto Integrado Los Bronces, colaborando con los departamentos administrativos, RRHH con Nubox, prevención de riesgos, maquinaria, adquisiciones y operaciones. Resolución de problemas técnicos con computadoras, impresoras, configuración de Windows OS, Microsoft Office y routers.
-                                </span>
-                                <span x-show="lang === 'en'" x-cloak>
-                                    Comprehensive support for the Los Bronces Integrated Project, collaborating with administrative and HR departments with Nubox, risk prevention, machinery, procurement and operations. Troubleshooting technical problems with computers, printers, Windows OS configuration, Microsoft Office and routers.
-                                </span>
-                            </p>
-                            <div class="flex gap-2 mt-4 flex-wrap">
-                                <span class="tag">Windows OS</span>
-                                <span class="tag">Microsoft Office</span>
-                                <span class="tag">Hardware Support</span>
-                                <span class="tag">Network Support</span>
-                                <span class="tag">Nubox</span>
                             </div>
                         </div>
                     </div>
@@ -598,7 +455,7 @@
                 </h2>
 
                 <div class="grid md:grid-cols-2 gap-8">
-                    <!-- Project 1: YouTube Music Playlist Creator -->
+                    <!-- Project 1 -->
                     <div class="cyber-card">
                         <div class="flex items-center gap-3 mb-4">
                             <i class="fas fa-music text-3xl text-red-500"></i>
@@ -606,396 +463,87 @@
                         </div>
                         <p class="text-gray-400 mb-4">
                             <span x-show="lang === 'es'">
-                                Herramienta de automatización para crear playlists de YouTube Music desde setlists de conciertos. 40+ estrellas en GitHub.
+                                Herramienta para crear playlists de YouTube Music desde archivos de audio locales.
+                                40+ estrellas en GitHub.
                             </span>
                             <span x-show="lang === 'en'" x-cloak>
-                                Automation tool to create YouTube Music playlists from concert setlists. 40+ stars on GitHub.
+                                Tool to create YouTube Music playlists from local audio files.
+                                40+ stars on GitHub.
                             </span>
                         </p>
-                        <div class="flex gap-2 flex-wrap mb-4">
+                        <div class="flex gap-2 flex-wrap">
                             <span class="tag">Python</span>
                             <span class="tag">YouTube API</span>
-                            <span class="tag">Automation</span>
-                        </div>
-                        <div class="flex gap-3">
-                            <a href="https://github.com/FabianIMV/automated-ytmusic-playlist-creator" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all">
-                                <i class="fab fa-github mr-2"></i>
-                                <span x-show="lang === 'es'">Código</span>
-                                <span x-show="lang === 'en'" x-cloak>Code</span>
-                            </a>
-                            <a href="https://github.com/FabianIMV/automated-ytmusic-playlist-creator#readme" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all">
-                                <i class="fas fa-book mr-2"></i>
-                                <span x-show="lang === 'es'">Docs</span>
-                                <span x-show="lang === 'en'" x-cloak>Docs</span>
-                            </a>
+                            <span class="tag">Audio Processing</span>
                         </div>
                     </div>
 
-                    <!-- Project 2: NutriCombat -->
+                    <!-- Project 2 -->
                     <div class="cyber-card">
                         <div class="flex items-center gap-3 mb-4">
-                            <i class="fas fa-dumbbell text-3xl text-green-500"></i>
+                            <i class="fas fa-dumbbell text-3xl text-orange-500"></i>
                             <h3 class="text-2xl font-bold">NutriCombat</h3>
                         </div>
                         <p class="text-gray-400 mb-4">
                             <span x-show="lang === 'es'">
-                                Progressive Web App especializada para atletas de deportes de combate. Manejo de corte de peso, nutrición personalizada con IA (Gemini), y planes específicos para competencias.
+                                PWA especializada para atletas de deportes de combate.
+                                Manejo de corte de peso con IA (Gemini).
                             </span>
                             <span x-show="lang === 'en'" x-cloak>
-                                Specialized Progressive Web App for combat sports athletes. Weight cutting management, AI-powered nutrition (Gemini), and specific plans for official competitions.
+                                Specialized PWA for combat sports athletes.
+                                Weight cutting management with AI (Gemini).
                             </span>
                         </p>
-                        <div class="flex gap-2 flex-wrap mb-4">
+                        <div class="flex gap-2 flex-wrap">
                             <span class="tag">PWA</span>
                             <span class="tag">Gemini AI</span>
                             <span class="tag">Nutrition</span>
-                            <span class="tag">React Native</span>
                         </div>
-                        <a href="https://github.com/FabianIMV/nutricombat" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
-                            <i class="fab fa-github mr-2"></i>
-                            <span x-show="lang === 'es'">Ver Proyecto</span>
-                            <span x-show="lang === 'en'" x-cloak>View Project</span>
-                        </a>
                     </div>
 
-                    <!-- Project 3: Chile Dashboard -->
+                    <!-- Project 3 -->
                     <div class="cyber-card">
                         <div class="flex items-center gap-3 mb-4">
-                            <i class="fas fa-chart-bar text-3xl text-orange-500"></i>
-                            <h3 class="text-2xl font-bold">
-                                <span x-show="lang === 'es'">Dashboard Chile - Datos Oficiales</span>
-                                <span x-show="lang === 'en'" x-cloak>Chile Dashboard - Official Data</span>
-                            </h3>
+                            <i class="fas fa-chart-bar text-3xl text-blue-500"></i>
+                            <h3 class="text-2xl font-bold">Chile Dashboard</h3>
                         </div>
                         <p class="text-gray-400 mb-4">
                             <span x-show="lang === 'es'">
-                                Dashboard interactivo de Grafana con datos oficiales de Chile en tiempo real. Integra APIs públicas para mostrar clima, sismos, indicadores económicos y métricas ambientales.
+                                Dashboard interactivo en Grafana con datos oficiales de Chile.
                             </span>
                             <span x-show="lang === 'en'" x-cloak>
-                                Interactive Grafana dashboard with official Chilean real-time data. Integrates public APIs to display weather, earthquakes, economic indicators and environmental metrics.
+                                Interactive dashboard in Grafana with official Chile data.
                             </span>
                         </p>
-                        <div class="flex gap-2 flex-wrap mb-4">
+                        <div class="flex gap-2 flex-wrap">
                             <span class="tag">Grafana</span>
                             <span class="tag">Data Visualization</span>
                             <span class="tag">API Integration</span>
                         </div>
-                        <a href="https://fabianignaciomv.grafana.net/dashboard/snapshot/bM7LtfIaG5faSK5xCDerzOA6xLLfuUVC" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
-                            <i class="fas fa-external-link-alt mr-2"></i>
-                            <span x-show="lang === 'es'">Ver Dashboard</span>
-                            <span x-show="lang === 'en'" x-cloak>View Dashboard</span>
-                        </a>
                     </div>
 
-                    <!-- Project 4: True Q -->
+                    <!-- Project 4 -->
                     <div class="cyber-card">
                         <div class="flex items-center gap-3 mb-4">
-                            <i class="fas fa-globe text-3xl text-indigo-500"></i>
-                            <h3 class="text-2xl font-bold">True Q</h3>
-                        </div>
-                        <p class="text-gray-400 mb-4">
-                            <span x-show="lang === 'es'">
-                                Plataforma de intercambios desarrollada como proyecto final para Duoc UC. Nota: 60/70
-                            </span>
-                            <span x-show="lang === 'en'" x-cloak>
-                                Exchange platform developed as final project for Duoc UC. Grade: 60/70
-                            </span>
-                        </p>
-                        <div class="flex gap-2 flex-wrap mb-4">
-                            <span class="tag">React</span>
-                            <span class="tag">Bootstrap</span>
-                            <span class="tag">Web Development</span>
-                        </div>
-                        <a href="https://trueq-vercel.vercel.app/" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
-                            <i class="fas fa-external-link-alt mr-2"></i>
-                            <span x-show="lang === 'es'">Ver Demo</span>
-                            <span x-show="lang === 'en'" x-cloak>View Demo</span>
-                        </a>
-                    </div>
-
-                    <!-- Project 5: Ferremás -->
-                    <div class="cyber-card">
-                        <div class="flex items-center gap-3 mb-4">
-                            <i class="fas fa-tools text-3xl text-blue-500"></i>
-                            <h3 class="text-2xl font-bold">Ferremás</h3>
-                        </div>
-                        <p class="text-gray-400 mb-4">
-                            <span x-show="lang === 'es'">
-                                Aplicación web para gestión de inventario de ferreterías locales. Proyecto académico.
-                            </span>
-                            <span x-show="lang === 'en'" x-cloak>
-                                Web application for local hardware store inventory management. Academic project.
-                            </span>
-                        </p>
-                        <div class="flex gap-2 flex-wrap mb-4">
-                            <span class="tag">React</span>
-                            <span class="tag">Bootstrap</span>
-                            <span class="tag">Full Stack</span>
-                        </div>
-                        <a href="https://ferremas.vercel.app/" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
-                            <i class="fas fa-external-link-alt mr-2"></i>
-                            <span x-show="lang === 'es'">Ver Demo</span>
-                            <span x-show="lang === 'en'" x-cloak>View Demo</span>
-                        </a>
-                    </div>
-
-                    <!-- Project 6: Psicóloga Valeria Améstica -->
-                    <div class="cyber-card">
-                        <div class="flex items-center gap-3 mb-4">
-                            <i class="fas fa-brain text-3xl text-pink-500"></i>
+                            <i class="fas fa-globe text-3xl text-green-500"></i>
                             <h3 class="text-2xl font-bold">
-                                <span x-show="lang === 'es'">Psicóloga Valeria Améstica</span>
-                                <span x-show="lang === 'en'" x-cloak>Psychologist Valeria Améstica</span>
+                                <span x-show="lang === 'es'">Proyectos Web Corporativos</span>
+                                <span x-show="lang === 'en'" x-cloak>Corporate Web Projects</span>
                             </h3>
                         </div>
                         <p class="text-gray-400 mb-4">
                             <span x-show="lang === 'es'">
-                                Sitio web profesional para servicios de psicología. Proyecto freelance real.
+                                Desarrollo de sitios web para True Q y Ferremás.
                             </span>
                             <span x-show="lang === 'en'" x-cloak>
-                                Professional website for psychology services. Real freelance project.
+                                Website development for True Q and Ferremás.
                             </span>
                         </p>
-                        <div class="flex gap-2 flex-wrap mb-4">
-                            <span class="tag">HTML</span>
-                            <span class="tag">CSS</span>
-                            <span class="tag">JavaScript</span>
-                        </div>
-                        <a href="https://psivaleriamestica.com/" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
-                            <i class="fas fa-external-link-alt mr-2"></i>
-                            <span x-show="lang === 'es'">Visitar Sitio</span>
-                            <span x-show="lang === 'en'" x-cloak>Visit Site</span>
-                        </a>
-                    </div>
-
-                    <!-- Project 7: BYF -->
-                    <div class="cyber-card">
-                        <div class="flex items-center gap-3 mb-4">
-                            <i class="fas fa-hamburger text-3xl text-yellow-500"></i>
-                            <h3 class="text-2xl font-bold">BYF</h3>
-                        </div>
-                        <p class="text-gray-400 mb-4">
-                            <span x-show="lang === 'es'">
-                                Sitio web para local de comida rápida. Proyecto personal de práctica.
-                            </span>
-                            <span x-show="lang === 'en'" x-cloak>
-                                Website for a fast food restaurant. Personal practice project.
-                            </span>
-                        </p>
-                        <div class="flex gap-2 flex-wrap mb-4">
-                            <span class="tag">React</span>
-                            <span class="tag">Bootstrap</span>
+                        <div class="flex gap-2 flex-wrap">
                             <span class="tag">Web Development</span>
+                            <span class="tag">Corporate</span>
+                            <span class="tag">Full Stack</span>
                         </div>
-                        <a href="https://byf.vercel.app/" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
-                            <i class="fas fa-external-link-alt mr-2"></i>
-                            <span x-show="lang === 'es'">Ver Demo</span>
-                            <span x-show="lang === 'en'" x-cloak>View Demo</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="py-20 px-4 bg-gray-900/30">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-5xl font-bold text-center mb-16 gradient-text">
-                    <span x-show="lang === 'es'">Habilidades Técnicas</span>
-                    <span x-show="lang === 'en'" x-cloak>Technical Skills</span>
-                </h2>
-
-                <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Observability & Monitoring -->
-                    <div class="cyber-card">
-                        <h3 class="text-xl font-bold mb-6 flex items-center">
-                            <i class="fas fa-chart-line mr-3 text-purple-400"></i>
-                            <span x-show="lang === 'es'">Observabilidad & Monitoreo</span>
-                            <span x-show="lang === 'en'" x-cloak>Observability & Monitoring</span>
-                        </h3>
-                        <ul class="space-y-4">
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/datadog/datadog-original.svg" alt="Datadog" class="w-8 h-8">
-                                    <span class="ml-3">Datadog APM</span>
-                                </div>
-                                <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Sólido</span>
-                                    <span x-show="lang === 'en'" x-cloak>Solid</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" alt="Grafana" class="w-8 h-8">
-                                    <span class="ml-3">Grafana Cloud</span>
-                                </div>
-                                <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Sólido</span>
-                                    <span x-show="lang === 'en'" x-cloak>Solid</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg" alt="Prometheus" class="w-8 h-8">
-                                    <span class="ml-3">Prometheus</span>
-                                </div>
-                                <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Sólido</span>
-                                    <span x-show="lang === 'en'" x-cloak>Solid</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <i class="fas fa-exclamation-triangle text-yellow-400 w-8"></i>
-                                    <span class="ml-3">BigPanda</span>
-                                </div>
-                                <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Actual</span>
-                                    <span x-show="lang === 'en'" x-cloak>Current</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <i class="fas fa-search text-purple-400 w-8"></i>
-                                    <span class="ml-3">Splunk</span>
-                                </div>
-                                <span class="learning-badge">
-                                    <span x-show="lang === 'es'">Básico</span>
-                                    <span x-show="lang === 'en'" x-cloak>Basic</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <i class="fas fa-cog text-blue-400 w-8"></i>
-                                    <span class="ml-3">ServiceNow</span>
-                                </div>
-                                <span class="learning-badge">
-                                    <span x-show="lang === 'es'">Básico</span>
-                                    <span x-show="lang === 'en'" x-cloak>Basic</span>
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- Cloud & Infrastructure -->
-                    <div class="cyber-card">
-                        <h3 class="text-xl font-bold mb-6 flex items-center">
-                            <i class="fas fa-cloud mr-3 text-blue-400"></i>
-                            Cloud & Infrastructure
-                        </h3>
-                        <ul class="space-y-4">
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS" class="w-8 h-8">
-                                    <span class="ml-3">AWS</span>
-                                </div>
-                                <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Sólido</span>
-                                    <span x-show="lang === 'en'" x-cloak>Solid</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform" class="w-8 h-8">
-                                    <span class="ml-3">Terraform</span>
-                                </div>
-                                <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Sólido</span>
-                                    <span x-show="lang === 'en'" x-cloak>Solid</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" class="w-8 h-8">
-                                    <span class="ml-3">Kubernetes</span>
-                                </div>
-                                <span class="learning-badge">
-                                    <span x-show="lang === 'es'">Test/Lab</span>
-                                    <span x-show="lang === 'en'" x-cloak>Test/Lab</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" class="w-8 h-8">
-                                    <span class="ml-3">Docker</span>
-                                </div>
-                                <span class="learning-badge">
-                                    <span x-show="lang === 'es'">Test/Lab</span>
-                                    <span x-show="lang === 'en'" x-cloak>Test/Lab</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" alt="Jenkins" class="w-8 h-8">
-                                    <span class="ml-3">Jenkins</span>
-                                </div>
-                                <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Sólido</span>
-                                    <span x-show="lang === 'en'" x-cloak>Solid</span>
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- Development & Tools -->
-                    <div class="cyber-card">
-                        <h3 class="text-xl font-bold mb-6 flex items-center">
-                            <i class="fas fa-code mr-3 text-green-400"></i>
-                            <span x-show="lang === 'es'">Desarrollo & Herramientas</span>
-                            <span x-show="lang === 'en'" x-cloak>Development & Tools</span>
-                        </h3>
-                        <ul class="space-y-4">
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="w-8 h-8">
-                                    <span class="ml-3">Python</span>
-                                </div>
-                                <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Sólido</span>
-                                    <span x-show="lang === 'en'" x-cloak>Solid</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="w-8 h-8">
-                                    <span class="ml-3">JavaScript</span>
-                                </div>
-                                <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Sólido</span>
-                                    <span x-show="lang === 'en'" x-cloak>Solid</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="w-8 h-8">
-                                    <span class="ml-3">React</span>
-                                </div>
-                                <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Sólido</span>
-                                    <span x-show="lang === 'en'" x-cloak>Solid</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" class="w-8 h-8">
-                                    <span class="ml-3">Node.js</span>
-                                </div>
-                                <span class="learning-badge">
-                                    <span x-show="lang === 'es'">Básico</span>
-                                    <span x-show="lang === 'en'" x-cloak>Basic</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="w-8 h-8">
-                                    <span class="ml-3">Git</span>
-                                </div>
-                                <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Sólido</span>
-                                    <span x-show="lang === 'en'" x-cloak>Solid</span>
-                                </span>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -1035,7 +583,7 @@
         </section>
     </div>
 
-    <!-- AI CHATBOT -->
+    <!-- AI CHATBOT (PRESERVED FROM ORIGINAL) -->
     <div id="aiChatButton" class="fixed bottom-6 right-6 z-50">
         <button onclick="toggleAIChat()" class="ai-pulse bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-full p-4 shadow-2xl transition-all duration-300 transform hover:scale-110">
             <i class="fas fa-robot text-2xl"></i>
@@ -1198,7 +746,7 @@
             scrollProgress.style.width = scrolled + '%';
         });
 
-        // ========== AI CHATBOT LOGIC ==========
+        // ========== AI CHATBOT LOGIC (PRESERVED FROM ORIGINAL) ==========
         let conversationLanguage = null;
         let aiChatOpen = false;
 
@@ -1209,7 +757,7 @@
                     const alpineElement = document.querySelector('[x-data]');
                     const currentLang = alpineElement && alpineElement.__x && alpineElement.__x.$data
                         ? alpineElement.__x.$data.lang
-                        : 'en';
+                        : 'es';
 
                     if (currentLang === 'es') {
                         input.placeholder = 'Escribe tu pregunta...';
@@ -1249,9 +797,9 @@
 
         function getCurrentLang() {
             try {
-                return document.querySelector('[x-data]').__x.$data.lang || 'en';
+                return document.querySelector('[x-data]').__x.$data.lang || 'es';
             } catch {
-                return 'en';
+                return 'es';
             }
         }
 
@@ -1453,7 +1001,7 @@ PROYECTOS:
 - 🎵 YouTube Music Playlist Creator (40+ stars)
 - 🥊 NutriCombat - PWA con IA
 - 📊 Chile Dashboard en Grafana con datos oficiales
-- 💼 Proyectos web True Q, Ferremás, Psicóloga Valeria Améstica, BYF
+- 💼 Proyectos web True Q y Ferremás
 
 CONTACTO:
 - 💼 LinkedIn: https://linkedin.com/in/fabianimv
@@ -1483,7 +1031,7 @@ PROJECTS:
 - 🎵 YouTube Music Playlist Creator (40+ stars)
 - 🥊 NutriCombat - PWA with AI
 - 📊 Chile Dashboard in Grafana with official data
-- 💼 Web projects True Q, Ferremás, Psychologist Valeria Améstica, BYF
+- 💼 Web projects True Q y Ferremás
 
 CONTACT:
 - 💼 LinkedIn: https://linkedin.com/in/fabianimv

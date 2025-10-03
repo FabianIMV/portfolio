@@ -5,7 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fabián M. - SRE Engineer | 3D Experience</title>
 
-    <meta name="description" content="Portfolio of Fabián Muñoz, SRE Engineer specialized in observability, golden signals monitoring and reliability optimization in critical infrastructures.">
+    <meta name="description" content="Portfolio of Fabián Muñoz, SRE Engineer specialized in cloud monitoring, golden signals, and infrastructure reliability.">
+    <meta property="og:title" content="Fabián Muñoz - Portfolio">
+    <meta property="og:description" content="Explore projects, experience, and professional background in cloud observability, reliability engineering, and automation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fabianimv.github.io/portfolio">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="icon" href="./favicon.svg" type="image/svg+xml">
 
     <!-- Three.js -->
@@ -18,17 +24,26 @@
     <script src="./config.js"></script>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap');
+
+        [x-cloak] { display: none !important; }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             overflow-x: hidden;
             background: #000;
             color: #fff;
+        }
+
+        .mono-font {
+            font-family: 'JetBrains Mono', monospace;
         }
 
         /* Three.js Canvas Background */
@@ -129,34 +144,7 @@
             animation: float 6s ease-in-out infinite;
         }
 
-        /* Pulse animation */
-        @keyframes pulse-ring {
-            0% {
-                transform: scale(0.8);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(2.5);
-                opacity: 0;
-            }
-        }
-
-        .pulse-ring {
-            animation: pulse-ring 2s ease-out infinite;
-        }
-
-        /* Blinking cursor */
-        .blinking-cursor {
-            animation: blink 1s step-end infinite;
-            margin-left: 2px;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        /* Glitch text effect with blue lightning */
+        /* Glitch effect */
         .glitch {
             position: relative;
             animation: glitch-skew 1s infinite linear alternate-reverse;
@@ -208,6 +196,17 @@
             20% { transform: skew(2deg); }
             30% { transform: skew(0deg); }
             100% { transform: skew(0deg); }
+        }
+
+        /* Blinking cursor */
+        .blinking-cursor {
+            animation: blink 1s step-end infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
 
         /* Scroll indicator */
@@ -305,23 +304,10 @@
             border-radius: 10px;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .cyber-card {
-                padding: 1.5rem;
-            }
-
-            #aiChatWidget {
-                width: calc(100vw - 2rem);
-                right: 1rem;
-                left: 1rem;
-            }
-        }
-
         /* Tech stack grid */
         .tech-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
             gap: 1rem;
         }
 
@@ -330,7 +316,7 @@
             flex-direction: column;
             align-items: center;
             gap: 0.5rem;
-            padding: 1rem;
+            padding: 1.5rem 1rem;
             background: rgba(139, 92, 246, 0.1);
             border: 1px solid rgba(139, 92, 246, 0.2);
             border-radius: 12px;
@@ -354,28 +340,93 @@
             font-weight: 600;
         }
 
-        /* Skill badges */
-        .honest-badge {
-            background: linear-gradient(45deg, #059669, #047857);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 0.75rem;
-            font-size: 0.75rem;
-            font-weight: 600;
+        /* Profile image */
+        .profile-image-container {
+            position: relative;
+            display: inline-block;
         }
 
-        .learning-badge {
-            background: linear-gradient(45deg, #2563eb, #1d4ed8);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 0.75rem;
-            font-size: 0.75rem;
-            font-weight: 600;
+        .profile-image {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 1.5rem;
+            border: 4px solid rgba(139, 92, 246, 0.4);
+            box-shadow:
+                0 0 60px 10px rgba(168,85,247,0.4),
+                0 20px 40px rgba(0,0,0,0.3);
+            transition: all 0.5s ease-in-out;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .profile-image:hover {
+            box-shadow: 0 0 80px 15px rgba(168,85,247,0.6);
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .profile-glow {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(168, 85, 247, 0.3));
+            border-radius: 1.5rem;
+            filter: blur(30px);
+            opacity: 0.5;
+            z-index: -1;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        /* Education section styles */
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            padding-bottom: 2rem;
+            border-left: 2px solid #7C3AED;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.55rem;
+            top: 0;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: #7C3AED;
+            box-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+        }
+
+        .timeline-item:last-child {
+            border-left-color: transparent;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cyber-card {
+                padding: 1.5rem;
+            }
+
+            #aiChatWidget {
+                width: calc(100vw - 2rem);
+                right: 1rem;
+                left: 1rem;
+            }
+
+            .profile-image {
+                max-width: 200px;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            }
         }
     </style>
 </head>
 
-<body x-data="{ lang: 'en' }">
+<body x-data="{ lang: 'en' }" x-cloak>
     <!-- Three.js 3D Background -->
     <canvas id="three-canvas"></canvas>
 
@@ -393,30 +444,34 @@
                 <div class="flex items-center gap-6">
                     <a href="#home" class="text-gray-300 hover:text-white transition">
                         <span x-show="lang === 'es'">Inicio</span>
-                        <span x-show="lang === 'en'" x-cloak>Home</span>
+                        <span x-show="lang === 'en'">Home</span>
+                    </a>
+                    <a href="#about" class="text-gray-300 hover:text-white transition">
+                        <span x-show="lang === 'es'">Sobre mí</span>
+                        <span x-show="lang === 'en'">About</span>
                     </a>
                     <a href="#experience" class="text-gray-300 hover:text-white transition">
                         <span x-show="lang === 'es'">Experiencia</span>
-                        <span x-show="lang === 'en'" x-cloak>Experience</span>
+                        <span x-show="lang === 'en'">Experience</span>
                     </a>
                     <a href="#projects" class="text-gray-300 hover:text-white transition">
                         <span x-show="lang === 'es'">Proyectos</span>
-                        <span x-show="lang === 'en'" x-cloak>Projects</span>
+                        <span x-show="lang === 'en'">Projects</span>
                     </a>
                     <a href="#skills" class="text-gray-300 hover:text-white transition">
-                        <span x-show="lang === 'es'">Skills</span>
-                        <span x-show="lang === 'en'" x-cloak>Skills</span>
+                        <span x-show="lang === 'es'">Habilidades</span>
+                        <span x-show="lang === 'en'">Skills</span>
                     </a>
                     <a href="#contact" class="text-gray-300 hover:text-white transition">
                         <span x-show="lang === 'es'">Contacto</span>
-                        <span x-show="lang === 'en'" x-cloak>Contact</span>
+                        <span x-show="lang === 'en'">Contact</span>
                     </a>
 
                     <!-- Language Toggle -->
                     <button @click="lang = lang === 'es' ? 'en' : 'es'"
                             class="glass-light px-3 py-1 rounded-full text-sm transition hover:bg-purple-500/20">
-                        <span x-show="lang === 'en'">🇪🇸 ES</span>
-                        <span x-show="lang === 'es'" x-cloak>🇬🇧 EN</span>
+                        <span x-show="lang === 'es'">🇪🇸 ES</span>
+                        <span x-show="lang === 'en'">🇬🇧 EN</span>
                     </button>
                 </div>
             </div>
@@ -428,77 +483,142 @@
 
         <!-- Hero Section -->
         <section id="home" class="min-h-screen flex items-center justify-center px-4 pt-20">
-            <div class="text-center max-w-4xl">
-                <div class="floating">
-                    <!-- Profile Photo -->
-                    <img src="./profilepic.jpeg" alt="Fabián M." class="rounded-full w-48 h-48 object-cover border-4 border-purple-500/40 shadow-2xl mb-8 mx-auto floating">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <!-- Left: Text Content -->
+                    <div class="floating">
+                        <p class="text-gray-300 text-lg mb-2">
+                            <span x-show="lang === 'es'">¡Hola! Soy</span>
+                            <span x-show="lang === 'en'">Hi! I'm</span>
+                        </p>
+                        <h1 class="text-5xl md:text-7xl font-bold mb-4">
+                            <span class="gradient-text neon-glow glitch" data-text="Fabián Muñoz">Fabián Muñoz</span>
+                        </h1>
+                        <p class="text-2xl md:text-3xl text-purple-300 mono-font font-semibold mb-4">
+                            Site Reliability Engineer<span class="blinking-cursor">|</span>
+                        </p>
+                        <p class="text-base md:text-lg text-gray-400 leading-relaxed mb-8">
+                            <span x-show="lang === 'es'">Especialista en observabilidad, golden signals monitoring y optimización de confiabilidad en infraestructuras críticas.</span>
+                            <span x-show="lang === 'en'">Specialist in observability, golden signals monitoring and reliability optimization in critical infrastructures.</span>
+                        </p>
 
-                    <h1 class="text-6xl md:text-8xl font-bold mb-6">
-                        <span class="gradient-text neon-glow glitch" data-text="Fabián Muñoz">Fabián Muñoz</span>
-                    </h1>
-                    <div class="text-2xl md:text-3xl text-gray-300 mb-8">
-                        <span x-show="lang === 'es'">
-                            Site Reliability Engineer<span class="blinking-cursor">|</span>
-                        </span>
-                        <span x-show="lang === 'en'" x-cloak>
-                            Site Reliability Engineer<span class="blinking-cursor">|</span>
-                        </span>
+                        <div class="flex gap-4 flex-wrap">
+                            <a href="#projects" class="glass neon-border px-8 py-4 rounded-full font-semibold hover:bg-purple-500/20 transition-all transform hover:scale-105">
+                                <span x-show="lang === 'es'">Ver Proyectos</span>
+                                <span x-show="lang === 'en'">View Projects</span>
+                            </a>
+                            <a href="#contact" class="glass-light px-8 py-4 rounded-full font-semibold hover:bg-purple-500/20 transition-all transform hover:scale-105">
+                                <span x-show="lang === 'es'">Contacto</span>
+                                <span x-show="lang === 'en'">Contact</span>
+                            </a>
+                        </div>
                     </div>
 
-                    <p class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto">
-                        <span x-show="lang === 'es'">
-                            Especialista en observabilidad, golden signals monitoring y optimización de confiabilidad en infraestructuras críticas.
-                        </span>
-                        <span x-show="lang === 'en'" x-cloak>
-                            Specialist in observability, golden signals monitoring and reliability optimization in critical infrastructures.
-                        </span>
-                    </p>
-
-                    <div class="flex gap-4 justify-center flex-wrap">
-                        <a href="#projects" class="glass neon-border px-8 py-4 rounded-full font-semibold hover:bg-purple-500/20 transition-all transform hover:scale-105">
-                            <span x-show="lang === 'es'">Ver Proyectos</span>
-                            <span x-show="lang === 'en'" x-cloak>View Projects</span>
-                        </a>
-                        <a href="#contact" class="glass-light px-8 py-4 rounded-full font-semibold hover:bg-purple-500/20 transition-all transform hover:scale-105">
-                            <span x-show="lang === 'es'">Contacto</span>
-                            <span x-show="lang === 'en'" x-cloak>Contact</span>
-                        </a>
+                    <!-- Right: Profile Photo -->
+                    <div class="flex justify-center">
+                        <div class="profile-image-container">
+                            <div class="profile-glow"></div>
+                            <img src="./profilepic.jpeg" alt="Fabián M." class="profile-image">
+                        </div>
                     </div>
                 </div>
 
-                <!-- Tech Icons Orbit -->
+                <!-- Tech Icons -->
                 <div class="mt-20 flex justify-center gap-8 flex-wrap">
                     <div class="tech-item" style="animation: float 3s ease-in-out infinite">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS" class="w-12 h-12">
+                        <i class="fab fa-aws text-4xl text-orange-400"></i>
                         <span class="text-xs text-gray-400">AWS</span>
                     </div>
-                    <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.1s">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/datadog/datadog-original.svg" alt="Datadog" class="w-12 h-12">
-                        <span class="text-xs text-gray-400">Datadog</span>
-                    </div>
                     <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.2s">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" alt="Grafana" class="w-12 h-12">
-                        <span class="text-xs text-gray-400">Grafana</span>
-                    </div>
-                    <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.3s">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg" alt="Prometheus" class="w-12 h-12">
-                        <span class="text-xs text-gray-400">Prometheus</span>
-                    </div>
-                    <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.4s">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" class="w-12 h-12">
+                        <i class="fab fa-docker text-4xl text-blue-400"></i>
                         <span class="text-xs text-gray-400">Docker</span>
                     </div>
-                    <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.5s">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" class="w-12 h-12">
+                    <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.4s">
+                        <i class="fas fa-dharmachakra text-4xl text-blue-500"></i>
                         <span class="text-xs text-gray-400">Kubernetes</span>
                     </div>
                     <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.6s">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform" class="w-12 h-12">
-                        <span class="text-xs text-gray-400">Terraform</span>
-                    </div>
-                    <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.7s">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="w-12 h-12">
+                        <i class="fab fa-python text-4xl text-yellow-400"></i>
                         <span class="text-xs text-gray-400">Python</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 px-4">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-5xl font-bold text-center mb-16 gradient-text">
+                    <span x-show="lang === 'es'">Sobre mí</span>
+                    <span x-show="lang === 'en'">About me</span>
+                </h2>
+
+                <div class="cyber-card">
+                    <p class="text-lg text-gray-300 mb-6">
+                        <span x-show="lang === 'es'">
+                            Site Reliability Engineer con experiencia sólida en observabilidad y monitoreo de sistemas
+                            críticos para entornos empresariales de alta disponibilidad. Desarrollando expertise en
+                            prácticas SRE incluyendo monitoreo de golden signals (latencia, tráfico, errores,
+                            saturación), gestión colaborativa de SLOs, y optimización de MTTR a través de análisis de
+                            incidentes y correlación de eventos.
+                        </span>
+                        <span x-show="lang === 'en'">
+                            Site Reliability Engineer with solid experience in observability and monitoring of critical
+                            systems for high-availability enterprise environments. Developing expertise in SRE practices
+                            including golden signals monitoring (latency, traffic, errors, saturation), collaborative
+                            SLO management, and MTTR optimization through incident analysis and event correlation.
+                        </span>
+                    </p>
+
+                    <div class="mt-6 pt-6 border-t border-gray-700">
+                        <h3 class="text-xl font-semibold mb-4 text-purple-300">
+                            <span x-show="lang === 'es'">Actualmente trabajando en:</span>
+                            <span x-show="lang === 'en'">Currently working on:</span>
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-search text-purple-400 mt-1 mr-3"></i>
+                                <span>
+                                    <span x-show="lang === 'es'">Análisis de incidentes y correlación usando BigPanda</span>
+                                    <span x-show="lang === 'en'">Incident analysis and correlation using BigPanda</span>
+                                </span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-chart-line text-purple-400 mt-1 mr-3"></i>
+                                <span>
+                                    <span x-show="lang === 'es'">Optimización de dashboards de observabilidad con Grafana</span>
+                                    <span x-show="lang === 'en'">Optimizing observability dashboards with Grafana</span>
+                                </span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-code-branch text-purple-400 mt-1 mr-3"></i>
+                                <span>
+                                    <span x-show="lang === 'es'">Implementación de monitoring-as-code con Terraform</span>
+                                    <span x-show="lang === 'en'">Implementing monitoring-as-code with Terraform</span>
+                                </span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-graduation-cap text-purple-400 mt-1 mr-3"></i>
+                                <span>
+                                    <span x-show="lang === 'es'">Finalizando Ingeniería en Informática (4to año)</span>
+                                    <span x-show="lang === 'en'">Completing Computer Engineering degree (4th year)</span>
+                                </span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-target text-purple-400 mt-1 mr-3"></i>
+                                <span>
+                                    <span x-show="lang === 'es'">Contribuyendo a implementación de golden signals (latencia, tráfico, errores, saturación)</span>
+                                    <span x-show="lang === 'en'">Contributing to golden signals implementation (latency, traffic, errors, saturation)</span>
+                                </span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-bullseye text-purple-400 mt-1 mr-3"></i>
+                                <span>
+                                    <span x-show="lang === 'es'">Apoyando desarrollo de framework SLI/SLO bajo guía senior</span>
+                                    <span x-show="lang === 'en'">Supporting SLI/SLO framework development under senior guidance</span>
+                                </span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -508,8 +628,8 @@
         <section id="experience" class="py-20 px-4">
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-5xl font-bold text-center mb-16 gradient-text">
-                    <span x-show="lang === 'es'">Experiencia</span>
-                    <span x-show="lang === 'en'" x-cloak>Experience</span>
+                    <span x-show="lang === 'es'">Experiencia Profesional</span>
+                    <span x-show="lang === 'en'">Professional Experience</span>
                 </h2>
 
                 <div class="cyber-card mb-8">
@@ -522,18 +642,21 @@
                         <div class="flex-1">
                             <h3 class="text-2xl font-bold mb-2">
                                 <span x-show="lang === 'es'">Site Reliability Engineer (SRE)</span>
-                                <span x-show="lang === 'en'" x-cloak>Site Reliability Engineer (SRE)</span>
+                                <span x-show="lang === 'en'">Site Reliability Engineer (SRE)</span>
                             </h3>
-                            <p class="text-purple-400 mb-2">
-                                <span x-show="lang === 'es'">Innfinit | Nov 2022 - Oct 2025</span>
-                                <span x-show="lang === 'en'" x-cloak>Innfinit | Nov 2022 - Oct 2025</span>
-                            </p>
-                            <p class="text-gray-400">
+                            <p class="text-purple-400 mb-2">Innfinit | Nov 2022 - <span x-show="lang === 'es'">Presente</span><span x-show="lang === 'en'">Present</span></p>
+                            <p class="text-gray-400 mb-4">
                                 <span x-show="lang === 'es'">
-                                    Site Reliability Engineer con experiencia sólida en observabilidad y monitoreo de sistemas críticos para entornos empresariales de alta disponibilidad. Desarrollando expertise en prácticas SRE incluyendo monitoreo de golden signals (latencia, tráfico, errores, saturación), gestión colaborativa de SLOs, y optimización de MTTR a través de análisis de incidentes y correlación de eventos. Participación activa en proyectos de arquitectura CN/Delta y optimización de confiabilidad.
+                                    Especialista en SRE enfocado en observabilidad y monitoreo de sistemas críticos empresariales.
+                                    Participación en proyectos de arquitectura CN/Delta y optimización de confiabilidad. Desarrollo
+                                    e implementación de prácticas de golden signals, gestión de SLO, y reducción de MTTR mediante
+                                    análisis de incidentes y correlación de eventos.
                                 </span>
-                                <span x-show="lang === 'en'" x-cloak>
-                                    Site Reliability Engineer with solid experience in observability and monitoring of critical systems for high-availability enterprise environments. Developing expertise in SRE practices including golden signals monitoring (latency, traffic, errors, saturation), collaborative SLO management, and MTTR optimization through incident analysis and event correlation. Active participation in CN/Delta architecture projects and reliability optimization.
+                                <span x-show="lang === 'en'">
+                                    SRE specialist focused on observability and monitoring of critical enterprise systems.
+                                    Participation in CN/Delta architecture projects and reliability optimization. Development
+                                    and implementation of golden signals practices, SLO management, and MTTR reduction through
+                                    incident analysis and event correlation.
                                 </span>
                             </p>
                             <div class="flex gap-2 mt-4 flex-wrap">
@@ -550,42 +673,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Recomin Card -->
-                <div class="cyber-card mb-8">
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0">
-                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-                                <i class="fas fa-headset text-2xl"></i>
-                            </div>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-2xl font-bold mb-2">
-                                <span x-show="lang === 'es'">Technical Support</span>
-                                <span x-show="lang === 'en'" x-cloak>Technical Support</span>
-                            </h3>
-                            <p class="text-purple-400 mb-2">
-                                <span x-show="lang === 'es'">Recomin SM | Mar 2019 - Nov 2022 · 3 años 9 meses</span>
-                                <span x-show="lang === 'en'" x-cloak>Recomin SM | Mar 2019 - Nov 2022 · 3 yrs 9 mos</span>
-                            </p>
-                            <p class="text-gray-400">
-                                <span x-show="lang === 'es'">
-                                    Soporte integral para el Proyecto Integrado Los Bronces, colaborando con los departamentos administrativos, RRHH con Nubox, prevención de riesgos, maquinaria, adquisiciones y operaciones. Resolución de problemas técnicos con computadoras, impresoras, configuración de Windows OS, Microsoft Office y routers.
-                                </span>
-                                <span x-show="lang === 'en'" x-cloak>
-                                    Comprehensive support for the Los Bronces Integrated Project, collaborating with administrative and HR departments with Nubox, risk prevention, machinery, procurement and operations. Troubleshooting technical problems with computers, printers, Windows OS configuration, Microsoft Office and routers.
-                                </span>
-                            </p>
-                            <div class="flex gap-2 mt-4 flex-wrap">
-                                <span class="tag">Windows OS</span>
-                                <span class="tag">Microsoft Office</span>
-                                <span class="tag">Hardware Support</span>
-                                <span class="tag">Network Support</span>
-                                <span class="tag">Nubox</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -593,8 +680,8 @@
         <section id="projects" class="py-20 px-4">
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-5xl font-bold text-center mb-16 gradient-text">
-                    <span x-show="lang === 'es'">Proyectos Destacados</span>
-                    <span x-show="lang === 'en'" x-cloak>Featured Projects</span>
+                    <span x-show="lang === 'es'">Proyectos</span>
+                    <span x-show="lang === 'en'">Projects</span>
                 </h2>
 
                 <div class="grid md:grid-cols-2 gap-8">
@@ -606,10 +693,12 @@
                         </div>
                         <p class="text-gray-400 mb-4">
                             <span x-show="lang === 'es'">
-                                Herramienta de automatización para crear playlists de YouTube Music desde setlists de conciertos. 40+ estrellas en GitHub.
+                                Herramienta de automatización para crear playlists de YouTube Music desde setlists de conciertos.
+                                Proyecto open source con más de 40 estrellas en GitHub.
                             </span>
-                            <span x-show="lang === 'en'" x-cloak>
-                                Automation tool to create YouTube Music playlists from concert setlists. 40+ stars on GitHub.
+                            <span x-show="lang === 'en'">
+                                Automation tool to create YouTube Music playlists from concert setlists.
+                                Open source project with 40+ stars on GitHub.
                             </span>
                         </p>
                         <div class="flex gap-2 flex-wrap mb-4">
@@ -617,16 +706,11 @@
                             <span class="tag">YouTube API</span>
                             <span class="tag">Automation</span>
                         </div>
-                        <div class="flex gap-3">
-                            <a href="https://github.com/FabianIMV/automated-ytmusic-playlist-creator" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all">
+                        <div class="flex gap-2">
+                            <a href="https://github.com/FabianIMV/automated-ytmusic-playlist-creator" target="_blank"
+                               class="inline-flex items-center text-purple-400 hover:text-purple-300">
                                 <i class="fab fa-github mr-2"></i>
-                                <span x-show="lang === 'es'">Código</span>
-                                <span x-show="lang === 'en'" x-cloak>Code</span>
-                            </a>
-                            <a href="https://github.com/FabianIMV/automated-ytmusic-playlist-creator#readme" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all">
-                                <i class="fas fa-book mr-2"></i>
-                                <span x-show="lang === 'es'">Docs</span>
-                                <span x-show="lang === 'en'" x-cloak>Docs</span>
+                                <span>GitHub</span>
                             </a>
                         </div>
                     </div>
@@ -634,109 +718,95 @@
                     <!-- Project 2: NutriCombat -->
                     <div class="cyber-card">
                         <div class="flex items-center gap-3 mb-4">
-                            <i class="fas fa-dumbbell text-3xl text-green-500"></i>
+                            <i class="fas fa-dumbbell text-3xl text-orange-500"></i>
                             <h3 class="text-2xl font-bold">NutriCombat</h3>
                         </div>
                         <p class="text-gray-400 mb-4">
                             <span x-show="lang === 'es'">
-                                Progressive Web App especializada para atletas de deportes de combate. Manejo de corte de peso, nutrición personalizada con IA (Gemini), y planes específicos para competencias.
+                                Progressive Web App especializada para atletas de deportes de combate. Manejo de corte de peso,
+                                nutrición personalizada con IA (Gemini), y planes específicos para competencias oficiales.
                             </span>
-                            <span x-show="lang === 'en'" x-cloak>
-                                Specialized Progressive Web App for combat sports athletes. Weight cutting management, AI-powered nutrition (Gemini), and specific plans for official competitions.
+                            <span x-show="lang === 'en'">
+                                Specialized Progressive Web App for combat sports athletes. Weight cutting management,
+                                AI-powered nutrition (Gemini), and specific plans for official competitions.
                             </span>
                         </p>
-                        <div class="flex gap-2 flex-wrap mb-4">
-                            <span class="tag">PWA</span>
-                            <span class="tag">Gemini AI</span>
-                            <span class="tag">Nutrition</span>
+                        <div class="flex gap-2 flex-wrap">
                             <span class="tag">React Native</span>
+                            <span class="tag">Expo</span>
+                            <span class="tag">AWS Lambda</span>
+                            <span class="tag">Supabase</span>
+                            <span class="tag">Gemini AI</span>
                         </div>
-                        <a href="https://github.com/FabianIMV/nutricombat" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
-                            <i class="fab fa-github mr-2"></i>
-                            <span x-show="lang === 'es'">Ver Proyecto</span>
-                            <span x-show="lang === 'en'" x-cloak>View Project</span>
-                        </a>
                     </div>
 
                     <!-- Project 3: Chile Dashboard -->
                     <div class="cyber-card">
                         <div class="flex items-center gap-3 mb-4">
-                            <i class="fas fa-chart-bar text-3xl text-orange-500"></i>
-                            <h3 class="text-2xl font-bold">
-                                <span x-show="lang === 'es'">Dashboard Chile - Datos Oficiales</span>
-                                <span x-show="lang === 'en'" x-cloak>Chile Dashboard - Official Data</span>
-                            </h3>
+                            <i class="fas fa-chart-bar text-3xl text-blue-500"></i>
+                            <h3 class="text-2xl font-bold">Chile Dashboard</h3>
                         </div>
                         <p class="text-gray-400 mb-4">
                             <span x-show="lang === 'es'">
-                                Dashboard interactivo de Grafana con datos oficiales de Chile en tiempo real. Integra APIs públicas para mostrar clima, sismos, indicadores económicos y métricas ambientales.
+                                Dashboard interactivo en Grafana con datos oficiales de Chile, incluyendo indicadores económicos,
+                                demográficos y sociales en tiempo real.
                             </span>
-                            <span x-show="lang === 'en'" x-cloak>
-                                Interactive Grafana dashboard with official Chilean real-time data. Integrates public APIs to display weather, earthquakes, economic indicators and environmental metrics.
+                            <span x-show="lang === 'en'">
+                                Interactive dashboard in Grafana with official Chile data, including economic, demographic,
+                                and social indicators in real-time.
                             </span>
                         </p>
-                        <div class="flex gap-2 flex-wrap mb-4">
+                        <div class="flex gap-2 flex-wrap">
                             <span class="tag">Grafana</span>
                             <span class="tag">Data Visualization</span>
                             <span class="tag">API Integration</span>
                         </div>
-                        <a href="https://fabianignaciomv.grafana.net/dashboard/snapshot/bM7LtfIaG5faSK5xCDerzOA6xLLfuUVC" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
-                            <i class="fas fa-external-link-alt mr-2"></i>
-                            <span x-show="lang === 'es'">Ver Dashboard</span>
-                            <span x-show="lang === 'en'" x-cloak>View Dashboard</span>
-                        </a>
                     </div>
 
                     <!-- Project 4: True Q -->
                     <div class="cyber-card">
                         <div class="flex items-center gap-3 mb-4">
-                            <i class="fas fa-globe text-3xl text-indigo-500"></i>
+                            <i class="fas fa-globe text-3xl text-green-500"></i>
                             <h3 class="text-2xl font-bold">True Q</h3>
                         </div>
                         <p class="text-gray-400 mb-4">
                             <span x-show="lang === 'es'">
-                                Plataforma de intercambios desarrollada como proyecto final para Duoc UC. Nota: 60/70
+                                Sitio web corporativo desarrollado para empresa de consultoría, con diseño moderno
+                                y optimizado para SEO.
                             </span>
-                            <span x-show="lang === 'en'" x-cloak>
-                                Exchange platform developed as final project for Duoc UC. Grade: 60/70
+                            <span x-show="lang === 'en'">
+                                Corporate website developed for consulting company, with modern design
+                                and SEO optimization.
                             </span>
                         </p>
-                        <div class="flex gap-2 flex-wrap mb-4">
-                            <span class="tag">React</span>
-                            <span class="tag">Bootstrap</span>
+                        <div class="flex gap-2 flex-wrap">
                             <span class="tag">Web Development</span>
+                            <span class="tag">Corporate</span>
+                            <span class="tag">SEO</span>
                         </div>
-                        <a href="https://trueq-vercel.vercel.app/" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
-                            <i class="fas fa-external-link-alt mr-2"></i>
-                            <span x-show="lang === 'es'">Ver Demo</span>
-                            <span x-show="lang === 'en'" x-cloak>View Demo</span>
-                        </a>
                     </div>
 
                     <!-- Project 5: Ferremás -->
                     <div class="cyber-card">
                         <div class="flex items-center gap-3 mb-4">
-                            <i class="fas fa-tools text-3xl text-blue-500"></i>
+                            <i class="fas fa-tools text-3xl text-yellow-500"></i>
                             <h3 class="text-2xl font-bold">Ferremás</h3>
                         </div>
                         <p class="text-gray-400 mb-4">
                             <span x-show="lang === 'es'">
-                                Aplicación web para gestión de inventario de ferreterías locales. Proyecto académico.
+                                Plataforma web para ferretería con catálogo de productos, sistema de cotizaciones
+                                y panel de administración.
                             </span>
-                            <span x-show="lang === 'en'" x-cloak>
-                                Web application for local hardware store inventory management. Academic project.
+                            <span x-show="lang === 'en'">
+                                Web platform for hardware store with product catalog, quotation system
+                                and admin panel.
                             </span>
                         </p>
-                        <div class="flex gap-2 flex-wrap mb-4">
-                            <span class="tag">React</span>
-                            <span class="tag">Bootstrap</span>
+                        <div class="flex gap-2 flex-wrap">
                             <span class="tag">Full Stack</span>
+                            <span class="tag">E-commerce</span>
+                            <span class="tag">Admin Panel</span>
                         </div>
-                        <a href="https://ferremas.vercel.app/" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
-                            <i class="fas fa-external-link-alt mr-2"></i>
-                            <span x-show="lang === 'es'">Ver Demo</span>
-                            <span x-show="lang === 'en'" x-cloak>View Demo</span>
-                        </a>
                     </div>
 
                     <!-- Project 6: Psicóloga Valeria Améstica -->
@@ -745,257 +815,190 @@
                             <i class="fas fa-brain text-3xl text-pink-500"></i>
                             <h3 class="text-2xl font-bold">
                                 <span x-show="lang === 'es'">Psicóloga Valeria Améstica</span>
-                                <span x-show="lang === 'en'" x-cloak>Psychologist Valeria Améstica</span>
+                                <span x-show="lang === 'en'">Psychologist Valeria Améstica</span>
                             </h3>
                         </div>
                         <p class="text-gray-400 mb-4">
                             <span x-show="lang === 'es'">
-                                Sitio web profesional para servicios de psicología. Proyecto freelance real.
+                                Sitio web profesional para psicóloga con sistema de citas online, blog
+                                y recursos para pacientes.
                             </span>
-                            <span x-show="lang === 'en'" x-cloak>
-                                Professional website for psychology services. Real freelance project.
+                            <span x-show="lang === 'en'">
+                                Professional website for psychologist with online appointment system, blog
+                                and patient resources.
                             </span>
                         </p>
-                        <div class="flex gap-2 flex-wrap mb-4">
-                            <span class="tag">HTML</span>
-                            <span class="tag">CSS</span>
-                            <span class="tag">JavaScript</span>
+                        <div class="flex gap-2 flex-wrap">
+                            <span class="tag">Web Development</span>
+                            <span class="tag">Professional</span>
+                            <span class="tag">Booking System</span>
                         </div>
-                        <a href="https://psivaleriamestica.com/" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
-                            <i class="fas fa-external-link-alt mr-2"></i>
-                            <span x-show="lang === 'es'">Visitar Sitio</span>
-                            <span x-show="lang === 'en'" x-cloak>Visit Site</span>
-                        </a>
                     </div>
 
                     <!-- Project 7: BYF -->
                     <div class="cyber-card">
                         <div class="flex items-center gap-3 mb-4">
-                            <i class="fas fa-hamburger text-3xl text-yellow-500"></i>
+                            <i class="fas fa-briefcase text-3xl text-cyan-500"></i>
                             <h3 class="text-2xl font-bold">BYF</h3>
                         </div>
                         <p class="text-gray-400 mb-4">
                             <span x-show="lang === 'es'">
-                                Sitio web para local de comida rápida. Proyecto personal de práctica.
+                                Aplicación web empresarial con funcionalidades de gestión y análisis de datos.
                             </span>
-                            <span x-show="lang === 'en'" x-cloak>
-                                Website for a fast food restaurant. Personal practice project.
+                            <span x-show="lang === 'en'">
+                                Enterprise web application with management and data analysis functionalities.
                             </span>
                         </p>
-                        <div class="flex gap-2 flex-wrap mb-4">
-                            <span class="tag">React</span>
-                            <span class="tag">Bootstrap</span>
-                            <span class="tag">Web Development</span>
+                        <div class="flex gap-2 flex-wrap">
+                            <span class="tag">Web App</span>
+                            <span class="tag">Enterprise</span>
+                            <span class="tag">Data Analysis</span>
                         </div>
-                        <a href="https://byf.vercel.app/" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
-                            <i class="fas fa-external-link-alt mr-2"></i>
-                            <span x-show="lang === 'es'">Ver Demo</span>
-                            <span x-show="lang === 'en'" x-cloak>View Demo</span>
-                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Skills Section -->
-        <section id="skills" class="py-20 px-4 bg-gray-900/30">
+        <section id="skills" class="py-20 px-4">
             <div class="max-w-6xl mx-auto">
                 <h2 class="text-5xl font-bold text-center mb-16 gradient-text">
                     <span x-show="lang === 'es'">Habilidades Técnicas</span>
-                    <span x-show="lang === 'en'" x-cloak>Technical Skills</span>
+                    <span x-show="lang === 'en'">Technical Skills</span>
                 </h2>
 
-                <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Observability & Monitoring -->
-                    <div class="cyber-card">
-                        <h3 class="text-xl font-bold mb-6 flex items-center">
-                            <i class="fas fa-chart-line mr-3 text-purple-400"></i>
-                            <span x-show="lang === 'es'">Observabilidad & Monitoreo</span>
-                            <span x-show="lang === 'en'" x-cloak>Observability & Monitoring</span>
-                        </h3>
-                        <ul class="space-y-4">
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/datadog/datadog-original.svg" alt="Datadog" class="w-8 h-8">
-                                    <span class="ml-3">Datadog APM</span>
-                                </div>
-                                <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Sólido</span>
-                                    <span x-show="lang === 'en'" x-cloak>Solid</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" alt="Grafana" class="w-8 h-8">
-                                    <span class="ml-3">Grafana Cloud</span>
-                                </div>
-                                <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Sólido</span>
-                                    <span x-show="lang === 'en'" x-cloak>Solid</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg" alt="Prometheus" class="w-8 h-8">
-                                    <span class="ml-3">Prometheus</span>
-                                </div>
-                                <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Sólido</span>
-                                    <span x-show="lang === 'en'" x-cloak>Solid</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <i class="fas fa-exclamation-triangle text-yellow-400 w-8"></i>
-                                    <span class="ml-3">BigPanda</span>
-                                </div>
-                                <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Actual</span>
-                                    <span x-show="lang === 'en'" x-cloak>Current</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <i class="fas fa-search text-purple-400 w-8"></i>
-                                    <span class="ml-3">Splunk</span>
-                                </div>
-                                <span class="learning-badge">
-                                    <span x-show="lang === 'es'">Básico</span>
-                                    <span x-show="lang === 'en'" x-cloak>Basic</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <i class="fas fa-cog text-blue-400 w-8"></i>
-                                    <span class="ml-3">ServiceNow</span>
-                                </div>
-                                <span class="learning-badge">
-                                    <span x-show="lang === 'es'">Básico</span>
-                                    <span x-show="lang === 'en'" x-cloak>Basic</span>
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Cloud & Infrastructure -->
                     <div class="cyber-card">
-                        <h3 class="text-xl font-bold mb-6 flex items-center">
-                            <i class="fas fa-cloud mr-3 text-blue-400"></i>
-                            Cloud & Infrastructure
+                        <h3 class="text-xl font-bold mb-4 text-purple-300">
+                            <i class="fas fa-cloud mr-2"></i>
+                            <span x-show="lang === 'es'">Cloud & Infraestructura</span>
+                            <span x-show="lang === 'en'">Cloud & Infrastructure</span>
                         </h3>
-                        <ul class="space-y-4">
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS" class="w-8 h-8">
-                                    <span class="ml-3">AWS</span>
-                                </div>
-                                <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Sólido</span>
-                                    <span x-show="lang === 'en'" x-cloak>Solid</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform" class="w-8 h-8">
-                                    <span class="ml-3">Terraform</span>
-                                </div>
-                                <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Sólido</span>
-                                    <span x-show="lang === 'en'" x-cloak>Solid</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" class="w-8 h-8">
-                                    <span class="ml-3">Kubernetes</span>
-                                </div>
-                                <span class="learning-badge">
-                                    <span x-show="lang === 'es'">Test/Lab</span>
-                                    <span x-show="lang === 'en'" x-cloak>Test/Lab</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" class="w-8 h-8">
-                                    <span class="ml-3">Docker</span>
-                                </div>
-                                <span class="learning-badge">
-                                    <span x-show="lang === 'es'">Test/Lab</span>
-                                    <span x-show="lang === 'en'" x-cloak>Test/Lab</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" alt="Jenkins" class="w-8 h-8">
-                                    <span class="ml-3">Jenkins</span>
-                                </div>
-                                <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Sólido</span>
-                                    <span x-show="lang === 'en'" x-cloak>Solid</span>
-                                </span>
-                            </li>
-                        </ul>
+                        <div class="tech-grid">
+                            <div class="tech-item">
+                                <i class="fab fa-aws text-3xl text-orange-400"></i>
+                                <span class="text-xs">AWS</span>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fab fa-docker text-3xl text-blue-400"></i>
+                                <span class="text-xs">Docker</span>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fas fa-dharmachakra text-3xl text-blue-500"></i>
+                                <span class="text-xs">Kubernetes</span>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fas fa-cube text-3xl text-purple-400"></i>
+                                <span class="text-xs">Terraform</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Development & Tools -->
+                    <!-- Observability -->
                     <div class="cyber-card">
-                        <h3 class="text-xl font-bold mb-6 flex items-center">
-                            <i class="fas fa-code mr-3 text-green-400"></i>
-                            <span x-show="lang === 'es'">Desarrollo & Herramientas</span>
-                            <span x-show="lang === 'en'" x-cloak>Development & Tools</span>
+                        <h3 class="text-xl font-bold mb-4 text-purple-300">
+                            <i class="fas fa-chart-line mr-2"></i>
+                            <span x-show="lang === 'es'">Observabilidad</span>
+                            <span x-show="lang === 'en'">Observability</span>
                         </h3>
-                        <ul class="space-y-4">
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="w-8 h-8">
-                                    <span class="ml-3">Python</span>
-                                </div>
-                                <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Sólido</span>
-                                    <span x-show="lang === 'en'" x-cloak>Solid</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="w-8 h-8">
-                                    <span class="ml-3">JavaScript</span>
-                                </div>
-                                <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Sólido</span>
-                                    <span x-show="lang === 'en'" x-cloak>Solid</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="w-8 h-8">
-                                    <span class="ml-3">React</span>
-                                </div>
-                                <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Sólido</span>
-                                    <span x-show="lang === 'en'" x-cloak>Solid</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" class="w-8 h-8">
-                                    <span class="ml-3">Node.js</span>
-                                </div>
-                                <span class="learning-badge">
-                                    <span x-show="lang === 'es'">Básico</span>
-                                    <span x-show="lang === 'en'" x-cloak>Basic</span>
-                                </span>
-                            </li>
-                            <li class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="w-8 h-8">
-                                    <span class="ml-3">Git</span>
-                                </div>
-                                <span class="honest-badge">
-                                    <span x-show="lang === 'es'">Sólido</span>
-                                    <span x-show="lang === 'en'" x-cloak>Solid</span>
-                                </span>
-                            </li>
-                        </ul>
+                        <div class="tech-grid">
+                            <div class="tech-item">
+                                <i class="fas fa-chart-area text-3xl text-orange-500"></i>
+                                <span class="text-xs">Grafana</span>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fas fa-fire text-3xl text-red-500"></i>
+                                <span class="text-xs">Prometheus</span>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fas fa-paw text-3xl text-yellow-400"></i>
+                                <span class="text-xs">BigPanda</span>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fas fa-search text-3xl text-cyan-400"></i>
+                                <span class="text-xs">Kibana</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Programming -->
+                    <div class="cyber-card">
+                        <h3 class="text-xl font-bold mb-4 text-purple-300">
+                            <i class="fas fa-code mr-2"></i>
+                            <span x-show="lang === 'es'">Programación</span>
+                            <span x-show="lang === 'en'">Programming</span>
+                        </h3>
+                        <div class="tech-grid">
+                            <div class="tech-item">
+                                <i class="fab fa-python text-3xl text-yellow-400"></i>
+                                <span class="text-xs">Python</span>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fab fa-js text-3xl text-yellow-300"></i>
+                                <span class="text-xs">JavaScript</span>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fab fa-react text-3xl text-cyan-400"></i>
+                                <span class="text-xs">React</span>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fab fa-node text-3xl text-green-500"></i>
+                                <span class="text-xs">Node.js</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-20 px-4">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-5xl font-bold text-center mb-16 gradient-text">
+                    <span x-show="lang === 'es'">Educación</span>
+                    <span x-show="lang === 'en'">Education</span>
+                </h2>
+
+                <div class="cyber-card">
+                    <div class="timeline-item">
+                        <h3 class="text-2xl font-bold mb-2">
+                            <span x-show="lang === 'es'">Ingeniería en Informática</span>
+                            <span x-show="lang === 'en'">Computer Engineering</span>
+                        </h3>
+                        <p class="text-purple-400 mb-2">
+                            <span x-show="lang === 'es'">Universidad - En curso (4to año)</span>
+                            <span x-show="lang === 'en'">University - In progress (4th year)</span>
+                        </p>
+                        <p class="text-gray-400">
+                            <span x-show="lang === 'es'">
+                                Formación en desarrollo de software, arquitectura de sistemas, bases de datos
+                                y metodologías ágiles.
+                            </span>
+                            <span x-show="lang === 'en'">
+                                Training in software development, systems architecture, databases
+                                and agile methodologies.
+                            </span>
+                        </p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h3 class="text-2xl font-bold mb-2">
+                            <span x-show="lang === 'es'">Analista Programador</span>
+                            <span x-show="lang === 'en'">Analyst Programmer</span>
+                        </h3>
+                        <p class="text-purple-400 mb-2">
+                            <span x-show="lang === 'es'">Instituto Profesional - Completado</span>
+                            <span x-show="lang === 'en'">Professional Institute - Completed</span>
+                        </p>
+                        <p class="text-gray-400">
+                            <span x-show="lang === 'es'">
+                                Fundamentos de programación, desarrollo web y gestión de bases de datos.
+                            </span>
+                            <span x-show="lang === 'en'">
+                                Programming fundamentals, web development and database management.
+                            </span>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1006,13 +1009,13 @@
             <div class="max-w-4xl mx-auto text-center">
                 <h2 class="text-5xl font-bold mb-8 gradient-text">
                     <span x-show="lang === 'es'">Conectemos</span>
-                    <span x-show="lang === 'en'" x-cloak>Let's Connect</span>
+                    <span x-show="lang === 'en'">Let's Connect</span>
                 </h2>
                 <p class="text-xl text-gray-400 mb-12">
                     <span x-show="lang === 'es'">
                         ¿Tienes un proyecto en mente? ¡Hablemos!
                     </span>
-                    <span x-show="lang === 'en'" x-cloak>
+                    <span x-show="lang === 'en'">
                         Have a project in mind? Let's talk!
                     </span>
                 </p>
@@ -1057,7 +1060,7 @@
             <div class="flex">
                 <div class="chat-bubble-ai text-white p-3 rounded-lg max-w-xs text-sm">
                     <span x-show="lang === 'es'">¡Hola! 👋 Soy el asistente AI de Fabián. Puedo ayudarte con información sobre su experiencia en SRE, proyectos y habilidades técnicas. ¿En qué te puedo ayudar?</span>
-                    <span x-show="lang === 'en'" x-cloak>Hi! 👋 I'm Fabián's AI assistant. I can help you with information about his SRE experience, projects and technical skills. How can I help you?</span>
+                    <span x-show="lang === 'en'">Hi! 👋 I'm Fabián's AI assistant. I can help you with information about his SRE experience, projects and technical skills. How can I help you?</span>
                 </div>
             </div>
         </div>
@@ -1317,7 +1320,7 @@
                     return getCurrentLang();
                 }
 
-                const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
+                const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent';
 
                 const requestBody = {
                     contents: [{
@@ -1388,7 +1391,7 @@ ${portfolioContext}
 
 Always respond in English, being direct and helpful.`;
 
-                const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
+                const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent';
 
                 const requestBody = {
                     contents: [{
@@ -1433,62 +1436,60 @@ Always respond in English, being direct and helpful.`;
                 return `
 PERFIL PROFESIONAL:
 - Fabián Muñoz es Ingeniero en Computación y Analista Programador
-- Se desempeña como Ingeniero en Observabilidad con 2 años de experiencia
-- Site Reliability Engineer (SRE) en Innfinit desde noviembre 2022
+- Se desempeña como Site Reliability Engineer (SRE) con 2 años de experiencia
 - Especializado en observabilidad, monitoreo y confiabilidad de sistemas críticos
 
 EXPERIENCIA:
-- 2 años como Ingeniero en Observabilidad y SRE
+- 2 años como SRE en Innfinit desde noviembre 2022
 - Especialista en monitoreo de sistemas críticos empresariales
 - Participando en proyectos de arquitectura CN/Delta
-- Experiencia con golden signals y gestión SLI/SLO
-- Trabajo con infraestructura cloud y automatización
+- Experiencia con golden signals (latencia, tráfico, errores, saturación)
+- Gestión de SLI/SLO y optimización de MTTR
 
 TECNOLOGÍAS:
 - ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform
 - 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda
-- 🐍 Python, Jenkins, CI/CD
+- 🐍 Python, JavaScript, React, Node.js
 
 PROYECTOS:
-- 🎵 YouTube Music Playlist Creator (40+ stars)
-- 🥊 NutriCombat - PWA con IA
+- 🎵 YouTube Music Playlist Creator (40+ stars en GitHub)
+- 🥊 NutriCombat - PWA con IA para atletas de combate
 - 📊 Chile Dashboard en Grafana con datos oficiales
-- 💼 Proyectos web True Q, Ferremás, Psicóloga Valeria Améstica, BYF
+- 💼 Proyectos web: True Q, Ferremás, Psicóloga Valeria Améstica, BYF
 
 CONTACTO:
 - 💼 LinkedIn: https://linkedin.com/in/fabianimv
-- 📧 Para contacto directo, usar el formulario de contacto del sitio
-- 🌐 Portfolio: https://fabianimv.github.io/portfolio`;
+- 🐙 GitHub: https://github.com/FabianIMV
+- 📧 Email: fabianignaciomv@gmail.com`;
             } else {
                 return `
 PROFESSIONAL PROFILE:
 - Fabián Muñoz is a Computer Engineer and Analyst Programmer
-- Works as Observability Engineer with 2 years of experience
-- Site Reliability Engineer (SRE) at Innfinit since November 2022
+- Works as Site Reliability Engineer (SRE) with 2 years of experience
 - Specialized in observability, monitoring and critical system reliability
 
 EXPERIENCE:
-- 2 years as Observability Engineer and SRE
+- 2 years as SRE at Innfinit since November 2022
 - Specialist in critical enterprise system monitoring
 - Participating in CN/Delta architecture projects
-- Experience with golden signals and SLI/SLO management
-- Working with cloud infrastructure and automation
+- Experience with golden signals (latency, traffic, errors, saturation)
+- SLI/SLO management and MTTR optimization
 
 TECHNOLOGIES:
 - ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform
 - 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda
-- 🐍 Python, Jenkins, CI/CD
+- 🐍 Python, JavaScript, React, Node.js
 
 PROJECTS:
-- 🎵 YouTube Music Playlist Creator (40+ stars)
-- 🥊 NutriCombat - PWA with AI
+- 🎵 YouTube Music Playlist Creator (40+ stars on GitHub)
+- 🥊 NutriCombat - PWA with AI for combat athletes
 - 📊 Chile Dashboard in Grafana with official data
-- 💼 Web projects True Q, Ferremás, Psychologist Valeria Améstica, BYF
+- 💼 Web projects: True Q, Ferremás, Psychologist Valeria Améstica, BYF
 
 CONTACT:
 - 💼 LinkedIn: https://linkedin.com/in/fabianimv
-- 📧 For direct contact, use the site's contact form
-- 🌐 Portfolio: https://fabianimv.github.io/portfolio`;
+- 🐙 GitHub: https://github.com/FabianIMV
+- 📧 Email: fabianignaciomv@gmail.com`;
             }
         }
 
@@ -1498,27 +1499,27 @@ CONTACT:
             const responsesES = {
                 'hola': '¡Hola! 👋 ¿En qué puedo ayudarte a conocer más sobre Fabián?',
                 'hello': '¡Hola! 👋 ¿En qué puedo ayudarte a conocer más sobre Fabián?',
-                'experiencia': 'Fabián es especialista en SRE en Innfinit, enfocado en observabilidad y monitoreo de sistemas críticos. 📊',
-                'experience': 'Fabián es especialista en SRE en Innfinit, enfocado en observabilidad y monitoreo de sistemas críticos. 📊',
-                'proyectos': 'Sus proyectos destacados incluyen: 🎵 YouTube Music Playlist Creator (40+ stars), 🥊 NutriCombat - PWA para atletas de combate con IA, 📊 Dashboard Chile.',
-                'projects': 'Sus proyectos destacados incluyen: 🎵 YouTube Music Playlist Creator (40+ stars), 🥊 NutriCombat - PWA para atletas de combate con IA.',
-                'habilidades': 'Maneja: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python.',
-                'skills': 'Maneja: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python.',
-                'contacto': 'Contacto: 💼 LinkedIn: https://linkedin.com/in/fabianimv o usa el formulario de contacto del sitio 📧',
-                'contact': 'Contacto: 💼 LinkedIn: https://linkedin.com/in/fabianimv o usa el formulario de contacto del sitio 📧',
+                'experiencia': 'Fabián es SRE en Innfinit, enfocado en observabilidad y monitoreo de sistemas críticos con golden signals. 📊',
+                'experience': 'Fabián es SRE en Innfinit, enfocado en observabilidad y monitoreo de sistemas críticos. 📊',
+                'proyectos': 'Destacan: 🎵 YouTube Music Creator (40+ stars), 🥊 NutriCombat PWA con IA, 📊 Chile Dashboard.',
+                'projects': 'Destacan: 🎵 YouTube Music Creator (40+ stars), 🥊 NutriCombat PWA con IA.',
+                'habilidades': 'Maneja: ☁️ AWS, 🐳 Docker, ⚓ K8s, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python.',
+                'skills': 'Maneja: ☁️ AWS, 🐳 Docker, ⚓ K8s, 📈 Grafana, 🔥 Prometheus.',
+                'contacto': '💼 LinkedIn: linkedin.com/in/fabianimv | 📧 fabianignaciomv@gmail.com',
+                'contact': '💼 LinkedIn: linkedin.com/in/fabianimv | 📧 fabianignaciomv@gmail.com',
             };
 
             const responsesEN = {
                 'hola': 'Hello! 👋 How can I help you learn more about Fabián?',
                 'hello': 'Hello! 👋 How can I help you learn more about Fabián?',
-                'experiencia': 'Fabián is an SRE specialist at Innfinit, focused on observability and monitoring of critical systems. 📊',
-                'experience': 'Fabián is an SRE specialist at Innfinit, focused on observability and monitoring of critical systems. 📊',
-                'proyectos': 'His featured projects include: 🎵 YouTube Music Playlist Creator (40+ stars), 🥊 NutriCombat - PWA for combat athletes with AI.',
-                'projects': 'His featured projects include: 🎵 YouTube Music Playlist Creator (40+ stars), 🥊 NutriCombat - PWA for combat athletes with AI.',
-                'habilidades': 'He handles: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python.',
-                'skills': 'He handles: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python.',
-                'contacto': 'Contact: 💼 LinkedIn: https://linkedin.com/in/fabianimv or use the site contact form 📧',
-                'contact': 'Contact: 💼 LinkedIn: https://linkedin.com/in/fabianimv or use the site contact form 📧',
+                'experiencia': 'Fabián is SRE at Innfinit, focused on observability and monitoring of critical systems with golden signals. 📊',
+                'experience': 'Fabián is SRE at Innfinit, focused on observability and critical system monitoring. 📊',
+                'proyectos': 'Featured: 🎵 YouTube Music Creator (40+ stars), 🥊 NutriCombat PWA with AI, 📊 Chile Dashboard.',
+                'projects': 'Featured: 🎵 YouTube Music Creator (40+ stars), 🥊 NutriCombat PWA with AI.',
+                'habilidades': 'Tech: ☁️ AWS, 🐳 Docker, ⚓ K8s, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python.',
+                'skills': 'Tech: ☁️ AWS, 🐳 Docker, ⚓ K8s, 📈 Grafana, 🔥 Prometheus.',
+                'contacto': '💼 LinkedIn: linkedin.com/in/fabianimv | 📧 fabianignaciomv@gmail.com',
+                'contact': '💼 LinkedIn: linkedin.com/in/fabianimv@gmail.com',
             };
 
             const responses = currentLang === 'es' ? responsesES : responsesEN;
@@ -1530,13 +1531,13 @@ CONTACT:
             }
 
             const defaultResponses = currentLang === 'es' ? [
-                '🤖 Interesante pregunta. Te recomiendo revisar las secciones de Experiencia, Proyectos y Habilidades del portfolio para más detalles.',
-                '💡 ¿Te interesa algo específico sobre la experiencia SRE de Fabián? Puedo contarte sobre sus proyectos, habilidades técnicas o experiencia laboral.',
-                '🔍 Puedo ayudarte con información sobre: experiencia, proyectos, habilidades, contacto, educación, o sus especialidades en SRE.'
+                '🤖 Revisa las secciones de Experiencia, Proyectos y Habilidades para más detalles.',
+                '💡 Puedo contarte sobre proyectos, habilidades técnicas o experiencia SRE de Fabián.',
+                '🔍 Puedo ayudarte con: experiencia, proyectos, habilidades, contacto o educación.'
             ] : [
-                '🤖 Interesting question. I recommend checking the Experience, Projects and Skills sections of the portfolio for more details.',
-                '💡 Are you interested in something specific about Fabián\'s SRE experience? I can tell you about his projects, technical skills or work experience.',
-                '🔍 I can help you with information about: experience, projects, skills, contact, education, or his SRE specialties.'
+                '🤖 Check the Experience, Projects and Skills sections for more details.',
+                '💡 I can tell you about Fabián\'s projects, technical skills or SRE experience.',
+                '🔍 I can help with: experience, projects, skills, contact or education.'
             ];
 
             return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
