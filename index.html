@@ -8,353 +8,18 @@
     <meta name="description" content="Portfolio of Fabián Muñoz, SRE Engineer specialized in observability, golden signals monitoring and reliability optimization in critical infrastructures.">
     <link rel="icon" href="./favicon.svg" type="image/svg+xml">
 
-    <!-- Three.js -->
+    <!-- External Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-    <!-- Other libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Config and Styles -->
     <script src="./config.js"></script>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            overflow-x: hidden;
-            background: #000;
-            color: #fff;
-        }
-
-        /* Three.js Canvas Background */
-        #three-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            background: linear-gradient(180deg, #0a0a0a 0%, #1a0a2e 50%, #0f0f23 100%);
-        }
-
-        /* Content wrapper */
-        .content-wrapper {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Glass morphism effect */
-        .glass {
-            background: rgba(15, 15, 35, 0.7);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(139, 92, 246, 0.3);
-            border-radius: 20px;
-        }
-
-        .glass-light {
-            background: rgba(139, 92, 246, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(139, 92, 246, 0.2);
-        }
-
-        /* Gradient text */
-        .gradient-text {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Neon glow effect */
-        .neon-glow {
-            text-shadow:
-                0 0 10px rgba(139, 92, 246, 0.8),
-                0 0 20px rgba(139, 92, 246, 0.6),
-                0 0 30px rgba(139, 92, 246, 0.4);
-        }
-
-        .neon-border {
-            box-shadow:
-                0 0 20px rgba(139, 92, 246, 0.5),
-                inset 0 0 20px rgba(139, 92, 246, 0.1);
-        }
-
-        /* Cyber cards */
-        .cyber-card {
-            position: relative;
-            background: rgba(15, 15, 35, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(139, 92, 246, 0.3);
-            border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
-        }
-
-        .cyber-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .cyber-card:hover::before {
-            left: 100%;
-        }
-
-        .cyber-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(139, 92, 246, 0.6);
-            box-shadow:
-                0 20px 60px rgba(139, 92, 246, 0.4),
-                0 0 40px rgba(139, 92, 246, 0.2);
-        }
-
-        /* Floating animation */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        /* Pulse animation */
-        @keyframes pulse-ring {
-            0% {
-                transform: scale(0.8);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(2.5);
-                opacity: 0;
-            }
-        }
-
-        .pulse-ring {
-            animation: pulse-ring 2s ease-out infinite;
-        }
-
-        /* Blinking cursor */
-        .blinking-cursor {
-            animation: blink 1s step-end infinite;
-            margin-left: 2px;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        /* Glitch text effect with blue lightning */
-        .glitch {
-            position: relative;
-            animation: glitch-skew 1s infinite linear alternate-reverse;
-        }
-
-        .glitch::before,
-        .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .glitch::before {
-            left: 2px;
-            text-shadow: -2px 0 #4da6ff;
-            clip: rect(24px, 550px, 90px, 0);
-            animation: glitch-1 2s infinite linear alternate-reverse;
-        }
-
-        .glitch::after {
-            left: -2px;
-            text-shadow: -2px 0 #00d4ff;
-            clip: rect(85px, 550px, 140px, 0);
-            animation: glitch-2 2s infinite linear alternate-reverse;
-        }
-
-        @keyframes glitch-1 {
-            0% { clip: rect(132px, 9999px, 101px, 0); }
-            25% { clip: rect(17px, 9999px, 94px, 0); }
-            50% { clip: rect(121px, 9999px, 36px, 0); }
-            75% { clip: rect(75px, 9999px, 78px, 0); }
-            100% { clip: rect(26px, 9999px, 147px, 0); }
-        }
-
-        @keyframes glitch-2 {
-            0% { clip: rect(129px, 9999px, 36px, 0); }
-            25% { clip: rect(17px, 9999px, 98px, 0); }
-            50% { clip: rect(85px, 9999px, 115px, 0); }
-            75% { clip: rect(48px, 9999px, 62px, 0); }
-            100% { clip: rect(103px, 9999px, 74px, 0); }
-        }
-
-        @keyframes glitch-skew {
-            0% { transform: skew(0deg); }
-            10% { transform: skew(-2deg); }
-            20% { transform: skew(2deg); }
-            30% { transform: skew(0deg); }
-            100% { transform: skew(0deg); }
-        }
-
-        /* Scroll indicator */
-        .scroll-indicator {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: rgba(139, 92, 246, 0.2);
-            z-index: 100;
-        }
-
-        .scroll-progress {
-            height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
-            width: 0%;
-            transition: width 0.1s;
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(15, 15, 35, 0.5);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #667eea, #764ba2);
-            border-radius: 10px;
-        }
-
-        /* Navbar */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 50;
-            transition: all 0.3s ease;
-        }
-
-        .navbar.scrolled {
-            background: rgba(15, 15, 35, 0.9);
-            backdrop-filter: blur(20px);
-            box-shadow: 0 4px 30px rgba(139, 92, 246, 0.1);
-        }
-
-        /* AI Chatbot styles */
-        .ai-pulse {
-            animation: ai-pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes ai-pulse {
-            0%, 100% {
-                box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7);
-            }
-            50% {
-                box-shadow: 0 0 0 20px rgba(139, 92, 246, 0);
-            }
-        }
-
-        .chat-bubble-ai {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 18px 18px 18px 4px;
-        }
-
-        .chat-bubble-user {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            border-radius: 18px 18px 4px 18px;
-        }
-
-        .typing-animation {
-            display: inline-block;
-            animation: typing-dots 1.4s infinite;
-        }
-
-        @keyframes typing-dots {
-            0%, 100% { opacity: 0.3; transform: translateY(0); }
-            50% { opacity: 1; transform: translateY(-10px); }
-        }
-
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: rgba(139, 92, 246, 0.1);
-            border-radius: 10px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #667eea, #764ba2);
-            border-radius: 10px;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .cyber-card {
-                padding: 1.5rem;
-            }
-
-            #aiChatWidget {
-                width: calc(100vw - 2rem);
-                right: 1rem;
-                left: 1rem;
-            }
-        }
-
-        /* Tech stack grid */
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-            gap: 1rem;
-        }
-
-        .tech-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem;
-            background: rgba(139, 92, 246, 0.1);
-            border: 1px solid rgba(139, 92, 246, 0.2);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .tech-item:hover {
-            background: rgba(139, 92, 246, 0.2);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
-        }
-
-        /* Project tags */
-        .tag {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            background: rgba(139, 92, 246, 0.2);
-            border: 1px solid rgba(139, 92, 246, 0.3);
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-    </style>
+    <link rel="stylesheet" href="./styles2.css">
 </head>
 
 <body x-data="{ lang: 'en' }">
@@ -411,74 +76,73 @@
         <!-- Hero Section -->
         <section id="home" class="min-h-screen flex items-center justify-center px-4 pt-20">
             <div class="text-center max-w-4xl">
-                <div class="floating">
-                    <!-- Profile Photo -->
-                    <img src="./profilepic.jpeg" alt="Fabián M." class="rounded-full w-48 h-48 object-cover border-4 border-purple-500/40 shadow-2xl mb-8 mx-auto floating">
+                <!-- Profile Photo -->
+                <img src="./profilepic.jpeg" alt="Fabián M." class="profile-photo mx-auto mb-8">
 
-                    <h1 class="text-6xl md:text-8xl font-bold mb-6">
-                        <span class="gradient-text neon-glow glitch" data-text="Fabián Muñoz">Fabián Muñoz</span>
-                    </h1>
-                    <div class="text-2xl md:text-3xl text-gray-300 mb-8">
-                        <span x-show="lang === 'es'">
-                            Site Reliability Engineer<span class="blinking-cursor">|</span>
-                        </span>
-                        <span x-show="lang === 'en'" x-cloak>
-                            Site Reliability Engineer<span class="blinking-cursor">|</span>
-                        </span>
-                    </div>
+                <h1 class="text-6xl md:text-8xl font-bold mb-6">
+                    <span class="gradient-text neon-glow glitch" data-text="Fabián Muñoz">Fabián Muñoz</span>
+                </h1>
 
-                    <p class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto">
-                        <span x-show="lang === 'es'">
-                            Especialista en observabilidad, golden signals monitoring y optimización de confiabilidad en infraestructuras críticas.
-                        </span>
-                        <span x-show="lang === 'en'" x-cloak>
-                            Specialist in observability, golden signals monitoring and reliability optimization in critical infrastructures.
-                        </span>
-                    </p>
-
-                    <div class="flex gap-4 justify-center flex-wrap">
-                        <a href="#projects" class="glass neon-border px-8 py-4 rounded-full font-semibold hover:bg-purple-500/20 transition-all transform hover:scale-105">
-                            <span x-show="lang === 'es'">Ver Proyectos</span>
-                            <span x-show="lang === 'en'" x-cloak>View Projects</span>
-                        </a>
-                        <a href="#contact" class="glass-light px-8 py-4 rounded-full font-semibold hover:bg-purple-500/20 transition-all transform hover:scale-105">
-                            <span x-show="lang === 'es'">Contacto</span>
-                            <span x-show="lang === 'en'" x-cloak>Contact</span>
-                        </a>
-                    </div>
+                <div class="text-2xl md:text-3xl text-gray-300 mb-8">
+                    <span x-show="lang === 'es'">
+                        Site Reliability Engineer<span class="blinking-cursor">|</span>
+                    </span>
+                    <span x-show="lang === 'en'" x-cloak>
+                        Site Reliability Engineer<span class="blinking-cursor">|</span>
+                    </span>
                 </div>
 
-                <!-- Tech Icons Orbit -->
+                <p class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto">
+                    <span x-show="lang === 'es'">
+                        Especialista en observabilidad, golden signals monitoring y optimización de confiabilidad en infraestructuras críticas.
+                    </span>
+                    <span x-show="lang === 'en'" x-cloak>
+                        Specialist in observability, golden signals monitoring and reliability optimization in critical infrastructures.
+                    </span>
+                </p>
+
+                <div class="flex gap-4 justify-center flex-wrap">
+                    <a href="#projects" class="glass neon-border px-8 py-4 rounded-full font-semibold hover:bg-purple-500/20 transition-all transform hover:scale-105">
+                        <span x-show="lang === 'es'">Ver Proyectos</span>
+                        <span x-show="lang === 'en'" x-cloak>View Projects</span>
+                    </a>
+                    <a href="#contact" class="glass-light px-8 py-4 rounded-full font-semibold hover:bg-purple-500/20 transition-all transform hover:scale-105">
+                        <span x-show="lang === 'es'">Contacto</span>
+                        <span x-show="lang === 'en'" x-cloak>Contact</span>
+                    </a>
+                </div>
+
+                <!-- Tech Icons -->
                 <div class="mt-20 flex justify-center gap-8 flex-wrap">
-                    <div class="tech-item" style="animation: float 3s ease-in-out infinite">
+                    <div class="tech-item">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS" class="w-12 h-12">
                         <span class="text-xs text-gray-400">AWS</span>
                     </div>
-                    <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.1s">
+                    <div class="tech-item">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/datadog/datadog-original.svg" alt="Datadog" class="w-12 h-12">
                         <span class="text-xs text-gray-400">Datadog</span>
                     </div>
-                    <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.2s">
+                    <div class="tech-item">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" alt="Grafana" class="w-12 h-12">
                         <span class="text-xs text-gray-400">Grafana</span>
                     </div>
-                    <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.3s">
+                    <div class="tech-item">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg" alt="Prometheus" class="w-12 h-12">
                         <span class="text-xs text-gray-400">Prometheus</span>
                     </div>
-                    <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.4s">
+                    <div class="tech-item">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" class="w-12 h-12">
                         <span class="text-xs text-gray-400">Docker</span>
                     </div>
-                    <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.5s">
+                    <div class="tech-item">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" class="w-12 h-12">
                         <span class="text-xs text-gray-400">Kubernetes</span>
                     </div>
-                    <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.6s">
+                    <div class="tech-item">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform" class="w-12 h-12">
                         <span class="text-xs text-gray-400">Terraform</span>
                     </div>
-                    <div class="tech-item" style="animation: float 3s ease-in-out infinite; animation-delay: 0.7s">
+                    <div class="tech-item">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="w-12 h-12">
                         <span class="text-xs text-gray-400">Python</span>
                     </div>
@@ -807,35 +471,30 @@
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" alt="Grafana" class="w-8 h-8">
                                     <span class="ml-3">Grafana Cloud</span>
                                 </div>
-
                             </li>
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg" alt="Prometheus" class="w-8 h-8">
                                     <span class="ml-3">Prometheus</span>
                                 </div>
-
                             </li>
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <i class="fas fa-exclamation-triangle text-yellow-400 w-8"></i>
                                     <span class="ml-3">BigPanda</span>
                                 </div>
-
                             </li>
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <i class="fas fa-search text-purple-400 w-8"></i>
                                     <span class="ml-3">Splunk</span>
                                 </div>
-
                             </li>
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <i class="fas fa-cog text-blue-400 w-8"></i>
                                     <span class="ml-3">ServiceNow</span>
                                 </div>
-
                             </li>
                         </ul>
                     </div>
@@ -852,35 +511,30 @@
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS" class="w-8 h-8">
                                     <span class="ml-3">AWS</span>
                                 </div>
-
                             </li>
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform" class="w-8 h-8">
                                     <span class="ml-3">Terraform</span>
                                 </div>
-
                             </li>
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" class="w-8 h-8">
                                     <span class="ml-3">Kubernetes</span>
                                 </div>
-
                             </li>
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" class="w-8 h-8">
                                     <span class="ml-3">Docker</span>
                                 </div>
-
                             </li>
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" alt="Jenkins" class="w-8 h-8">
                                     <span class="ml-3">Jenkins</span>
                                 </div>
-
                             </li>
                         </ul>
                     </div>
@@ -898,35 +552,30 @@
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="w-8 h-8">
                                     <span class="ml-3">Python</span>
                                 </div>
-
                             </li>
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="w-8 h-8">
                                     <span class="ml-3">JavaScript</span>
                                 </div>
-
                             </li>
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="w-8 h-8">
                                     <span class="ml-3">React</span>
                                 </div>
-
                             </li>
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" class="w-8 h-8">
                                     <span class="ml-3">Node.js</span>
                                 </div>
-
                             </li>
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="w-8 h-8">
                                     <span class="ml-3">Git</span>
                                 </div>
-
                             </li>
                         </ul>
                     </div>
@@ -1013,474 +662,7 @@
         </div>
     </div>
 
-    <script>
-        // ========== THREE.JS 3D BACKGROUND ==========
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({
-            canvas: document.getElementById('three-canvas'),
-            antialias: true,
-            alpha: true
-        });
-
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
-
-        // Particles
-        const particlesGeometry = new THREE.BufferGeometry();
-        const particlesCount = 5000;
-        const posArray = new Float32Array(particlesCount * 3);
-
-        for(let i = 0; i < particlesCount * 3; i++) {
-            posArray[i] = (Math.random() - 0.5) * 100;
-        }
-
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-
-        const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.05,
-            color: 0x8b5cf6,
-            transparent: true,
-            opacity: 0.8,
-            blending: THREE.AdditiveBlending
-        });
-
-        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particlesMesh);
-
-        // Geometric shapes
-        const torusGeometry = new THREE.TorusGeometry(10, 1, 16, 100);
-        const torusMaterial = new THREE.MeshBasicMaterial({
-            color: 0x667eea,
-            wireframe: true,
-            transparent: true,
-            opacity: 0.3
-        });
-        const torus = new THREE.Mesh(torusGeometry, torusMaterial);
-        scene.add(torus);
-
-        const sphereGeometry = new THREE.SphereGeometry(8, 32, 32);
-        const sphereMaterial = new THREE.MeshBasicMaterial({
-            color: 0x764ba2,
-            wireframe: true,
-            transparent: true,
-            opacity: 0.2
-        });
-        const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-        sphere.position.x = -20;
-        sphere.position.y = 10;
-        scene.add(sphere);
-
-        camera.position.z = 30;
-
-        // Mouse movement effect
-        let mouseX = 0;
-        let mouseY = 0;
-
-        document.addEventListener('mousemove', (event) => {
-            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-        });
-
-        // Animation loop
-        function animate() {
-            requestAnimationFrame(animate);
-
-            // Rotate particles
-            particlesMesh.rotation.y += 0.001;
-            particlesMesh.rotation.x += 0.0005;
-
-            // Rotate shapes
-            torus.rotation.x += 0.01;
-            torus.rotation.y += 0.005;
-            sphere.rotation.x += 0.005;
-            sphere.rotation.y += 0.01;
-
-            // Camera follow mouse
-            camera.position.x += (mouseX * 5 - camera.position.x) * 0.05;
-            camera.position.y += (mouseY * 5 - camera.position.y) * 0.05;
-            camera.lookAt(scene.position);
-
-            renderer.render(scene, camera);
-        }
-
-        animate();
-
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-        // ========== SCROLL EFFECTS ==========
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            const scrollProgress = document.getElementById('scrollProgress');
-
-            // Navbar background on scroll
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-
-            // Scroll progress
-            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrolled = (window.scrollY / scrollHeight) * 100;
-            scrollProgress.style.width = scrolled + '%';
-        });
-
-        // ========== AI CHATBOT LOGIC ==========
-        let conversationLanguage = null;
-        let aiChatOpen = false;
-
-        function updateChatPlaceholder() {
-            const input = document.getElementById('aiChatInput');
-            if (input) {
-                try {
-                    const alpineElement = document.querySelector('[x-data]');
-                    const currentLang = alpineElement && alpineElement.__x && alpineElement.__x.$data
-                        ? alpineElement.__x.$data.lang
-                        : 'en';
-
-                    if (currentLang === 'es') {
-                        input.placeholder = 'Escribe tu pregunta...';
-                    } else {
-                        input.placeholder = 'Type your question...';
-                    }
-                } catch (error) {
-                    input.placeholder = 'Type your question...';
-                }
-            }
-        }
-
-        function toggleAIChat() {
-            const widget = document.getElementById('aiChatWidget');
-            const button = document.getElementById('aiChatButton');
-            aiChatOpen = !aiChatOpen;
-
-            if (aiChatOpen) {
-                widget.classList.remove('hidden');
-                widget.classList.add('flex');
-                button.querySelector('.fa-robot').classList.add('animate-spin');
-                setTimeout(() => {
-                    button.querySelector('.fa-robot').classList.remove('animate-spin');
-                }, 500);
-                updateChatPlaceholder();
-            } else {
-                widget.classList.add('hidden');
-                widget.classList.remove('flex');
-            }
-        }
-
-        function handleAIKeyPress(event) {
-            if (event.key === 'Enter') {
-                sendAIMessage();
-            }
-        }
-
-        function getCurrentLang() {
-            try {
-                return document.querySelector('[x-data]').__x.$data.lang || 'en';
-            } catch {
-                return 'en';
-            }
-        }
-
-        async function sendAIMessage() {
-            const input = document.getElementById('aiChatInput');
-            const message = input.value.trim();
-
-            if (!message) return;
-
-            addAIMessage(message, 'user');
-            input.value = '';
-            showAITyping();
-
-            setTimeout(async () => {
-                const response = await getAIResponse(message);
-                hideAITyping();
-                addAIMessage(response, 'ai');
-            }, 1000 + Math.random() * 1000);
-        }
-
-        function addAIMessage(message, type) {
-            const messagesContainer = document.getElementById('aiChatMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'flex ' + (type === 'user' ? 'justify-end' : '');
-
-            const bubbleClass = type === 'user' ? 'chat-bubble-user' : 'chat-bubble-ai';
-            messageDiv.innerHTML = `
-                <div class="${bubbleClass} text-white p-3 rounded-lg max-w-xs text-sm">
-                    ${message}
-                </div>
-            `;
-
-            messagesContainer.appendChild(messageDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function showAITyping() {
-            const messagesContainer = document.getElementById('aiChatMessages');
-            const typingDiv = document.createElement('div');
-            typingDiv.id = 'aiTypingIndicator';
-            typingDiv.className = 'flex';
-            typingDiv.innerHTML = `
-                <div class="chat-bubble-ai text-white p-3 rounded-lg">
-                    <span class="typing-animation">●</span>
-                    <span class="typing-animation" style="animation-delay: 0.2s">●</span>
-                    <span class="typing-animation" style="animation-delay: 0.4s">●</span>
-                </div>
-            `;
-            messagesContainer.appendChild(typingDiv);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function hideAITyping() {
-            const typingIndicator = document.getElementById('aiTypingIndicator');
-            if (typingIndicator) {
-                typingIndicator.remove();
-            }
-        }
-
-        async function detectLanguage(message) {
-            try {
-                if (!window.GEMINI_CONFIG || !window.GEMINI_CONFIG.apiKey) {
-                    return getCurrentLang();
-                }
-
-                const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
-
-                const requestBody = {
-                    contents: [{
-                        parts: [{
-                            text: `Detect the language of this message and respond ONLY with "es" for Spanish or "en" for English. Message: "${message}"`
-                        }]
-                    }]
-                };
-
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-goog-api-key': window.GEMINI_CONFIG.apiKey
-                    },
-                    body: JSON.stringify(requestBody)
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    const detectedLang = data.candidates[0].content.parts[0].text.trim().toLowerCase();
-                    return detectedLang === 'es' ? 'es' : 'en';
-                }
-            } catch (error) {
-                console.log('Language detection fallback');
-            }
-
-            return getCurrentLang();
-        }
-
-        async function getAIResponse(message) {
-            const lowerMessage = message.toLowerCase();
-            if (lowerMessage.includes('habla español') || lowerMessage.includes('speak spanish') || lowerMessage.includes('en español')) {
-                conversationLanguage = 'es';
-                return '¡Perfecto! Ahora te responderé en español. ¿En qué puedo ayudarte? 😊';
-            }
-            if (lowerMessage.includes('speak english') || lowerMessage.includes('habla inglés') || lowerMessage.includes('in english')) {
-                conversationLanguage = 'en';
-                return 'Perfect! Now I\'ll respond in English. How can I help you? 😊';
-            }
-
-            let detectedLang = await detectLanguage(message);
-
-            if (conversationLanguage !== null && conversationLanguage !== detectedLang) {
-                conversationLanguage = detectedLang;
-            } else if (conversationLanguage === null) {
-                conversationLanguage = detectedLang;
-            }
-
-            try {
-                if (!window.GEMINI_CONFIG || !window.GEMINI_CONFIG.apiKey) {
-                    return getBasicResponse(message, detectedLang);
-                }
-
-                const portfolioContext = getPortfolioContext(detectedLang);
-
-                const systemPrompt = detectedLang === 'es'
-                    ? `Eres un asistente personal de Fabián Muñoz. Responde de manera amigable y conversacional sobre su experiencia, proyectos y habilidades. Usa emojis ocasionalmente. Mantén las respuestas concisas (máximo 50 palabras). NO repitas saludos en cada respuesta. Enfócate en responder la pregunta específica. Para contacto, dirige a LinkedIn o formulario de contacto.
-
-Contexto del portfolio:
-${portfolioContext}
-
-Responde siempre en español, siendo directo y útil.`
-                    : `You are Fabián Muñoz's personal assistant. Respond in a friendly and conversational manner about his experience, projects, and skills. Use emojis occasionally. Keep responses concise (max 50 words). DON'T repeat greetings in every response. Focus on answering the specific question. For contact, direct to LinkedIn or contact form.
-
-Portfolio context:
-${portfolioContext}
-
-Always respond in English, being direct and helpful.`;
-
-                const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
-
-                const requestBody = {
-                    contents: [{
-                        parts: [{
-                            text: `${systemPrompt}\n\nUsuario: ${message}`
-                        }]
-                    }],
-                    generationConfig: {
-                        temperature: 0.7,
-                        maxOutputTokens: 60
-                    }
-                };
-
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-goog-api-key': window.GEMINI_CONFIG.apiKey
-                    },
-                    body: JSON.stringify(requestBody)
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const data = await response.json();
-
-                if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-                    return data.candidates[0].content.parts[0].text;
-                } else {
-                    throw new Error('No response content received');
-                }
-
-            } catch (error) {
-                return getBasicResponse(message, detectedLang);
-            }
-        }
-
-        function getPortfolioContext(lang) {
-            if (lang === 'es') {
-                return `
-PERFIL PROFESIONAL:
-- Fabián Muñoz es Ingeniero en Computación y Analista Programador
-- Se desempeña como Ingeniero en Observabilidad con 2 años de experiencia
-- Site Reliability Engineer (SRE) en Innfinit desde noviembre 2022
-- Especializado en observabilidad, monitoreo y confiabilidad de sistemas críticos
-
-EXPERIENCIA:
-- 2 años como Ingeniero en Observabilidad y SRE
-- Especialista en monitoreo de sistemas críticos empresariales
-- Participando en proyectos de arquitectura CN/Delta
-- Experiencia con golden signals y gestión SLI/SLO
-- Trabajo con infraestructura cloud y automatización
-
-TECNOLOGÍAS:
-- ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform
-- 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda
-- 🐍 Python, Jenkins, CI/CD
-
-PROYECTOS:
-- 🎵 YouTube Music Playlist Creator (40+ stars)
-- 🥊 NutriCombat - PWA con IA
-- 📊 Chile Dashboard en Grafana con datos oficiales
-- 💼 Proyectos web True Q, Ferremás, Psicóloga Valeria Améstica, BYF
-
-CONTACTO:
-- 💼 LinkedIn: https://linkedin.com/in/fabianimv
-- 📧 Para contacto directo, usar el formulario de contacto del sitio
-- 🌐 Portfolio: https://fabianimv.github.io/portfolio`;
-            } else {
-                return `
-PROFESSIONAL PROFILE:
-- Fabián Muñoz is a Computer Engineer and Analyst Programmer
-- Works as Observability Engineer with 2 years of experience
-- Site Reliability Engineer (SRE) at Innfinit since November 2022
-- Specialized in observability, monitoring and critical system reliability
-
-EXPERIENCE:
-- 2 years as Observability Engineer and SRE
-- Specialist in critical enterprise system monitoring
-- Participating in CN/Delta architecture projects
-- Experience with golden signals and SLI/SLO management
-- Working with cloud infrastructure and automation
-
-TECHNOLOGIES:
-- ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform
-- 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda
-- 🐍 Python, Jenkins, CI/CD
-
-PROJECTS:
-- 🎵 YouTube Music Playlist Creator (40+ stars)
-- 🥊 NutriCombat - PWA with AI
-- 📊 Chile Dashboard in Grafana with official data
-- 💼 Web projects True Q, Ferremás, Psychologist Valeria Améstica, BYF
-
-CONTACT:
-- 💼 LinkedIn: https://linkedin.com/in/fabianimv
-- 📧 For direct contact, use the site's contact form
-- 🌐 Portfolio: https://fabianimv.github.io/portfolio`;
-            }
-        }
-
-        function getBasicResponse(message, currentLang) {
-            const lowerMessage = message.toLowerCase();
-
-            const responsesES = {
-                'hola': '¡Hola! 👋 ¿En qué puedo ayudarte a conocer más sobre Fabián?',
-                'hello': '¡Hola! 👋 ¿En qué puedo ayudarte a conocer más sobre Fabián?',
-                'experiencia': 'Fabián es especialista en SRE en Innfinit, enfocado en observabilidad y monitoreo de sistemas críticos. 📊',
-                'experience': 'Fabián es especialista en SRE en Innfinit, enfocado en observabilidad y monitoreo de sistemas críticos. 📊',
-                'proyectos': 'Sus proyectos destacados incluyen: 🎵 YouTube Music Playlist Creator (40+ stars), 🥊 NutriCombat - PWA para atletas de combate con IA, 📊 Dashboard Chile.',
-                'projects': 'Sus proyectos destacados incluyen: 🎵 YouTube Music Playlist Creator (40+ stars), 🥊 NutriCombat - PWA para atletas de combate con IA.',
-                'habilidades': 'Maneja: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python.',
-                'skills': 'Maneja: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python.',
-                'contacto': 'Contacto: 💼 LinkedIn: https://linkedin.com/in/fabianimv o usa el formulario de contacto del sitio 📧',
-                'contact': 'Contacto: 💼 LinkedIn: https://linkedin.com/in/fabianimv o usa el formulario de contacto del sitio 📧',
-            };
-
-            const responsesEN = {
-                'hola': 'Hello! 👋 How can I help you learn more about Fabián?',
-                'hello': 'Hello! 👋 How can I help you learn more about Fabián?',
-                'experiencia': 'Fabián is an SRE specialist at Innfinit, focused on observability and monitoring of critical systems. 📊',
-                'experience': 'Fabián is an SRE specialist at Innfinit, focused on observability and monitoring of critical systems. 📊',
-                'proyectos': 'His featured projects include: 🎵 YouTube Music Playlist Creator (40+ stars), 🥊 NutriCombat - PWA for combat athletes with AI.',
-                'projects': 'His featured projects include: 🎵 YouTube Music Playlist Creator (40+ stars), 🥊 NutriCombat - PWA for combat athletes with AI.',
-                'habilidades': 'He handles: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python.',
-                'skills': 'He handles: ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform, 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda, 🐍 Python.',
-                'contacto': 'Contact: 💼 LinkedIn: https://linkedin.com/in/fabianimv or use the site contact form 📧',
-                'contact': 'Contact: 💼 LinkedIn: https://linkedin.com/in/fabianimv or use the site contact form 📧',
-            };
-
-            const responses = currentLang === 'es' ? responsesES : responsesEN;
-
-            for (const [key, response] of Object.entries(responses)) {
-                if (lowerMessage.includes(key)) {
-                    return response;
-                }
-            }
-
-            const defaultResponses = currentLang === 'es' ? [
-                '🤖 Interesante pregunta. Te recomiendo revisar las secciones de Experiencia, Proyectos y Habilidades del portfolio para más detalles.',
-                '💡 ¿Te interesa algo específico sobre la experiencia SRE de Fabián? Puedo contarte sobre sus proyectos, habilidades técnicas o experiencia laboral.',
-                '🔍 Puedo ayudarte con información sobre: experiencia, proyectos, habilidades, contacto, educación, o sus especialidades en SRE.'
-            ] : [
-                '🤖 Interesting question. I recommend checking the Experience, Projects and Skills sections of the portfolio for more details.',
-                '💡 Are you interested in something specific about Fabián\'s SRE experience? I can tell you about his projects, technical skills or work experience.',
-                '🔍 I can help you with information about: experience, projects, skills, contact, education, or his SRE specialties.'
-            ];
-
-            return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
-        }
-
-        // Initialize on load
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                updateChatPlaceholder();
-            }, 100);
-        });
-    </script>
+    <!-- Main Script -->
+    <script src="./main2.js"></script>
 </body>
 </html>
