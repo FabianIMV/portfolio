@@ -20,10 +20,13 @@ function initCustomCursor() {
 
     const cursor = document.createElement('div');
     cursor.className = 'custom-cursor';
+    cursor.style.opacity = '1';
     document.body.appendChild(cursor);
 
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let cursorX = mouseX;
+    let cursorY = mouseY;
 
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
@@ -35,20 +38,23 @@ function initCustomCursor() {
         const dx = mouseX - cursorX;
         const dy = mouseY - cursorY;
 
-        cursorX += dx * 0.15;
-        cursorY += dy * 0.15;
+        cursorX += dx * 0.2;
+        cursorY += dy * 0.2;
 
-        cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+        cursor.style.left = `${cursorX}px`;
+        cursor.style.top = `${cursorY}px`;
         requestAnimationFrame(animateCursor);
     }
     animateCursor();
 
-    // Cursor hover effect
-    const hoverElements = document.querySelectorAll('a, button, .cyber-card, .tech-item');
-    hoverElements.forEach(el => {
-        el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
-        el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
-    });
+    // Cursor hover effect - use setTimeout to ensure elements exist
+    setTimeout(() => {
+        const hoverElements = document.querySelectorAll('a, button, .cyber-card, .tech-item, input, textarea');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
+        });
+    }, 500);
 }
 
 // ========== THREE.JS 3D BACKGROUND ==========

@@ -14,26 +14,83 @@ body {
     overflow-x: hidden;
     background: #000;
     color: #fff;
-    cursor: none;
+    cursor: none !important;
+}
+
+body * {
+    cursor: none !important;
+}
+
+a, button, input, textarea {
+    cursor: none !important;
 }
 
 /* Custom Cursor */
+
 .custom-cursor {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #8b5cf6;
+    width: 30px;
+    height: 30px;
+    border: 3px solid #a78bfa;
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
-    z-index: 9999;
-    mix-blend-mode: difference;
-    transition: all 0.15s ease;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.6) 0%, rgba(167, 139, 250, 0.3) 50%, transparent 70%);
+    box-shadow:
+        0 0 25px rgba(139, 92, 246, 1),
+        0 0 50px rgba(139, 92, 246, 0.8),
+        0 0 75px rgba(139, 92, 246, 0.6),
+        inset 0 0 25px rgba(167, 139, 250, 0.7);
+    animation: cursor-pulse 2s ease-in-out infinite;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+.custom-cursor::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 1);
 }
 
 .custom-cursor.cursor-hover {
     width: 50px;
     height: 50px;
-    background: rgba(139, 92, 246, 0.1);
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, rgba(167, 139, 250, 0.15) 50%, transparent 70%);
+    border-color: #c4b5fd;
+    box-shadow:
+        0 0 30px rgba(139, 92, 246, 1),
+        0 0 60px rgba(139, 92, 246, 0.8),
+        0 0 90px rgba(139, 92, 246, 0.6),
+        inset 0 0 30px rgba(167, 139, 250, 0.6);
+}
+
+@keyframes cursor-pulse {
+    0%, 100% {
+        box-shadow:
+            0 0 25px rgba(139, 92, 246, 1),
+            0 0 50px rgba(139, 92, 246, 0.8),
+            0 0 75px rgba(139, 92, 246, 0.6),
+            inset 0 0 25px rgba(167, 139, 250, 0.7);
+        border-color: #a78bfa;
+    }
+    50% {
+        box-shadow:
+            0 0 35px rgba(139, 92, 246, 1),
+            0 0 70px rgba(139, 92, 246, 1),
+            0 0 105px rgba(139, 92, 246, 0.8),
+            inset 0 0 35px rgba(167, 139, 250, 0.9);
+        border-color: #c4b5fd;
+    }
 }
 
 /* Three.js Canvas Background */
