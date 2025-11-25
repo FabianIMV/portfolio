@@ -497,41 +497,20 @@ function hideAITyping() {
     }
 }
 
+// API Endpoint configurado después del deployment
+const API_ENDPOINT = window.CHATBOT_API_ENDPOINT || null;
+
 async function detectLanguage(message) {
-    try {
-        if (!window.GEMINI_CONFIG || !window.GEMINI_CONFIG.apiKey) {
-            return getCurrentLang();
+    const spanishWords = ['hola', 'qué', 'cómo', 'dónde', 'cuándo', 'por qué', 'experiencia', 'proyectos', 'habilidades', 'contacto'];
+    const lowerMessage = message.toLowerCase();
+
+    for (const word of spanishWords) {
+        if (lowerMessage.includes(word)) {
+            return 'es';
         }
-
-        const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
-
-        const requestBody = {
-            contents: [{
-                parts: [{
-                    text: `Detect the language of this message and respond ONLY with "es" for Spanish or "en" for English. Message: "${message}"`
-                }]
-            }]
-        };
-
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-goog-api-key': window.GEMINI_CONFIG.apiKey
-            },
-            body: JSON.stringify(requestBody)
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            const detectedLang = data.candidates[0].content.parts[0].text.trim().toLowerCase();
-            return detectedLang === 'es' ? 'es' : 'en';
-        }
-    } catch (error) {
-        console.log('Language detection fallback');
     }
 
-    return getCurrentLang();
+    return 'en';
 }
 
 async function getAIResponse(message) {
@@ -554,47 +533,21 @@ async function getAIResponse(message) {
     }
 
     try {
-        if (!window.GEMINI_CONFIG || !window.GEMINI_CONFIG.apiKey) {
+        // Verificar si hay endpoint configurado
+        if (!API_ENDPOINT) {
+            console.log('API endpoint no configurado, usando respuestas básicas');
             return getBasicResponse(message, detectedLang);
         }
 
-        const portfolioContext = getPortfolioContext(detectedLang);
-
-        const systemPrompt = detectedLang === 'es'
-            ? `Eres un asistente personal de Fabián Muñoz. Responde de manera amigable y conversacional sobre su experiencia, proyectos y habilidades. Usa emojis ocasionalmente. Mantén las respuestas concisas (máximo 50 palabras). NO repitas saludos en cada respuesta. Enfócate en responder la pregunta específica. Para contacto, dirige a LinkedIn o formulario de contacto.
-
-Contexto del portfolio:
-${portfolioContext}
-
-Responde siempre en español, siendo directo y útil.`
-            : `You are Fabián Muñoz's personal assistant. Respond in a friendly and conversational manner about his experience, projects, and skills. Use emojis occasionally. Keep responses concise (max 50 words). DON'T repeat greetings in every response. Focus on answering the specific question. For contact, direct to LinkedIn or contact form.
-
-Portfolio context:
-${portfolioContext}
-
-Always respond in English, being direct and helpful.`;
-
-        const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
-
-        const requestBody = {
-            contents: [{
-                parts: [{
-                    text: `${systemPrompt}\n\nUsuario: ${message}`
-                }]
-            }],
-            generationConfig: {
-                temperature: 0.7,
-                maxOutputTokens: 60
-            }
-        };
-
-        const response = await fetch(apiUrl, {
+        // Llamar a la Lambda a través de API Gateway
+        const response = await fetch(API_ENDPOINT, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'X-goog-api-key': window.GEMINI_CONFIG.apiKey
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify(requestBody)
+            body: JSON.stringify({
+                message: message
+            })
         });
 
         if (!response.ok) {
@@ -603,80 +556,18 @@ Always respond in English, being direct and helpful.`;
 
         const data = await response.json();
 
-        if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-            return data.candidates[0].content.parts[0].text;
+        if (data.message) {
+            return data.message;
         } else {
             throw new Error('No response content received');
         }
 
     } catch (error) {
+        console.error('Error llamando a la API:', error);
         return getBasicResponse(message, detectedLang);
     }
 }
 
-function getPortfolioContext(lang) {
-    if (lang === 'es') {
-        return `
-PERFIL PROFESIONAL:
-- Fabián Muñoz es Ingeniero en Computación y Analista Programador
-- Se desempeña como Ingeniero en Observabilidad con 2 años de experiencia
-- Site Reliability Engineer (SRE) en Innfinit desde noviembre 2022
-- Especializado en observabilidad, monitoreo y confiabilidad de sistemas críticos
-
-EXPERIENCIA:
-- 2 años como Ingeniero en Observabilidad y SRE
-- Especialista en monitoreo de sistemas críticos empresariales
-- Participando en proyectos de arquitectura CN/Delta
-- Experiencia con golden signals y gestión SLI/SLO
-- Trabajo con infraestructura cloud y automatización
-
-TECNOLOGÍAS:
-- ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform
-- 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda
-- 🐍 Python, Jenkins, CI/CD
-
-PROYECTOS:
-- 🎵 YouTube Music Playlist Creator (40+ stars)
-- 🥊 NutriCombat - PWA con IA
-- 📊 Chile Dashboard en Grafana con datos oficiales
-- 💼 Proyectos web True Q, Ferremás, Psicóloga Valeria Améstica, BYF
-
-CONTACTO:
-- 💼 LinkedIn: https://linkedin.com/in/fabianimv
-- 📧 Para contacto directo, usar el formulario de contacto del sitio
-- 🌐 Portfolio: https://fabianimv.github.io/portfolio`;
-    } else {
-        return `
-PROFESSIONAL PROFILE:
-- Fabián Muñoz is a Computer Engineer and Analyst Programmer
-- Works as Observability Engineer with 2 years of experience
-- Site Reliability Engineer (SRE) at Innfinit since November 2022
-- Specialized in observability, monitoring and critical system reliability
-
-EXPERIENCE:
-- 2 years as Observability Engineer and SRE
-- Specialist in critical enterprise system monitoring
-- Participating in CN/Delta architecture projects
-- Experience with golden signals and SLI/SLO management
-- Working with cloud infrastructure and automation
-
-TECHNOLOGIES:
-- ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform
-- 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda
-- 🐍 Python, Jenkins, CI/CD
-
-PROJECTS:
-- 🎵 YouTube Music Playlist Creator (40+ stars)
-- 🥊 NutriCombat - PWA with AI
-- 📊 Chile Dashboard in Grafana with official data
-- 💼 Web projects True Q, Ferremás, Psychologist Valeria Améstica, BYF
-
-CONTACT:
-- 💼 LinkedIn: https://linkedin.com/in/fabianimv
-- 📧 For direct contact, use the site's contact form
-- 🌐 Portfolio: https://fabianimv.github.io/portfolio`;
-    }
-}
 
 function getBasicResponse(message, currentLang) {
     const lowerMessage = message.toLowerCase();

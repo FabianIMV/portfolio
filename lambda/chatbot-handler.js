@@ -1,0 +1,244 @@
+/**
+ * Lambda Function: AI Chatbot Handler
+ *
+ * Este handler recibe mensajes del chatbot y los procesa usando Google Gemini AI
+ *
+ * Environment Variables requeridas:
+ * - GEMINI_API_KEY: Tu API key de Google Gemini
+ */
+
+const https = require('https');
+
+// Contexto del portfolio en español
+const PORTFOLIO_CONTEXT_ES = `
+PERFIL PROFESIONAL:
+- Fabián Muñoz es Ingeniero en Computación y Analista Programador
+- Se desempeña como Ingeniero en Observabilidad con 2 años de experiencia
+- Site Reliability Engineer (SRE) en Innfinit desde noviembre 2022
+- Especializado en observabilidad, monitoreo y confiabilidad de sistemas críticos
+
+EXPERIENCIA:
+- 2 años como Ingeniero en Observabilidad y SRE
+- Especialista en monitoreo de sistemas críticos empresariales
+- Participando en proyectos de arquitectura CN/Delta
+- Experiencia con golden signals y gestión SLI/SLO
+- Trabajo con infraestructura cloud y automatización
+
+TECNOLOGÍAS:
+- ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform
+- 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda
+- 🐍 Python, Jenkins, CI/CD
+
+PROYECTOS:
+- 🎵 YouTube Music Playlist Creator (40+ stars)
+- 🥊 NutriCombat - PWA con IA
+- 📊 Chile Dashboard en Grafana con datos oficiales
+- 💼 Proyectos web True Q, Ferremás, Psicóloga Valeria Améstica, BYF
+
+CONTACTO:
+- 💼 LinkedIn: https://linkedin.com/in/fabianimv
+- 📧 Para contacto directo, usar el formulario de contacto del sitio
+- 🌐 Portfolio: https://fabianimv.github.io/portfolio`;
+
+// Contexto del portfolio en inglés
+const PORTFOLIO_CONTEXT_EN = `
+PROFESSIONAL PROFILE:
+- Fabián Muñoz is a Computer Engineer and Analyst Programmer
+- Works as Observability Engineer with 2 years of experience
+- Site Reliability Engineer (SRE) at Innfinit since November 2022
+- Specialized in observability, monitoring and critical system reliability
+
+EXPERIENCE:
+- 2 years as Observability Engineer and SRE
+- Specialist in critical enterprise system monitoring
+- Participating in CN/Delta architecture projects
+- Experience with golden signals and SLI/SLO management
+- Working with cloud infrastructure and automation
+
+TECHNOLOGIES:
+- ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform
+- 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda
+- 🐍 Python, Jenkins, CI/CD
+
+PROJECTS:
+- 🎵 YouTube Music Playlist Creator (40+ stars)
+- 🥊 NutriCombat - PWA with AI
+- 📊 Chile Dashboard in Grafana with official data
+- 💼 Web projects True Q, Ferremás, Psychologist Valeria Améstica, BYF
+
+CONTACT:
+- 💼 LinkedIn: https://linkedin.com/in/fabianimv
+- 📧 For direct contact, use the site's contact form
+- 🌐 Portfolio: https://fabianimv.github.io/portfolio`;
+
+/**
+ * Detecta el idioma del mensaje
+ */
+function detectLanguage(message) {
+    const spanishWords = ['hola', 'qué', 'cómo', 'dónde', 'cuándo', 'por qué', 'experiencia', 'proyectos', 'habilidades', 'contacto'];
+    const lowerMessage = message.toLowerCase();
+
+    for (const word of spanishWords) {
+        if (lowerMessage.includes(word)) {
+            return 'es';
+        }
+    }
+
+    return 'en';
+}
+
+/**
+ * Llama a la API de Gemini
+ */
+function callGeminiAPI(prompt, apiKey) {
+    return new Promise((resolve, reject) => {
+        const postData = JSON.stringify({
+            contents: [{
+                parts: [{
+                    text: prompt
+                }]
+            }],
+            generationConfig: {
+                temperature: 0.7,
+                maxOutputTokens: 150
+            }
+        });
+
+        const options = {
+            hostname: 'generativelanguage.googleapis.com',
+            path: `/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': Buffer.byteLength(postData)
+            }
+        };
+
+        const req = https.request(options, (res) => {
+            let data = '';
+
+            res.on('data', (chunk) => {
+                data += chunk;
+            });
+
+            res.on('end', () => {
+                try {
+                    const response = JSON.parse(data);
+
+                    if (response.candidates && response.candidates[0] && response.candidates[0].content) {
+                        resolve(response.candidates[0].content.parts[0].text);
+                    } else {
+                        reject(new Error('Invalid response format from Gemini API'));
+                    }
+                } catch (error) {
+                    reject(error);
+                }
+            });
+        });
+
+        req.on('error', (error) => {
+            reject(error);
+        });
+
+        req.write(postData);
+        req.end();
+    });
+}
+
+/**
+ * Handler principal de la Lambda
+ */
+exports.handler = async (event) => {
+    console.log('Received event:', JSON.stringify(event, null, 2));
+
+    // Headers CORS
+    const headers = {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'OPTIONS,POST'
+    };
+
+    // Manejar preflight request
+    if (event.httpMethod === 'OPTIONS') {
+        return {
+            statusCode: 200,
+            headers,
+            body: ''
+        };
+    }
+
+    try {
+        // Parsear el body
+        const body = JSON.parse(event.body);
+        const { message } = body;
+
+        if (!message) {
+            return {
+                statusCode: 400,
+                headers,
+                body: JSON.stringify({
+                    error: 'Message is required'
+                })
+            };
+        }
+
+        // Obtener la API key de las variables de entorno
+        const apiKey = process.env.GEMINI_API_KEY;
+
+        if (!apiKey) {
+            return {
+                statusCode: 500,
+                headers,
+                body: JSON.stringify({
+                    error: 'API key not configured'
+                })
+            };
+        }
+
+        // Detectar idioma
+        const language = detectLanguage(message);
+        const portfolioContext = language === 'es' ? PORTFOLIO_CONTEXT_ES : PORTFOLIO_CONTEXT_EN;
+
+        // Crear el prompt
+        const systemPrompt = language === 'es'
+            ? `Eres un asistente personal de Fabián Muñoz. Responde de manera amigable y conversacional sobre su experiencia, proyectos y habilidades. Usa emojis ocasionalmente. Mantén las respuestas concisas (máximo 60 palabras). NO repitas saludos en cada respuesta. Enfócate en responder la pregunta específica. Para contacto, dirige a LinkedIn o formulario de contacto.
+
+Contexto del portfolio:
+${portfolioContext}
+
+Responde siempre en español, siendo directo y útil.`
+            : `You are Fabián Muñoz's personal assistant. Respond in a friendly and conversational manner about his experience, projects, and skills. Use emojis occasionally. Keep responses concise (max 60 words). DON'T repeat greetings in every response. Focus on answering the specific question. For contact, direct to LinkedIn or contact form.
+
+Portfolio context:
+${portfolioContext}
+
+Always respond in English, being direct and helpful.`;
+
+        const fullPrompt = `${systemPrompt}\n\nUser: ${message}`;
+
+        // Llamar a la API de Gemini
+        const response = await callGeminiAPI(fullPrompt, apiKey);
+
+        return {
+            statusCode: 200,
+            headers,
+            body: JSON.stringify({
+                message: response,
+                language: language
+            })
+        };
+
+    } catch (error) {
+        console.error('Error:', error);
+
+        return {
+            statusCode: 500,
+            headers,
+            body: JSON.stringify({
+                error: 'Internal server error',
+                details: error.message
+            })
+        };
+    }
+};

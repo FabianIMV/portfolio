@@ -1,0 +1,22 @@
+{
+  "name": "portfolio-chatbot-lambda",
+  "version": "1.0.0",
+  "description": "Lambda function for portfolio AI chatbot with Gemini",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "node deploy.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "aws-sdk": "^2.1691.0",
+    "archiver": "^7.0.1"
+  },
+  "keywords": [
+    "lambda",
+    "aws",
+    "chatbot",
+    "gemini"
+  ],
+  "author": "Fabián Muñoz",
+  "license": "MIT"
+}
