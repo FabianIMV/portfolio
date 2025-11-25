@@ -104,15 +104,23 @@ CONTACT:
 - 🌐 Portfolio: https://fabianimv.github.io/portfolio`;
 
 /**
+ * Normaliza texto removiendo tildes
+ */
+function removeAccents(str) {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+/**
  * Detecta el idioma del mensaje de forma más precisa
  */
 function detectLanguage(message) {
     const lowerMessage = message.toLowerCase();
+    const normalizedMessage = removeAccents(lowerMessage);
 
     // Palabras clave que indican español explícitamente
     if (lowerMessage.includes('en español') || lowerMessage.includes('en espanol') ||
         lowerMessage.includes('responde en español') || lowerMessage.includes('habla español') ||
-        lowerMessage.includes('habla espanol')) {
+        lowerMessage.includes('habla espanol') || lowerMessage.includes('respondeme en español')) {
         return 'es';
     }
 
@@ -122,28 +130,37 @@ function detectLanguage(message) {
         return 'en';
     }
 
-    // Palabras comunes en español (contar coincidencias)
-    const spanishWords = ['hola', 'qué', 'cómo', 'dónde', 'cuándo', 'por qué', 'cuéntame', 'cuéntame',
-                          'dame', 'dime', 'muéstrame', 'háblame', 'sobre', 'acerca', 'eres', 'estás',
-                          'experiencia', 'proyectos', 'habilidades', 'tecnologías', 'tecnologias'];
+    // Palabras comunes en español (SIN tildes para matching)
+    const spanishWords = ['hola', 'que', 'como', 'donde', 'cuando', 'por que', 'porque',
+                          'cuentame', 'cuentame', 'dame', 'dime', 'muestrame', 'hablame',
+                          'sobre', 'acerca', 'eres', 'estas', 'fabian', 'español', 'espanol',
+                          'experiencia', 'proyectos', 'habilidades', 'tecnologias', 'tecnologías',
+                          'cuales', 'hace', 'tiene', 'usa', 'trabaja', 'sabe'];
 
     // Palabras comunes en inglés
     const englishWords = ['what', 'how', 'where', 'when', 'why', 'tell', 'show', 'about',
-                         'experience', 'projects', 'skills', 'technologies', 'can', 'are', 'you'];
+                         'experience', 'projects', 'skills', 'technologies', 'can', 'are', 'you',
+                         'does', 'has', 'uses', 'works', 'knows', 'his', 'the'];
 
     let spanishScore = 0;
     let englishScore = 0;
 
+    // Usar mensaje normalizado para comparar
     for (const word of spanishWords) {
-        if (lowerMessage.includes(word)) spanishScore++;
+        if (normalizedMessage.includes(word)) spanishScore++;
     }
 
     for (const word of englishWords) {
-        if (lowerMessage.includes(word)) englishScore++;
+        if (normalizedMessage.includes(word)) englishScore++;
     }
 
     // Si hay más palabras en español, es español
     if (spanishScore > englishScore) {
+        return 'es';
+    }
+
+    // Si es empate y tiene "fabian", probablemente español
+    if (spanishScore === englishScore && normalizedMessage.includes('fabian')) {
         return 'es';
     }
 
