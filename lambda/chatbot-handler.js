@@ -17,11 +17,25 @@ const dynamodb = DynamoDBDocumentClient.from(client);
 const TABLE_NAME = 'portfolio-chatbot-messages';
 
 /**
+ * Genera un sessionId único basado en IP y User-Agent
+ */
+function generateSessionId(event) {
+    const ip = event.requestContext?.identity?.sourceIp || 'unknown';
+    const userAgent = event.headers?.['User-Agent'] || event.headers?.['user-agent'] || 'unknown';
+
+    // Hash simple para anonimizar pero mantener consistencia
+    const sessionHash = Buffer.from(`${ip}-${userAgent}`).toString('base64').substring(0, 16);
+    return sessionHash;
+}
+
+/**
  * Guarda un mensaje en DynamoDB
  */
-async function saveMessageToDynamoDB(message, response, language) {
+async function saveMessageToDynamoDB(message, response, language, sessionId, ipAddress) {
     const item = {
         messageId: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+        sessionId: sessionId,           // ← Identificador de sesión
+        ipAddress: ipAddress,           // ← IP del usuario
         timestamp: new Date().toISOString(),
         userMessage: message,
         botResponse: response,
@@ -34,7 +48,7 @@ async function saveMessageToDynamoDB(message, response, language) {
             TableName: TABLE_NAME,
             Item: item
         }));
-        console.log('Message saved to DynamoDB:', item.messageId);
+        console.log('Message saved to DynamoDB:', item.messageId, 'Session:', sessionId);
     } catch (error) {
         console.error('Error saving to DynamoDB:', error);
         // No fallar la Lambda si falla el guardado
@@ -325,9 +339,11 @@ ANSWER THE QUESTION IN ENGLISH, being direct and helpful.`;
         // Llamar a la API de Gemini
         const response = await callGeminiAPI(fullPrompt, apiKey);
 
-        // Guardar mensaje en DynamoDB
+        // Guardar mensaje en DynamoDB con sessionId e IP
         try {
-            await saveMessageToDynamoDB(message, response, language);
+            const sessionId = generateSessionId(event);
+            const ipAddress = event.requestContext?.identity?.sourceIp || 'unknown';
+            await saveMessageToDynamoDB(message, response, language, sessionId, ipAddress);
         } catch (err) {
             console.error('Failed to save to DynamoDB:', err);
             // Continuar aunque falle el guardado

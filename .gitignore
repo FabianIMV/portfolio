@@ -1,2 +1,3 @@
 # No sensitive data here anymore - API key is in Lambda
 lambda/node_modules/
+lambda/function.zip
