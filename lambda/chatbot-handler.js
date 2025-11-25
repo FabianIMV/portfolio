@@ -8,6 +8,38 @@
  */
 
 const https = require('https');
+const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
+const { DynamoDBDocumentClient, PutCommand } = require('@aws-sdk/lib-dynamodb');
+
+// Configurar DynamoDB
+const client = new DynamoDBClient({ region: 'us-east-1' });
+const dynamodb = DynamoDBDocumentClient.from(client);
+const TABLE_NAME = 'portfolio-chatbot-messages';
+
+/**
+ * Guarda un mensaje en DynamoDB
+ */
+async function saveMessageToDynamoDB(message, response, language) {
+    const item = {
+        messageId: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+        timestamp: new Date().toISOString(),
+        userMessage: message,
+        botResponse: response,
+        language: language,
+        createdAt: Math.floor(Date.now() / 1000)
+    };
+
+    try {
+        await dynamodb.send(new PutCommand({
+            TableName: TABLE_NAME,
+            Item: item
+        }));
+        console.log('Message saved to DynamoDB:', item.messageId);
+    } catch (error) {
+        console.error('Error saving to DynamoDB:', error);
+        // No fallar la Lambda si falla el guardado
+    }
+}
 
 // Contexto del portfolio en español
 const PORTFOLIO_CONTEXT_ES = `
@@ -100,13 +132,13 @@ function callGeminiAPI(prompt, apiKey) {
             }],
             generationConfig: {
                 temperature: 0.7,
-                maxOutputTokens: 150
+                maxOutputTokens: 500
             }
         });
 
         const options = {
             hostname: 'generativelanguage.googleapis.com',
-            path: `/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`,
+            path: `/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -122,21 +154,29 @@ function callGeminiAPI(prompt, apiKey) {
             });
 
             res.on('end', () => {
+                console.log('Gemini API response status:', res.statusCode);
+                console.log('Gemini API response:', data);
+
                 try {
                     const response = JSON.parse(data);
 
-                    if (response.candidates && response.candidates[0] && response.candidates[0].content) {
+                    if (response.candidates && response.candidates[0] && response.candidates[0].content && response.candidates[0].content.parts && response.candidates[0].content.parts[0]) {
                         resolve(response.candidates[0].content.parts[0].text);
+                    } else if (response.error) {
+                        reject(new Error(`Gemini API error: ${response.error.message}`));
                     } else {
+                        console.error('Unexpected response structure:', JSON.stringify(response));
                         reject(new Error('Invalid response format from Gemini API'));
                     }
                 } catch (error) {
+                    console.error('Error parsing Gemini response:', error);
                     reject(error);
                 }
             });
         });
 
         req.on('error', (error) => {
+            console.error('HTTP request error:', error);
             reject(error);
         });
 
@@ -219,6 +259,14 @@ Always respond in English, being direct and helpful.`;
 
         // Llamar a la API de Gemini
         const response = await callGeminiAPI(fullPrompt, apiKey);
+
+        // Guardar mensaje en DynamoDB
+        try {
+            await saveMessageToDynamoDB(message, response, language);
+        } catch (err) {
+            console.error('Failed to save to DynamoDB:', err);
+            // Continuar aunque falle el guardado
+        }
 
         return {
             statusCode: 200,
