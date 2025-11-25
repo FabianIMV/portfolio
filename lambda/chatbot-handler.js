@@ -104,18 +104,50 @@ CONTACT:
 - 🌐 Portfolio: https://fabianimv.github.io/portfolio`;
 
 /**
- * Detecta el idioma del mensaje
+ * Detecta el idioma del mensaje de forma más precisa
  */
 function detectLanguage(message) {
-    const spanishWords = ['hola', 'qué', 'cómo', 'dónde', 'cuándo', 'por qué', 'experiencia', 'proyectos', 'habilidades', 'contacto'];
     const lowerMessage = message.toLowerCase();
 
-    for (const word of spanishWords) {
-        if (lowerMessage.includes(word)) {
-            return 'es';
-        }
+    // Palabras clave que indican español explícitamente
+    if (lowerMessage.includes('en español') || lowerMessage.includes('en espanol') ||
+        lowerMessage.includes('responde en español') || lowerMessage.includes('habla español') ||
+        lowerMessage.includes('habla espanol')) {
+        return 'es';
     }
 
+    // Palabras clave que indican inglés explícitamente
+    if (lowerMessage.includes('in english') || lowerMessage.includes('speak english') ||
+        lowerMessage.includes('respond in english')) {
+        return 'en';
+    }
+
+    // Palabras comunes en español (contar coincidencias)
+    const spanishWords = ['hola', 'qué', 'cómo', 'dónde', 'cuándo', 'por qué', 'cuéntame', 'cuéntame',
+                          'dame', 'dime', 'muéstrame', 'háblame', 'sobre', 'acerca', 'eres', 'estás',
+                          'experiencia', 'proyectos', 'habilidades', 'tecnologías', 'tecnologias'];
+
+    // Palabras comunes en inglés
+    const englishWords = ['what', 'how', 'where', 'when', 'why', 'tell', 'show', 'about',
+                         'experience', 'projects', 'skills', 'technologies', 'can', 'are', 'you'];
+
+    let spanishScore = 0;
+    let englishScore = 0;
+
+    for (const word of spanishWords) {
+        if (lowerMessage.includes(word)) spanishScore++;
+    }
+
+    for (const word of englishWords) {
+        if (lowerMessage.includes(word)) englishScore++;
+    }
+
+    // Si hay más palabras en español, es español
+    if (spanishScore > englishScore) {
+        return 'es';
+    }
+
+    // Por defecto inglés
     return 'en';
 }
 
@@ -242,18 +274,34 @@ exports.handler = async (event) => {
 
         // Crear el prompt
         const systemPrompt = language === 'es'
-            ? `Eres un asistente personal de Fabián Muñoz. Responde de manera amigable y conversacional sobre su experiencia, proyectos y habilidades. Usa emojis ocasionalmente. Mantén las respuestas concisas (máximo 60 palabras). NO repitas saludos en cada respuesta. Enfócate en responder la pregunta específica. Para contacto, dirige a LinkedIn o formulario de contacto.
+            ? `Eres un asistente personal de Fabián Muñoz. Responde SIEMPRE EN ESPAÑOL de manera amigable y conversacional sobre su experiencia, proyectos y habilidades.
+
+IMPORTANTE:
+- NUNCA digas "voy a responderte en español" - simplemente responde en español directamente
+- Usa emojis ocasionalmente
+- Mantén las respuestas concisas (máximo 60 palabras)
+- NO repitas saludos en cada respuesta
+- Enfócate en responder la pregunta específica
+- Para contacto, dirige a LinkedIn: https://linkedin.com/in/fabianimv
 
 Contexto del portfolio:
 ${portfolioContext}
 
-Responde siempre en español, siendo directo y útil.`
-            : `You are Fabián Muñoz's personal assistant. Respond in a friendly and conversational manner about his experience, projects, and skills. Use emojis occasionally. Keep responses concise (max 60 words). DON'T repeat greetings in every response. Focus on answering the specific question. For contact, direct to LinkedIn or contact form.
+RESPONDE LA PREGUNTA EN ESPAÑOL, siendo directo y útil.`
+            : `You are Fabián Muñoz's personal assistant. ALWAYS RESPOND IN ENGLISH in a friendly and conversational manner about his experience, projects, and skills.
+
+IMPORTANT:
+- NEVER say "I'll respond in English" - just respond in English directly
+- Use emojis occasionally
+- Keep responses concise (max 60 words)
+- DON'T repeat greetings in every response
+- Focus on answering the specific question
+- For contact, direct to LinkedIn: https://linkedin.com/in/fabianimv
 
 Portfolio context:
 ${portfolioContext}
 
-Always respond in English, being direct and helpful.`;
+ANSWER THE QUESTION IN ENGLISH, being direct and helpful.`;
 
         const fullPrompt = `${systemPrompt}\n\nUser: ${message}`;
 
