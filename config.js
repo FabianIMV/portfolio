@@ -6,3 +6,4 @@
  */
 
 window.CHATBOT_API_ENDPOINT = 'https://i44bi6kpp9.execute-api.us-east-1.amazonaws.com/prod/chat';
+
