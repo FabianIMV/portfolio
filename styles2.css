@@ -1525,16 +1525,21 @@ a {
     justify-content: center;
 }
 
+.cert-category {
+    margin-bottom: 2rem;
+}
+
 .cert-badge {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 12px 24px;
-    border-radius: 50px;
+    padding: 12px 20px;
+    border-radius: 12px;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     transition: all 0.3s ease;
-    cursor: default;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .cert-badge:hover {
@@ -1543,31 +1548,96 @@ a {
 }
 
 .cert-icon {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 
-.cert-oracle {
-    background: rgba(248, 0, 0, 0.15);
-    border: 1px solid rgba(248, 0, 0, 0.4);
-    color: #FF6B6B;
+.cert-logo {
+    width: 24px;
+    height: 24px;
 }
 
+/* AWS */
+.cert-aws {
+    background: linear-gradient(135deg, rgba(255, 153, 0, 0.15), rgba(255, 153, 0, 0.05));
+    border: 1px solid rgba(255, 153, 0, 0.4);
+    color: #FF9900;
+}
+
+/* Azure */
 .cert-azure {
-    background: rgba(0, 120, 212, 0.15);
+    background: linear-gradient(135deg, rgba(0, 120, 212, 0.15), rgba(0, 120, 212, 0.05));
     border: 1px solid rgba(0, 120, 212, 0.4);
     color: #5DADE2;
 }
 
-.cert-scrum {
-    background: rgba(0, 157, 250, 0.15);
-    border: 1px solid rgba(0, 157, 250, 0.4);
-    color: #5BC0DE;
+/* DevOps */
+.cert-devops {
+    background: linear-gradient(135deg, rgba(0, 200, 150, 0.15), rgba(0, 200, 150, 0.05));
+    border: 1px solid rgba(0, 200, 150, 0.4);
+    color: #00C896;
 }
 
+/* OpenTofu */
 .cert-opentofu {
-    background: rgba(61, 101, 196, 0.15);
+    background: linear-gradient(135deg, rgba(61, 101, 196, 0.15), rgba(61, 101, 196, 0.05));
     border: 1px solid rgba(61, 101, 196, 0.4);
     color: #7C9DFA;
+}
+
+/* Datadog */
+.cert-datadog {
+    background: linear-gradient(135deg, rgba(99, 44, 166, 0.15), rgba(99, 44, 166, 0.05));
+    border: 1px solid rgba(99, 44, 166, 0.4);
+    color: #9D6FD1;
+}
+
+/* Linux Foundation */
+.cert-linux {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #FFFFFF;
+}
+
+/* Platform Engineering */
+.cert-platform {
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(236, 72, 153, 0.05));
+    border: 1px solid rgba(236, 72, 153, 0.4);
+    color: #F472B6;
+}
+
+/* Kubernetes */
+.cert-k8s {
+    background: linear-gradient(135deg, rgba(50, 108, 229, 0.15), rgba(50, 108, 229, 0.05));
+    border: 1px solid rgba(50, 108, 229, 0.4);
+    color: #326CE5;
+}
+
+/* Google */
+.cert-google {
+    background: linear-gradient(135deg, rgba(66, 133, 244, 0.15), rgba(66, 133, 244, 0.05));
+    border: 1px solid rgba(66, 133, 244, 0.4);
+    color: #4285F4;
+}
+
+/* Anthropic */
+.cert-anthropic {
+    background: linear-gradient(135deg, rgba(204, 122, 83, 0.15), rgba(204, 122, 83, 0.05));
+    border: 1px solid rgba(204, 122, 83, 0.4);
+    color: #D4967A;
+}
+
+/* IBM */
+.cert-ibm {
+    background: linear-gradient(135deg, rgba(30, 144, 255, 0.15), rgba(30, 144, 255, 0.05));
+    border: 1px solid rgba(30, 144, 255, 0.4);
+    color: #1E90FF;
+}
+
+/* Duoc */
+.cert-duoc {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.15), rgba(255, 193, 7, 0.05));
+    border: 1px solid rgba(255, 193, 7, 0.4);
+    color: #FFC107;
 }
 
 /* Education Card */
