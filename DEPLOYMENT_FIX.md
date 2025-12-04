@@ -68,7 +68,15 @@ For future updates, increment the version number in query parameters:
 <script src="./main2.js?v=20251205"></script>
 ```
 
-Or use a build process to inject commit hash/timestamp automatically.
+**Recommended Long-term Solution:**
+Use a build process to inject commit hash/timestamp automatically:
+- Use GitHub Actions to replace version placeholders during build
+- Example: `styles2.css?v=${{ github.sha }}`
+- Or use build tools like webpack/vite with automatic hash generation
+- This eliminates manual version management and prevents stale cache issues
+
+**Note from Code Review:**
+The current hardcoded timestamps and version dates will need manual updates for future deployments. This is acceptable as an immediate fix but should be automated in the future.
 
 ## Files Modified
 - `index.html` - Added cache-busting version parameters and timestamp
