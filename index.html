@@ -32,39 +32,92 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <nav class="navbar" id="navbar" x-data="{ mobileMenuOpen: false }">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
             <div class="flex justify-between items-center">
                 <div class="text-2xl font-bold gradient-text">FM.</div>
 
-                <div class="flex items-center gap-6">
-                    <a href="#home" class="text-gray-300 hover:text-white transition">
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="#home" class="nav-link text-gray-300 hover:text-white transition-all duration-300">
                         <span x-show="lang === 'es'">Inicio</span>
                         <span x-show="lang === 'en'" x-cloak>Home</span>
                     </a>
-                    <a href="#experience" class="text-gray-300 hover:text-white transition">
+                    <a href="#experience" class="nav-link text-gray-300 hover:text-white transition-all duration-300">
                         <span x-show="lang === 'es'">Experiencia</span>
                         <span x-show="lang === 'en'" x-cloak>Experience</span>
                     </a>
-                    <a href="#projects" class="text-gray-300 hover:text-white transition">
+                    <a href="#projects" class="nav-link text-gray-300 hover:text-white transition-all duration-300">
                         <span x-show="lang === 'es'">Proyectos</span>
                         <span x-show="lang === 'en'" x-cloak>Projects</span>
                     </a>
-                    <a href="#skills" class="text-gray-300 hover:text-white transition">
+                    <a href="#skills" class="nav-link text-gray-300 hover:text-white transition-all duration-300">
                         <span x-show="lang === 'es'">Skills</span>
                         <span x-show="lang === 'en'" x-cloak>Skills</span>
                     </a>
-                    <a href="#contact" class="text-gray-300 hover:text-white transition">
+                    <a href="#contact" class="nav-link text-gray-300 hover:text-white transition-all duration-300">
                         <span x-show="lang === 'es'">Contacto</span>
                         <span x-show="lang === 'en'" x-cloak>Contact</span>
                     </a>
 
                     <!-- Language Toggle -->
                     <button @click="lang = lang === 'es' ? 'en' : 'es'"
-                            class="glass-light px-3 py-1 rounded-full text-sm transition hover:bg-purple-500/20">
+                            class="glass-light px-3 py-1 rounded-full text-sm transition-all duration-300 hover:bg-purple-500/20">
                         <span x-show="lang === 'en'">🇪🇸 ES</span>
                         <span x-show="lang === 'es'" x-cloak>🇬🇧 EN</span>
                     </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center gap-3">
+                    <!-- Language Toggle Mobile -->
+                    <button @click="lang = lang === 'es' ? 'en' : 'es'"
+                            class="glass-light px-2 py-1 rounded-full text-xs transition-all duration-300">
+                        <span x-show="lang === 'en'">🇪🇸</span>
+                        <span x-show="lang === 'es'" x-cloak>🇬🇧</span>
+                    </button>
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-white p-2 focus:outline-none">
+                        <svg x-show="!mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                        <svg x-show="mobileMenuOpen" x-cloak class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div x-show="mobileMenuOpen" 
+                 x-transition:enter="transition ease-out duration-200"
+                 x-transition:enter-start="opacity-0 transform -translate-y-4"
+                 x-transition:enter-end="opacity-100 transform translate-y-0"
+                 x-transition:leave="transition ease-in duration-150"
+                 x-transition:leave-start="opacity-100 transform translate-y-0"
+                 x-transition:leave-end="opacity-0 transform -translate-y-4"
+                 class="md:hidden mt-4 pb-4"
+                 x-cloak>
+                <div class="flex flex-col space-y-3">
+                    <a href="#home" @click="mobileMenuOpen = false" class="nav-link-mobile text-gray-300 hover:text-white transition-all duration-300 px-4 py-2 rounded-lg hover:bg-purple-500/20">
+                        <span x-show="lang === 'es'">Inicio</span>
+                        <span x-show="lang === 'en'" x-cloak>Home</span>
+                    </a>
+                    <a href="#experience" @click="mobileMenuOpen = false" class="nav-link-mobile text-gray-300 hover:text-white transition-all duration-300 px-4 py-2 rounded-lg hover:bg-purple-500/20">
+                        <span x-show="lang === 'es'">Experiencia</span>
+                        <span x-show="lang === 'en'" x-cloak>Experience</span>
+                    </a>
+                    <a href="#projects" @click="mobileMenuOpen = false" class="nav-link-mobile text-gray-300 hover:text-white transition-all duration-300 px-4 py-2 rounded-lg hover:bg-purple-500/20">
+                        <span x-show="lang === 'es'">Proyectos</span>
+                        <span x-show="lang === 'en'" x-cloak>Projects</span>
+                    </a>
+                    <a href="#skills" @click="mobileMenuOpen = false" class="nav-link-mobile text-gray-300 hover:text-white transition-all duration-300 px-4 py-2 rounded-lg hover:bg-purple-500/20">
+                        <span x-show="lang === 'es'">Skills</span>
+                        <span x-show="lang === 'en'" x-cloak>Skills</span>
+                    </a>
+                    <a href="#contact" @click="mobileMenuOpen = false" class="nav-link-mobile text-gray-300 hover:text-white transition-all duration-300 px-4 py-2 rounded-lg hover:bg-purple-500/20">
+                        <span x-show="lang === 'es'">Contacto</span>
+                        <span x-show="lang === 'en'" x-cloak>Contact</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -158,10 +211,10 @@
                     <span x-show="lang === 'en'" x-cloak>Experience</span>
                 </h2>
 
-                <div class="cyber-card mb-8">
+                <div class="cyber-card mb-8 experience-card">
                     <div class="flex items-start gap-4">
                         <div class="flex-shrink-0">
-                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center icon-pulse">
                                 <i class="fas fa-chart-line text-2xl"></i>
                             </div>
                         </div>
@@ -198,10 +251,10 @@
                 </div>
 
                 <!-- Recomin Card -->
-                <div class="cyber-card mb-8">
+                <div class="cyber-card mb-8 experience-card">
                     <div class="flex items-start gap-4">
                         <div class="flex-shrink-0">
-                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center icon-pulse">
                                 <i class="fas fa-headset text-2xl"></i>
                             </div>
                         </div>
@@ -601,16 +654,16 @@
 
                 <div class="flex gap-6 justify-center flex-wrap">
                     <a href="https://linkedin.com/in/fabianimv" target="_blank"
-                       class="glass neon-border w-16 h-16 rounded-full flex items-center justify-center hover:bg-purple-500/20 transition-all transform hover:scale-110">
-                        <i class="fab fa-linkedin text-2xl"></i>
+                       class="contact-icon glass neon-border w-16 h-16 rounded-full flex items-center justify-center hover:bg-purple-500/20 transition-all transform hover:scale-110 group">
+                        <i class="fab fa-linkedin text-2xl group-hover:scale-125 transition-transform"></i>
                     </a>
                     <a href="https://github.com/FabianIMV" target="_blank"
-                       class="glass neon-border w-16 h-16 rounded-full flex items-center justify-center hover:bg-purple-500/20 transition-all transform hover:scale-110">
-                        <i class="fab fa-github text-2xl"></i>
+                       class="contact-icon glass neon-border w-16 h-16 rounded-full flex items-center justify-center hover:bg-purple-500/20 transition-all transform hover:scale-110 group">
+                        <i class="fab fa-github text-2xl group-hover:scale-125 transition-transform"></i>
                     </a>
                     <a href="mailto:fabianignaciomv@gmail.com"
-                       class="glass neon-border w-16 h-16 rounded-full flex items-center justify-center hover:bg-purple-500/20 transition-all transform hover:scale-110">
-                        <i class="fas fa-envelope text-2xl"></i>
+                       class="contact-icon glass neon-border w-16 h-16 rounded-full flex items-center justify-center hover:bg-purple-500/20 transition-all transform hover:scale-110 group">
+                        <i class="fas fa-envelope text-2xl group-hover:scale-125 transition-transform"></i>
                     </a>
                 </div>
             </div>
