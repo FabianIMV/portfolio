@@ -248,7 +248,56 @@
                     <span x-show="lang === 'en'" x-cloak>Experience</span>
                 </h2>
 
-                <div class="cyber-card mb-8 experience-card spotlight-card reveal-up">
+                <!-- Banco Falabella - Current -->
+                <div class="cyber-card mb-8 experience-card spotlight-card reveal-up current-job">
+                    <div class="current-badge">
+                        <span x-show="lang === 'es'">Actual</span>
+                        <span x-show="lang === 'en'" x-cloak>Current</span>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center icon-pulse">
+                                <i class="fas fa-university text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold mb-2">
+                                <span x-show="lang === 'es'">Site Reliability Engineer</span>
+                                <span x-show="lang === 'en'" x-cloak>Site Reliability Engineer</span>
+                            </h3>
+                            <p class="text-green-400 mb-2 font-semibold">
+                                <span x-show="lang === 'es'">Banco Falabella | Oct 2025 - Presente</span>
+                                <span x-show="lang === 'en'" x-cloak>Banco Falabella | Oct 2025 - Present</span>
+                            </p>
+                            <p class="text-gray-500 text-sm mb-2">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                <span x-show="lang === 'es'">Santiago, Chile · Híbrido</span>
+                                <span x-show="lang === 'en'" x-cloak>Santiago, Chile · Hybrid</span>
+                            </p>
+                            <p class="text-gray-400">
+                                <span x-show="lang === 'es'">
+                                    SRE especializado en observabilidad y monitoreo para infraestructura bancaria crítica. Trabajando con colas de mensajes Kafka, sistemas de procesamiento de transacciones e implementando monitoreo de golden signals. Construyendo dashboards de monitoreo, sistemas de alertas y contribuyendo a la respuesta de incidentes para servicios financieros 24/7.
+                                </span>
+                                <span x-show="lang === 'en'" x-cloak>
+                                    SRE specializing in observability and monitoring for critical banking infrastructure. Working with Kafka message queues, transaction processing systems, and implementing golden signals monitoring. Building monitoring dashboards, alert systems, and contributing to incident response for 24/7 financial services reliability.
+                                </span>
+                            </p>
+                            <div class="flex gap-2 mt-4 flex-wrap">
+                                <span class="tag tag-highlight">Apache Kafka</span>
+                                <span class="tag">Datadog</span>
+                                <span class="tag">Grafana</span>
+                                <span class="tag">Prometheus</span>
+                                <span class="tag">Kubernetes</span>
+                                <span class="tag">Terraform</span>
+                                <span class="tag">Splunk</span>
+                                <span class="tag">ELK Stack</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Innfinit -->
+                <div class="cyber-card mb-8 experience-card spotlight-card reveal-up" style="animation-delay: 0.15s;">
                     <div class="flex items-start gap-4">
                         <div class="flex-shrink-0">
                             <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center icon-pulse">
@@ -261,27 +310,60 @@
                                 <span x-show="lang === 'en'" x-cloak>Site Reliability Engineer (SRE)</span>
                             </h3>
                             <p class="text-purple-400 mb-2">
-                                <span x-show="lang === 'es'">Innfinit | Nov 2022 - Oct 2025</span>
-                                <span x-show="lang === 'en'" x-cloak>Innfinit | Nov 2022 - Oct 2025</span>
+                                <span x-show="lang === 'es'">Innfinit SpA | Nov 2022 - Oct 2025 · 3 años</span>
+                                <span x-show="lang === 'en'" x-cloak>Innfinit SpA | Nov 2022 - Oct 2025 · 3 yrs</span>
                             </p>
-                            <p class="text-gray-400">
+                            <p class="text-gray-400 mb-3">
                                 <span x-show="lang === 'es'">
-                                    Site Reliability Engineer con experiencia sólida en observabilidad y monitoreo de sistemas críticos para entornos empresariales de alta disponibilidad. Desarrollando expertise en prácticas SRE incluyendo monitoreo de golden signals (latencia, tráfico, errores, saturación), gestión colaborativa de SLOs, y optimización de MTTR a través de análisis de incidentes y correlación de eventos. Participación activa en proyectos de arquitectura CN/Delta y optimización de confiabilidad.
+                                    SRE con 3 años en observabilidad y monitoreo de sistemas críticos para empresas Fortune 500. Especializado en golden signals monitoring, análisis de incidentes y prácticas SRE para servicios financieros de alta disponibilidad.
                                 </span>
                                 <span x-show="lang === 'en'" x-cloak>
-                                    Site Reliability Engineer with solid experience in observability and monitoring of critical systems for high-availability enterprise environments. Developing expertise in SRE practices including golden signals monitoring (latency, traffic, errors, saturation), collaborative SLO management, and MTTR optimization through incident analysis and event correlation. Active participation in CN/Delta architecture projects and reliability optimization.
+                                    SRE with 3 years in observability and monitoring of critical systems for Fortune 500 enterprises. Specialized in golden signals monitoring, incident analysis, and SRE practices for high-availability financial services.
                                 </span>
                             </p>
+                            
+                            <!-- Innfinit Sub-projects -->
+                            <div class="sub-projects mt-4">
+                                <div class="sub-project-item">
+                                    <div class="sub-project-header">
+                                        <span class="sub-project-client">Liberty Mutual US</span>
+                                        <span class="sub-project-date">Oct 2024 - Sep 2025</span>
+                                    </div>
+                                    <p class="text-gray-500 text-sm">Monitoring Optimization & Incident Correlation - BigPanda, Splunk, Datadog</p>
+                                </div>
+                                <div class="sub-project-item">
+                                    <div class="sub-project-header">
+                                        <span class="sub-project-client">Sovos</span>
+                                        <span class="sub-project-date">Aug 2024 - Aug 2025</span>
+                                    </div>
+                                    <p class="text-gray-500 text-sm">Delta Compliance Monitoring - K8s, Grafana Cloud, RabbitMQ, Redis</p>
+                                </div>
+                                <div class="sub-project-item">
+                                    <div class="sub-project-header">
+                                        <span class="sub-project-client">Red Salud</span>
+                                        <span class="sub-project-date">Feb 2024 - Mar 2025</span>
+                                    </div>
+                                    <p class="text-gray-500 text-sm">HA Observability Platform - Grafana, Prometheus, Loki</p>
+                                </div>
+                                <div class="sub-project-item">
+                                    <div class="sub-project-header">
+                                        <span class="sub-project-client">Liberty Andes</span>
+                                        <span class="sub-project-date">Nov 2022 - Dec 2024</span>
+                                    </div>
+                                    <p class="text-gray-500 text-sm">Multi-Region Observability (Colombia, Chile, Ecuador) - AWS, Datadog, Terraform</p>
+                                </div>
+                            </div>
+                            
                             <div class="flex gap-2 mt-4 flex-wrap">
                                 <span class="tag">Grafana</span>
                                 <span class="tag">Prometheus</span>
                                 <span class="tag">BigPanda</span>
                                 <span class="tag">AWS</span>
+                                <span class="tag">GCP</span>
                                 <span class="tag">Kubernetes</span>
                                 <span class="tag">Terraform</span>
-                                <span class="tag">Python</span>
-                                <span class="tag">Golden Signals</span>
-                                <span class="tag">SLO/SLI</span>
+                                <span class="tag">Datadog</span>
+                                <span class="tag">Splunk</span>
                             </div>
                         </div>
                     </div>
@@ -415,11 +497,14 @@
                 <div class="stats-dashboard mt-16 reveal-up" style="animation-delay: 0.4s;">
                     <div class="stats-grid">
                         <div class="stat-item">
-                            <div class="stat-number counter" data-target="3">0</div>
-                            <div class="stat-label">+</div>
+                            <div class="stat-number">3<span class="stat-plus">+</span></div>
+                            <div class="stat-label">
+                                <span x-show="lang === 'es'">Años</span>
+                                <span x-show="lang === 'en'" x-cloak>Years</span>
+                            </div>
                             <div class="stat-desc">
-                                <span x-show="lang === 'es'">Años en SRE</span>
-                                <span x-show="lang === 'en'" x-cloak>Years in SRE</span>
+                                <span x-show="lang === 'es'">en SRE</span>
+                                <span x-show="lang === 'en'" x-cloak>in SRE</span>
                             </div>
                         </div>
                         <div class="stat-item">
