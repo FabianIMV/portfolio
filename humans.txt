@@ -1,0 +1,13 @@
+/* TEAM */
+Developer: Fabián Muñoz
+Contact: fabianignaciomv@gmail.com
+LinkedIn: linkedin.com/in/fabianimv
+GitHub: github.com/FabianIMV
+Location: Santiago, Chile
+
+/* SITE */
+Last update: 2025/12/04
+Language: English / Spanish
+Standards: HTML5, CSS3, ES6+
+Components: Three.js, GSAP, Alpine.js, Tailwind CSS
+Software: VS Code, GitHub Copilot

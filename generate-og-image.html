@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>OG Image Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        .og-container {
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, #030014 0%, #0f0a28 50%, #1a1040 100%);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        /* Grid background */
+        .grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(99, 102, 241, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        /* Gradient orbs */
+        .orb-1 {
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .orb-2 {
+            position: absolute;
+            bottom: -150px;
+            left: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 10;
+            padding: 60px 80px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .top-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .badge {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.5);
+            color: #4ade80;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid rgba(99, 102, 241, 0.5);
+            object-fit: cover;
+        }
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 72px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 32px;
+            color: #a5b4fc;
+            margin-bottom: 20px;
+        }
+        
+        .description {
+            font-size: 20px;
+            color: #94a3b8;
+            max-width: 700px;
+            line-height: 1.5;
+        }
+        
+        .tech-tags {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+        
+        .tag {
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            color: #a5b4fc;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .bottom-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .location {
+            color: #64748b;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .url {
+            color: #6366f1;
+            font-size: 18px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="og-container">
+        <div class="grid-bg"></div>
+        <div class="orb-1"></div>
+        <div class="orb-2"></div>
+        
+        <div class="content">
+            <div class="top-section">
+                <div class="badge">🟢 Available for opportunities</div>
+                <img src="./profilepic.jpeg" alt="Fabián M." class="profile-pic">
+            </div>
+            
+            <div class="main-content">
+                <h1 class="gradient-text">Fabián Muñoz</h1>
+                <div class="subtitle">Site Reliability Engineer</div>
+                <p class="description">
+                    3+ years building observable systems for high-availability financial services. 
+                    Expert in Kubernetes, Datadog, Grafana & Prometheus.
+                </p>
+                <div class="tech-tags">
+                    <span class="tag">☁️ AWS</span>
+                    <span class="tag">⎈ Kubernetes</span>
+                    <span class="tag">📊 Datadog</span>
+                    <span class="tag">🔥 Grafana</span>
+                    <span class="tag">🛠️ Terraform</span>
+                </div>
+            </div>
+            
+            <div class="bottom-section">
+                <div class="location">🇨🇱 Santiago, Chile</div>
+                <div class="url">fabianimv.github.io/portfolio</div>
+            </div>
+        </div>
+    </div>
+    
+    <p style="margin-top: 20px; color: #666; font-family: sans-serif;">
+        ⬆️ Take a screenshot of the card above (1200x630px) and save it as <strong>og-image.png</strong>
+    </p>
+</body>
+</html>

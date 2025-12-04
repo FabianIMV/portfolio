@@ -1,0 +1,33 @@
+# Robots.txt for Fabián Muñoz Portfolio
+# https://fabianimv.github.io/portfolio/
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://fabianimv.github.io/portfolio/sitemap.xml
+
+# Crawl-delay (optional, be nice to servers)
+Crawl-delay: 1
+
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+User-agent: Discordbot
+Allow: /
