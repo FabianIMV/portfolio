@@ -1,5 +1,5 @@
 // ========================================
-// ULTRA MODERN PORTFOLIO WITH VISUAL EFFECTS
+// MODERN PORTFOLIO WITH GSAP ANIMATIONS
 // ========================================
 
 // Wait for DOM, Alpine.js and all resources to load
@@ -7,152 +7,12 @@ window.addEventListener('load', () => {
     // Wait a bit more to ensure Alpine.js has fully initialized
     setTimeout(() => {
         initCustomCursor();
-        initMouseGradient();
-        initTypingEffect();
         initThreeJS();
         initGSAPAnimations();
         initScrollEffects();
-        initScrollReveal();
-        initSpotlightCards();
-        initMagneticButtons();
         initAIChatbot();
     }, 100);
 });
-
-// ========== TYPING EFFECT ==========
-function initTypingEffect() {
-    const typingElement = document.getElementById('typingText');
-    if (!typingElement) return;
-    
-    // Phrases from README profile
-    const phrases = [
-        '🔭 Building Observable Systems',
-        '🚀 Golden Signals | SLI/SLO | MTTR',
-        '🎯 3+ Years in Observability & Monitoring',
-        '📊 High-Availability Architecture',
-        '🔥 Incident Correlation & Root Cause',
-        '☁️ AWS | Kubernetes | Terraform'
-    ];
-    
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let typingSpeed = 80;
-    
-    function type() {
-        const currentPhrase = phrases[phraseIndex];
-        
-        if (isDeleting) {
-            typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
-            charIndex--;
-            typingSpeed = 40;
-        } else {
-            typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
-            charIndex++;
-            typingSpeed = 80;
-        }
-        
-        if (!isDeleting && charIndex === currentPhrase.length) {
-            // Pause at the end
-            typingSpeed = 2000;
-            isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            phraseIndex = (phraseIndex + 1) % phrases.length;
-            typingSpeed = 500;
-        }
-        
-        setTimeout(type, typingSpeed);
-    }
-    
-    // Start typing after a small delay
-    setTimeout(type, 1000);
-}
-
-// ========== MOUSE GRADIENT FOLLOW ==========
-function initMouseGradient() {
-    const gradient = document.getElementById('mouseGradient');
-    if (!gradient || window.innerWidth <= 768) return;
-    
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let gradientX = mouseX;
-    let gradientY = mouseY;
-    
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-    
-    function animateGradient() {
-        gradientX += (mouseX - gradientX) * 0.08;
-        gradientY += (mouseY - gradientY) * 0.08;
-        gradient.style.left = `${gradientX}px`;
-        gradient.style.top = `${gradientY}px`;
-        requestAnimationFrame(animateGradient);
-    }
-    animateGradient();
-}
-
-// ========== SCROLL REVEAL ANIMATIONS ==========
-function initScrollReveal() {
-    const reveals = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-scale');
-    
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
-    }, observerOptions);
-    
-    reveals.forEach(el => observer.observe(el));
-}
-
-// ========== SPOTLIGHT EFFECT ON CARDS ==========
-function initSpotlightCards() {
-    const cards = document.querySelectorAll('.spotlight-card');
-    
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
-            
-            // Update the ::before position
-            const before = card.querySelector('.spotlight-before') || card;
-            before.style.background = `radial-gradient(600px circle at ${x}px ${y}px, rgba(99, 102, 241, 0.1), transparent 40%)`;
-        });
-    });
-}
-
-// ========== MAGNETIC BUTTON EFFECT ==========
-function initMagneticButtons() {
-    const buttons = document.querySelectorAll('.magnetic-btn');
-    
-    buttons.forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-            const rect = btn.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-            
-            btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-        });
-        
-        btn.addEventListener('mouseleave', () => {
-            btn.style.transform = 'translate(0, 0)';
-        });
-    });
-}
 
 // ========== CUSTOM CURSOR ==========
 function initCustomCursor() {
@@ -197,7 +57,7 @@ function initCustomCursor() {
     }, 500);
 }
 
-// ========== THREE.JS 3D BACKGROUND - ULTRA ==========
+// ========== THREE.JS 3D BACKGROUND ==========
 function initThreeJS() {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -208,109 +68,58 @@ function initThreeJS() {
     });
 
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(window.devicePixelRatio);
 
-    // Particles with multiple colors
+    // Particles
     const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = window.innerWidth < 768 ? 3000 : 8000;
+    const particlesCount = window.innerWidth < 768 ? 2000 : 5000;
     const posArray = new Float32Array(particlesCount * 3);
-    const colorsArray = new Float32Array(particlesCount * 3);
 
-    const colors = [
-        { r: 0.388, g: 0.4, b: 0.945 },    // Indigo
-        { r: 0.024, g: 0.714, b: 0.831 },   // Cyan
-        { r: 0.545, g: 0.361, b: 0.965 }    // Purple
-    ];
-
-    for(let i = 0; i < particlesCount; i++) {
-        const i3 = i * 3;
-        posArray[i3] = (Math.random() - 0.5) * 120;
-        posArray[i3 + 1] = (Math.random() - 0.5) * 120;
-        posArray[i3 + 2] = (Math.random() - 0.5) * 120;
-        
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        colorsArray[i3] = color.r;
-        colorsArray[i3 + 1] = color.g;
-        colorsArray[i3 + 2] = color.b;
+    for(let i = 0; i < particlesCount * 3; i++) {
+        posArray[i] = (Math.random() - 0.5) * 100;
     }
 
     particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-    particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorsArray, 3));
 
     const particlesMaterial = new THREE.PointsMaterial({
-        size: 0.08,
-        vertexColors: true,
+        size: 0.05,
+        color: 0x8b5cf6,
         transparent: true,
         opacity: 0.8,
-        blending: THREE.AdditiveBlending,
-        sizeAttenuation: true
+        blending: THREE.AdditiveBlending
     });
 
     const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
     scene.add(particlesMesh);
 
-    // Floating geometric shapes
-    const shapes = [];
-    
-    // Torus Knot
-    const torusKnotGeometry = new THREE.TorusKnotGeometry(8, 2.5, 100, 16);
-    const torusKnotMaterial = new THREE.MeshBasicMaterial({
-        color: 0x6366f1,
+    // Geometric shapes
+    const torusGeometry = new THREE.TorusGeometry(10, 1, 16, 100);
+    const torusMaterial = new THREE.MeshBasicMaterial({
+        color: 0x667eea,
         wireframe: true,
         transparent: true,
-        opacity: 0.15
+        opacity: 0.3
     });
-    const torusKnot = new THREE.Mesh(torusKnotGeometry, torusKnotMaterial);
-    torusKnot.position.set(25, 10, -30);
-    scene.add(torusKnot);
-    shapes.push({ mesh: torusKnot, speed: { x: 0.003, y: 0.005 } });
+    const torus = new THREE.Mesh(torusGeometry, torusMaterial);
+    scene.add(torus);
 
-    // Icosahedron
-    const icoGeometry = new THREE.IcosahedronGeometry(6, 0);
-    const icoMaterial = new THREE.MeshBasicMaterial({
-        color: 0x06b6d4,
+    const sphereGeometry = new THREE.SphereGeometry(8, 32, 32);
+    const sphereMaterial = new THREE.MeshBasicMaterial({
+        color: 0x764ba2,
         wireframe: true,
         transparent: true,
         opacity: 0.2
     });
-    const ico = new THREE.Mesh(icoGeometry, icoMaterial);
-    ico.position.set(-30, -15, -20);
-    scene.add(ico);
-    shapes.push({ mesh: ico, speed: { x: 0.008, y: 0.004 } });
+    const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+    sphere.position.x = -20;
+    sphere.position.y = 10;
+    scene.add(sphere);
 
-    // Octahedron
-    const octGeometry = new THREE.OctahedronGeometry(5, 0);
-    const octMaterial = new THREE.MeshBasicMaterial({
-        color: 0x8b5cf6,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.18
-    });
-    const oct = new THREE.Mesh(octGeometry, octMaterial);
-    oct.position.set(20, -20, -25);
-    scene.add(oct);
-    shapes.push({ mesh: oct, speed: { x: 0.006, y: 0.007 } });
-
-    // Ring
-    const ringGeometry = new THREE.TorusGeometry(12, 0.5, 16, 100);
-    const ringMaterial = new THREE.MeshBasicMaterial({
-        color: 0x6366f1,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.12
-    });
-    const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-    ring.position.set(-20, 20, -35);
-    scene.add(ring);
-    shapes.push({ mesh: ring, speed: { x: 0.002, y: 0.006 } });
-
-    camera.position.z = 40;
+    camera.position.z = 30;
 
     // Mouse movement effect
     let mouseX = 0;
     let mouseY = 0;
-    let targetX = 0;
-    let targetY = 0;
 
     document.addEventListener('mousemove', (event) => {
         mouseX = (event.clientX / window.innerWidth) * 2 - 1;
@@ -321,22 +130,16 @@ function initThreeJS() {
     function animate() {
         requestAnimationFrame(animate);
 
-        // Smooth camera movement
-        targetX += (mouseX - targetX) * 0.02;
-        targetY += (mouseY - targetY) * 0.02;
+        particlesMesh.rotation.y += 0.001;
+        particlesMesh.rotation.x += 0.0005;
 
-        particlesMesh.rotation.y += 0.0008;
-        particlesMesh.rotation.x += 0.0003;
+        torus.rotation.x += 0.01;
+        torus.rotation.y += 0.005;
+        sphere.rotation.x += 0.005;
+        sphere.rotation.y += 0.01;
 
-        // Animate shapes
-        shapes.forEach(shape => {
-            shape.mesh.rotation.x += shape.speed.x;
-            shape.mesh.rotation.y += shape.speed.y;
-        });
-
-        // Camera follows mouse smoothly
-        camera.position.x += (targetX * 8 - camera.position.x) * 0.03;
-        camera.position.y += (targetY * 8 - camera.position.y) * 0.03;
+        camera.position.x += (mouseX * 5 - camera.position.x) * 0.05;
+        camera.position.y += (mouseY * 5 - camera.position.y) * 0.05;
         camera.lookAt(scene.position);
 
         renderer.render(scene, camera);

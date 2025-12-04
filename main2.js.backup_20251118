@@ -1,5 +1,5 @@
 // ========================================
-// ULTRA MODERN PORTFOLIO WITH VISUAL EFFECTS
+// MODERN PORTFOLIO WITH GSAP ANIMATIONS
 // ========================================
 
 // Wait for DOM, Alpine.js and all resources to load
@@ -7,152 +7,12 @@ window.addEventListener('load', () => {
     // Wait a bit more to ensure Alpine.js has fully initialized
     setTimeout(() => {
         initCustomCursor();
-        initMouseGradient();
-        initTypingEffect();
         initThreeJS();
         initGSAPAnimations();
         initScrollEffects();
-        initScrollReveal();
-        initSpotlightCards();
-        initMagneticButtons();
         initAIChatbot();
     }, 100);
 });
-
-// ========== TYPING EFFECT ==========
-function initTypingEffect() {
-    const typingElement = document.getElementById('typingText');
-    if (!typingElement) return;
-    
-    // Phrases from README profile
-    const phrases = [
-        '🔭 Building Observable Systems',
-        '🚀 Golden Signals | SLI/SLO | MTTR',
-        '🎯 3+ Years in Observability & Monitoring',
-        '📊 High-Availability Architecture',
-        '🔥 Incident Correlation & Root Cause',
-        '☁️ AWS | Kubernetes | Terraform'
-    ];
-    
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    let typingSpeed = 80;
-    
-    function type() {
-        const currentPhrase = phrases[phraseIndex];
-        
-        if (isDeleting) {
-            typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
-            charIndex--;
-            typingSpeed = 40;
-        } else {
-            typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
-            charIndex++;
-            typingSpeed = 80;
-        }
-        
-        if (!isDeleting && charIndex === currentPhrase.length) {
-            // Pause at the end
-            typingSpeed = 2000;
-            isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            phraseIndex = (phraseIndex + 1) % phrases.length;
-            typingSpeed = 500;
-        }
-        
-        setTimeout(type, typingSpeed);
-    }
-    
-    // Start typing after a small delay
-    setTimeout(type, 1000);
-}
-
-// ========== MOUSE GRADIENT FOLLOW ==========
-function initMouseGradient() {
-    const gradient = document.getElementById('mouseGradient');
-    if (!gradient || window.innerWidth <= 768) return;
-    
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let gradientX = mouseX;
-    let gradientY = mouseY;
-    
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-    
-    function animateGradient() {
-        gradientX += (mouseX - gradientX) * 0.08;
-        gradientY += (mouseY - gradientY) * 0.08;
-        gradient.style.left = `${gradientX}px`;
-        gradient.style.top = `${gradientY}px`;
-        requestAnimationFrame(animateGradient);
-    }
-    animateGradient();
-}
-
-// ========== SCROLL REVEAL ANIMATIONS ==========
-function initScrollReveal() {
-    const reveals = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-scale');
-    
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
-    }, observerOptions);
-    
-    reveals.forEach(el => observer.observe(el));
-}
-
-// ========== SPOTLIGHT EFFECT ON CARDS ==========
-function initSpotlightCards() {
-    const cards = document.querySelectorAll('.spotlight-card');
-    
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
-            
-            // Update the ::before position
-            const before = card.querySelector('.spotlight-before') || card;
-            before.style.background = `radial-gradient(600px circle at ${x}px ${y}px, rgba(99, 102, 241, 0.1), transparent 40%)`;
-        });
-    });
-}
-
-// ========== MAGNETIC BUTTON EFFECT ==========
-function initMagneticButtons() {
-    const buttons = document.querySelectorAll('.magnetic-btn');
-    
-    buttons.forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-            const rect = btn.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-            
-            btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-        });
-        
-        btn.addEventListener('mouseleave', () => {
-            btn.style.transform = 'translate(0, 0)';
-        });
-    });
-}
 
 // ========== CUSTOM CURSOR ==========
 function initCustomCursor() {
@@ -197,7 +57,7 @@ function initCustomCursor() {
     }, 500);
 }
 
-// ========== THREE.JS 3D BACKGROUND - ULTRA ==========
+// ========== THREE.JS 3D BACKGROUND ==========
 function initThreeJS() {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -208,109 +68,58 @@ function initThreeJS() {
     });
 
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(window.devicePixelRatio);
 
-    // Particles with multiple colors
+    // Particles
     const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = window.innerWidth < 768 ? 3000 : 8000;
+    const particlesCount = window.innerWidth < 768 ? 2000 : 5000;
     const posArray = new Float32Array(particlesCount * 3);
-    const colorsArray = new Float32Array(particlesCount * 3);
 
-    const colors = [
-        { r: 0.388, g: 0.4, b: 0.945 },    // Indigo
-        { r: 0.024, g: 0.714, b: 0.831 },   // Cyan
-        { r: 0.545, g: 0.361, b: 0.965 }    // Purple
-    ];
-
-    for(let i = 0; i < particlesCount; i++) {
-        const i3 = i * 3;
-        posArray[i3] = (Math.random() - 0.5) * 120;
-        posArray[i3 + 1] = (Math.random() - 0.5) * 120;
-        posArray[i3 + 2] = (Math.random() - 0.5) * 120;
-        
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        colorsArray[i3] = color.r;
-        colorsArray[i3 + 1] = color.g;
-        colorsArray[i3 + 2] = color.b;
+    for(let i = 0; i < particlesCount * 3; i++) {
+        posArray[i] = (Math.random() - 0.5) * 100;
     }
 
     particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-    particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorsArray, 3));
 
     const particlesMaterial = new THREE.PointsMaterial({
-        size: 0.08,
-        vertexColors: true,
+        size: 0.05,
+        color: 0x8b5cf6,
         transparent: true,
         opacity: 0.8,
-        blending: THREE.AdditiveBlending,
-        sizeAttenuation: true
+        blending: THREE.AdditiveBlending
     });
 
     const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
     scene.add(particlesMesh);
 
-    // Floating geometric shapes
-    const shapes = [];
-    
-    // Torus Knot
-    const torusKnotGeometry = new THREE.TorusKnotGeometry(8, 2.5, 100, 16);
-    const torusKnotMaterial = new THREE.MeshBasicMaterial({
-        color: 0x6366f1,
+    // Geometric shapes
+    const torusGeometry = new THREE.TorusGeometry(10, 1, 16, 100);
+    const torusMaterial = new THREE.MeshBasicMaterial({
+        color: 0x667eea,
         wireframe: true,
         transparent: true,
-        opacity: 0.15
+        opacity: 0.3
     });
-    const torusKnot = new THREE.Mesh(torusKnotGeometry, torusKnotMaterial);
-    torusKnot.position.set(25, 10, -30);
-    scene.add(torusKnot);
-    shapes.push({ mesh: torusKnot, speed: { x: 0.003, y: 0.005 } });
+    const torus = new THREE.Mesh(torusGeometry, torusMaterial);
+    scene.add(torus);
 
-    // Icosahedron
-    const icoGeometry = new THREE.IcosahedronGeometry(6, 0);
-    const icoMaterial = new THREE.MeshBasicMaterial({
-        color: 0x06b6d4,
+    const sphereGeometry = new THREE.SphereGeometry(8, 32, 32);
+    const sphereMaterial = new THREE.MeshBasicMaterial({
+        color: 0x764ba2,
         wireframe: true,
         transparent: true,
         opacity: 0.2
     });
-    const ico = new THREE.Mesh(icoGeometry, icoMaterial);
-    ico.position.set(-30, -15, -20);
-    scene.add(ico);
-    shapes.push({ mesh: ico, speed: { x: 0.008, y: 0.004 } });
+    const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+    sphere.position.x = -20;
+    sphere.position.y = 10;
+    scene.add(sphere);
 
-    // Octahedron
-    const octGeometry = new THREE.OctahedronGeometry(5, 0);
-    const octMaterial = new THREE.MeshBasicMaterial({
-        color: 0x8b5cf6,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.18
-    });
-    const oct = new THREE.Mesh(octGeometry, octMaterial);
-    oct.position.set(20, -20, -25);
-    scene.add(oct);
-    shapes.push({ mesh: oct, speed: { x: 0.006, y: 0.007 } });
-
-    // Ring
-    const ringGeometry = new THREE.TorusGeometry(12, 0.5, 16, 100);
-    const ringMaterial = new THREE.MeshBasicMaterial({
-        color: 0x6366f1,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.12
-    });
-    const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-    ring.position.set(-20, 20, -35);
-    scene.add(ring);
-    shapes.push({ mesh: ring, speed: { x: 0.002, y: 0.006 } });
-
-    camera.position.z = 40;
+    camera.position.z = 30;
 
     // Mouse movement effect
     let mouseX = 0;
     let mouseY = 0;
-    let targetX = 0;
-    let targetY = 0;
 
     document.addEventListener('mousemove', (event) => {
         mouseX = (event.clientX / window.innerWidth) * 2 - 1;
@@ -321,22 +130,16 @@ function initThreeJS() {
     function animate() {
         requestAnimationFrame(animate);
 
-        // Smooth camera movement
-        targetX += (mouseX - targetX) * 0.02;
-        targetY += (mouseY - targetY) * 0.02;
+        particlesMesh.rotation.y += 0.001;
+        particlesMesh.rotation.x += 0.0005;
 
-        particlesMesh.rotation.y += 0.0008;
-        particlesMesh.rotation.x += 0.0003;
+        torus.rotation.x += 0.01;
+        torus.rotation.y += 0.005;
+        sphere.rotation.x += 0.005;
+        sphere.rotation.y += 0.01;
 
-        // Animate shapes
-        shapes.forEach(shape => {
-            shape.mesh.rotation.x += shape.speed.x;
-            shape.mesh.rotation.y += shape.speed.y;
-        });
-
-        // Camera follows mouse smoothly
-        camera.position.x += (targetX * 8 - camera.position.x) * 0.03;
-        camera.position.y += (targetY * 8 - camera.position.y) * 0.03;
+        camera.position.x += (mouseX * 5 - camera.position.x) * 0.05;
+        camera.position.y += (mouseY * 5 - camera.position.y) * 0.05;
         camera.lookAt(scene.position);
 
         renderer.render(scene, camera);
@@ -694,20 +497,41 @@ function hideAITyping() {
     }
 }
 
-// API Endpoint configurado después del deployment
-const API_ENDPOINT = window.CHATBOT_API_ENDPOINT || null;
-
 async function detectLanguage(message) {
-    const spanishWords = ['hola', 'qué', 'cómo', 'dónde', 'cuándo', 'por qué', 'experiencia', 'proyectos', 'habilidades', 'contacto'];
-    const lowerMessage = message.toLowerCase();
-
-    for (const word of spanishWords) {
-        if (lowerMessage.includes(word)) {
-            return 'es';
+    try {
+        if (!window.GEMINI_CONFIG || !window.GEMINI_CONFIG.apiKey) {
+            return getCurrentLang();
         }
+
+        const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
+
+        const requestBody = {
+            contents: [{
+                parts: [{
+                    text: `Detect the language of this message and respond ONLY with "es" for Spanish or "en" for English. Message: "${message}"`
+                }]
+            }]
+        };
+
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-goog-api-key': window.GEMINI_CONFIG.apiKey
+            },
+            body: JSON.stringify(requestBody)
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            const detectedLang = data.candidates[0].content.parts[0].text.trim().toLowerCase();
+            return detectedLang === 'es' ? 'es' : 'en';
+        }
+    } catch (error) {
+        console.log('Language detection fallback');
     }
 
-    return 'en';
+    return getCurrentLang();
 }
 
 async function getAIResponse(message) {
@@ -730,21 +554,47 @@ async function getAIResponse(message) {
     }
 
     try {
-        // Verificar si hay endpoint configurado
-        if (!API_ENDPOINT) {
-            console.log('API endpoint no configurado, usando respuestas básicas');
+        if (!window.GEMINI_CONFIG || !window.GEMINI_CONFIG.apiKey) {
             return getBasicResponse(message, detectedLang);
         }
 
-        // Llamar a la Lambda a través de API Gateway
-        const response = await fetch(API_ENDPOINT, {
+        const portfolioContext = getPortfolioContext(detectedLang);
+
+        const systemPrompt = detectedLang === 'es'
+            ? `Eres un asistente personal de Fabián Muñoz. Responde de manera amigable y conversacional sobre su experiencia, proyectos y habilidades. Usa emojis ocasionalmente. Mantén las respuestas concisas (máximo 50 palabras). NO repitas saludos en cada respuesta. Enfócate en responder la pregunta específica. Para contacto, dirige a LinkedIn o formulario de contacto.
+
+Contexto del portfolio:
+${portfolioContext}
+
+Responde siempre en español, siendo directo y útil.`
+            : `You are Fabián Muñoz's personal assistant. Respond in a friendly and conversational manner about his experience, projects, and skills. Use emojis occasionally. Keep responses concise (max 50 words). DON'T repeat greetings in every response. Focus on answering the specific question. For contact, direct to LinkedIn or contact form.
+
+Portfolio context:
+${portfolioContext}
+
+Always respond in English, being direct and helpful.`;
+
+        const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
+
+        const requestBody = {
+            contents: [{
+                parts: [{
+                    text: `${systemPrompt}\n\nUsuario: ${message}`
+                }]
+            }],
+            generationConfig: {
+                temperature: 0.7,
+                maxOutputTokens: 60
+            }
+        };
+
+        const response = await fetch(apiUrl, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'X-goog-api-key': window.GEMINI_CONFIG.apiKey
             },
-            body: JSON.stringify({
-                message: message
-            })
+            body: JSON.stringify(requestBody)
         });
 
         if (!response.ok) {
@@ -753,18 +603,80 @@ async function getAIResponse(message) {
 
         const data = await response.json();
 
-        if (data.message) {
-            return data.message;
+        if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+            return data.candidates[0].content.parts[0].text;
         } else {
             throw new Error('No response content received');
         }
 
     } catch (error) {
-        console.error('Error llamando a la API:', error);
         return getBasicResponse(message, detectedLang);
     }
 }
 
+function getPortfolioContext(lang) {
+    if (lang === 'es') {
+        return `
+PERFIL PROFESIONAL:
+- Fabián Muñoz es Ingeniero en Computación y Analista Programador
+- Se desempeña como Ingeniero en Observabilidad con 2 años de experiencia
+- Site Reliability Engineer (SRE) en Innfinit desde noviembre 2022
+- Especializado en observabilidad, monitoreo y confiabilidad de sistemas críticos
+
+EXPERIENCIA:
+- 2 años como Ingeniero en Observabilidad y SRE
+- Especialista en monitoreo de sistemas críticos empresariales
+- Participando en proyectos de arquitectura CN/Delta
+- Experiencia con golden signals y gestión SLI/SLO
+- Trabajo con infraestructura cloud y automatización
+
+TECNOLOGÍAS:
+- ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform
+- 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda
+- 🐍 Python, Jenkins, CI/CD
+
+PROYECTOS:
+- 🎵 YouTube Music Playlist Creator (40+ stars)
+- 🥊 NutriCombat - PWA con IA
+- 📊 Chile Dashboard en Grafana con datos oficiales
+- 💼 Proyectos web True Q, Ferremás, Psicóloga Valeria Améstica, BYF
+
+CONTACTO:
+- 💼 LinkedIn: https://linkedin.com/in/fabianimv
+- 📧 Para contacto directo, usar el formulario de contacto del sitio
+- 🌐 Portfolio: https://fabianimv.github.io/portfolio`;
+    } else {
+        return `
+PROFESSIONAL PROFILE:
+- Fabián Muñoz is a Computer Engineer and Analyst Programmer
+- Works as Observability Engineer with 2 years of experience
+- Site Reliability Engineer (SRE) at Innfinit since November 2022
+- Specialized in observability, monitoring and critical system reliability
+
+EXPERIENCE:
+- 2 years as Observability Engineer and SRE
+- Specialist in critical enterprise system monitoring
+- Participating in CN/Delta architecture projects
+- Experience with golden signals and SLI/SLO management
+- Working with cloud infrastructure and automation
+
+TECHNOLOGIES:
+- ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform
+- 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda
+- 🐍 Python, Jenkins, CI/CD
+
+PROJECTS:
+- 🎵 YouTube Music Playlist Creator (40+ stars)
+- 🥊 NutriCombat - PWA with AI
+- 📊 Chile Dashboard in Grafana with official data
+- 💼 Web projects True Q, Ferremás, Psychologist Valeria Améstica, BYF
+
+CONTACT:
+- 💼 LinkedIn: https://linkedin.com/in/fabianimv
+- 📧 For direct contact, use the site's contact form
+- 🌐 Portfolio: https://fabianimv.github.io/portfolio`;
+    }
+}
 
 function getBasicResponse(message, currentLang) {
     const lowerMessage = message.toLowerCase();

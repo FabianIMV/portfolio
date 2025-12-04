@@ -17,28 +17,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    <!-- Fira Code for typing effect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
-
     <!-- Config and Styles -->
     <script src="./chatbot-config.js"></script>
     <link rel="stylesheet" href="./styles2.css">
 </head>
 
 <body x-data="{ lang: 'en' }">
-    <!-- Visual Background Elements -->
-    <div class="bg-gradient-animated"></div>
-    <div class="noise-overlay"></div>
-    <div class="grid-bg"></div>
-    <div class="mouse-gradient" id="mouseGradient"></div>
-    
-    <!-- Glowing Orbs -->
-    <div class="glow-orb glow-orb-1"></div>
-    <div class="glow-orb glow-orb-2"></div>
-    <div class="glow-orb glow-orb-3"></div>
-
     <!-- Three.js 3D Background -->
     <canvas id="three-canvas"></canvas>
 
@@ -144,23 +128,15 @@
 
         <!-- Hero Section -->
         <section id="home" class="min-h-screen flex items-center justify-center px-4 pt-20">
-            <div class="text-center max-w-5xl">
-                <!-- Status Badge -->
-                <div class="status-badge mb-8 reveal-up">
-                    <span x-show="lang === 'es'">Disponible para proyectos</span>
-                    <span x-show="lang === 'en'" x-cloak>Available for work</span>
-                </div>
-
+            <div class="text-center max-w-4xl">
                 <!-- Profile Photo -->
-                <img src="./profilepic.jpeg" alt="Fabián M." class="profile-photo mx-auto mb-10 reveal-scale">
+                <img src="./profilepic.jpeg" alt="Fabián M." class="profile-photo mx-auto mb-8">
 
-                <h1 class="hero-mega-title mb-4 reveal-up">
-                    <span class="gradient-text">Fabián</span>
-                    <br>
-                    <span class="text-stroke">Muñoz</span>
+                <h1 class="text-6xl md:text-8xl font-bold mb-6">
+                    <span class="gradient-text neon-glow glitch" data-text="Fabián Muñoz">Fabián Muñoz</span>
                 </h1>
 
-                <div class="hero-mega-subtitle mb-4 reveal-up">
+                <div class="text-2xl md:text-3xl text-gray-300 mb-8">
                     <span x-show="lang === 'es'">
                         Site Reliability Engineer<span class="blinking-cursor">|</span>
                     </span>
@@ -169,19 +145,7 @@
                     </span>
                 </div>
 
-                <!-- Typing Effect -->
-                <div class="typing-container mb-6 reveal-up" style="animation-delay: 0.15s;">
-                    <span class="typing-text" id="typingText"></span>
-                    <span class="typing-cursor">|</span>
-                </div>
-
-                <!-- Location Badge -->
-                <div class="location-badge mb-8 reveal-up" style="animation-delay: 0.18s;">
-                    <span class="flag-emoji">🇨🇱</span>
-                    <span>Santiago, Chile</span>
-                </div>
-
-                <p class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto reveal-up" style="animation-delay: 0.2s;">
+                <p class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto">
                     <span x-show="lang === 'es'">
                         Especialista en observabilidad, golden signals monitoring y optimización de confiabilidad en infraestructuras críticas.
                     </span>
@@ -190,20 +154,19 @@
                     </span>
                 </p>
 
-                <div class="flex gap-4 justify-center flex-wrap reveal-up" style="animation-delay: 0.3s;">
-                    <a href="#projects" class="btn-arrow magnetic-btn">
+                <div class="flex gap-4 justify-center flex-wrap">
+                    <a href="#projects" class="glass neon-border px-8 py-4 rounded-full font-semibold hover:bg-purple-500/20 transition-all transform hover:scale-105">
                         <span x-show="lang === 'es'">Ver Proyectos</span>
                         <span x-show="lang === 'en'" x-cloak>View Projects</span>
-                        <i class="fas fa-arrow-right"></i>
                     </a>
-                    <a href="#contact" class="glass-light px-8 py-4 rounded-full font-semibold hover:bg-purple-500/20 transition-all transform hover:scale-105 magnetic-btn">
+                    <a href="#contact" class="glass-light px-8 py-4 rounded-full font-semibold hover:bg-purple-500/20 transition-all transform hover:scale-105">
                         <span x-show="lang === 'es'">Contacto</span>
                         <span x-show="lang === 'en'" x-cloak>Contact</span>
                     </a>
                 </div>
 
                 <!-- Tech Icons -->
-                <div class="mt-20 flex justify-center gap-8 flex-wrap reveal-up" style="animation-delay: 0.4s;">
+                <div class="mt-20 flex justify-center gap-8 flex-wrap">
                     <div class="tech-item">
                         <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS" class="w-12 h-12">
                         <span class="text-xs text-gray-400">AWS</span>
@@ -243,12 +206,12 @@
         <!-- Experience Section -->
         <section id="experience" class="py-20 px-4">
             <div class="max-w-6xl mx-auto">
-                <h2 class="section-title-ultra text-center mb-16 gradient-text reveal-up">
+                <h2 class="text-5xl font-bold text-center mb-16 gradient-text">
                     <span x-show="lang === 'es'">Experiencia</span>
                     <span x-show="lang === 'en'" x-cloak>Experience</span>
                 </h2>
 
-                <div class="cyber-card mb-8 experience-card spotlight-card reveal-up">
+                <div class="cyber-card mb-8 experience-card">
                     <div class="flex items-start gap-4">
                         <div class="flex-shrink-0">
                             <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center icon-pulse">
@@ -288,7 +251,7 @@
                 </div>
 
                 <!-- Recomin Card -->
-                <div class="cyber-card mb-8 experience-card spotlight-card reveal-up" style="animation-delay: 0.2s;">
+                <div class="cyber-card mb-8 experience-card">
                     <div class="flex items-start gap-4">
                         <div class="flex-shrink-0">
                             <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center icon-pulse">
@@ -325,137 +288,17 @@
             </div>
         </section>
 
-        <!-- Key Projects SRE Section -->
-        <section id="sre-projects" class="py-20 px-4 bg-gray-900/30">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="section-title-ultra text-center mb-6 gradient-text reveal-up">
-                    <span x-show="lang === 'es'">🏗️ Proyectos SRE Clave</span>
-                    <span x-show="lang === 'en'" x-cloak>🏗️ Key SRE Projects</span>
-                </h2>
-                <p class="text-center text-gray-400 mb-12 reveal-up" style="animation-delay: 0.1s;">
-                    <span x-show="lang === 'es'">Arquitecturas de observabilidad enterprise implementadas</span>
-                    <span x-show="lang === 'en'" x-cloak>Enterprise observability architectures implemented</span>
-                </p>
-
-                <div class="grid md:grid-cols-2 gap-6">
-                    <!-- K8s Observability -->
-                    <div class="sre-project-card cyber-card spotlight-card reveal-up">
-                        <div class="sre-project-icon">🔭</div>
-                        <h3 class="text-xl font-bold mb-3 text-center">
-                            <span x-show="lang === 'es'">Enterprise K8s Observability</span>
-                            <span x-show="lang === 'en'" x-cloak>Enterprise K8s Observability</span>
-                        </h3>
-                        <div class="flex gap-2 flex-wrap justify-center mb-3">
-                            <span class="tag-sre tag-kubernetes">Kubernetes</span>
-                            <span class="tag-sre tag-grafana">Grafana Cloud</span>
-                            <span class="tag-sre tag-prometheus">Prometheus</span>
-                        </div>
-                        <p class="text-gray-400 text-sm text-center">
-                            <span x-show="lang === 'es'">Arquitectura de observabilidad con dashboards para K8s, RabbitMQ, Redis, AWS RDS & S3</span>
-                            <span x-show="lang === 'en'" x-cloak>Observability architecture with dashboards for K8s, RabbitMQ, Redis, AWS RDS & S3</span>
-                        </p>
-                    </div>
-
-                    <!-- Incident Correlation -->
-                    <div class="sre-project-card cyber-card spotlight-card reveal-up" style="animation-delay: 0.1s;">
-                        <div class="sre-project-icon">🔥</div>
-                        <h3 class="text-xl font-bold mb-3 text-center">
-                            <span x-show="lang === 'es'">Motor de Correlación de Incidentes</span>
-                            <span x-show="lang === 'en'" x-cloak>Incident Correlation Engine</span>
-                        </h3>
-                        <div class="flex gap-2 flex-wrap justify-center mb-3">
-                            <span class="tag-sre tag-bigpanda">BigPanda</span>
-                            <span class="tag-sre tag-datadog">Datadog</span>
-                            <span class="tag-sre tag-splunk">Splunk</span>
-                        </div>
-                        <p class="text-gray-400 text-sm text-center">
-                            <span x-show="lang === 'es'">Análisis de causa raíz, framework SLI/SLO y sistemas de reducción de ruido</span>
-                            <span x-show="lang === 'en'" x-cloak>Root cause analysis, SLI/SLO framework & noise reduction systems</span>
-                        </p>
-                    </div>
-
-                    <!-- HA Monitoring -->
-                    <div class="sre-project-card cyber-card spotlight-card reveal-up" style="animation-delay: 0.2s;">
-                        <div class="sre-project-icon">📊</div>
-                        <h3 class="text-xl font-bold mb-3 text-center">
-                            <span x-show="lang === 'es'">Plataforma de Monitoreo HA</span>
-                            <span x-show="lang === 'en'" x-cloak>HA Monitoring Platform</span>
-                        </h3>
-                        <div class="flex gap-2 flex-wrap justify-center mb-3">
-                            <span class="tag-sre tag-grafana">Grafana</span>
-                            <span class="tag-sre tag-prometheus">Prometheus</span>
-                            <span class="tag-sre tag-loki">Loki</span>
-                        </div>
-                        <p class="text-gray-400 text-sm text-center">
-                            <span x-show="lang === 'es'">Arquitectura de alta disponibilidad con logging centralizado y monitores sintéticos</span>
-                            <span x-show="lang === 'en'" x-cloak>High-availability architecture with centralized logging & synthetic monitors</span>
-                        </p>
-                    </div>
-
-                    <!-- Multi-Region -->
-                    <div class="sre-project-card cyber-card spotlight-card reveal-up" style="animation-delay: 0.3s;">
-                        <div class="sre-project-icon">🌎</div>
-                        <h3 class="text-xl font-bold mb-3 text-center">
-                            <span x-show="lang === 'es'">Observabilidad Multi-Región</span>
-                            <span x-show="lang === 'en'" x-cloak>Multi-Region Observability</span>
-                        </h3>
-                        <div class="flex gap-2 flex-wrap justify-center mb-3">
-                            <span class="tag-sre tag-aws">AWS</span>
-                            <span class="tag-sre tag-datadog">Datadog</span>
-                            <span class="tag-sre tag-terraform">Terraform</span>
-                        </div>
-                        <p class="text-gray-400 text-sm text-center">
-                            <span x-show="lang === 'es'">Monitoreo de infraestructura en múltiples regiones con despliegue IaC</span>
-                            <span x-show="lang === 'en'" x-cloak>Infrastructure monitoring across multiple regions with IaC deployment</span>
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Stats Dashboard -->
-                <div class="stats-dashboard mt-16 reveal-up" style="animation-delay: 0.4s;">
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-number counter" data-target="3">0</div>
-                            <div class="stat-label">+</div>
-                            <div class="stat-desc">
-                                <span x-show="lang === 'es'">Años en SRE</span>
-                                <span x-show="lang === 'en'" x-cloak>Years in SRE</span>
-                            </div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">Golden</div>
-                            <div class="stat-label">Signals</div>
-                            <div class="stat-desc">Latency • Traffic • Errors • Saturation</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">SLI/SLO</div>
-                            <div class="stat-label">Expert</div>
-                            <div class="stat-desc">MTTR Optimization</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">24/7</div>
-                            <div class="stat-label">Monitoring</div>
-                            <div class="stat-desc">
-                                <span x-show="lang === 'es'">Alta Disponibilidad</span>
-                                <span x-show="lang === 'en'" x-cloak>High Availability</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Projects Section -->
         <section id="projects" class="py-20 px-4">
             <div class="max-w-6xl mx-auto">
-                <h2 class="section-title-ultra text-center mb-16 gradient-text reveal-up">
-                    <span x-show="lang === 'es'">💻 Proyectos Personales</span>
-                    <span x-show="lang === 'en'" x-cloak>💻 Personal Projects</span>
+                <h2 class="text-5xl font-bold text-center mb-16 gradient-text">
+                    <span x-show="lang === 'es'">Proyectos Destacados</span>
+                    <span x-show="lang === 'en'" x-cloak>Featured Projects</span>
                 </h2>
 
                 <div class="grid md:grid-cols-2 gap-8">
                     <!-- Project 1: YouTube Music Playlist Creator -->
-                    <div class="cyber-card spotlight-card reveal-up">
+                    <div class="cyber-card">
                         <div class="flex items-center gap-3 mb-4">
                             <i class="fas fa-music text-3xl text-red-500"></i>
                             <h3 class="text-2xl font-bold">YouTube Music Playlist Creator</h3>
@@ -488,7 +331,7 @@
                     </div>
 
                     <!-- Project 2: NutriCombat -->
-                    <div class="cyber-card spotlight-card reveal-up" style="animation-delay: 0.1s;">
+                    <div class="cyber-card">
                         <div class="flex items-center gap-3 mb-4">
                             <i class="fas fa-dumbbell text-3xl text-green-500"></i>
                             <h3 class="text-2xl font-bold">NutriCombat</h3>
@@ -515,7 +358,7 @@
                     </div>
 
                     <!-- Project 3: Chile Dashboard -->
-                    <div class="cyber-card spotlight-card reveal-up" style="animation-delay: 0.2s;">
+                    <div class="cyber-card">
                         <div class="flex items-center gap-3 mb-4">
                             <i class="fas fa-chart-bar text-3xl text-orange-500"></i>
                             <h3 class="text-2xl font-bold">
@@ -544,7 +387,7 @@
                     </div>
 
                     <!-- Project 4: True Q -->
-                    <div class="cyber-card spotlight-card reveal-up" style="animation-delay: 0.3s;">
+                    <div class="cyber-card">
                         <div class="flex items-center gap-3 mb-4">
                             <i class="fas fa-globe text-3xl text-indigo-500"></i>
                             <h3 class="text-2xl font-bold">True Q</h3>
@@ -570,7 +413,7 @@
                     </div>
 
                     <!-- Project 5: Ferremás -->
-                    <div class="cyber-card spotlight-card reveal-up" style="animation-delay: 0.4s;">
+                    <div class="cyber-card">
                         <div class="flex items-center gap-3 mb-4">
                             <i class="fas fa-tools text-3xl text-blue-500"></i>
                             <h3 class="text-2xl font-bold">Ferremás</h3>
@@ -596,7 +439,7 @@
                     </div>
 
                     <!-- Project 6: Psicóloga Valeria Améstica -->
-                    <div class="cyber-card spotlight-card reveal-up" style="animation-delay: 0.5s;">
+                    <div class="cyber-card">
                         <div class="flex items-center gap-3 mb-4">
                             <i class="fas fa-brain text-3xl text-pink-500"></i>
                             <h3 class="text-2xl font-bold">
@@ -625,7 +468,7 @@
                     </div>
 
                     <!-- Project 7: BYF -->
-                    <div class="cyber-card spotlight-card reveal-up" style="animation-delay: 0.6s;">
+                    <div class="cyber-card">
                         <div class="flex items-center gap-3 mb-4">
                             <i class="fas fa-hamburger text-3xl text-yellow-500"></i>
                             <h3 class="text-2xl font-bold">BYF</h3>
@@ -656,14 +499,14 @@
         <!-- Skills Section -->
         <section id="skills" class="py-20 px-4 bg-gray-900/30">
             <div class="max-w-6xl mx-auto">
-                <h2 class="section-title-ultra text-center mb-16 gradient-text reveal-up">
+                <h2 class="text-5xl font-bold text-center mb-16 gradient-text">
                     <span x-show="lang === 'es'">Habilidades Técnicas</span>
                     <span x-show="lang === 'en'" x-cloak>Technical Skills</span>
                 </h2>
 
                 <div class="grid md:grid-cols-3 gap-8">
                     <!-- Observability & Monitoring -->
-                    <div class="cyber-card spotlight-card reveal-up">
+                    <div class="cyber-card">
                         <h3 class="text-xl font-bold mb-6 flex items-center">
                             <i class="fas fa-chart-line mr-3 text-purple-400"></i>
                             <span x-show="lang === 'es'">Observabilidad & Monitoreo</span>
@@ -710,7 +553,7 @@
                     </div>
 
                     <!-- Cloud & Infrastructure -->
-                    <div class="cyber-card spotlight-card reveal-up" style="animation-delay: 0.1s;">
+                    <div class="cyber-card">
                         <h3 class="text-xl font-bold mb-6 flex items-center">
                             <i class="fas fa-cloud mr-3 text-blue-400"></i>
                             Cloud & Infrastructure
@@ -750,7 +593,7 @@
                     </div>
 
                     <!-- Development & Tools -->
-                    <div class="cyber-card spotlight-card reveal-up" style="animation-delay: 0.2s;">
+                    <div class="cyber-card">
                         <h3 class="text-xl font-bold mb-6 flex items-center">
                             <i class="fas fa-code mr-3 text-green-400"></i>
                             <span x-show="lang === 'es'">Desarrollo & Herramientas</span>
@@ -793,64 +636,19 @@
             </div>
         </section>
 
-        <!-- Certifications Section -->
-        <section id="certifications" class="py-20 px-4">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="section-title-ultra text-center mb-12 gradient-text reveal-up">
-                    <span x-show="lang === 'es'">🏅 Certificaciones</span>
-                    <span x-show="lang === 'en'" x-cloak>🏅 Certifications</span>
-                </h2>
-
-                <div class="certifications-grid reveal-up" style="animation-delay: 0.1s;">
-                    <div class="cert-badge cert-oracle">
-                        <i class="fas fa-cloud cert-icon"></i>
-                        <span>Oracle Cloud Foundations</span>
-                    </div>
-                    <div class="cert-badge cert-azure">
-                        <i class="fas fa-brain cert-icon"></i>
-                        <span>Azure AI Fundamentals</span>
-                    </div>
-                    <div class="cert-badge cert-scrum">
-                        <i class="fas fa-users cert-icon"></i>
-                        <span>Scrum Professional</span>
-                    </div>
-                    <div class="cert-badge cert-opentofu">
-                        <i class="fas fa-cubes cert-icon"></i>
-                        <span>OpenTofu</span>
-                    </div>
-                </div>
-
-                <!-- Education -->
-                <div class="education-card mt-12 reveal-up" style="animation-delay: 0.2s;">
-                    <div class="education-icon">🎓</div>
-                    <div class="education-content">
-                        <h3 class="text-xl font-bold">
-                            <span x-show="lang === 'es'">Ingeniería en Informática</span>
-                            <span x-show="lang === 'en'" x-cloak>Computer Engineering</span>
-                        </h3>
-                        <p class="text-purple-400">Duoc UC</p>
-                        <p class="text-gray-400 text-sm">
-                            <span x-show="lang === 'es'">4to año</span>
-                            <span x-show="lang === 'en'" x-cloak>4th year</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Contact Section -->
         <section id="contact" class="py-20 px-4 mb-20">
             <div class="max-w-4xl mx-auto text-center">
-                <h2 class="section-title-ultra mb-8 gradient-text reveal-up">
-                    <span x-show="lang === 'es'">💬 Conectemos</span>
-                    <span x-show="lang === 'en'" x-cloak>💬 Let's Connect</span>
+                <h2 class="text-5xl font-bold mb-8 gradient-text">
+                    <span x-show="lang === 'es'">Conectemos</span>
+                    <span x-show="lang === 'en'" x-cloak>Let's Connect</span>
                 </h2>
-                <p class="text-xl text-gray-400 mb-12 reveal-up" style="animation-delay: 0.1s;">
+                <p class="text-xl text-gray-400 mb-12">
                     <span x-show="lang === 'es'">
-                        ¡Construyamos sistemas observables juntos! 🚀
+                        ¿Tienes un proyecto en mente? ¡Hablemos!
                     </span>
                     <span x-show="lang === 'en'" x-cloak>
-                        Let's build observable systems together! 🚀
+                        Have a project in mind? Let's talk!
                     </span>
                 </p>
 
