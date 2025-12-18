@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- ========== PRIMARY SEO ========== -->
     <title>Fabián Muñoz - Site Reliability Engineer (SRE) | Observability Expert | Santiago, Chile</title>
-    <meta name="description" content="Fabián Muñoz - SRE Engineer at Banco Falabella with 3+ years in observability, Kubernetes monitoring, Datadog, Grafana, Prometheus. Expert in golden signals, SLI/SLO, MTTR optimization. AWS Cloud Practitioner certified. Santiago, Chile.">
-    <meta name="keywords" content="SRE, Site Reliability Engineer, Fabián Muñoz, observability, monitoring, Kubernetes, Datadog, Grafana, Prometheus, AWS, Terraform, DevOps, golden signals, SLI, SLO, MTTR, Chile, Santiago, Banco Falabella, infrastructure, cloud, reliability engineering">
+    <meta name="description"
+        content="Fabián Muñoz - SRE Engineer at Banco Falabella with 3+ years in observability, Kubernetes monitoring, Datadog, Grafana, Prometheus. Expert in golden signals, SLI/SLO, MTTR optimization. AWS Cloud Practitioner certified. Santiago, Chile.">
+    <meta name="keywords"
+        content="SRE, Site Reliability Engineer, Fabián Muñoz, observability, monitoring, Kubernetes, Datadog, Grafana, Prometheus, AWS, Terraform, DevOps, golden signals, SLI, SLO, MTTR, Chile, Santiago, Banco Falabella, infrastructure, cloud, reliability engineering">
     <meta name="author" content="Fabián Muñoz">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="googlebot" content="index, follow">
     <meta name="bingbot" content="index, follow">
     <link rel="canonical" href="https://fabianimv.github.io/portfolio/">
-    
+
     <!-- ========== OPEN GRAPH (Facebook, LinkedIn, Discord, Slack) ========== -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://fabianimv.github.io/portfolio/">
     <meta property="og:title" content="Fabián Muñoz - Site Reliability Engineer | Observability Expert">
-    <meta property="og:description" content="SRE at Banco Falabella with 3+ years in observability. Expert in Kubernetes, Datadog, Grafana, Prometheus. AWS Certified. Building observable systems for high-availability financial services.">
+    <meta property="og:description"
+        content="SRE at Banco Falabella with 3+ years in observability. Expert in Kubernetes, Datadog, Grafana, Prometheus. AWS Certified. Building observable systems for high-availability financial services.">
     <meta property="og:image" content="https://fabianimv.github.io/portfolio/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -26,16 +30,17 @@
     <meta property="og:site_name" content="Fabián Muñoz Portfolio">
     <meta property="og:locale" content="en_US">
     <meta property="og:locale:alternate" content="es_CL">
-    
+
     <!-- ========== TWITTER CARD ========== -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://fabianimv.github.io/portfolio/">
     <meta name="twitter:title" content="Fabián Muñoz - Site Reliability Engineer | Observability Expert">
-    <meta name="twitter:description" content="SRE at Banco Falabella with 3+ years in observability. Expert in Kubernetes, Datadog, Grafana, Prometheus. AWS Certified.">
+    <meta name="twitter:description"
+        content="SRE at Banco Falabella with 3+ years in observability. Expert in Kubernetes, Datadog, Grafana, Prometheus. AWS Certified.">
     <meta name="twitter:image" content="https://fabianimv.github.io/portfolio/og-image.png">
     <meta name="twitter:image:alt" content="Fabián Muñoz - SRE Engineer Portfolio">
     <meta name="twitter:creator" content="@fabianimv">
-    
+
     <!-- ========== ADDITIONAL SEO ========== -->
     <meta name="theme-color" content="#6366f1">
     <meta name="msapplication-TileColor" content="#6366f1">
@@ -44,20 +49,20 @@
     <meta name="apple-mobile-web-app-title" content="Fabián M. Portfolio">
     <meta name="application-name" content="Fabián Muñoz Portfolio">
     <meta name="format-detection" content="telephone=no">
-    
+
     <!-- ========== GEO LOCATION SEO ========== -->
     <meta name="geo.region" content="CL-RM">
     <meta name="geo.placename" content="Santiago, Chile">
     <meta name="geo.position" content="-33.4489;-70.6693">
     <meta name="ICBM" content="-33.4489, -70.6693">
-    
+
     <!-- ========== FAVICON & ICONS ========== -->
     <link rel="icon" href="./favicon.svg" type="image/svg+xml">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
     <link rel="manifest" href="./site.webmanifest">
-    
+
     <!-- ========== STRUCTURED DATA (JSON-LD) ========== -->
     <script type="application/ld+json">
     {
@@ -123,7 +128,7 @@
         ]
     }
     </script>
-    
+
     <!-- Breadcrumb Schema -->
     <script type="application/ld+json">
     {
@@ -163,7 +168,7 @@
         ]
     }
     </script>
-    
+
     <!-- Website Schema -->
     <script type="application/ld+json">
     {
@@ -199,12 +204,33 @@
 </head>
 
 <body x-data="{ lang: 'en' }">
+    <!-- System Status Bar - SRE Control Room -->
+    <div class="system-status-bar">
+        <span class="status-indicator online">SYSTEM ONLINE</span>
+        <span class="metric">UPTIME: <span id="uptimeCounter">1127</span>d</span>
+        <span class="metric">LATENCY: <span id="latencyMetric">42</span>ms</span>
+        <span class="metric">CPU: <span id="cpuMetric">23</span>%</span>
+        <span class="metric">HEALTH: <span id="healthMetric">99.99</span>%</span>
+    </div>
+
+    <!-- HUD Overlays -->
+    <div class="hud-overlay hud-top-right">
+        <div class="hud-item">SYS_TIME: <span class="hud-value" id="hudTime">--:--:--</span></div>
+        <div class="hud-item">TIMEZONE: <span class="hud-value">America/Santiago</span></div>
+        <div class="hud-item">REQUESTS: <span class="hud-value" id="hudRequests">0</span>/sec</div>
+    </div>
+
+    <div class="hud-overlay hud-bottom-left">
+        <div class="hud-item">NODE: <span class="hud-value">sre-portfolio-01</span></div>
+        <div class="hud-item">POD: <span class="hud-value">fabian-main-<span id="podId">a7f3x</span></span></div>
+    </div>
+
     <!-- Visual Background Elements -->
     <div class="bg-gradient-animated"></div>
     <div class="noise-overlay"></div>
     <div class="grid-bg"></div>
     <div class="mouse-gradient" id="mouseGradient"></div>
-    
+
     <!-- Glowing Orbs -->
     <div class="glow-orb glow-orb-1"></div>
     <div class="glow-orb glow-orb-2"></div>
@@ -213,12 +239,687 @@
     <!-- Three.js 3D Background -->
     <canvas id="three-canvas"></canvas>
 
-    <!-- Scroll Progress Indicator -->
-    <div class="scroll-indicator">
+    <!-- Scroll Progress Indicator (hidden in dashboard mode) -->
+    <div class="scroll-indicator" id="scrollIndicator">
         <div class="scroll-progress" id="scrollProgress"></div>
     </div>
 
-    <!-- Navbar -->
+    <!-- ========================================
+         COMMAND CENTER DASHBOARD
+         ======================================== -->
+    <div class="dashboard-container" id="dashboardContainer">
+
+        <!-- Sidebar Navigation -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-logo">F</div>
+            <nav class="sidebar-nav">
+                <a href="#" class="sidebar-item active" data-panel="0" onclick="scrollToPanel(0); return false;">
+                    <i class="fas fa-terminal"></i>
+                    <span class="sidebar-tooltip">
+                        <span x-show="lang === 'es'">Inicio</span>
+                        <span x-show="lang === 'en'" x-cloak>Home</span>
+                    </span>
+                </a>
+                <a href="#" class="sidebar-item" data-panel="1" onclick="scrollToPanel(1); return false;">
+                    <i class="fas fa-briefcase"></i>
+                    <span class="sidebar-tooltip">
+                        <span x-show="lang === 'es'">Experiencia</span>
+                        <span x-show="lang === 'en'" x-cloak>Experience</span>
+                    </span>
+                </a>
+                <a href="#" class="sidebar-item" data-panel="2" onclick="scrollToPanel(2); return false;">
+                    <i class="fas fa-rocket"></i>
+                    <span class="sidebar-tooltip">
+                        <span x-show="lang === 'es'">Proyectos</span>
+                        <span x-show="lang === 'en'" x-cloak>Projects</span>
+                    </span>
+                </a>
+                <a href="#" class="sidebar-item" data-panel="3" onclick="scrollToPanel(3); return false;">
+                    <i class="fas fa-chart-bar"></i>
+                    <span class="sidebar-tooltip">
+                        <span x-show="lang === 'es'">Skills</span>
+                        <span x-show="lang === 'en'" x-cloak>Skills</span>
+                    </span>
+                </a>
+                <a href="#" class="sidebar-item" data-panel="4" onclick="scrollToPanel(4); return false;">
+                    <i class="fas fa-satellite-dish"></i>
+                    <span class="sidebar-tooltip">
+                        <span x-show="lang === 'es'">Contacto</span>
+                        <span x-show="lang === 'en'" x-cloak>Contact</span>
+                    </span>
+                </a>
+            </nav>
+            <div class="sidebar-lang-toggle" @click="lang = lang === 'es' ? 'en' : 'es'">
+                <span x-show="lang === 'en'">🇪🇸</span>
+                <span x-show="lang === 'es'" x-cloak>🇬🇧</span>
+            </div>
+        </aside>
+
+        <!-- Horizontal Panels Container -->
+        <main class="panels-container" id="panelsContainer">
+
+            <!-- Panel 1: Home/Overview -->
+            <section class="dashboard-panel" id="panel-home">
+                <div class="panel-header">
+                    <span class="panel-number">PANEL 01</span>
+                    <h1 class="panel-title">
+                        <span x-show="lang === 'es'">Centro de Control</span>
+                        <span x-show="lang === 'en'" x-cloak>Control Center</span>
+                    </h1>
+                    <div class="visitor-counter">
+                        <span class="count" id="visitorCount">2,847</span>
+                        <span x-show="lang === 'es'">perfiles analizados</span>
+                        <span x-show="lang === 'en'" x-cloak>profiles analyzed</span>
+                    </div>
+                </div>
+
+                <div class="panel-bento-grid">
+                    <!-- Main Profile Widget -->
+                    <div class="widget-card bento-span-2 bento-row-2">
+                        <div class="widget-header">
+                            <span class="widget-title">SRE.profile</span>
+                            <span class="widget-status">ACTIVE</span>
+                        </div>
+                        <div class="flex items-center gap-6 mt-4">
+                            <div class="profile-frame w-32 h-32 rounded-full overflow-hidden border-2"
+                                style="border-color: var(--terminal-green);">
+                                <img src="./profilepic.jpeg" alt="Fabián Muñoz" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold mb-1">Fabián Muñoz V.</h2>
+                                <p class="text-lg" style="color: var(--terminal-green);">Site Reliability Engineer</p>
+                                <p class="text-sm text-gray-400 mt-2">
+                                    <i class="fas fa-map-marker-alt mr-2"></i>Santiago, Chile
+                                </p>
+                                <div class="flex gap-3 mt-4">
+                                    <a href="https://linkedin.com/in/fabianimv" target="_blank"
+                                        class="text-gray-400 hover:text-white transition-colors">
+                                        <i class="fab fa-linkedin text-xl"></i>
+                                    </a>
+                                    <a href="https://github.com/FabianIMV" target="_blank"
+                                        class="text-gray-400 hover:text-white transition-colors">
+                                        <i class="fab fa-github text-xl"></i>
+                                    </a>
+                                    <a href="mailto:fabianignaciomv@gmail.com"
+                                        class="text-gray-400 hover:text-white transition-colors">
+                                        <i class="fas fa-envelope text-xl"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 mt-6 leading-relaxed">
+                            <span x-show="lang === 'es'">
+                                3+ años construyendo sistemas observables de alta disponibilidad.
+                                Especializado en Golden Signals, SLI/SLO, correlación de incidentes y automatización.
+                            </span>
+                            <span x-show="lang === 'en'" x-cloak>
+                                3+ years building high-availability observable systems.
+                                Specialized in Golden Signals, SLI/SLO, incident correlation and automation.
+                            </span>
+                        </p>
+                    </div>
+
+                    <!-- Uptime Gauge -->
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <span class="widget-title">UPTIME</span>
+                        </div>
+                        <div class="circular-gauge mx-auto" data-value="99.99">
+                            <svg width="120" height="120" viewBox="0 0 120 120">
+                                <circle class="circular-gauge-bg" cx="60" cy="60" r="54"></circle>
+                                <circle class="circular-gauge-fill" cx="60" cy="60" r="54"></circle>
+                            </svg>
+                            <div class="circular-gauge-value">99.9%</div>
+                        </div>
+                        <div class="circular-gauge-label">
+                            <span x-show="lang === 'es'">Disponibilidad SRE</span>
+                            <span x-show="lang === 'en'" x-cloak>SRE Availability</span>
+                        </div>
+                    </div>
+
+                    <!-- Career Days -->
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <span class="widget-title">CAREER.days</span>
+                        </div>
+                        <div class="text-center py-4">
+                            <div class="text-4xl font-bold" style="color: var(--terminal-cyan);" id="careerDays">780
+                            </div>
+                            <div class="text-sm text-gray-400 mt-2">
+                                <span x-show="lang === 'es'">días en SRE</span>
+                                <span x-show="lang === 'en'" x-cloak>days in SRE</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tech Stack Mini -->
+                    <div class="widget-card bento-span-3">
+                        <div class="widget-header">
+                            <span class="widget-title">TECH.stack</span>
+                            <span class="widget-status">RUNNING</span>
+                        </div>
+                        <div class="flex flex-wrap gap-3 mt-2">
+                            <span class="tag-sre tag-kubernetes"><i class="fab fa-docker mr-1"></i>Kubernetes</span>
+                            <span class="tag-sre tag-datadog">Datadog</span>
+                            <span class="tag-sre tag-grafana">Grafana</span>
+                            <span class="tag-sre tag-prometheus">Prometheus</span>
+                            <span class="tag-sre tag-aws">AWS</span>
+                            <span class="tag-sre tag-terraform">Terraform</span>
+                            <span class="tag-sre tag-python">Python</span>
+                            <span class="tag-sre"
+                                style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3);">Kafka</span>
+                            <span class="tag-sre"
+                                style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3);">ELK
+                                Stack</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Panel 2: Experience -->
+            <section class="dashboard-panel" id="panel-experience">
+                <div class="panel-header">
+                    <span class="panel-number">PANEL 02</span>
+                    <h1 class="panel-title">
+                        <span x-show="lang === 'es'">Historial de Deployments</span>
+                        <span x-show="lang === 'en'" x-cloak>Deployment History</span>
+                    </h1>
+                </div>
+
+                <div class="deployment-log">
+                    <!-- Banco Falabella -->
+                    <div class="deploy-entry active">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <span class="deploy-version">[ACTIVE] v3.0.0</span>
+                                <span class="deploy-target">→ Banco Falabella</span>
+                            </div>
+                            <span class="deploy-date">Oct 2025 - Present</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-3">
+                            <span x-show="lang === 'es'">
+                                SRE para infraestructura de banca digital. Kafka monitoring, Golden Signals, respuesta a
+                                incidentes 24/7.
+                            </span>
+                            <span x-show="lang === 'en'" x-cloak>
+                                SRE for digital banking infrastructure. Kafka monitoring, Golden Signals, 24/7 incident
+                                response.
+                            </span>
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tag-sre tag-kubernetes">Kubernetes</span>
+                            <span class="tag-sre tag-datadog">Datadog</span>
+                            <span class="tag-sre">Kafka</span>
+                            <span class="tag-sre">Splunk</span>
+                        </div>
+                    </div>
+
+                    <!-- Innfinit -->
+                    <div class="deploy-entry stable">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <span class="deploy-version">[STABLE] v2.x</span>
+                                <span class="deploy-target">→ Innfinit SpA</span>
+                            </div>
+                            <span class="deploy-date">Nov 2022 - Oct 2025</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-3">
+                            <span x-show="lang === 'es'">
+                                4 proyectos mayores para Fortune 500. Plataformas de observabilidad multi-región.
+                            </span>
+                            <span x-show="lang === 'en'" x-cloak>
+                                4 major projects for Fortune 500 clients. Multi-region observability platforms.
+                            </span>
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tag-sre tag-aws">AWS</span>
+                            <span class="tag-sre tag-grafana">Grafana</span>
+                            <span class="tag-sre tag-prometheus">Prometheus</span>
+                            <span class="tag-sre tag-terraform">Terraform</span>
+                        </div>
+                    </div>
+
+                    <!-- Recomin -->
+                    <div class="deploy-entry stable">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <span class="deploy-version">[LEGACY] v1.x</span>
+                                <span class="deploy-target">→ Recomin SM</span>
+                            </div>
+                            <span class="deploy-date">Jul 2022 - Nov 2022</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-3">
+                            <span x-show="lang === 'es'">
+                                Desarrollo fullstack inicial. Base sólida en desarrollo web.
+                            </span>
+                            <span x-show="lang === 'en'" x-cloak>
+                                Initial fullstack development. Solid foundation in web development.
+                            </span>
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tag-sre">React</span>
+                            <span class="tag-sre">Node.js</span>
+                            <span class="tag-sre">PostgreSQL</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Panel 3: Projects -->
+            <section class="dashboard-panel" id="panel-projects">
+                <div class="panel-header">
+                    <span class="panel-number">PANEL 03</span>
+                    <h1 class="panel-title">
+                        <span x-show="lang === 'es'">Servicios Activos</span>
+                        <span x-show="lang === 'en'" x-cloak>Active Services</span>
+                    </h1>
+                </div>
+
+                <div class="panel-bento-grid">
+                    <!-- SRE Projects -->
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <span class="widget-title">K8s Observability</span>
+                            <span class="widget-status">HEALTHY</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mt-2">
+                            <span x-show="lang === 'es'">Monitoreo completo de clusters Kubernetes con Datadog
+                                APM</span>
+                            <span x-show="lang === 'en'" x-cloak>Complete Kubernetes cluster monitoring with Datadog
+                                APM</span>
+                        </p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="tag-sre tag-kubernetes text-xs">K8s</span>
+                            <span class="tag-sre tag-datadog text-xs">Datadog</span>
+                        </div>
+                    </div>
+
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <span class="widget-title">Incident Correlation</span>
+                            <span class="widget-status">HEALTHY</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mt-2">
+                            <span x-show="lang === 'es'">Motor de correlación de incidentes con análisis de causa raíz
+                                automatizado</span>
+                            <span x-show="lang === 'en'" x-cloak>Incident correlation engine with automated root cause
+                                analysis</span>
+                        </p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="tag-sre tag-python text-xs">Python</span>
+                            <span class="tag-sre tag-aws text-xs">Lambda</span>
+                        </div>
+                    </div>
+
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <span class="widget-title">HA Monitoring</span>
+                            <span class="widget-status">HEALTHY</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mt-2">
+                            <span x-show="lang === 'es'">Plataforma de alta disponibilidad para métricas críticas</span>
+                            <span x-show="lang === 'en'" x-cloak>High-availability platform for critical metrics</span>
+                        </p>
+                        <div class="flex gap-2 mt-3">
+                            <span class="tag-sre tag-grafana text-xs">Grafana</span>
+                            <span class="tag-sre tag-prometheus text-xs">Prometheus</span>
+                        </div>
+                    </div>
+
+                    <!-- Personal Projects -->
+                    <div class="widget-card bento-span-2">
+                        <div class="widget-header">
+                            <span class="widget-title">PERSONAL.projects</span>
+                            <span class="widget-status">DEPLOYED</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3 mt-3">
+                            <a href="https://github.com/FabianIMV/youtube-playlist-creator" target="_blank"
+                                class="p-3 rounded-lg bg-black/30 hover:bg-black/50 transition-all">
+                                <div class="font-semibold text-sm">YouTube Playlist Creator</div>
+                                <div class="text-xs text-gray-400 mt-1">Python, OAuth2</div>
+                            </a>
+                            <a href="https://github.com/FabianIMV/chile-dashboard" target="_blank"
+                                class="p-3 rounded-lg bg-black/30 hover:bg-black/50 transition-all">
+                                <div class="font-semibold text-sm">Chile Dashboard</div>
+                                <div class="text-xs text-gray-400 mt-1">React, Charts</div>
+                            </a>
+                            <a href="#" class="p-3 rounded-lg bg-black/30 hover:bg-black/50 transition-all">
+                                <div class="font-semibold text-sm">NutriCombat</div>
+                                <div class="text-xs text-gray-400 mt-1">Flutter, Firebase</div>
+                            </a>
+                            <a href="#" class="p-3 rounded-lg bg-black/30 hover:bg-black/50 transition-all">
+                                <div class="font-semibold text-sm">True Q (Capstone)</div>
+                                <div class="text-xs text-gray-400 mt-1">React, Machine Learning</div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <span class="widget-title">STATS</span>
+                        </div>
+                        <div class="space-y-4 mt-3">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-400">SRE Projects</span>
+                                    <span style="color: var(--terminal-green);">4</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-400">Personal Projects</span>
+                                    <span style="color: var(--terminal-cyan);">7</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-400">Certifications</span>
+                                    <span style="color: var(--terminal-amber);">12+</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Panel 4: Skills -->
+            <section class="dashboard-panel" id="panel-skills">
+                <div class="panel-header">
+                    <span class="panel-number">PANEL 04</span>
+                    <h1 class="panel-title">
+                        <span x-show="lang === 'es'">Recursos del Sistema</span>
+                        <span x-show="lang === 'en'" x-cloak>System Resources</span>
+                    </h1>
+                </div>
+
+                <div class="panel-bento-grid">
+                    <!-- Observability -->
+                    <div class="widget-card bento-row-2">
+                        <div class="widget-header">
+                            <span class="widget-title">OBSERVABILITY</span>
+                        </div>
+                        <div class="space-y-3 mt-4">
+                            <div class="skill-gauge">
+                                <span class="skill-gauge-name">Datadog</span>
+                                <div class="skill-gauge-bar">
+                                    <div class="skill-gauge-fill" style="width: 95%"></div>
+                                </div>
+                                <span class="skill-gauge-percent">95%</span>
+                            </div>
+                            <div class="skill-gauge">
+                                <span class="skill-gauge-name">Grafana</span>
+                                <div class="skill-gauge-bar">
+                                    <div class="skill-gauge-fill" style="width: 90%"></div>
+                                </div>
+                                <span class="skill-gauge-percent">90%</span>
+                            </div>
+                            <div class="skill-gauge">
+                                <span class="skill-gauge-name">Prometheus</span>
+                                <div class="skill-gauge-bar">
+                                    <div class="skill-gauge-fill" style="width: 88%"></div>
+                                </div>
+                                <span class="skill-gauge-percent">88%</span>
+                            </div>
+                            <div class="skill-gauge">
+                                <span class="skill-gauge-name">ELK Stack</span>
+                                <div class="skill-gauge-bar">
+                                    <div class="skill-gauge-fill" style="width: 82%"></div>
+                                </div>
+                                <span class="skill-gauge-percent">82%</span>
+                            </div>
+                            <div class="skill-gauge">
+                                <span class="skill-gauge-name">Splunk</span>
+                                <div class="skill-gauge-bar">
+                                    <div class="skill-gauge-fill" style="width: 75%"></div>
+                                </div>
+                                <span class="skill-gauge-percent">75%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cloud -->
+                    <div class="widget-card bento-span-2">
+                        <div class="widget-header">
+                            <span class="widget-title">CLOUD & INFRASTRUCTURE</span>
+                        </div>
+                        <div class="grid grid-cols-4 gap-4 mt-4 text-center">
+                            <div class="circular-gauge mx-auto" style="width: 80px; height: 80px;" data-value="92">
+                                <svg width="80" height="80" viewBox="0 0 80 80">
+                                    <circle class="circular-gauge-bg" cx="40" cy="40" r="34" stroke-width="6"></circle>
+                                    <circle class="circular-gauge-fill" cx="40" cy="40" r="34" stroke-width="6"
+                                        style="stroke-dasharray: 213.628; stroke-dashoffset: 17.09;"></circle>
+                                </svg>
+                                <div class="circular-gauge-value" style="font-size: 1rem;">92%</div>
+                            </div>
+                            <div class="circular-gauge mx-auto" style="width: 80px; height: 80px;">
+                                <svg width="80" height="80" viewBox="0 0 80 80">
+                                    <circle class="circular-gauge-bg" cx="40" cy="40" r="34" stroke-width="6"></circle>
+                                    <circle class="circular-gauge-fill" cx="40" cy="40" r="34" stroke-width="6"
+                                        style="stroke-dasharray: 213.628; stroke-dashoffset: 21.36; stroke: var(--terminal-cyan);">
+                                    </circle>
+                                </svg>
+                                <div class="circular-gauge-value" style="font-size: 1rem; color: var(--terminal-cyan);">
+                                    90%</div>
+                            </div>
+                            <div class="circular-gauge mx-auto" style="width: 80px; height: 80px;">
+                                <svg width="80" height="80" viewBox="0 0 80 80">
+                                    <circle class="circular-gauge-bg" cx="40" cy="40" r="34" stroke-width="6"></circle>
+                                    <circle class="circular-gauge-fill" cx="40" cy="40" r="34" stroke-width="6"
+                                        style="stroke-dasharray: 213.628; stroke-dashoffset: 32.04;"></circle>
+                                </svg>
+                                <div class="circular-gauge-value" style="font-size: 1rem;">85%</div>
+                            </div>
+                            <div class="circular-gauge mx-auto" style="width: 80px; height: 80px;">
+                                <svg width="80" height="80" viewBox="0 0 80 80">
+                                    <circle class="circular-gauge-bg" cx="40" cy="40" r="34" stroke-width="6"></circle>
+                                    <circle class="circular-gauge-fill" cx="40" cy="40" r="34" stroke-width="6"
+                                        style="stroke-dasharray: 213.628; stroke-dashoffset: 42.72; stroke: var(--terminal-cyan);">
+                                    </circle>
+                                </svg>
+                                <div class="circular-gauge-value" style="font-size: 1rem; color: var(--terminal-cyan);">
+                                    80%</div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-4 gap-4 mt-2 text-center">
+                            <div class="text-xs text-gray-400">AWS</div>
+                            <div class="text-xs text-gray-400">Kubernetes</div>
+                            <div class="text-xs text-gray-400">Terraform</div>
+                            <div class="text-xs text-gray-400">Docker</div>
+                        </div>
+                    </div>
+
+                    <!-- Languages -->
+                    <div class="widget-card bento-span-2">
+                        <div class="widget-header">
+                            <span class="widget-title">DEVELOPMENT</span>
+                        </div>
+                        <div class="space-y-2 mt-3">
+                            <div class="skill-gauge">
+                                <span class="skill-gauge-name">Python</span>
+                                <div class="skill-gauge-bar">
+                                    <div class="skill-gauge-fill"
+                                        style="width: 90%; background: repeating-linear-gradient(90deg, var(--terminal-cyan) 0px, var(--terminal-cyan) 8px, rgba(0, 180, 220, 0.8) 8px, rgba(0, 180, 220, 0.8) 10px);">
+                                    </div>
+                                </div>
+                                <span class="skill-gauge-percent" style="color: var(--terminal-cyan);">90%</span>
+                            </div>
+                            <div class="skill-gauge">
+                                <span class="skill-gauge-name">JavaScript</span>
+                                <div class="skill-gauge-bar">
+                                    <div class="skill-gauge-fill"
+                                        style="width: 85%; background: repeating-linear-gradient(90deg, var(--terminal-cyan) 0px, var(--terminal-cyan) 8px, rgba(0, 180, 220, 0.8) 8px, rgba(0, 180, 220, 0.8) 10px);">
+                                    </div>
+                                </div>
+                                <span class="skill-gauge-percent" style="color: var(--terminal-cyan);">85%</span>
+                            </div>
+                            <div class="skill-gauge">
+                                <span class="skill-gauge-name">Bash/Shell</span>
+                                <div class="skill-gauge-bar">
+                                    <div class="skill-gauge-fill"
+                                        style="width: 88%; background: repeating-linear-gradient(90deg, var(--terminal-cyan) 0px, var(--terminal-cyan) 8px, rgba(0, 180, 220, 0.8) 8px, rgba(0, 180, 220, 0.8) 10px);">
+                                    </div>
+                                </div>
+                                <span class="skill-gauge-percent" style="color: var(--terminal-cyan);">88%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Certifications -->
+                    <div class="widget-card">
+                        <div class="widget-header">
+                            <span class="widget-title">CERTS</span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span class="text-xs px-2 py-1 rounded"
+                                style="background: rgba(255,153,0,0.2); color: #FF9900;">AWS CP</span>
+                            <span class="text-xs px-2 py-1 rounded"
+                                style="background: rgba(99,57,249,0.2); color: #6339F9;">Datadog</span>
+                            <span class="text-xs px-2 py-1 rounded"
+                                style="background: rgba(50,108,229,0.2); color: #326CE5;">CKA</span>
+                            <span class="text-xs px-2 py-1 rounded"
+                                style="background: rgba(66,133,244,0.2); color: #4285F4;">GCP</span>
+                            <span class="text-xs px-2 py-1 rounded"
+                                style="background: rgba(139,92,246,0.2); color: #8b5cf6;">+8</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Panel 5: Contact -->
+            <section class="dashboard-panel" id="panel-contact">
+                <div class="panel-header">
+                    <span class="panel-number">PANEL 05</span>
+                    <h1 class="panel-title">
+                        <span x-show="lang === 'es'">Establecer Conexión</span>
+                        <span x-show="lang === 'en'" x-cloak>Establish Connection</span>
+                    </h1>
+                </div>
+
+                <div class="max-w-2xl mx-auto">
+                    <!-- SSH Terminal -->
+                    <div class="ssh-connect">
+                        <div class="ssh-line">
+                            <span class="ssh-prompt">$</span>
+                            <span class="ssh-command">ssh connect@fabian.dev</span>
+                        </div>
+                        <div class="ssh-line">
+                            <span x-show="lang === 'es'">Conectando a fabian.dev...</span>
+                            <span x-show="lang === 'en'" x-cloak>Connecting to fabian.dev...</span>
+                        </div>
+                        <div class="ssh-line">
+                            <span class="ssh-success">✓ </span>
+                            <span x-show="lang === 'es'">¡Conexión establecida!</span>
+                            <span x-show="lang === 'en'" x-cloak>Connection established!</span>
+                        </div>
+                        <br>
+                        <div class="ssh-line" style="color: rgba(255,255,255,0.5);">
+                            <span x-show="lang === 'es'">Canales disponibles:</span>
+                            <span x-show="lang === 'en'" x-cloak>Available channels:</span>
+                        </div>
+
+                        <a href="https://linkedin.com/in/fabianimv" target="_blank" class="ssh-channel">
+                            <span class="ssh-channel-num">[1]</span>
+                            <span class="ssh-channel-name">LinkedIn</span>
+                            <span class="ssh-channel-path">/dev/linkedin</span>
+                        </a>
+
+                        <a href="https://github.com/FabianIMV" target="_blank" class="ssh-channel">
+                            <span class="ssh-channel-num">[2]</span>
+                            <span class="ssh-channel-name">GitHub</span>
+                            <span class="ssh-channel-path">/dev/github</span>
+                        </a>
+
+                        <a href="mailto:fabianignaciomv@gmail.com" class="ssh-channel">
+                            <span class="ssh-channel-num">[3]</span>
+                            <span class="ssh-channel-name">Email</span>
+                            <span class="ssh-channel-path">/dev/mail</span>
+                        </a>
+
+                        <br>
+                        <div class="ssh-line">
+                            <span class="ssh-prompt">$</span>
+                            <span class="typing-cursor">_</span>
+                        </div>
+                    </div>
+
+                    <!-- Alert Stream -->
+                    <div class="alert-stream mt-8">
+                        <div class="alert-stream-header">
+                            <span class="alert-stream-title">Event Log</span>
+                            <span class="alert-stream-live">LIVE</span>
+                        </div>
+                        <div class="alert-stream-body">
+                            <div class="alert-stream-scroll" id="alertScrollDashboard">
+                                <div class="alert-item">
+                                    <span class="alert-level info">INFO</span>
+                                    <span class="alert-time">[14:23:45]</span>
+                                    <span class="alert-message">New certification acquired: Datadog APM</span>
+                                </div>
+                                <div class="alert-item">
+                                    <span class="alert-level info">INFO</span>
+                                    <span class="alert-time">[14:20:12]</span>
+                                    <span class="alert-message">LinkedIn connection established</span>
+                                </div>
+                                <div class="alert-item">
+                                    <span class="alert-level warn">WARN</span>
+                                    <span class="alert-time">[14:15:00]</span>
+                                    <span class="alert-message">Coffee level LOW - refill needed</span>
+                                </div>
+                                <div class="alert-item">
+                                    <span class="alert-level info">INFO</span>
+                                    <span class="alert-time">[14:10:33]</span>
+                                    <span class="alert-message">GitHub contribution recorded</span>
+                                </div>
+                                <div class="alert-item">
+                                    <span class="alert-level info">INFO</span>
+                                    <span class="alert-time">[13:55:21]</span>
+                                    <span class="alert-message">Portfolio visitor detected</span>
+                                </div>
+                                <div class="alert-item">
+                                    <span class="alert-level info">INFO</span>
+                                    <span class="alert-time">[13:45:00]</span>
+                                    <span class="alert-message">System health check: PASSED</span>
+                                </div>
+                                <!-- Duplicates for scroll -->
+                                <div class="alert-item">
+                                    <span class="alert-level info">INFO</span>
+                                    <span class="alert-time">[14:23:45]</span>
+                                    <span class="alert-message">New certification acquired: Datadog APM</span>
+                                </div>
+                                <div class="alert-item">
+                                    <span class="alert-level info">INFO</span>
+                                    <span class="alert-time">[14:20:12]</span>
+                                    <span class="alert-message">LinkedIn connection established</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Progress Bar -->
+        <div class="progress-bar-container">
+            <div class="progress-dots">
+                <div class="progress-dot active" onclick="scrollToPanel(0)"></div>
+                <div class="progress-dot" onclick="scrollToPanel(1)"></div>
+                <div class="progress-dot" onclick="scrollToPanel(2)"></div>
+                <div class="progress-dot" onclick="scrollToPanel(3)"></div>
+                <div class="progress-dot" onclick="scrollToPanel(4)"></div>
+            </div>
+            <div class="progress-scrubber">
+                <div class="progress-scrubber-fill" id="progressFill" style="width: 20%"></div>
+            </div>
+            <div class="progress-text">
+                <span x-show="lang === 'es'">PANEL <span id="currentPanelNum">1</span> DE 5</span>
+                <span x-show="lang === 'en'" x-cloak>PANEL <span id="currentPanelNumEn">1</span> OF 5</span>
+            </div>
+        </div>
+    </div>
+    <!-- END COMMAND CENTER DASHBOARD -->
+
+    <!-- Navbar (hidden in dashboard mode but kept for fallback) -->
+
     <nav class="navbar" id="navbar" x-data="{ mobileMenuOpen: false }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
             <div class="flex justify-between items-center">
@@ -249,7 +950,7 @@
 
                     <!-- Language Toggle -->
                     <button @click="lang = lang === 'es' ? 'en' : 'es'"
-                            class="glass-light px-3 py-1 rounded-full text-sm transition-all duration-300 hover:bg-purple-500/20">
+                        class="glass-light px-3 py-1 rounded-full text-sm transition-all duration-300 hover:bg-purple-500/20">
                         <span x-show="lang === 'en'">🇪🇸 ES</span>
                         <span x-show="lang === 'es'" x-cloak>🇬🇧 EN</span>
                     </button>
@@ -259,49 +960,55 @@
                 <div class="md:hidden flex items-center gap-3">
                     <!-- Language Toggle Mobile -->
                     <button @click="lang = lang === 'es' ? 'en' : 'es'"
-                            class="glass-light px-2 py-1 rounded-full text-xs transition-all duration-300">
+                        class="glass-light px-2 py-1 rounded-full text-xs transition-all duration-300">
                         <span x-show="lang === 'en'">🇪🇸</span>
                         <span x-show="lang === 'es'" x-cloak>🇬🇧</span>
                     </button>
                     <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-white p-2 focus:outline-none">
-                        <svg x-show="!mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        <svg x-show="!mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
-                        <svg x-show="mobileMenuOpen" x-cloak class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        <svg x-show="mobileMenuOpen" x-cloak class="w-6 h-6" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
                     </button>
                 </div>
             </div>
 
             <!-- Mobile Menu -->
-            <div x-show="mobileMenuOpen" 
-                 x-transition:enter="transition ease-out duration-200"
-                 x-transition:enter-start="opacity-0 transform -translate-y-4"
-                 x-transition:enter-end="opacity-100 transform translate-y-0"
-                 x-transition:leave="transition ease-in duration-150"
-                 x-transition:leave-start="opacity-100 transform translate-y-0"
-                 x-transition:leave-end="opacity-0 transform -translate-y-4"
-                 class="md:hidden mt-4 pb-4"
-                 x-cloak>
+            <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0 transform -translate-y-4"
+                x-transition:enter-end="opacity-100 transform translate-y-0"
+                x-transition:leave="transition ease-in duration-150"
+                x-transition:leave-start="opacity-100 transform translate-y-0"
+                x-transition:leave-end="opacity-0 transform -translate-y-4" class="md:hidden mt-4 pb-4" x-cloak>
                 <div class="flex flex-col space-y-3">
-                    <a href="#home" @click="mobileMenuOpen = false" class="nav-link-mobile text-gray-300 hover:text-white transition-all duration-300 px-4 py-2 rounded-lg hover:bg-purple-500/20">
+                    <a href="#home" @click="mobileMenuOpen = false"
+                        class="nav-link-mobile text-gray-300 hover:text-white transition-all duration-300 px-4 py-2 rounded-lg hover:bg-purple-500/20">
                         <span x-show="lang === 'es'">Inicio</span>
                         <span x-show="lang === 'en'" x-cloak>Home</span>
                     </a>
-                    <a href="#experience" @click="mobileMenuOpen = false" class="nav-link-mobile text-gray-300 hover:text-white transition-all duration-300 px-4 py-2 rounded-lg hover:bg-purple-500/20">
+                    <a href="#experience" @click="mobileMenuOpen = false"
+                        class="nav-link-mobile text-gray-300 hover:text-white transition-all duration-300 px-4 py-2 rounded-lg hover:bg-purple-500/20">
                         <span x-show="lang === 'es'">Experiencia</span>
                         <span x-show="lang === 'en'" x-cloak>Experience</span>
                     </a>
-                    <a href="#projects" @click="mobileMenuOpen = false" class="nav-link-mobile text-gray-300 hover:text-white transition-all duration-300 px-4 py-2 rounded-lg hover:bg-purple-500/20">
+                    <a href="#projects" @click="mobileMenuOpen = false"
+                        class="nav-link-mobile text-gray-300 hover:text-white transition-all duration-300 px-4 py-2 rounded-lg hover:bg-purple-500/20">
                         <span x-show="lang === 'es'">Proyectos</span>
                         <span x-show="lang === 'en'" x-cloak>Projects</span>
                     </a>
-                    <a href="#skills" @click="mobileMenuOpen = false" class="nav-link-mobile text-gray-300 hover:text-white transition-all duration-300 px-4 py-2 rounded-lg hover:bg-purple-500/20">
+                    <a href="#skills" @click="mobileMenuOpen = false"
+                        class="nav-link-mobile text-gray-300 hover:text-white transition-all duration-300 px-4 py-2 rounded-lg hover:bg-purple-500/20">
                         <span x-show="lang === 'es'">Skills</span>
                         <span x-show="lang === 'en'" x-cloak>Skills</span>
                     </a>
-                    <a href="#contact" @click="mobileMenuOpen = false" class="nav-link-mobile text-gray-300 hover:text-white transition-all duration-300 px-4 py-2 rounded-lg hover:bg-purple-500/20">
+                    <a href="#contact" @click="mobileMenuOpen = false"
+                        class="nav-link-mobile text-gray-300 hover:text-white transition-all duration-300 px-4 py-2 rounded-lg hover:bg-purple-500/20">
                         <span x-show="lang === 'es'">Contacto</span>
                         <span x-show="lang === 'en'" x-cloak>Contact</span>
                     </a>
@@ -354,10 +1061,12 @@
 
                 <p class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto reveal-up" style="animation-delay: 0.2s;">
                     <span x-show="lang === 'es'">
-                        Especialista en observabilidad, golden signals monitoring y optimización de confiabilidad en infraestructuras críticas.
+                        Especialista en observabilidad, golden signals monitoring y optimización de confiabilidad en
+                        infraestructuras críticas.
                     </span>
                     <span x-show="lang === 'en'" x-cloak>
-                        Specialist in observability, golden signals monitoring and reliability optimization in critical infrastructures.
+                        Specialist in observability, golden signals monitoring and reliability optimization in critical
+                        infrastructures.
                     </span>
                 </p>
 
@@ -367,7 +1076,8 @@
                         <span x-show="lang === 'en'" x-cloak>View Projects</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>
-                    <a href="#contact" class="glass-light px-8 py-4 rounded-full font-semibold hover:bg-purple-500/20 transition-all transform hover:scale-105 magnetic-btn">
+                    <a href="#contact"
+                        class="glass-light px-8 py-4 rounded-full font-semibold hover:bg-purple-500/20 transition-all transform hover:scale-105 magnetic-btn">
                         <span x-show="lang === 'es'">Contacto</span>
                         <span x-show="lang === 'en'" x-cloak>Contact</span>
                     </a>
@@ -376,35 +1086,43 @@
                 <!-- Tech Icons -->
                 <div class="mt-20 flex justify-center gap-8 flex-wrap reveal-up" style="animation-delay: 0.4s;">
                     <div class="tech-item">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS" class="w-12 h-12">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg"
+                            alt="AWS" class="w-12 h-12">
                         <span class="text-xs text-gray-400">AWS</span>
                     </div>
                     <div class="tech-item">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/datadog/datadog-original.svg" alt="Datadog" class="w-12 h-12">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/datadog/datadog-original.svg"
+                            alt="Datadog" class="w-12 h-12">
                         <span class="text-xs text-gray-400">Datadog</span>
                     </div>
                     <div class="tech-item">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" alt="Grafana" class="w-12 h-12">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg"
+                            alt="Grafana" class="w-12 h-12">
                         <span class="text-xs text-gray-400">Grafana</span>
                     </div>
                     <div class="tech-item">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg" alt="Prometheus" class="w-12 h-12">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg"
+                            alt="Prometheus" class="w-12 h-12">
                         <span class="text-xs text-gray-400">Prometheus</span>
                     </div>
                     <div class="tech-item">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" class="w-12 h-12">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+                            alt="Docker" class="w-12 h-12">
                         <span class="text-xs text-gray-400">Docker</span>
                     </div>
                     <div class="tech-item">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" class="w-12 h-12">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg"
+                            alt="Kubernetes" class="w-12 h-12">
                         <span class="text-xs text-gray-400">Kubernetes</span>
                     </div>
                     <div class="tech-item">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform" class="w-12 h-12">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg"
+                            alt="Terraform" class="w-12 h-12">
                         <span class="text-xs text-gray-400">Terraform</span>
                     </div>
                     <div class="tech-item">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="w-12 h-12">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                            alt="Python" class="w-12 h-12">
                         <span class="text-xs text-gray-400">Python</span>
                     </div>
                 </div>
@@ -427,7 +1145,8 @@
                     </div>
                     <div class="flex items-start gap-4">
                         <div class="flex-shrink-0">
-                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center icon-pulse">
+                            <div
+                                class="w-16 h-16 rounded-full bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center icon-pulse">
                                 <i class="fas fa-university text-2xl"></i>
                             </div>
                         </div>
@@ -447,10 +1166,18 @@
                             </p>
                             <p class="text-gray-400">
                                 <span x-show="lang === 'es'">
-                                    SRE especializado en observabilidad y monitoreo para infraestructura bancaria crítica. Trabajando con colas de mensajes Kafka, sistemas de procesamiento de transacciones e implementando monitoreo de golden signals. Construyendo dashboards de monitoreo, sistemas de alertas y contribuyendo a la respuesta de incidentes para servicios financieros 24/7.
+                                    SRE especializado en observabilidad y monitoreo para infraestructura bancaria
+                                    crítica. Trabajando con colas de mensajes Kafka, sistemas de procesamiento de
+                                    transacciones e implementando monitoreo de golden signals. Construyendo dashboards
+                                    de monitoreo, sistemas de alertas y contribuyendo a la respuesta de incidentes para
+                                    servicios financieros 24/7.
                                 </span>
                                 <span x-show="lang === 'en'" x-cloak>
-                                    SRE specializing in observability and monitoring for critical banking infrastructure. Working with Kafka message queues, transaction processing systems, and implementing golden signals monitoring. Building monitoring dashboards, alert systems, and contributing to incident response for 24/7 financial services reliability.
+                                    SRE specializing in observability and monitoring for critical banking
+                                    infrastructure. Working with Kafka message queues, transaction processing systems,
+                                    and implementing golden signals monitoring. Building monitoring dashboards, alert
+                                    systems, and contributing to incident response for 24/7 financial services
+                                    reliability.
                                 </span>
                             </p>
                             <div class="flex gap-2 mt-4 flex-wrap">
@@ -471,7 +1198,8 @@
                 <div class="cyber-card mb-8 experience-card spotlight-card reveal-up" style="animation-delay: 0.15s;">
                     <div class="flex items-start gap-4">
                         <div class="flex-shrink-0">
-                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center icon-pulse">
+                            <div
+                                class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center icon-pulse">
                                 <i class="fas fa-chart-line text-2xl"></i>
                             </div>
                         </div>
@@ -486,13 +1214,17 @@
                             </p>
                             <p class="text-gray-400 mb-3">
                                 <span x-show="lang === 'es'">
-                                    SRE con 3 años en observabilidad y monitoreo de sistemas críticos para empresas Fortune 500. Especializado en golden signals monitoring, análisis de incidentes y prácticas SRE para servicios financieros de alta disponibilidad.
+                                    SRE con 3 años en observabilidad y monitoreo de sistemas críticos para empresas
+                                    Fortune 500. Especializado en golden signals monitoring, análisis de incidentes y
+                                    prácticas SRE para servicios financieros de alta disponibilidad.
                                 </span>
                                 <span x-show="lang === 'en'" x-cloak>
-                                    SRE with 3 years in observability and monitoring of critical systems for Fortune 500 enterprises. Specialized in golden signals monitoring, incident analysis, and SRE practices for high-availability financial services.
+                                    SRE with 3 years in observability and monitoring of critical systems for Fortune 500
+                                    enterprises. Specialized in golden signals monitoring, incident analysis, and SRE
+                                    practices for high-availability financial services.
                                 </span>
                             </p>
-                            
+
                             <!-- Innfinit Sub-projects -->
                             <div class="sub-projects mt-4">
                                 <div class="sub-project-item">
@@ -500,31 +1232,35 @@
                                         <span class="sub-project-client">Liberty Mutual US</span>
                                         <span class="sub-project-date">Oct 2024 - Sep 2025</span>
                                     </div>
-                                    <p class="text-gray-500 text-sm">Monitoring Optimization & Incident Correlation - BigPanda, Splunk, Datadog</p>
+                                    <p class="text-gray-500 text-sm">Monitoring Optimization & Incident Correlation -
+                                        BigPanda, Splunk, Datadog</p>
                                 </div>
                                 <div class="sub-project-item">
                                     <div class="sub-project-header">
                                         <span class="sub-project-client">Sovos</span>
                                         <span class="sub-project-date">Aug 2024 - Aug 2025</span>
                                     </div>
-                                    <p class="text-gray-500 text-sm">Delta Compliance Monitoring - K8s, Grafana Cloud, RabbitMQ, Redis</p>
+                                    <p class="text-gray-500 text-sm">Delta Compliance Monitoring - K8s, Grafana Cloud,
+                                        RabbitMQ, Redis</p>
                                 </div>
                                 <div class="sub-project-item">
                                     <div class="sub-project-header">
                                         <span class="sub-project-client">Red Salud</span>
                                         <span class="sub-project-date">Feb 2024 - Mar 2025</span>
                                     </div>
-                                    <p class="text-gray-500 text-sm">HA Observability Platform - Grafana, Prometheus, Loki</p>
+                                    <p class="text-gray-500 text-sm">HA Observability Platform - Grafana, Prometheus,
+                                        Loki</p>
                                 </div>
                                 <div class="sub-project-item">
                                     <div class="sub-project-header">
                                         <span class="sub-project-client">Liberty Andes</span>
                                         <span class="sub-project-date">Nov 2022 - Dec 2024</span>
                                     </div>
-                                    <p class="text-gray-500 text-sm">Multi-Region Observability (Colombia, Chile, Ecuador) - AWS, Datadog, Terraform</p>
+                                    <p class="text-gray-500 text-sm">Multi-Region Observability (Colombia, Chile,
+                                        Ecuador) - AWS, Datadog, Terraform</p>
                                 </div>
                             </div>
-                            
+
                             <div class="flex gap-2 mt-4 flex-wrap">
                                 <span class="tag">Grafana</span>
                                 <span class="tag">Prometheus</span>
@@ -544,7 +1280,8 @@
                 <div class="cyber-card mb-8 experience-card spotlight-card reveal-up" style="animation-delay: 0.2s;">
                     <div class="flex items-start gap-4">
                         <div class="flex-shrink-0">
-                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center icon-pulse">
+                            <div
+                                class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center icon-pulse">
                                 <i class="fas fa-headset text-2xl"></i>
                             </div>
                         </div>
@@ -555,14 +1292,21 @@
                             </h3>
                             <p class="text-purple-400 mb-2">
                                 <span x-show="lang === 'es'">Recomin SM | Mar 2019 - Nov 2022 · 3 años 9 meses</span>
-                                <span x-show="lang === 'en'" x-cloak>Recomin SM | Mar 2019 - Nov 2022 · 3 yrs 9 mos</span>
+                                <span x-show="lang === 'en'" x-cloak>Recomin SM | Mar 2019 - Nov 2022 · 3 yrs 9
+                                    mos</span>
                             </p>
                             <p class="text-gray-400">
                                 <span x-show="lang === 'es'">
-                                    Soporte integral para el Proyecto Integrado Los Bronces, colaborando con los departamentos administrativos, RRHH con Nubox, prevención de riesgos, maquinaria, adquisiciones y operaciones. Resolución de problemas técnicos con computadoras, impresoras, configuración de Windows OS, Microsoft Office y routers.
+                                    Soporte integral para el Proyecto Integrado Los Bronces, colaborando con los
+                                    departamentos administrativos, RRHH con Nubox, prevención de riesgos, maquinaria,
+                                    adquisiciones y operaciones. Resolución de problemas técnicos con computadoras,
+                                    impresoras, configuración de Windows OS, Microsoft Office y routers.
                                 </span>
                                 <span x-show="lang === 'en'" x-cloak>
-                                    Comprehensive support for the Los Bronces Integrated Project, collaborating with administrative and HR departments with Nubox, risk prevention, machinery, procurement and operations. Troubleshooting technical problems with computers, printers, Windows OS configuration, Microsoft Office and routers.
+                                    Comprehensive support for the Los Bronces Integrated Project, collaborating with
+                                    administrative and HR departments with Nubox, risk prevention, machinery,
+                                    procurement and operations. Troubleshooting technical problems with computers,
+                                    printers, Windows OS configuration, Microsoft Office and routers.
                                 </span>
                             </p>
                             <div class="flex gap-2 mt-4 flex-wrap">
@@ -604,8 +1348,10 @@
                             <span class="tag-sre tag-prometheus">Prometheus</span>
                         </div>
                         <p class="text-gray-400 text-sm text-center">
-                            <span x-show="lang === 'es'">Arquitectura de observabilidad con dashboards para K8s, RabbitMQ, Redis, AWS RDS & S3</span>
-                            <span x-show="lang === 'en'" x-cloak>Observability architecture with dashboards for K8s, RabbitMQ, Redis, AWS RDS & S3</span>
+                            <span x-show="lang === 'es'">Arquitectura de observabilidad con dashboards para K8s,
+                                RabbitMQ, Redis, AWS RDS & S3</span>
+                            <span x-show="lang === 'en'" x-cloak>Observability architecture with dashboards for K8s,
+                                RabbitMQ, Redis, AWS RDS & S3</span>
                         </p>
                     </div>
 
@@ -622,8 +1368,10 @@
                             <span class="tag-sre tag-splunk">Splunk</span>
                         </div>
                         <p class="text-gray-400 text-sm text-center">
-                            <span x-show="lang === 'es'">Análisis de causa raíz, framework SLI/SLO y sistemas de reducción de ruido</span>
-                            <span x-show="lang === 'en'" x-cloak>Root cause analysis, SLI/SLO framework & noise reduction systems</span>
+                            <span x-show="lang === 'es'">Análisis de causa raíz, framework SLI/SLO y sistemas de
+                                reducción de ruido</span>
+                            <span x-show="lang === 'en'" x-cloak>Root cause analysis, SLI/SLO framework & noise
+                                reduction systems</span>
                         </p>
                     </div>
 
@@ -640,8 +1388,10 @@
                             <span class="tag-sre tag-loki">Loki</span>
                         </div>
                         <p class="text-gray-400 text-sm text-center">
-                            <span x-show="lang === 'es'">Arquitectura de alta disponibilidad con logging centralizado y monitores sintéticos</span>
-                            <span x-show="lang === 'en'" x-cloak>High-availability architecture with centralized logging & synthetic monitors</span>
+                            <span x-show="lang === 'es'">Arquitectura de alta disponibilidad con logging centralizado y
+                                monitores sintéticos</span>
+                            <span x-show="lang === 'en'" x-cloak>High-availability architecture with centralized logging
+                                & synthetic monitors</span>
                         </p>
                     </div>
 
@@ -658,8 +1408,10 @@
                             <span class="tag-sre tag-terraform">Terraform</span>
                         </div>
                         <p class="text-gray-400 text-sm text-center">
-                            <span x-show="lang === 'es'">Monitoreo de infraestructura en múltiples regiones con despliegue IaC</span>
-                            <span x-show="lang === 'en'" x-cloak>Infrastructure monitoring across multiple regions with IaC deployment</span>
+                            <span x-show="lang === 'es'">Monitoreo de infraestructura en múltiples regiones con
+                                despliegue IaC</span>
+                            <span x-show="lang === 'en'" x-cloak>Infrastructure monitoring across multiple regions with
+                                IaC deployment</span>
                         </p>
                     </div>
                 </div>
@@ -718,10 +1470,12 @@
                         </div>
                         <p class="text-gray-400 mb-4">
                             <span x-show="lang === 'es'">
-                                Herramienta de automatización para crear listas de reproducción en YouTube Music a partir de listas de canciones de conciertos declaradas en un archivo .txt.
+                                Herramienta de automatización para crear listas de reproducción en YouTube Music a
+                                partir de listas de canciones de conciertos declaradas en un archivo .txt.
                             </span>
                             <span x-show="lang === 'en'" x-cloak>
-                                Automation tool to create YouTube Music playlists from concert setlists declared in a .txt file.
+                                Automation tool to create YouTube Music playlists from concert setlists declared in a
+                                .txt file.
                             </span>
                         </p>
                         <div class="flex gap-2 flex-wrap mb-4">
@@ -730,12 +1484,15 @@
                             <span class="tag">Automation</span>
                         </div>
                         <div class="flex gap-3">
-                            <a href="https://github.com/FabianIMV/automated-ytmusic-playlist-creator" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all">
+                            <a href="https://github.com/FabianIMV/automated-ytmusic-playlist-creator" target="_blank"
+                                class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all">
                                 <i class="fab fa-github mr-2"></i>
                                 <span x-show="lang === 'es'">Código</span>
                                 <span x-show="lang === 'en'" x-cloak>Code</span>
                             </a>
-                            <a href="https://github.com/FabianIMV/automated-ytmusic-playlist-creator#readme" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all">
+                            <a href="https://github.com/FabianIMV/automated-ytmusic-playlist-creator#readme"
+                                target="_blank"
+                                class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all">
                                 <i class="fas fa-book mr-2"></i>
                                 <span x-show="lang === 'es'">Docs</span>
                                 <span x-show="lang === 'en'" x-cloak>Docs</span>
@@ -751,10 +1508,13 @@
                         </div>
                         <p class="text-gray-400 mb-4">
                             <span x-show="lang === 'es'">
-                                Progressive Web App especializada para atletas de deportes de combate. Manejo de corte de peso, nutrición personalizada con IA (Gemini), y planes específicos para competencias.
+                                Progressive Web App especializada para atletas de deportes de combate. Manejo de corte
+                                de peso, nutrición personalizada con IA (Gemini), y planes específicos para
+                                competencias.
                             </span>
                             <span x-show="lang === 'en'" x-cloak>
-                                Specialized Progressive Web App for combat sports athletes. Weight cutting management, AI-powered nutrition (Gemini), and specific plans for official competitions.
+                                Specialized Progressive Web App for combat sports athletes. Weight cutting management,
+                                AI-powered nutrition (Gemini), and specific plans for official competitions.
                             </span>
                         </p>
                         <div class="flex gap-2 flex-wrap mb-4">
@@ -763,7 +1523,8 @@
                             <span class="tag">Nutrition</span>
                             <span class="tag">React Native</span>
                         </div>
-                        <a href="https://github.com/FabianIMV/nutricombat" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
+                        <a href="https://github.com/FabianIMV/nutricombat" target="_blank"
+                            class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
                             <i class="fab fa-github mr-2"></i>
                             <span x-show="lang === 'es'">Ver Proyecto</span>
                             <span x-show="lang === 'en'" x-cloak>View Project</span>
@@ -781,10 +1542,12 @@
                         </div>
                         <p class="text-gray-400 mb-4">
                             <span x-show="lang === 'es'">
-                                Dashboard interactivo de Grafana con datos oficiales de Chile en tiempo real. Integra APIs públicas para mostrar clima, sismos, indicadores económicos y métricas ambientales.
+                                Dashboard interactivo de Grafana con datos oficiales de Chile en tiempo real. Integra
+                                APIs públicas para mostrar clima, sismos, indicadores económicos y métricas ambientales.
                             </span>
                             <span x-show="lang === 'en'" x-cloak>
-                                Interactive Grafana dashboard with official Chilean real-time data. Integrates public APIs to display weather, earthquakes, economic indicators and environmental metrics.
+                                Interactive Grafana dashboard with official Chilean real-time data. Integrates public
+                                APIs to display weather, earthquakes, economic indicators and environmental metrics.
                             </span>
                         </p>
                         <div class="flex gap-2 flex-wrap mb-4">
@@ -792,7 +1555,9 @@
                             <span class="tag">Data Visualization</span>
                             <span class="tag">API Integration</span>
                         </div>
-                        <a href="https://fabianignaciomv.grafana.net/dashboard/snapshot/bM7LtfIaG5faSK5xCDerzOA6xLLfuUVC" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
+                        <a href="https://fabianignaciomv.grafana.net/dashboard/snapshot/bM7LtfIaG5faSK5xCDerzOA6xLLfuUVC"
+                            target="_blank"
+                            class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
                             <i class="fas fa-external-link-alt mr-2"></i>
                             <span x-show="lang === 'es'">Ver Dashboard</span>
                             <span x-show="lang === 'en'" x-cloak>View Dashboard</span>
@@ -818,7 +1583,8 @@
                             <span class="tag">Bootstrap</span>
                             <span class="tag">Web Development</span>
                         </div>
-                        <a href="https://trueq-vercel.vercel.app/" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
+                        <a href="https://trueq-vercel.vercel.app/" target="_blank"
+                            class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
                             <i class="fas fa-external-link-alt mr-2"></i>
                             <span x-show="lang === 'es'">Ver Demo</span>
                             <span x-show="lang === 'en'" x-cloak>View Demo</span>
@@ -844,7 +1610,8 @@
                             <span class="tag">Bootstrap</span>
                             <span class="tag">Full Stack</span>
                         </div>
-                        <a href="https://ferremas.vercel.app/" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
+                        <a href="https://ferremas.vercel.app/" target="_blank"
+                            class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
                             <i class="fas fa-external-link-alt mr-2"></i>
                             <span x-show="lang === 'es'">Ver Demo</span>
                             <span x-show="lang === 'en'" x-cloak>View Demo</span>
@@ -873,7 +1640,8 @@
                             <span class="tag">CSS</span>
                             <span class="tag">JavaScript</span>
                         </div>
-                        <a href="https://psivaleriamestica.com/" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
+                        <a href="https://psivaleriamestica.com/" target="_blank"
+                            class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
                             <i class="fas fa-external-link-alt mr-2"></i>
                             <span x-show="lang === 'es'">Visitar Sitio</span>
                             <span x-show="lang === 'en'" x-cloak>Visit Site</span>
@@ -899,7 +1667,8 @@
                             <span class="tag">Bootstrap</span>
                             <span class="tag">Web Development</span>
                         </div>
-                        <a href="https://byf.vercel.app/" target="_blank" class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
+                        <a href="https://byf.vercel.app/" target="_blank"
+                            class="glass-light px-4 py-2 rounded-lg text-sm hover:bg-purple-500/20 transition-all inline-block">
                             <i class="fas fa-external-link-alt mr-2"></i>
                             <span x-show="lang === 'es'">Ver Demo</span>
                             <span x-show="lang === 'en'" x-cloak>View Demo</span>
@@ -928,19 +1697,22 @@
                         <ul class="space-y-4">
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/datadog/datadog-original.svg" alt="Datadog" class="w-8 h-8">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/datadog/datadog-original.svg"
+                                        alt="Datadog" class="w-8 h-8">
                                     <span class="ml-3">Datadog APM</span>
                                 </div>
                             </li>
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg" alt="Grafana" class="w-8 h-8">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg"
+                                        alt="Grafana" class="w-8 h-8">
                                     <span class="ml-3">Grafana Cloud</span>
                                 </div>
                             </li>
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg" alt="Prometheus" class="w-8 h-8">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg"
+                                        alt="Prometheus" class="w-8 h-8">
                                     <span class="ml-3">Prometheus</span>
                                 </div>
                             </li>
@@ -974,31 +1746,36 @@
                         <ul class="space-y-4">
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="AWS" class="w-8 h-8">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg"
+                                        alt="AWS" class="w-8 h-8">
                                     <span class="ml-3">AWS</span>
                                 </div>
                             </li>
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform" class="w-8 h-8">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg"
+                                        alt="Terraform" class="w-8 h-8">
                                     <span class="ml-3">Terraform</span>
                                 </div>
                             </li>
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" class="w-8 h-8">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg"
+                                        alt="Kubernetes" class="w-8 h-8">
                                     <span class="ml-3">Kubernetes</span>
                                 </div>
                             </li>
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" class="w-8 h-8">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg"
+                                        alt="Docker" class="w-8 h-8">
                                     <span class="ml-3">Docker</span>
                                 </div>
                             </li>
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" alt="Jenkins" class="w-8 h-8">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg"
+                                        alt="Jenkins" class="w-8 h-8">
                                     <span class="ml-3">Jenkins</span>
                                 </div>
                             </li>
@@ -1015,31 +1792,36 @@
                         <ul class="space-y-4">
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="w-8 h-8">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                                        alt="Python" class="w-8 h-8">
                                     <span class="ml-3">Python</span>
                                 </div>
                             </li>
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="w-8 h-8">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                                        alt="JavaScript" class="w-8 h-8">
                                     <span class="ml-3">JavaScript</span>
                                 </div>
                             </li>
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="w-8 h-8">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+                                        alt="React" class="w-8 h-8">
                                     <span class="ml-3">React</span>
                                 </div>
                             </li>
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" class="w-8 h-8">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+                                        alt="Node.js" class="w-8 h-8">
                                     <span class="ml-3">Node.js</span>
                                 </div>
                             </li>
                             <li class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="w-8 h-8">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg"
+                                        alt="Git" class="w-8 h-8">
                                     <span class="ml-3">Git</span>
                                 </div>
                             </li>
@@ -1064,7 +1846,8 @@
                     </h3>
                     <div class="certifications-grid">
                         <a href="#" class="cert-badge cert-aws" target="_blank">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" class="cert-logo" alt="AWS">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg"
+                                class="cert-logo" alt="AWS">
                             <span>AWS Cloud Practitioner</span>
                         </a>
                         <a href="#" class="cert-badge cert-azure" target="_blank">
@@ -1089,11 +1872,13 @@
                     </h3>
                     <div class="certifications-grid">
                         <a href="#" class="cert-badge cert-datadog" target="_blank">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/datadog/datadog-original.svg" class="cert-logo" alt="Datadog">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/datadog/datadog-original.svg"
+                                class="cert-logo" alt="Datadog">
                             <span>Datadog APM & Alerting</span>
                         </a>
                         <a href="#" class="cert-badge cert-datadog" target="_blank">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/datadog/datadog-original.svg" class="cert-logo" alt="Datadog">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/datadog/datadog-original.svg"
+                                class="cert-logo" alt="Datadog">
                             <span>Datadog SLO & Architecture</span>
                         </a>
                         <a href="#" class="cert-badge cert-linux" target="_blank">
@@ -1114,7 +1899,8 @@
                     </h3>
                     <div class="certifications-grid">
                         <a href="#" class="cert-badge cert-k8s" target="_blank">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" class="cert-logo" alt="K8s">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg"
+                                class="cert-logo" alt="K8s">
                             <span>LFS158: Intro to Kubernetes</span>
                         </a>
                         <a href="#" class="cert-badge cert-google" target="_blank">
@@ -1175,48 +1961,138 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
+        <!-- Contact Section - SSH Terminal Style -->
         <section id="contact" class="py-20 px-4 mb-20">
             <div class="max-w-4xl mx-auto text-center">
                 <h2 class="section-title-ultra mb-8 gradient-text reveal-up">
-                    <span x-show="lang === 'es'">💬 Conectemos</span>
-                    <span x-show="lang === 'en'" x-cloak>💬 Let's Connect</span>
+                    <span x-show="lang === 'es'">📡 Establecer Conexión</span>
+                    <span x-show="lang === 'en'" x-cloak>📡 Establish Connection</span>
                 </h2>
-                <p class="text-xl text-gray-400 mb-12 reveal-up" style="animation-delay: 0.1s;">
-                    <span x-show="lang === 'es'">
-                        ¡Construyamos sistemas observables juntos! 🚀
-                    </span>
-                    <span x-show="lang === 'en'" x-cloak>
-                        Let's build observable systems together! 🚀
-                    </span>
-                </p>
 
-                <div class="flex gap-6 justify-center flex-wrap">
-                    <a href="https://linkedin.com/in/fabianimv" target="_blank"
-                       class="contact-icon glass neon-border w-16 h-16 rounded-full flex items-center justify-center hover:bg-purple-500/20 transition-all transform hover:scale-110 group">
-                        <i class="fab fa-linkedin text-2xl group-hover:scale-125 transition-transform"></i>
+                <!-- SSH Terminal Interface -->
+                <div class="ssh-connect reveal-up" style="animation-delay: 0.1s;">
+                    <div class="ssh-line">
+                        <span class="ssh-prompt">$</span>
+                        <span class="ssh-command">ssh connect@fabian.dev</span>
+                    </div>
+                    <div class="ssh-line">
+                        <span x-show="lang === 'es'">Conectando a fabian.dev...</span>
+                        <span x-show="lang === 'en'" x-cloak>Connecting to fabian.dev...</span>
+                    </div>
+                    <div class="ssh-line">
+                        <span class="ssh-success">✓ </span>
+                        <span x-show="lang === 'es'">¡Conexión establecida!</span>
+                        <span x-show="lang === 'en'" x-cloak>Connection established!</span>
+                    </div>
+                    <br>
+                    <div class="ssh-line" style="color: rgba(255,255,255,0.5);">
+                        <span x-show="lang === 'es'">Canales disponibles:</span>
+                        <span x-show="lang === 'en'" x-cloak>Available channels:</span>
+                    </div>
+
+                    <a href="https://linkedin.com/in/fabianimv" target="_blank" class="ssh-channel">
+                        <span class="ssh-channel-num">[1]</span>
+                        <span class="ssh-channel-name">LinkedIn</span>
+                        <span class="ssh-channel-path">/dev/linkedin</span>
                     </a>
-                    <a href="https://github.com/FabianIMV" target="_blank"
-                       class="contact-icon glass neon-border w-16 h-16 rounded-full flex items-center justify-center hover:bg-purple-500/20 transition-all transform hover:scale-110 group">
-                        <i class="fab fa-github text-2xl group-hover:scale-125 transition-transform"></i>
+
+                    <a href="https://github.com/FabianIMV" target="_blank" class="ssh-channel">
+                        <span class="ssh-channel-num">[2]</span>
+                        <span class="ssh-channel-name">GitHub</span>
+                        <span class="ssh-channel-path">/dev/github</span>
                     </a>
-                    <a href="mailto:fabianignaciomv@gmail.com"
-                       class="contact-icon glass neon-border w-16 h-16 rounded-full flex items-center justify-center hover:bg-purple-500/20 transition-all transform hover:scale-110 group">
-                        <i class="fas fa-envelope text-2xl group-hover:scale-125 transition-transform"></i>
+
+                    <a href="mailto:fabianignaciomv@gmail.com" class="ssh-channel">
+                        <span class="ssh-channel-num">[3]</span>
+                        <span class="ssh-channel-name">Email</span>
+                        <span class="ssh-channel-path">/dev/mail</span>
                     </a>
+
+                    <br>
+                    <div class="ssh-line">
+                        <span class="ssh-prompt">$</span>
+                        <span class="typing-cursor">_</span>
+                    </div>
+                </div>
+
+                <!-- Alert Stream -->
+                <div class="alert-stream mt-12 reveal-up"
+                    style="animation-delay: 0.2s; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    <div class="alert-stream-header">
+                        <span class="alert-stream-title">Event Log</span>
+                        <span class="alert-stream-live">LIVE</span>
+                    </div>
+                    <div class="alert-stream-body">
+                        <div class="alert-stream-scroll" id="alertScroll">
+                            <div class="alert-item">
+                                <span class="alert-level info">INFO</span>
+                                <span class="alert-time">[14:23:45]</span>
+                                <span class="alert-message">New certification acquired: Datadog APM</span>
+                            </div>
+                            <div class="alert-item">
+                                <span class="alert-level info">INFO</span>
+                                <span class="alert-time">[14:20:12]</span>
+                                <span class="alert-message">LinkedIn connection established</span>
+                            </div>
+                            <div class="alert-item">
+                                <span class="alert-level warn">WARN</span>
+                                <span class="alert-time">[14:15:00]</span>
+                                <span class="alert-message">Coffee level LOW - refill needed</span>
+                            </div>
+                            <div class="alert-item">
+                                <span class="alert-level info">INFO</span>
+                                <span class="alert-time">[14:10:33]</span>
+                                <span class="alert-message">GitHub contribution recorded</span>
+                            </div>
+                            <div class="alert-item">
+                                <span class="alert-level info">INFO</span>
+                                <span class="alert-time">[13:55:21]</span>
+                                <span class="alert-message">Portfolio visitor detected</span>
+                            </div>
+                            <div class="alert-item">
+                                <span class="alert-level info">INFO</span>
+                                <span class="alert-time">[13:45:00]</span>
+                                <span class="alert-message">System health check: PASSED</span>
+                            </div>
+                            <!-- Duplicate for infinite scroll effect -->
+                            <div class="alert-item">
+                                <span class="alert-level info">INFO</span>
+                                <span class="alert-time">[14:23:45]</span>
+                                <span class="alert-message">New certification acquired: Datadog APM</span>
+                            </div>
+                            <div class="alert-item">
+                                <span class="alert-level info">INFO</span>
+                                <span class="alert-time">[14:20:12]</span>
+                                <span class="alert-message">LinkedIn connection established</span>
+                            </div>
+                            <div class="alert-item">
+                                <span class="alert-level warn">WARN</span>
+                                <span class="alert-time">[14:15:00]</span>
+                                <span class="alert-message">Coffee level LOW - refill needed</span>
+                            </div>
+                            <div class="alert-item">
+                                <span class="alert-level info">INFO</span>
+                                <span class="alert-time">[14:10:33]</span>
+                                <span class="alert-message">GitHub contribution recorded</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </div>
 
+
     <!-- AI CHATBOT -->
     <div id="aiChatButton" class="fixed bottom-6 right-6 z-50">
-        <button onclick="toggleAIChat()" class="ai-pulse bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-full p-4 shadow-2xl transition-all duration-300 transform hover:scale-110">
+        <button onclick="toggleAIChat()"
+            class="ai-pulse bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-full p-4 shadow-2xl transition-all duration-300 transform hover:scale-110">
             <i class="fas fa-robot text-2xl"></i>
         </button>
     </div>
 
-    <div id="aiChatWidget" class="fixed bottom-20 right-6 w-80 h-96 bg-gray-800/95 backdrop-blur-sm rounded-lg shadow-2xl border border-purple-500/30 z-50 hidden flex-col">
+    <div id="aiChatWidget"
+        class="fixed bottom-20 right-6 w-80 h-96 bg-gray-800/95 backdrop-blur-sm rounded-lg shadow-2xl border border-purple-500/30 z-50 hidden flex-col">
         <div class="bg-gradient-to-r from-purple-600 to-blue-600 p-4 rounded-t-lg flex justify-between items-center">
             <div class="flex items-center">
                 <i class="fas fa-robot mr-2 animate-pulse"></i>
@@ -1230,24 +2106,21 @@
         <div id="aiChatMessages" class="flex-1 p-4 overflow-y-auto space-y-3 custom-scrollbar">
             <div class="flex">
                 <div class="chat-bubble-ai text-white p-3 rounded-lg max-w-xs text-sm">
-                    <span x-show="lang === 'es'">¡Hola! 👋 Soy el asistente AI de Fabián. Puedo ayudarte con información sobre su experiencia en SRE, proyectos y habilidades técnicas. ¿En qué te puedo ayudar?</span>
-                    <span x-show="lang === 'en'" x-cloak>Hi! 👋 I'm Fabián's AI assistant. I can help you with information about his SRE experience, projects and technical skills. How can I help you?</span>
+                    <span x-show="lang === 'es'">¡Hola! 👋 Soy el asistente AI de Fabián. Puedo ayudarte con información
+                        sobre su experiencia en SRE, proyectos y habilidades técnicas. ¿En qué te puedo ayudar?</span>
+                    <span x-show="lang === 'en'" x-cloak>Hi! 👋 I'm Fabián's AI assistant. I can help you with
+                        information about his SRE experience, projects and technical skills. How can I help you?</span>
                 </div>
             </div>
         </div>
 
         <div class="p-4 border-t border-gray-700">
             <div class="flex space-x-2">
-                <input
-                    type="text"
-                    id="aiChatInput"
+                <input type="text" id="aiChatInput"
                     class="flex-1 bg-gray-700 text-white border border-gray-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
-                    onkeypress="handleAIKeyPress(event)"
-                />
-                <button
-                    onclick="sendAIMessage()"
-                    class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 flex items-center justify-center"
-                >
+                    onkeypress="handleAIKeyPress(event)" />
+                <button onclick="sendAIMessage()"
+                    class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 flex items-center justify-center">
                     <i class="fas fa-paper-plane"></i>
                 </button>
             </div>
@@ -1257,5 +2130,5 @@
     <!-- Main Script -->
     <script src="./main.js"></script>
 </body>
-</html>
 
+</html>
