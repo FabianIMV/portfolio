@@ -522,50 +522,58 @@
                     <!-- SRE Projects -->
                     <div class="widget-card">
                         <div class="widget-header">
-                            <span class="widget-title">K8s Observability</span>
+                            <span class="widget-title">Enterprise K8s Observability</span>
                             <span class="widget-status">HEALTHY</span>
                         </div>
                         <p class="text-gray-400 text-sm mt-2">
-                            <span x-show="lang === 'es'">Monitoreo completo de clusters Kubernetes con Datadog
-                                APM</span>
-                            <span x-show="lang === 'en'" x-cloak>Complete Kubernetes cluster monitoring with Datadog
-                                APM</span>
+                            <span x-show="lang === 'es'">Arquitectura de observabilidad con dashboards para K8s,
+                                RabbitMQ, Redis, AWS RDS & S3</span>
+                            <span x-show="lang === 'en'" x-cloak>Observability architecture with dashboards for K8s,
+                                RabbitMQ, Redis, AWS RDS & S3</span>
                         </p>
                         <div class="flex gap-2 mt-3">
                             <span class="tag-sre tag-kubernetes text-xs">K8s</span>
-                            <span class="tag-sre tag-datadog text-xs">Datadog</span>
+                            <span class="tag-sre tag-grafana text-xs">Grafana</span>
+                            <span class="tag-sre tag-prometheus text-xs">Prometheus</span>
                         </div>
                     </div>
 
                     <div class="widget-card">
                         <div class="widget-header">
-                            <span class="widget-title">Incident Correlation</span>
+                            <span class="widget-title">Monitoring & Correlation</span>
                             <span class="widget-status">HEALTHY</span>
                         </div>
                         <p class="text-gray-400 text-sm mt-2">
-                            <span x-show="lang === 'es'">Motor de correlación de incidentes con análisis de causa raíz
-                                automatizado</span>
-                            <span x-show="lang === 'en'" x-cloak>Incident correlation engine with automated root cause
-                                analysis</span>
+                            <span x-show="lang === 'es'">Análisis de causa raíz, framework SLI/SLO y sistemas de
+                                reducción de ruido</span>
+                            <span x-show="lang === 'en'" x-cloak>Root cause analysis, SLI/SLO framework & noise
+                                reduction systems</span>
                         </p>
                         <div class="flex gap-2 mt-3">
-                            <span class="tag-sre tag-python text-xs">Python</span>
-                            <span class="tag-sre tag-aws text-xs">Lambda</span>
+                            <span class="tag-sre text-xs"
+                                style="background: rgba(255,140,0,0.1); border-color: rgba(255,140,0,0.3); color: #ff8c00;">BigPanda</span>
+                            <span class="tag-sre tag-datadog text-xs">Datadog</span>
+                            <span class="tag-sre text-xs"
+                                style="background: rgba(0,200,0,0.1); border-color: rgba(0,200,0,0.3); color: #00c800;">Splunk</span>
                         </div>
                     </div>
 
                     <div class="widget-card">
                         <div class="widget-header">
-                            <span class="widget-title">HA Monitoring</span>
+                            <span class="widget-title">HA Observability Platform</span>
                             <span class="widget-status">HEALTHY</span>
                         </div>
                         <p class="text-gray-400 text-sm mt-2">
-                            <span x-show="lang === 'es'">Plataforma de alta disponibilidad para métricas críticas</span>
-                            <span x-show="lang === 'en'" x-cloak>High-availability platform for critical metrics</span>
+                            <span x-show="lang === 'es'">Plataforma de alta disponibilidad para métricas críticas con
+                                Grafana, Prometheus & Loki</span>
+                            <span x-show="lang === 'en'" x-cloak>High-availability platform for critical metrics with
+                                Grafana, Prometheus & Loki</span>
                         </p>
                         <div class="flex gap-2 mt-3">
                             <span class="tag-sre tag-grafana text-xs">Grafana</span>
                             <span class="tag-sre tag-prometheus text-xs">Prometheus</span>
+                            <span class="tag-sre text-xs"
+                                style="background: rgba(255,215,0,0.1); border-color: rgba(255,215,0,0.3); color: #ffd700;">Loki</span>
                         </div>
                     </div>
 
@@ -576,23 +584,25 @@
                             <span class="widget-status">DEPLOYED</span>
                         </div>
                         <div class="grid grid-cols-2 gap-3 mt-3">
-                            <a href="https://github.com/FabianIMV/youtube-playlist-creator" target="_blank"
+                            <a href="https://trueq-vercel.vercel.app/" target="_blank"
                                 class="p-3 rounded-lg bg-black/30 hover:bg-black/50 transition-all">
-                                <div class="font-semibold text-sm">YouTube Playlist Creator</div>
-                                <div class="text-xs text-gray-400 mt-1">Python, OAuth2</div>
-                            </a>
-                            <a href="https://github.com/FabianIMV/chile-dashboard" target="_blank"
-                                class="p-3 rounded-lg bg-black/30 hover:bg-black/50 transition-all">
-                                <div class="font-semibold text-sm">Chile Dashboard</div>
-                                <div class="text-xs text-gray-400 mt-1">React, Charts</div>
-                            </a>
-                            <a href="#" class="p-3 rounded-lg bg-black/30 hover:bg-black/50 transition-all">
-                                <div class="font-semibold text-sm">NutriCombat</div>
-                                <div class="text-xs text-gray-400 mt-1">Flutter, Firebase</div>
-                            </a>
-                            <a href="#" class="p-3 rounded-lg bg-black/30 hover:bg-black/50 transition-all">
                                 <div class="font-semibold text-sm">True Q (Capstone)</div>
                                 <div class="text-xs text-gray-400 mt-1">React, Machine Learning</div>
+                            </a>
+                            <a href="https://github.com/FabianIMV/ProyectoAPT" target="_blank"
+                                class="p-3 rounded-lg bg-black/30 hover:bg-black/50 transition-all">
+                                <div class="font-semibold text-sm">NutriCombat</div>
+                                <div class="text-xs text-gray-400 mt-1">Expo, React Native</div>
+                            </a>
+                            <a href="https://fabianimv.github.io/gemini-models-health-checker/" target="_blank"
+                                class="p-3 rounded-lg bg-black/30 hover:bg-black/50 transition-all">
+                                <div class="font-semibold text-sm">Gemini Health Checker</div>
+                                <div class="text-xs text-gray-400 mt-1">API Monitoring Tool</div>
+                            </a>
+                            <a href="https://fabianimv.github.io/learn-piano/" target="_blank"
+                                class="p-3 rounded-lg bg-black/30 hover:bg-black/50 transition-all">
+                                <div class="font-semibold text-sm">Learn Piano</div>
+                                <div class="text-xs text-gray-400 mt-1">Claude AI, Web Audio</div>
                             </a>
                         </div>
                     </div>
