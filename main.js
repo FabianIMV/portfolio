@@ -7,7 +7,7 @@
 window.addEventListener('load', () => {
     // Wait a bit more to ensure Alpine.js has fully initialized
     setTimeout(() => {
-        initCustomCursor();
+        // Custom cursor removed - using native device cursor
         initMouseGradient();
         initTypingEffect();
         initThreeJS();
@@ -18,6 +18,7 @@ window.addEventListener('load', () => {
         initMagneticButtons();
         initAIChatbot();
         initSREMetrics(); // New SRE Control Room metrics
+        initGrafanaCharts(); // Grafana-style dashboard
     }, 100);
 });
 
@@ -113,6 +114,135 @@ function animateVisitorCounter() {
         }
     }, 5000);
 }
+
+// ========== GRAFANA CHARTS ==========
+let careerChart = null;
+
+function initGrafanaCharts() {
+    const ctx = document.getElementById('careerTimelineChart');
+    if (!ctx) return;
+
+    // Career growth data points (monthly averages)
+    const labels = ['Jul 22', 'Nov 22', 'Mar 23', 'Jul 23', 'Nov 23', 'Mar 24', 'Jul 24', 'Nov 24', 'Mar 25', 'Dec 25'];
+    const skillData = [30, 45, 55, 65, 72, 78, 82, 88, 92, 95]; // Skill growth %
+    const projectsData = [1, 2, 3, 5, 6, 7, 8, 9, 10, 11]; // Cumulative projects
+
+    careerChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Skill Level',
+                    data: skillData,
+                    borderColor: '#4ade80',
+                    backgroundColor: 'rgba(74, 222, 128, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 3,
+                    pointBackgroundColor: '#4ade80',
+                    pointBorderColor: '#4ade80',
+                    borderWidth: 2
+                },
+                {
+                    label: 'Projects',
+                    data: projectsData.map(p => p * 9), // Scale to match
+                    borderColor: '#22d3ee',
+                    backgroundColor: 'transparent',
+                    borderDash: [5, 5],
+                    tension: 0.4,
+                    pointRadius: 2,
+                    pointBackgroundColor: '#22d3ee',
+                    borderWidth: 2,
+                    yAxisID: 'y1'
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    align: 'end',
+                    labels: {
+                        color: '#888',
+                        font: { size: 10 },
+                        boxWidth: 12,
+                        padding: 10
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(17, 17, 34, 0.95)',
+                    titleColor: '#fff',
+                    bodyColor: '#aaa',
+                    borderColor: '#333',
+                    borderWidth: 1,
+                    padding: 10
+                }
+            },
+            scales: {
+                x: {
+                    grid: { color: 'rgba(255,255,255,0.05)' },
+                    ticks: { color: '#666', font: { size: 9 } }
+                },
+                y: {
+                    grid: { color: 'rgba(255,255,255,0.05)' },
+                    ticks: {
+                        color: '#4ade80',
+                        font: { size: 9 },
+                        callback: (value) => value + '%'
+                    },
+                    min: 0,
+                    max: 100
+                },
+                y1: {
+                    position: 'right',
+                    grid: { display: false },
+                    ticks: {
+                        color: '#22d3ee',
+                        font: { size: 9 },
+                        callback: (value) => Math.round(value / 9)
+                    },
+                    min: 0,
+                    max: 100
+                }
+            }
+        }
+    });
+}
+
+// Refresh Grafana charts with slight variations
+function refreshGrafanaCharts() {
+    if (!careerChart) return;
+
+    // Add slight random variations to simulate live data
+    careerChart.data.datasets[0].data = careerChart.data.datasets[0].data.map((val, i) => {
+        const variation = Math.random() * 2 - 1;
+        return Math.min(100, Math.max(0, val + variation));
+    });
+
+    careerChart.update('none');
+
+    // Flash the refresh button
+    const btn = document.querySelector('.grafana-refresh');
+    if (btn) {
+        btn.style.background = 'var(--terminal-grafana)';
+        btn.style.color = 'white';
+        setTimeout(() => {
+            btn.style.background = '';
+            btn.style.color = '';
+        }, 500);
+    }
+}
+
+// Make refresh function global
+window.refreshGrafanaCharts = refreshGrafanaCharts;
 
 // ========== DASHBOARD PANEL NAVIGATION ==========
 function scrollToPanel(panelIndex) {
@@ -854,6 +984,9 @@ function toggleAIChat() {
         widget.classList.remove('hidden');
         widget.classList.add('flex');
 
+        // Reset any previous GSAP transforms before animating
+        gsap.set(widget, { scale: 1, opacity: 1 });
+
         // GSAP animation for opening
         gsap.from(widget, {
             scale: 0,
@@ -878,6 +1011,8 @@ function toggleAIChat() {
             onComplete: () => {
                 widget.classList.add('hidden');
                 widget.classList.remove('flex');
+                // Reset for next open
+                gsap.set(widget, { scale: 1, opacity: 1 });
             }
         });
     }
