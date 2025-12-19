@@ -32,7 +32,6 @@ body {
     overflow-x: hidden;
     background: var(--bg-dark);
     color: var(--text-primary);
-    cursor: none !important;
     min-height: 100vh;
 }
 
@@ -76,86 +75,84 @@ body {
     transition: opacity 0.3s;
 }
 
-body * {
-    cursor: none !important;
+/* Cursor styles - desktop only */
+@media (min-width: 769px) {
+    body {
+        cursor: none;
+    }
+
+    body * {
+        cursor: none;
+    }
 }
 
-a,
-button,
-input,
-textarea {
-    cursor: none !important;
-}
-
-/* Custom Cursor */
-
+/* Custom Cursor - SRE Crosshair (instant, no lag) */
 .custom-cursor {
-    width: 30px;
-    height: 30px;
-    border: 3px solid #a78bfa;
-    border-radius: 50%;
+    width: 24px;
+    height: 24px;
     position: fixed;
     pointer-events: none;
     z-index: 99999;
     transform: translate(-50%, -50%);
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.6) 0%, rgba(167, 139, 250, 0.3) 50%, transparent 70%);
-    box-shadow:
-        0 0 25px rgba(139, 92, 246, 1),
-        0 0 50px rgba(139, 92, 246, 0.8),
-        0 0 75px rgba(139, 92, 246, 0.6),
-        inset 0 0 25px rgba(167, 139, 250, 0.7);
-    animation: cursor-pulse 2s ease-in-out infinite;
-    opacity: 1 !important;
-    visibility: visible !important;
-    display: block !important;
+    /* No transition = instant movement */
 }
 
-.custom-cursor::before {
+/* Crosshair design */
+.custom-cursor::before,
+.custom-cursor::after {
     content: '';
     position: absolute;
+    background: var(--terminal-green, #4ade80);
+    box-shadow: 0 0 10px var(--terminal-green, #4ade80);
+}
+
+/* Horizontal line */
+.custom-cursor::before {
+    width: 24px;
+    height: 2px;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+/* Vertical line */
+.custom-cursor::after {
+    width: 2px;
+    height: 24px;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+}
+
+/* Center dot */
+.cursor-dot {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    border-radius: 50%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 8px;
-    height: 8px;
-    background: #ffffff;
-    border-radius: 50%;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 1);
+    box-shadow: 0 0 8px #fff;
 }
 
+/* Hover state - expands slightly */
 .custom-cursor.cursor-hover {
-    width: 50px;
-    height: 50px;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, rgba(167, 139, 250, 0.15) 50%, transparent 70%);
-    border-color: #c4b5fd;
-    box-shadow:
-        0 0 30px rgba(139, 92, 246, 1),
-        0 0 60px rgba(139, 92, 246, 0.8),
-        0 0 90px rgba(139, 92, 246, 0.6),
-        inset 0 0 30px rgba(167, 139, 250, 0.6);
+    width: 32px;
+    height: 32px;
 }
 
-@keyframes cursor-pulse {
+.custom-cursor.cursor-hover::before {
+    width: 32px;
+    background: var(--terminal-cyan, #22d3ee);
+    box-shadow: 0 0 15px var(--terminal-cyan, #22d3ee);
+}
 
-    0%,
-    100% {
-        box-shadow:
-            0 0 25px rgba(139, 92, 246, 1),
-            0 0 50px rgba(139, 92, 246, 0.8),
-            0 0 75px rgba(139, 92, 246, 0.6),
-            inset 0 0 25px rgba(167, 139, 250, 0.7);
-        border-color: #a78bfa;
-    }
-
-    50% {
-        box-shadow:
-            0 0 35px rgba(139, 92, 246, 1),
-            0 0 70px rgba(139, 92, 246, 1),
-            0 0 105px rgba(139, 92, 246, 0.8),
-            inset 0 0 35px rgba(167, 139, 250, 0.9);
-        border-color: #c4b5fd;
-    }
+.custom-cursor.cursor-hover::after {
+    height: 32px;
+    background: var(--terminal-cyan, #22d3ee);
+    box-shadow: 0 0 15px var(--terminal-cyan, #22d3ee);
 }
 
 /* Three.js Canvas Background */
@@ -938,6 +935,17 @@ textarea {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ========== AI CHATBOT Z-INDEX FIX ========== */
+#aiChatButton {
+    z-index: 99998 !important;
+    position: fixed;
+}
+
+#aiChatWidget {
+    z-index: 99999 !important;
+    position: fixed;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
     .cyber-card {
@@ -966,12 +974,17 @@ textarea {
         width: calc(100vw - 2rem);
         right: 1rem;
         left: 1rem;
-        height: 450px;
+        height: 400px;
+        bottom: 130px;
+        /* Above dashboard bottom nav */
+        z-index: 9999 !important;
     }
 
     #aiChatButton {
-        bottom: 1rem;
+        bottom: 70px;
+        /* Above dashboard bottom nav */
         right: 1rem;
+        z-index: 9998 !important;
     }
 
     .profile-photo {

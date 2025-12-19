@@ -336,42 +336,29 @@ function initMagneticButtons() {
     });
 }
 
-// ========== CUSTOM CURSOR ==========
+// ========== CUSTOM CURSOR - INSTANT SRE CROSSHAIR ==========
 function initCustomCursor() {
     if (window.innerWidth <= 768) return; // Skip on mobile
 
     const cursor = document.createElement('div');
     cursor.className = 'custom-cursor';
-    cursor.style.opacity = '1';
+
+    // Add center dot
+    const dot = document.createElement('div');
+    dot.className = 'cursor-dot';
+    cursor.appendChild(dot);
+
     document.body.appendChild(cursor);
 
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let cursorX = mouseX;
-    let cursorY = mouseY;
-
+    // INSTANT cursor movement - no easing
     document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
     });
 
-    // Smooth cursor follow
-    function animateCursor() {
-        const dx = mouseX - cursorX;
-        const dy = mouseY - cursorY;
-
-        cursorX += dx * 0.2;
-        cursorY += dy * 0.2;
-
-        cursor.style.left = `${cursorX}px`;
-        cursor.style.top = `${cursorY}px`;
-        requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-
-    // Cursor hover effect - use setTimeout to ensure elements exist
+    // Cursor hover effect
     setTimeout(() => {
-        const hoverElements = document.querySelectorAll('a, button, .cyber-card, .tech-item, input, textarea');
+        const hoverElements = document.querySelectorAll('a, button, .cyber-card, .tech-item, input, textarea, .widget-card, .sidebar-item');
         hoverElements.forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
             el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
