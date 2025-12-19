@@ -415,27 +415,7 @@
                         </div>
                     </div>
 
-                    <!-- Grafana Cloud Link Button -->
-                    <div class="widget-card bento-span-2">
-                        <div class="widget-header">
-                            <span class="widget-title">OBSERVABILITY</span>
-                            <span class="widget-status" style="color: var(--terminal-grafana);">GRAFANA</span>
-                        </div>
-                        <div class="flex flex-col items-center justify-center py-6 gap-4">
-                            <i class="fas fa-chart-area text-4xl" style="color: var(--terminal-grafana);"></i>
-                            <p class="text-gray-400 text-sm text-center">
-                                <span x-show="lang === 'es'">Dashboard de monitoreo real en Grafana Cloud</span>
-                                <span x-show="lang === 'en'" x-cloak>Real monitoring dashboard on Grafana Cloud</span>
-                            </p>
-                            <a href="https://fabianmunoz.grafana.net" target="_blank"
-                                class="px-6 py-3 rounded-lg font-semibold transition-all hover:scale-105"
-                                style="background: linear-gradient(135deg, #f46800, #ff8f00); color: white;">
-                                <i class="fas fa-external-link-alt mr-2"></i>
-                                <span x-show="lang === 'es'">Ver en Grafana Cloud</span>
-                                <span x-show="lang === 'en'" x-cloak>View on Grafana Cloud</span>
-                            </a>
-                        </div>
-                    </div>
+
                 </div>
             </section>
 
@@ -640,6 +620,12 @@
                                     <span style="color: var(--terminal-amber);">12+</span>
                                 </div>
                             </div>
+                            <a href="https://fabianmunoz.grafana.net" target="_blank"
+                                class="flex items-center justify-center gap-2 mt-4 px-3 py-2 rounded text-xs font-medium transition-all hover:scale-105"
+                                style="background: linear-gradient(135deg, #f46800, #ff8f00); color: white;">
+                                <i class="fas fa-chart-area"></i>
+                                <span>Grafana Cloud</span>
+                            </a>
                         </div>
                     </div>
                 </div>
