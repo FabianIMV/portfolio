@@ -1,0 +1,36 @@
+name: Grafana Keep-Alive
+
+on:
+  schedule:
+    - cron: '0 */6 * * *' # Run every 6 hours
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  send-heartbeat:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Heartbeat Metric
+        env:
+          GRAFANA_USER: ${{ secrets.GRAFANA_METRICS_USER }}
+          GRAFANA_API_KEY: ${{ secrets.GRAFANA_METRICS_API_KEY }}
+          GRAFANA_URL: ${{ secrets.GRAFANA_METRICS_URL }}
+        run: |
+          if [ -z "$GRAFANA_USER" ] || [ -z "$GRAFANA_API_KEY" ] || [ -z "$GRAFANA_URL" ]; then
+            echo "Error: Missing secrets. Please set GRAFANA_METRICS_USER, GRAFANA_METRICS_API_KEY, and GRAFANA_METRICS_URL."
+            exit 1
+          fi
+
+          # Current timestamp in seconds
+          TIMESTAMP=$(date +%s)
+          
+          # Construct the metric payload (Prometheus line protocol)
+          # metric_name value timestamp_ms
+          DATA="heartbeat_keepalive 1 $(($TIMESTAMP * 1000))"
+
+          echo "Sending metric: $DATA to $GRAFANA_URL"
+
+          # Send to Grafana Cloud Prometheus
+          curl -X POST -H "Authorization: Basic $(echo -n "$GRAFANA_USER:$GRAFANA_API_KEY" | base64)" \
+               -H "Content-Type: text/plain" \
+               --data-binary "$DATA" \
+               "$GRAFANA_URL/api/prom/push"
