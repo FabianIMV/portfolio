@@ -301,7 +301,7 @@
 
             <!-- Panel 1: Home/Overview -->
             <section class="dashboard-panel" id="panel-home">
-                <div class="panel-header">
+                <div class="panel-header hero-animate" style="--delay: 0.2s">
                     <span class="panel-number">PANEL 01</span>
                     <h1 class="panel-title">
                         <span x-show="lang === 'es'">Centro de Control</span>
@@ -316,33 +316,33 @@
 
                 <div class="panel-bento-grid">
                     <!-- Main Profile Widget -->
-                    <div class="widget-card bento-span-2 bento-row-2">
+                    <div class="widget-card bento-span-2 bento-row-2 hero-animate" style="--delay: 0.4s">
                         <div class="widget-header">
                             <span class="widget-title">SRE.profile</span>
-                            <span class="widget-status">ACTIVE</span>
+                            <span class="widget-status pulse-status">ACTIVE</span>
                         </div>
                         <div class="flex items-center gap-6 mt-4">
-                            <div class="profile-frame w-32 h-32 rounded-full overflow-hidden border-2"
+                            <div class="profile-frame w-32 h-32 rounded-full overflow-hidden border-2 profile-glow"
                                 style="border-color: var(--terminal-green);">
                                 <img src="./profilepic.jpeg" alt="Fabián Muñoz" class="w-full h-full object-cover">
                             </div>
                             <div>
-                                <h2 class="text-2xl font-bold mb-1">Fabián Muñoz V.</h2>
+                                <h2 class="text-2xl font-bold mb-1 typing-name">Fabián Muñoz V.</h2>
                                 <p class="text-lg" style="color: var(--terminal-green);">Site Reliability Engineer</p>
                                 <p class="text-sm text-gray-400 mt-2">
                                     <i class="fas fa-map-marker-alt mr-2"></i>Santiago, Chile
                                 </p>
-                                <div class="flex gap-3 mt-4">
+                                <div class="flex gap-3 mt-4 social-icons">
                                     <a href="https://linkedin.com/in/fabianimv" target="_blank"
-                                        class="text-gray-400 hover:text-white transition-colors">
+                                        class="text-gray-400 hover:text-white transition-colors social-icon">
                                         <i class="fab fa-linkedin text-xl"></i>
                                     </a>
                                     <a href="https://github.com/FabianIMV" target="_blank"
-                                        class="text-gray-400 hover:text-white transition-colors">
+                                        class="text-gray-400 hover:text-white transition-colors social-icon">
                                         <i class="fab fa-github text-xl"></i>
                                     </a>
                                     <a href="mailto:fabianignaciomv@gmail.com"
-                                        class="text-gray-400 hover:text-white transition-colors">
+                                        class="text-gray-400 hover:text-white transition-colors social-icon">
                                         <i class="fas fa-envelope text-xl"></i>
                                     </a>
                                 </div>
@@ -361,11 +361,11 @@
                     </div>
 
                     <!-- Uptime Gauge -->
-                    <div class="widget-card">
+                    <div class="widget-card hero-animate" style="--delay: 0.6s">
                         <div class="widget-header">
                             <span class="widget-title">UPTIME</span>
                         </div>
-                        <div class="circular-gauge mx-auto" data-value="99.99">
+                        <div class="circular-gauge mx-auto gauge-animate" data-value="99.99">
                             <svg width="120" height="120" viewBox="0 0 120 120">
                                 <circle class="circular-gauge-bg" cx="60" cy="60" r="54"></circle>
                                 <circle class="circular-gauge-fill" cx="60" cy="60" r="54"></circle>
@@ -379,12 +379,13 @@
                     </div>
 
                     <!-- Career Days -->
-                    <div class="widget-card">
+                    <div class="widget-card hero-animate" style="--delay: 0.8s">
                         <div class="widget-header">
                             <span class="widget-title">CAREER.days</span>
                         </div>
                         <div class="text-center py-4">
-                            <div class="text-4xl font-bold" style="color: var(--terminal-cyan);" id="careerDays">780
+                            <div class="text-4xl font-bold counter-animate" style="color: var(--terminal-cyan);"
+                                id="careerDays">780
                             </div>
                             <div class="text-sm text-gray-400 mt-2">
                                 <span x-show="lang === 'es'">días en SRE</span>
@@ -394,23 +395,24 @@
                     </div>
 
                     <!-- Tech Stack Mini -->
-                    <div class="widget-card bento-span-3">
+                    <div class="widget-card bento-span-3 hero-animate" style="--delay: 1s">
                         <div class="widget-header">
                             <span class="widget-title">TECH.stack</span>
-                            <span class="widget-status">RUNNING</span>
+                            <span class="widget-status pulse-status">RUNNING</span>
                         </div>
-                        <div class="flex flex-wrap gap-3 mt-2">
-                            <span class="tag-sre tag-kubernetes"><i class="fab fa-docker mr-1"></i>Kubernetes</span>
-                            <span class="tag-sre tag-datadog">Datadog</span>
-                            <span class="tag-sre tag-grafana">Grafana</span>
-                            <span class="tag-sre tag-prometheus">Prometheus</span>
-                            <span class="tag-sre tag-aws">AWS</span>
-                            <span class="tag-sre tag-terraform">Terraform</span>
-                            <span class="tag-sre tag-python">Python</span>
-                            <span class="tag-sre"
-                                style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3);">Kafka</span>
-                            <span class="tag-sre"
-                                style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3);">ELK
+                        <div class="flex flex-wrap gap-3 mt-2 tech-tags">
+                            <span class="tag-sre tag-kubernetes tag-pop" style="--tag-delay: 0.1s"><i
+                                    class="fab fa-docker mr-1"></i>Kubernetes</span>
+                            <span class="tag-sre tag-datadog tag-pop" style="--tag-delay: 0.15s">Datadog</span>
+                            <span class="tag-sre tag-grafana tag-pop" style="--tag-delay: 0.2s">Grafana</span>
+                            <span class="tag-sre tag-prometheus tag-pop" style="--tag-delay: 0.25s">Prometheus</span>
+                            <span class="tag-sre tag-aws tag-pop" style="--tag-delay: 0.3s">AWS</span>
+                            <span class="tag-sre tag-terraform tag-pop" style="--tag-delay: 0.35s">Terraform</span>
+                            <span class="tag-sre tag-python tag-pop" style="--tag-delay: 0.4s">Python</span>
+                            <span class="tag-sre tag-pop"
+                                style="--tag-delay: 0.45s; background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3);">Kafka</span>
+                            <span class="tag-sre tag-pop"
+                                style="--tag-delay: 0.5s; background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3);">ELK
                                 Stack</span>
                         </div>
                     </div>
@@ -473,10 +475,11 @@
                         </div>
                         <p class="text-gray-400 text-sm mb-3">
                             <span x-show="lang === 'es'">
-                                4 proyectos mayores para Fortune 500. Plataformas de observabilidad multi-región.
+                                Consultoría SRE para cliente gran aseguradora. Plataformas de observabilidad
+                                multi-región.
                             </span>
                             <span x-show="lang === 'en'" x-cloak>
-                                4 major projects for Fortune 500 clients. Multi-region observability platforms.
+                                SRE consulting for large insurance client. Multi-region observability platforms.
                             </span>
                         </p>
                         <div class="flex flex-wrap gap-2">

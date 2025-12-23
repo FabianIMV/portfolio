@@ -496,12 +496,15 @@ function initCustomCursor() {
     }, 500);
 }
 
-// ========== THREE.JS 3D BACKGROUND - SRE NETWORK TOPOLOGY ==========
+// ========== THREE.JS 3D BACKGROUND - ABSTRACT DATA FLOW ==========
 function initThreeJS() {
+    const canvas = document.getElementById('three-canvas');
+    if (!canvas) return;
+
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 2000);
     const renderer = new THREE.WebGLRenderer({
-        canvas: document.getElementById('three-canvas'),
+        canvas: canvas,
         antialias: true,
         alpha: true
     });
@@ -509,246 +512,400 @@ function initThreeJS() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    // SRE Green color palette
-    const sreGreen = 0x00ff88;
-    const sreCyan = 0x00d4ff;
-    const srePurple = 0x8b5cf6;
+    // Color Palette
+    const palette = {
+        bg: 0x030014,
+        cyan: 0x06b6d4,
+        purple: 0x8b5cf6,
+        green: 0x10b981,
+        pink: 0xec4899,
+        amber: 0xf59e0b,
+        white: 0xffffff
+    };
 
-    // Particles with network-themed colors
-    const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = window.innerWidth < 768 ? 2000 : 5000;
-    const posArray = new Float32Array(particlesCount * 3);
-    const colorsArray = new Float32Array(particlesCount * 3);
+    // ======= STARFIELD BACKGROUND =======
+    const starGeometry = new THREE.BufferGeometry();
+    const starCount = 6000;
+    const starPos = new Float32Array(starCount * 3);
+    const starColors = new Float32Array(starCount * 3);
 
-    const colors = [
-        { r: 0, g: 1, b: 0.53 },       // Terminal green
-        { r: 0, g: 0.83, b: 1 },        // Cyan
-        { r: 0.545, g: 0.361, b: 0.965 } // Purple (keep some original)
-    ];
-
-    for (let i = 0; i < particlesCount; i++) {
+    for (let i = 0; i < starCount; i++) {
         const i3 = i * 3;
-        posArray[i3] = (Math.random() - 0.5) * 120;
-        posArray[i3 + 1] = (Math.random() - 0.5) * 120;
-        posArray[i3 + 2] = (Math.random() - 0.5) * 120;
+        starPos[i3] = (Math.random() - 0.5) * 1000;
+        starPos[i3 + 1] = (Math.random() - 0.5) * 1000;
+        starPos[i3 + 2] = (Math.random() - 0.5) * 1000;
 
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        colorsArray[i3] = color.r;
-        colorsArray[i3 + 1] = color.g;
-        colorsArray[i3 + 2] = color.b;
+        // Mix of white and colored stars
+        const colorChoice = Math.random();
+        if (colorChoice > 0.7) {
+            starColors[i3] = 0.4; starColors[i3 + 1] = 0.8; starColors[i3 + 2] = 1; // Cyan
+        } else if (colorChoice > 0.5) {
+            starColors[i3] = 0.6; starColors[i3 + 1] = 0.4; starColors[i3 + 2] = 1; // Purple
+        } else {
+            starColors[i3] = 1; starColors[i3 + 1] = 1; starColors[i3 + 2] = 1; // White
+        }
     }
 
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-    particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorsArray, 3));
+    starGeometry.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+    starGeometry.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
 
-    const particlesMaterial = new THREE.PointsMaterial({
-        size: 0.06,
+    const starMaterial = new THREE.PointsMaterial({
+        size: 1.2,
         vertexColors: true,
         transparent: true,
-        opacity: 0.6,
-        blending: THREE.AdditiveBlending,
+        opacity: 0.8,
         sizeAttenuation: true
     });
+    const stars = new THREE.Points(starGeometry, starMaterial);
+    scene.add(stars);
 
-    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-    scene.add(particlesMesh);
-
-    // ======= NETWORK NODES =======
-    const nodes = [];
-    const nodePositions = [
-        { x: -25, y: 15, z: -20 },
-        { x: 20, y: 20, z: -25 },
-        { x: -15, y: -10, z: -15 },
-        { x: 25, y: -15, z: -30 },
-        { x: 0, y: 5, z: -10 },
-        { x: -30, y: -20, z: -35 },
-        { x: 30, y: 0, z: -20 },
-        { x: 10, y: -25, z: -25 }
+    // ======= SECTION NODES (Floating Geometric Shapes) =======
+    const sectionNodes = [];
+    const sectionData = [
+        { name: 'Home', color: palette.cyan, pos: { x: 0, y: 0, z: 0 }, shape: 'icosahedron', size: 8 },
+        { name: 'Experience', color: palette.purple, pos: { x: -60, y: 30, z: -80 }, shape: 'octahedron', size: 10 },
+        { name: 'Projects', color: palette.green, pos: { x: 80, y: -20, z: -120 }, shape: 'dodecahedron', size: 12 },
+        { name: 'Skills', color: palette.amber, pos: { x: -40, y: -50, z: -180 }, shape: 'tetrahedron', size: 10 },
+        { name: 'Contact', color: palette.pink, pos: { x: 50, y: 40, z: -250 }, shape: 'icosahedron', size: 8 }
     ];
 
-    // Create glowing spheres as network nodes
-    nodePositions.forEach((pos, index) => {
-        const nodeGeometry = new THREE.SphereGeometry(0.8, 16, 16);
-        const nodeMaterial = new THREE.MeshBasicMaterial({
-            color: index % 2 === 0 ? sreGreen : sreCyan,
-            transparent: true,
-            opacity: 0.8
-        });
-        const node = new THREE.Mesh(nodeGeometry, nodeMaterial);
-        node.position.set(pos.x, pos.y, pos.z);
-        scene.add(node);
-        nodes.push({ mesh: node, baseOpacity: 0.8, pulseOffset: Math.random() * Math.PI * 2 });
+    sectionData.forEach((data, index) => {
+        const group = new THREE.Group();
+        group.position.set(data.pos.x, data.pos.y, data.pos.z);
 
-        // Add outer glow ring
-        const glowGeometry = new THREE.RingGeometry(1.2, 1.5, 32);
-        const glowMaterial = new THREE.MeshBasicMaterial({
-            color: index % 2 === 0 ? sreGreen : sreCyan,
+        // Create geometry based on shape type
+        let geometry;
+        switch (data.shape) {
+            case 'octahedron': geometry = new THREE.OctahedronGeometry(data.size); break;
+            case 'dodecahedron': geometry = new THREE.DodecahedronGeometry(data.size); break;
+            case 'tetrahedron': geometry = new THREE.TetrahedronGeometry(data.size); break;
+            default: geometry = new THREE.IcosahedronGeometry(data.size);
+        }
+
+        // Wireframe outer shell
+        const wireMat = new THREE.MeshBasicMaterial({
+            color: data.color,
+            wireframe: true,
             transparent: true,
-            opacity: 0.3,
+            opacity: 0.4
+        });
+        const wireMesh = new THREE.Mesh(geometry, wireMat);
+        group.add(wireMesh);
+
+        // Solid inner core (smaller)
+        const coreGeometry = geometry.clone();
+        const coreMat = new THREE.MeshBasicMaterial({
+            color: data.color,
+            transparent: true,
+            opacity: 0.2
+        });
+        const coreMesh = new THREE.Mesh(coreGeometry, coreMat);
+        coreMesh.scale.set(0.6, 0.6, 0.6);
+        group.add(coreMesh);
+
+        // Glow ring
+        const ringGeo = new THREE.RingGeometry(data.size * 1.5, data.size * 1.8, 64);
+        const ringMat = new THREE.MeshBasicMaterial({
+            color: data.color,
+            transparent: true,
+            opacity: 0.15,
             side: THREE.DoubleSide
         });
-        const glow = new THREE.Mesh(glowGeometry, glowMaterial);
-        glow.position.set(pos.x, pos.y, pos.z);
-        scene.add(glow);
-        nodes.push({ mesh: glow, isGlow: true, pulseOffset: Math.random() * Math.PI * 2 });
+        const ring = new THREE.Mesh(ringGeo, ringMat);
+        ring.rotation.x = Math.PI / 2;
+        group.add(ring);
+
+        scene.add(group);
+        sectionNodes.push({
+            group: group,
+            wire: wireMesh,
+            core: coreMesh,
+            ring: ring,
+            data: data,
+            rotationSpeed: { x: 0.002 + Math.random() * 0.002, y: 0.003 + Math.random() * 0.002 }
+        });
     });
 
-    // ======= CONNECTION LINES BETWEEN NODES =======
-    const connections = [
-        [0, 1], [0, 2], [1, 3], [2, 4], [3, 4], [4, 5], [4, 6], [5, 7], [6, 7], [0, 4], [1, 4], [3, 6]
-    ];
+    // ======= PARTICLE STREAMS BETWEEN NODES =======
+    const streamParticles = [];
+    const streamConnections = [[0, 1], [0, 2], [1, 3], [2, 4], [3, 4], [0, 3], [1, 2]];
 
-    const lineMaterial = new THREE.LineBasicMaterial({
-        color: sreGreen,
-        transparent: true,
-        opacity: 0.2
+    streamConnections.forEach(([fromIdx, toIdx]) => {
+        const from = sectionData[fromIdx].pos;
+        const to = sectionData[toIdx].pos;
+
+        // Create particles along the path
+        const particleCount = 30;
+        const streamGeo = new THREE.BufferGeometry();
+        const streamPos = new Float32Array(particleCount * 3);
+
+        for (let i = 0; i < particleCount; i++) {
+            const t = i / particleCount;
+            streamPos[i * 3] = from.x + (to.x - from.x) * t;
+            streamPos[i * 3 + 1] = from.y + (to.y - from.y) * t;
+            streamPos[i * 3 + 2] = from.z + (to.z - from.z) * t;
+        }
+
+        streamGeo.setAttribute('position', new THREE.BufferAttribute(streamPos, 3));
+
+        const streamMat = new THREE.PointsMaterial({
+            color: palette.cyan,
+            size: 1.5,
+            transparent: true,
+            opacity: 0.5,
+            blending: THREE.AdditiveBlending
+        });
+
+        const stream = new THREE.Points(streamGeo, streamMat);
+        scene.add(stream);
+
+        streamParticles.push({
+            mesh: stream,
+            from: from,
+            to: to,
+            offset: Math.random() * Math.PI * 2
+        });
     });
 
-    connections.forEach(([startIdx, endIdx]) => {
-        const start = nodePositions[startIdx];
-        const end = nodePositions[endIdx];
-        const points = [
-            new THREE.Vector3(start.x, start.y, start.z),
-            new THREE.Vector3(end.x, end.y, end.z)
-        ];
-        const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
-        const line = new THREE.Line(lineGeometry, lineMaterial);
-        scene.add(line);
-    });
+    // ======= FLOATING ALERT COMETS =======
+    const comets = [];
+    const alertMessages = ['Deploy ✓', 'SLO 99.9%', 'Latency OK', 'CPU: 23%', 'Pods: Healthy'];
 
-    // ======= TRAVELING DATA PACKETS =======
-    const dataPackets = [];
-    const packetGeometry = new THREE.SphereGeometry(0.3, 8, 8);
+    function createComet() {
+        const cometGroup = new THREE.Group();
 
-    connections.forEach(([startIdx, endIdx], idx) => {
-        if (idx % 2 === 0) { // Only some connections have packets
-            const packetMaterial = new THREE.MeshBasicMaterial({
-                color: sreCyan,
-                transparent: true,
-                opacity: 0.9
+        // Comet head
+        const headGeo = new THREE.SphereGeometry(0.8, 16, 16);
+        const headMat = new THREE.MeshBasicMaterial({ color: palette.green, transparent: true, opacity: 0.9 });
+        const head = new THREE.Mesh(headGeo, headMat);
+        cometGroup.add(head);
+
+        // Trail
+        const trailGeo = new THREE.BufferGeometry();
+        const trailMat = new THREE.LineBasicMaterial({ color: palette.green, transparent: true, opacity: 0.5 });
+        const trail = new THREE.Line(trailGeo, trailMat);
+        cometGroup.add(trail);
+
+        // Random start position
+        const angle = Math.random() * Math.PI * 2;
+        const radius = 50 + Math.random() * 100;
+        const height = (Math.random() - 0.5) * 100;
+        cometGroup.position.set(Math.cos(angle) * radius, height, Math.sin(angle) * radius);
+
+        scene.add(cometGroup);
+
+        comets.push({
+            group: cometGroup,
+            head: head,
+            trail: trail,
+            velocity: new THREE.Vector3((Math.random() - 0.5) * 0.8, (Math.random() - 0.5) * 0.3, (Math.random() - 0.5) * 0.8 - 0.5),
+            history: [],
+            message: alertMessages[Math.floor(Math.random() * alertMessages.length)]
+        });
+    }
+
+    for (let i = 0; i < 8; i++) createComet();
+
+    // ======= CAMERA SETUP & NAVIGATION =======
+    camera.position.set(0, 15, 50);
+    camera.lookAt(0, 0, 0);
+
+    let currentSection = 0;
+    let isAnimating = false;
+    let mouseX = 0, mouseY = 0;
+
+    // Fly to section function (exposed globally)
+    window.flyToSection = (index) => {
+        if (isAnimating || index === currentSection) return;
+        isAnimating = true;
+
+        const prevSection = currentSection;
+        currentSection = index;
+
+        const target = sectionData[index];
+        const offset = { x: 15, y: 10, z: 40 }; // Camera offset from node
+
+        // First, hide the current panel immediately
+        document.querySelectorAll('.dashboard-panel').forEach((panel, i) => {
+            if (i === prevSection) {
+                panel.classList.remove('panel-visible');
+            }
+        });
+
+        // Fly camera to new section (FASTER)
+        gsap.to(camera.position, {
+            x: target.pos.x + offset.x,
+            y: target.pos.y + offset.y,
+            z: target.pos.z + offset.z,
+            duration: 1.2,
+            ease: "power2.inOut",
+            onComplete: () => {
+                isAnimating = false;
+            }
+        });
+
+        // Animate look target
+        const lookTarget = { x: camera.position.x, y: camera.position.y, z: camera.position.z - 50 };
+        gsap.to(lookTarget, {
+            x: target.pos.x,
+            y: target.pos.y,
+            z: target.pos.z,
+            duration: 1.2,
+            ease: "power2.inOut",
+            onUpdate: () => {
+                camera.lookAt(lookTarget.x, lookTarget.y, lookTarget.z);
+            }
+        });
+
+        // Show new panel AFTER camera arrives (emerge from geometry)
+        setTimeout(() => {
+            document.querySelectorAll('.dashboard-panel').forEach((panel, i) => {
+                if (i === index) {
+                    panel.classList.add('panel-visible');
+                }
             });
-            const packet = new THREE.Mesh(packetGeometry, packetMaterial);
-            const start = nodePositions[startIdx];
-            packet.position.set(start.x, start.y, start.z);
-            scene.add(packet);
+        }, 1000); // Faster delay
 
-            dataPackets.push({
-                mesh: packet,
-                start: nodePositions[startIdx],
-                end: nodePositions[endIdx],
-                progress: Math.random(), // Random starting position
-                speed: 0.003 + Math.random() * 0.003,
-                direction: 1
-            });
+        // Update sidebar active state
+        updateActiveSidebar(index);
+    };
+
+    // Override scrollToPanel to use flyToSection
+    window.scrollToPanel = (index) => {
+        window.flyToSection(index);
+    };
+
+    // Keyboard navigation (Arrow keys)
+    document.addEventListener('keydown', (e) => {
+        if (isAnimating) return;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+            const nextSection = Math.min(currentSection + 1, sectionData.length - 1);
+            window.flyToSection(nextSection);
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            const prevSection = Math.max(currentSection - 1, 0);
+            window.flyToSection(prevSection);
         }
     });
 
-    // ======= FLOATING GEOMETRIC SHAPES (simplified) =======
-    const shapes = [];
+    // Touch swipe navigation
+    let touchStartX = 0;
+    let touchStartY = 0;
 
-    // Hexagon (server rack silhouette)
-    const hexGeometry = new THREE.CylinderGeometry(4, 4, 8, 6);
-    const hexMaterial = new THREE.MeshBasicMaterial({
-        color: srePurple,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.1
-    });
-    const hex = new THREE.Mesh(hexGeometry, hexMaterial);
-    hex.position.set(35, 0, -40);
-    scene.add(hex);
-    shapes.push({ mesh: hex, speed: { x: 0.002, y: 0.003 } });
+    document.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
 
-    // Large ring (monitoring dashboard silhouette)
-    const ringGeometry = new THREE.TorusGeometry(15, 0.3, 16, 100);
-    const ringMaterial = new THREE.MeshBasicMaterial({
-        color: sreGreen,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.08
-    });
-    const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-    ring.position.set(-25, 25, -50);
-    ring.rotation.x = Math.PI / 4;
-    scene.add(ring);
-    shapes.push({ mesh: ring, speed: { x: 0.001, y: 0.004 } });
+    document.addEventListener('touchend', (e) => {
+        if (isAnimating) return;
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
+        const diffX = touchStartX - touchEndX;
+        const diffY = touchStartY - touchEndY;
 
-    camera.position.z = 40;
+        // Check horizontal swipe (more than 50px and more horizontal than vertical)
+        if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+            if (diffX > 0) {
+                // Swipe left -> next section
+                const nextSection = Math.min(currentSection + 1, sectionData.length - 1);
+                window.flyToSection(nextSection);
+            } else {
+                // Swipe right -> previous section
+                const prevSection = Math.max(currentSection - 1, 0);
+                window.flyToSection(prevSection);
+            }
+        }
+    }, { passive: true });
 
-    // Mouse movement effect
-    let mouseX = 0;
-    let mouseY = 0;
-    let targetX = 0;
-    let targetY = 0;
-
-    document.addEventListener('mousemove', (event) => {
-        mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-        mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+    // Mouse parallax
+    document.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
     });
 
-    // Animation loop
-    let time = 0;
+    // ======= ANIMATION LOOP =======
+    const clock = new THREE.Clock();
+
     function animate() {
         requestAnimationFrame(animate);
-        time += 0.016;
+        const time = clock.getElapsedTime();
 
-        // Smooth camera movement
-        targetX += (mouseX - targetX) * 0.02;
-        targetY += (mouseY - targetY) * 0.02;
+        // Rotate starfield slowly
+        stars.rotation.y += 0.0001;
+        stars.rotation.x += 0.00005;
 
-        particlesMesh.rotation.y += 0.0005;
-        particlesMesh.rotation.x += 0.0002;
+        // Animate section nodes
+        sectionNodes.forEach((node, idx) => {
+            node.wire.rotation.x += node.rotationSpeed.x;
+            node.wire.rotation.y += node.rotationSpeed.y;
+            node.core.rotation.x -= node.rotationSpeed.x * 0.5;
+            node.core.rotation.y -= node.rotationSpeed.y * 0.5;
+            node.ring.rotation.z += 0.005;
 
-        // Animate shapes
-        shapes.forEach(shape => {
-            shape.mesh.rotation.x += shape.speed.x;
-            shape.mesh.rotation.y += shape.speed.y;
+            // Pulse effect
+            const pulse = Math.sin(time * 2 + idx) * 0.1 + 1;
+            node.ring.scale.set(pulse, pulse, 1);
+            node.wire.material.opacity = 0.3 + Math.sin(time * 1.5 + idx) * 0.1;
         });
 
-        // Pulse nodes
-        nodes.forEach((nodeObj, idx) => {
-            const pulse = Math.sin(time * 2 + nodeObj.pulseOffset) * 0.3 + 0.7;
-            if (nodeObj.isGlow) {
-                nodeObj.mesh.material.opacity = 0.2 * pulse;
-                nodeObj.mesh.rotation.z += 0.01;
-            } else {
-                nodeObj.mesh.material.opacity = nodeObj.baseOpacity * pulse;
+        // Animate particle streams
+        streamParticles.forEach((stream, idx) => {
+            const positions = stream.mesh.geometry.attributes.position.array;
+            const particleCount = positions.length / 3;
+
+            for (let i = 0; i < particleCount; i++) {
+                const baseT = (i / particleCount + time * 0.1 + stream.offset) % 1;
+                positions[i * 3] = stream.from.x + (stream.to.x - stream.from.x) * baseT;
+                positions[i * 3 + 1] = stream.from.y + (stream.to.y - stream.from.y) * baseT + Math.sin(time * 3 + i) * 2;
+                positions[i * 3 + 2] = stream.from.z + (stream.to.z - stream.from.z) * baseT;
+            }
+            stream.mesh.geometry.attributes.position.needsUpdate = true;
+        });
+
+        // Animate comets
+        comets.forEach(comet => {
+            comet.group.position.add(comet.velocity);
+            comet.history.push(comet.group.position.clone());
+            if (comet.history.length > 15) comet.history.shift();
+
+            if (comet.history.length > 1) {
+                comet.trail.geometry.setFromPoints(comet.history);
+            }
+
+            // Reset if too far
+            if (comet.group.position.length() > 300 || comet.group.position.z < -350) {
+                const angle = Math.random() * Math.PI * 2;
+                const radius = 50 + Math.random() * 100;
+                comet.group.position.set(Math.cos(angle) * radius, (Math.random() - 0.5) * 100, Math.sin(angle) * radius);
+                comet.history = [];
             }
         });
 
-        // Animate data packets traveling along connections
-        dataPackets.forEach(packet => {
-            packet.progress += packet.speed * packet.direction;
-
-            if (packet.progress >= 1 || packet.progress <= 0) {
-                packet.direction *= -1;
-            }
-
-            const t = packet.progress;
-            packet.mesh.position.x = packet.start.x + (packet.end.x - packet.start.x) * t;
-            packet.mesh.position.y = packet.start.y + (packet.end.y - packet.start.y) * t;
-            packet.mesh.position.z = packet.start.z + (packet.end.z - packet.start.z) * t;
-
-            // Pulse packet opacity
-            packet.mesh.material.opacity = 0.5 + Math.sin(time * 5) * 0.4;
-        });
-
-        // Camera follows mouse smoothly
-        camera.position.x += (targetX * 8 - camera.position.x) * 0.03;
-        camera.position.y += (targetY * 8 - camera.position.y) * 0.03;
-        camera.lookAt(scene.position);
+        // Mouse parallax (only when not animating)
+        if (!isAnimating) {
+            camera.position.x += (mouseX * 3 - (camera.position.x - sectionData[currentSection].pos.x - 15)) * 0.02;
+            camera.position.y += (-mouseY * 3 - (camera.position.y - sectionData[currentSection].pos.y - 10)) * 0.02;
+        }
 
         renderer.render(scene, camera);
     }
 
     animate();
 
-    // Handle window resize
+    // Resize handler
     window.addEventListener('resize', () => {
-
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Initial panel visibility - only first panel visible
+    document.querySelectorAll('.dashboard-panel').forEach((panel, i) => {
+        if (i === 0) {
+            panel.classList.add('panel-visible');
+        } else {
+            panel.classList.remove('panel-visible');
+        }
     });
 }
 

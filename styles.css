@@ -2793,32 +2793,58 @@ a {
     transform: translateX(0);
 }
 
-/* ========== HORIZONTAL PANELS CONTAINER ========== */
+/* ========== PANELS WRAPPER (Now invisible - panels are overlays) ========== */
 .panels-container {
-    margin-left: 70px;
-    width: calc(100vw - 70px);
-    height: calc(100vh - 92px);
-    /* Status bar + progress bar */
-    overflow-x: auto;
-    overflow-y: hidden;
-    display: flex;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* Allow clicks through to 3D scene */
+    z-index: 99;
+}
+
+.panels-container>.dashboard-panel {
+    pointer-events: auto;
+    /* But panels themselves are clickable */
 }
 
 .panels-container::-webkit-scrollbar {
     display: none;
 }
 
-/* Individual Panel */
+/* Individual Panel - Now an overlay with emerge animation */
 .dashboard-panel {
-    flex: 0 0 calc(100vw - 70px);
-    height: 100%;
-    scroll-snap-align: start;
-    padding: 2rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.3);
+    width: min(900px, 90vw);
+    max-height: 85vh;
+    padding: 2.5rem;
     overflow-y: auto;
-    position: relative;
+    background: rgba(10, 5, 25, 0.9);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    border-radius: 24px;
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.7),
+        0 0 80px rgba(99, 102, 241, 0.2),
+        inset 0 0 100px rgba(99, 102, 241, 0.08);
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+        visibility 0.6s ease;
+}
+
+.dashboard-panel.panel-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .dashboard-panel::-webkit-scrollbar {
@@ -3186,4 +3212,127 @@ a {
 
 .dashboard-mode .system-status-bar {
     z-index: 100;
+}
+
+/* ========== HERO ANIMATIONS ========== */
+
+/* Staggered entrance for hero elements */
+.hero-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: heroSlideIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation-delay: var(--delay, 0s);
+}
+
+@keyframes heroSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Pulse effect for status indicators */
+.pulse-status {
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 5px currentColor, 0 0 10px currentColor;
+        opacity: 1;
+    }
+
+    50% {
+        box-shadow: 0 0 15px currentColor, 0 0 25px currentColor;
+        opacity: 0.8;
+    }
+}
+
+/* Profile photo glow effect */
+.profile-glow {
+    animation: profilePulse 3s ease-in-out infinite;
+}
+
+@keyframes profilePulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(0, 255, 136, 0.3), 0 0 40px rgba(0, 255, 136, 0.1);
+    }
+
+    50% {
+        box-shadow: 0 0 30px rgba(0, 255, 136, 0.5), 0 0 60px rgba(0, 255, 136, 0.2);
+    }
+}
+
+/* Social icons hover animation */
+.social-icon {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s;
+}
+
+.social-icon:hover {
+    transform: translateY(-5px) scale(1.2);
+}
+
+/* Tag pop-in animation */
+.tag-pop {
+    opacity: 0;
+    transform: scale(0.5);
+    animation: tagPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation-delay: calc(1s + var(--tag-delay, 0s));
+}
+
+@keyframes tagPop {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Counter number animation */
+.counter-animate {
+    animation: counterPulse 2s ease-in-out infinite;
+}
+
+@keyframes counterPulse {
+
+    0%,
+    100% {
+        text-shadow: 0 0 10px currentColor;
+    }
+
+    50% {
+        text-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+    }
+}
+
+/* Gauge fill animation */
+.gauge-animate .circular-gauge-fill {
+    animation: gaugeFill 2s ease-out forwards;
+    animation-delay: 0.8s;
+}
+
+@keyframes gaugeFill {
+    from {
+        stroke-dashoffset: 339.292;
+    }
+
+    to {
+        stroke-dashoffset: 3.39;
+        /* ~99% fill */
+    }
+}
+
+/* Floating effect for widgets on hover */
+.widget-card {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s;
+}
+
+.widget-card:hover {
+    transform: translateY(-8px);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(99, 102, 241, 0.2);
 }
