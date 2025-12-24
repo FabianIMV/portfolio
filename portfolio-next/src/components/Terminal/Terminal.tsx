@@ -40,7 +40,7 @@ export default function Terminal({ className = '' }: TerminalProps) {
     const commandRef = useRef<string>('');
     const historyRef = useRef<string[]>([]);
     const historyIndexRef = useRef<number>(-1);
-    const [lang] = useState<Lang>(() => getLang());
+    const langRef = useRef<Lang>(getLang());
 
     const { addCommand, triggerIncident, incidentState, resolveIncident, investigateIncident } = usePortfolioStore();
 
@@ -53,6 +53,7 @@ export default function Terminal({ className = '' }: TerminalProps) {
     // Command implementations
     const commands: Record<string, (args: string[]) => string> = {
         help: () => {
+            const lang = langRef.current;
             const cmds: [string, string, string][] = [
                 ['whoami', t.commands.whoami.es, t.commands.whoami.en],
                 ['neofetch', t.commands.neofetch.es, t.commands.neofetch.en],
@@ -66,6 +67,7 @@ export default function Terminal({ className = '' }: TerminalProps) {
                 ['docker', t.commands.docker.es, t.commands.docker.en],
                 ['incident', t.commands.incident.es, t.commands.incident.en],
                 ['resolve', t.commands.resolve.es, t.commands.resolve.en],
+                ['lang es|en', 'Cambiar idioma', 'Change language'],
                 ['clear', t.commands.clear.es, t.commands.clear.en],
                 ['matrix', t.commands.matrix.es, t.commands.matrix.en],
                 ['exit', t.commands.exit.es, t.commands.exit.en],
@@ -77,6 +79,17 @@ export default function Terminal({ className = '' }: TerminalProps) {
             });
             output += `\n${DIM}${t.tip[lang]}${RESET}`;
             return output;
+        },
+
+        lang: (args) => {
+            const newLang = args[0]?.toLowerCase();
+            if (newLang === 'es' || newLang === 'en') {
+                langRef.current = newLang;
+                return newLang === 'es'
+                    ? `${GREEN}✓ Idioma cambiado a Español${RESET}`
+                    : `${GREEN}✓ Language changed to English${RESET}`;
+            }
+            return `${YELLOW}Usage: lang es|en${RESET}\n${DIM}Current: ${langRef.current}${RESET}`;
         },
 
         whoami: () => `
@@ -371,12 +384,13 @@ ${DIM}Follow the white rabbit. 🐰${RESET}
         fitAddonRef.current = fitAddon;
 
         // Welcome message
+        const initLang = langRef.current;
         term.writeln('');
         term.writeln(`${CYAN}${LOGO}${RESET}`);
-        term.writeln(`${WHITE}${BOLD}  ${t.welcome[lang]}${RESET}`);
+        term.writeln(`${WHITE}${BOLD}  ${t.welcome[initLang]}${RESET}`);
         term.writeln('');
-        term.writeln(`  ${DIM}${t.helpTip[lang].replace('help', `${GREEN}help${RESET}${DIM}`)}${RESET}`);
-        term.writeln(`  ${DIM}${t.tryNeofetch[lang].replace('neofetch', `${GREEN}neofetch${RESET}${DIM}`)}${RESET}`);
+        term.writeln(`  ${DIM}${t.helpTip[initLang].replace('help', `${GREEN}help${RESET}${DIM}`)}${RESET}`);
+        term.writeln(`  ${DIM}${initLang === 'es' ? 'Cambiar idioma:' : 'Change language:'} ${GREEN}lang es${RESET}${DIM} | ${GREEN}lang en${RESET}`);
         writePrompt();
 
         // Handle input
