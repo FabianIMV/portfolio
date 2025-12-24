@@ -2,9 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: 'export',
-  // No basePath needed - will be served from portfolio-next/out/
-  basePath: '',
-  assetPrefix: '',
+  basePath: '/portfolio/portfolio-next/out',
+  assetPrefix: '/portfolio/portfolio-next/out/',
   trailingSlash: true,
   images: {
     unoptimized: true,
