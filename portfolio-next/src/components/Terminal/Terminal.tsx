@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
 import { Terminal as XTerm } from '@xterm/xterm';
 import { FitAddon } from '@xterm/addon-fit';
 import '@xterm/xterm/css/xterm.css';
 import { profile, experience, skills, projects, certifications } from '@/data/profile';
 import { usePortfolioStore } from '@/store/portfolioStore';
+import { t, getLang, Lang } from '@/data/i18n';
 
 // Color codes
 const GREEN = '\x1b[32m';
@@ -39,6 +40,7 @@ export default function Terminal({ className = '' }: TerminalProps) {
     const commandRef = useRef<string>('');
     const historyRef = useRef<string[]>([]);
     const historyIndexRef = useRef<number>(-1);
+    const [lang] = useState<Lang>(() => getLang());
 
     const { addCommand, triggerIncident, incidentState, resolveIncident, investigateIncident } = usePortfolioStore();
 
@@ -51,29 +53,29 @@ export default function Terminal({ className = '' }: TerminalProps) {
     // Command implementations
     const commands: Record<string, (args: string[]) => string> = {
         help: () => {
-            const cmds = [
-                ['whoami', 'Show my profile'],
-                ['neofetch', 'System info SRE style'],
-                ['contact', 'Contact details'],
-                ['ls', 'List sections'],
-                ['cat <file>', 'View a section'],
-                ['skills', 'Technical skills'],
-                ['projects', 'Personal projects'],
-                ['certs', 'Certifications'],
-                ['kubectl', 'Kubernetes commands'],
-                ['docker', 'Docker commands'],
-                ['incident', 'Trigger incident sim'],
-                ['resolve', 'Resolve incident'],
-                ['clear', 'Clear terminal'],
-                ['matrix', 'Easter egg'],
-                ['exit', 'Back to portfolio'],
+            const cmds: [string, string, string][] = [
+                ['whoami', t.commands.whoami.es, t.commands.whoami.en],
+                ['neofetch', t.commands.neofetch.es, t.commands.neofetch.en],
+                ['contact', t.commands.contact.es, t.commands.contact.en],
+                ['ls', t.commands.ls.es, t.commands.ls.en],
+                ['cat <file>', t.commands.cat.es, t.commands.cat.en],
+                ['skills', t.commands.skills.es, t.commands.skills.en],
+                ['projects', t.commands.projects.es, t.commands.projects.en],
+                ['certs', t.commands.certs.es, t.commands.certs.en],
+                ['kubectl', t.commands.kubectl.es, t.commands.kubectl.en],
+                ['docker', t.commands.docker.es, t.commands.docker.en],
+                ['incident', t.commands.incident.es, t.commands.incident.en],
+                ['resolve', t.commands.resolve.es, t.commands.resolve.en],
+                ['clear', t.commands.clear.es, t.commands.clear.en],
+                ['matrix', t.commands.matrix.es, t.commands.matrix.en],
+                ['exit', t.commands.exit.es, t.commands.exit.en],
             ];
 
-            let output = `\n${CYAN}${BOLD}AVAILABLE COMMANDS${RESET}\n\n`;
-            cmds.forEach(([cmd, desc]) => {
-                output += `  ${GREEN}${cmd.padEnd(14)}${RESET} ${DIM}${desc}${RESET}\n`;
+            let output = `\n${CYAN}${BOLD}${t.availableCommands[lang]}${RESET}\n\n`;
+            cmds.forEach(([cmd, descEs, descEn]) => {
+                output += `  ${GREEN}${cmd.padEnd(14)}${RESET} ${DIM}${lang === 'es' ? descEs : descEn}${RESET}\n`;
             });
-            output += `\n${DIM}Tip: Tab=autocomplete, ↑↓=history${RESET}`;
+            output += `\n${DIM}${t.tip[lang]}${RESET}`;
             return output;
         },
 
@@ -371,10 +373,10 @@ ${DIM}Follow the white rabbit. 🐰${RESET}
         // Welcome message
         term.writeln('');
         term.writeln(`${CYAN}${LOGO}${RESET}`);
-        term.writeln(`${WHITE}${BOLD}  Welcome to Fabián's SRE Terminal Portfolio${RESET}`);
+        term.writeln(`${WHITE}${BOLD}  ${t.welcome[lang]}${RESET}`);
         term.writeln('');
-        term.writeln(`  ${DIM}Type ${GREEN}help${RESET}${DIM} if you need help to explore what you can do here${RESET}`);
-        term.writeln(`  ${DIM}Or try ${GREEN}neofetch${RESET}${DIM} for a quick overview${RESET}`);
+        term.writeln(`  ${DIM}${t.helpTip[lang].replace('help', `${GREEN}help${RESET}${DIM}`)}${RESET}`);
+        term.writeln(`  ${DIM}${t.tryNeofetch[lang].replace('neofetch', `${GREEN}neofetch${RESET}${DIM}`)}${RESET}`);
         writePrompt();
 
         // Handle input

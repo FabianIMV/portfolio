@@ -2177,20 +2177,21 @@
         </div>
     </div>
 
-    <!-- Interactive Mode Floating Button -->
-    <div id="interactiveModeCTA" class="fixed bottom-24 right-6 z-50 group">
+    <!-- Interactive Mode Floating Button - Visible on ALL devices -->
+    <div id="interactiveModeCTA" class="fixed bottom-20 sm:bottom-24 right-4 sm:right-6 z-50 group">
         <a href="./portfolio-next/out/"
-            class="flex items-center gap-3 px-5 py-3 bg-gradient-to-r from-green-600 via-cyan-500 to-purple-500 rounded-full shadow-lg shadow-green-500/30 hover:shadow-green-500/50 transition-all duration-300 hover:scale-105 animate-pulse-slow">
-            <span class="text-white font-semibold text-sm">
-                <span x-show="lang === 'es'">🖥️ Prueba el modo Terminal</span>
-                <span x-show="lang === 'en'" x-cloak>🖥️ Try Terminal Mode</span>
+            class="flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2 sm:py-3 bg-gradient-to-r from-green-600 via-cyan-500 to-purple-500 rounded-full shadow-lg shadow-green-500/30 hover:shadow-green-500/50 transition-all duration-300 hover:scale-105 animate-pulse-slow">
+            <span class="text-white font-semibold text-xs sm:text-sm">
+                <span x-show="lang === 'es'">🖥️ <span class="hidden sm:inline">Prueba el modo</span> Terminal</span>
+                <span x-show="lang === 'en'" x-cloak>🖥️ <span class="hidden sm:inline">Try</span> Terminal <span
+                        class="hidden sm:inline">Mode</span></span>
             </span>
             <span class="bg-white/20 rounded-full px-2 py-0.5 text-xs text-white font-mono">
                 >_
             </span>
         </a>
         <div
-            class="absolute -top-12 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+            class="absolute -top-12 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none hidden sm:block">
             <div class="bg-black/80 backdrop-blur-sm text-white text-xs px-3 py-2 rounded-lg whitespace-nowrap">
                 <span x-show="lang === 'es'">Navega mi portfolio usando comandos CLI</span>
                 <span x-show="lang === 'en'" x-cloak>Navigate my portfolio using CLI commands</span>
