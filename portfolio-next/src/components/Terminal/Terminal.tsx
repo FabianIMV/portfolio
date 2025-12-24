@@ -390,7 +390,9 @@ ${DIM}Follow the white rabbit. 🐰${RESET}
         term.writeln(`${WHITE}${BOLD}  ${t.welcome[initLang]}${RESET}`);
         term.writeln('');
         term.writeln(`  ${DIM}${t.helpTip[initLang].replace('help', `${GREEN}help${RESET}${DIM}`)}${RESET}`);
-        term.writeln(`  ${DIM}${initLang === 'es' ? 'Cambiar idioma:' : 'Change language:'} ${GREEN}lang es${RESET}${DIM} | ${GREEN}lang en${RESET}`);
+        term.writeln('');
+        term.writeln(`  ${DIM}Change language to English, write: ${GREEN}lang en${RESET}`);
+        term.writeln(`  ${DIM}Cambiar idioma a Español, escribe: ${GREEN}lang es${RESET}`);
         writePrompt();
 
         // Handle input
