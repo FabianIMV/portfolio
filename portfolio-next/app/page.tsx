@@ -45,7 +45,7 @@ export default function Home() {
 
       {/* Back to Portfolio Button */}
       <motion.a
-        href="javascript:history.back()"
+        href="../"
         className="fixed top-4 left-4 z-50 px-4 py-2 bg-gray-800/60 backdrop-blur-md border border-gray-600/30 rounded-lg text-sm text-gray-400 hover:text-white hover:bg-gray-700/60 transition-all flex items-center gap-2"
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
