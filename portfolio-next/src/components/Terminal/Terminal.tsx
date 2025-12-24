@@ -373,8 +373,8 @@ ${DIM}Follow the white rabbit. 🐰${RESET}
         term.writeln(`${CYAN}${LOGO}${RESET}`);
         term.writeln(`${WHITE}${BOLD}  Welcome to Fabián's SRE Terminal Portfolio${RESET}`);
         term.writeln('');
-        term.writeln(`  ${DIM}Type ${GREEN}help${RESET}${DIM} to see available commands${RESET}`);
-        term.writeln(`  ${DIM}Try ${GREEN}neofetch${RESET}${DIM} for a quick overview${RESET}`);
+        term.writeln(`  ${DIM}Type ${GREEN}help${RESET}${DIM} if you need help to explore what you can do here${RESET}`);
+        term.writeln(`  ${DIM}Or try ${GREEN}neofetch${RESET}${DIM} for a quick overview${RESET}`);
         writePrompt();
 
         // Handle input
