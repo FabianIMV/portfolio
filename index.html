@@ -2177,6 +2177,47 @@
         </div>
     </div>
 
+    <!-- Interactive Mode Floating Button -->
+    <!-- For PRODUCTION: change href to "./portfolio-next/" -->
+    <!-- For DEVELOPMENT: use "http://localhost:3000" -->
+    <div id="interactiveModeCTA" class="fixed bottom-24 right-6 z-50 group">
+        <a href="./portfolio-next/out/" target="_blank"
+            class="flex items-center gap-3 px-5 py-3 bg-gradient-to-r from-green-600 via-cyan-500 to-purple-500 rounded-full shadow-lg shadow-green-500/30 hover:shadow-green-500/50 transition-all duration-300 hover:scale-105 animate-pulse-slow">
+            <span class="text-white font-semibold text-sm">
+                <span x-show="lang === 'es'">🖥️ Prueba el modo Terminal</span>
+                <span x-show="lang === 'en'" x-cloak>🖥️ Try Terminal Mode</span>
+            </span>
+            <span class="bg-white/20 rounded-full px-2 py-0.5 text-xs text-white font-mono">
+                >_
+            </span>
+        </a>
+        <div
+            class="absolute -top-12 right-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+            <div class="bg-black/80 backdrop-blur-sm text-white text-xs px-3 py-2 rounded-lg whitespace-nowrap">
+                <span x-show="lang === 'es'">Navega mi portfolio usando comandos CLI</span>
+                <span x-show="lang === 'en'" x-cloak>Navigate my portfolio using CLI commands</span>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes pulse-slow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 35px rgba(168, 85, 247, 0.7);
+            }
+        }
+
+        .animate-pulse-slow {
+            animation: pulse-slow 3s ease-in-out infinite;
+        }
+    </style>
+
     <!-- Main Script -->
     <script src="./main.js"></script>
 </body>
