@@ -67,7 +67,7 @@ export default function Terminal({ className = '' }: TerminalProps) {
                 ['docker', t.commands.docker.es, t.commands.docker.en],
                 ['incident', t.commands.incident.es, t.commands.incident.en],
                 ['resolve', t.commands.resolve.es, t.commands.resolve.en],
-                ['lang es|en', 'Cambiar idioma', 'Change language'],
+                ['lang es|en', 'Cambiar idioma / Change language', 'Change language / Cambiar idioma'],
                 ['clear', t.commands.clear.es, t.commands.clear.en],
                 ['matrix', t.commands.matrix.es, t.commands.matrix.en],
                 ['exit', t.commands.exit.es, t.commands.exit.en],
