@@ -383,16 +383,14 @@ ${DIM}Follow the white rabbit. 🐰${RESET}
         xtermRef.current = term;
         fitAddonRef.current = fitAddon;
 
-        // Welcome message
-        const initLang = langRef.current;
+        // Welcome message - bilingual
         term.writeln('');
         term.writeln(`${CYAN}${LOGO}${RESET}`);
-        term.writeln(`${WHITE}${BOLD}  ${t.welcome[initLang]}${RESET}`);
+        term.writeln(`${WHITE}${BOLD}  Welcome to Fabián's SRE Terminal Portfolio${RESET}`);
+        term.writeln(`${WHITE}${BOLD}  Bienvenido al Portfolio Terminal de Fabián${RESET}`);
         term.writeln('');
-        term.writeln(`  ${DIM}${t.helpTip[initLang].replace('help', `${GREEN}help${RESET}${DIM}`)}${RESET}`);
-        term.writeln('');
-        term.writeln(`  ${DIM}Change language to English, write: ${GREEN}lang en${RESET}`);
-        term.writeln(`  ${DIM}Cambiar idioma a Español, escribe: ${GREEN}lang es${RESET}`);
+        term.writeln(`  ${DIM}Type ${GREEN}help${RESET}${DIM} to see available commands${RESET}`);
+        term.writeln(`  ${DIM}Escribe ${GREEN}help${RESET}${DIM} para ver los comandos disponibles${RESET}`);
         writePrompt();
 
         // Handle input
