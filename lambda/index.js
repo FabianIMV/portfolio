@@ -9,12 +9,13 @@
 
 const https = require('https');
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
-const { DynamoDBDocumentClient, PutCommand } = require('@aws-sdk/lib-dynamodb');
+const { DynamoDBDocumentClient, PutCommand, GetCommand, UpdateCommand } = require('@aws-sdk/lib-dynamodb');
 
 // Configurar DynamoDB
 const client = new DynamoDBClient({ region: 'us-east-1' });
 const dynamodb = DynamoDBDocumentClient.from(client);
 const TABLE_NAME = 'portfolio-chatbot-messages';
+const SESSIONS_TABLE_NAME = 'portfolio-chatbot-sessions';
 
 /**
  * Genera un sessionId único basado en IP y User-Agent
@@ -55,67 +56,155 @@ async function saveMessageToDynamoDB(message, response, language, sessionId, ipA
     }
 }
 
+/**
+ * Obtiene la sesión del visitante desde DynamoDB
+ */
+async function getSession(sessionId) {
+    try {
+        const result = await dynamodb.send(new GetCommand({
+            TableName: SESSIONS_TABLE_NAME,
+            Key: { sessionId: sessionId }
+        }));
+        return result.Item || null;
+    } catch (error) {
+        console.error('Error getting session from DynamoDB:', error);
+        return null;
+    }
+}
+
+/**
+ * Actualiza o crea una sesión con el nombre del visitante
+ */
+async function updateSessionName(sessionId, visitorName, ipAddress) {
+    try {
+        await dynamodb.send(new PutCommand({
+            TableName: SESSIONS_TABLE_NAME,
+            Item: {
+                sessionId: sessionId,
+                visitorName: visitorName,
+                ipAddress: ipAddress,
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            }
+        }));
+        console.log('Session updated with visitor name:', visitorName, 'Session:', sessionId);
+        return true;
+    } catch (error) {
+        console.error('Error updating session in DynamoDB:', error);
+        return false;
+    }
+}
+
+/**
+ * Detecta si el mensaje es un nombre (respuesta a la pregunta de nombre)
+ */
+function extractNameFromMessage(message) {
+    const lowerMessage = message.toLowerCase().trim();
+
+    // Patrones comunes de respuesta con nombre
+    const namePatterns = [
+        /^(?:me llamo|mi nombre es|soy|i am|my name is|i'm|im)\s+(.+)$/i,
+        /^(?:hola,?\s*)?(?:me llamo|soy|i am|my name is)\s+(.+)$/i,
+    ];
+
+    for (const pattern of namePatterns) {
+        const match = message.match(pattern);
+        if (match) {
+            return match[1].trim().split(/\s+/).slice(0, 3).join(' '); // Max 3 palabras para el nombre
+        }
+    }
+
+    // Si el mensaje es corto (1-3 palabras) y no contiene palabras comunes, probablemente es solo el nombre
+    const words = message.trim().split(/\s+/);
+    const commonWords = ['hola', 'hello', 'hi', 'hey', 'que', 'what', 'como', 'how', 'quien', 'who', 'gracias', 'thanks', 'ok', 'si', 'yes', 'no'];
+
+    if (words.length <= 3 && words.length >= 1) {
+        const isJustName = !words.some(word => commonWords.includes(word.toLowerCase()));
+        if (isJustName) {
+            return message.trim();
+        }
+    }
+
+    return null;
+}
+
 // Contexto del portfolio en español
 const PORTFOLIO_CONTEXT_ES = `
 PERFIL PROFESIONAL:
 - Fabián Muñoz es Ingeniero en Computación y Analista Programador
-- Se desempeña como Ingeniero en Observabilidad con 2 años de experiencia
-- Site Reliability Engineer (SRE) en Innfinit desde noviembre 2022
-- Especializado en observabilidad, monitoreo y confiabilidad de sistemas críticos
+- Actualmente SRE en Banco Falabella desde octubre 2025
+- +3 años de experiencia en observabilidad y SRE
+- Especializado en monitoreo de infraestructura bancaria digital
 
-EXPERIENCIA:
-- 2 años como Ingeniero en Observabilidad y SRE
-- Especialista en monitoreo de sistemas críticos empresariales
-- Participando en proyectos de arquitectura CN/Delta
-- Experiencia con golden signals y gestión SLI/SLO
-- Trabajo con infraestructura cloud y automatización
+HISTORIAL LABORAL:
+1. Banco Falabella (Oct 2025 - Presente) - SRE
+   - Infraestructura de banca digital
+   - Monitoreo con Kafka, Golden Signals
+   - Respuesta a incidentes 24/7
+   - Tecnologías: Kubernetes, Datadog, Grafana, Prometheus, Terraform, Kafka, Splunk, Nagios, AppDynamics
 
-TECNOLOGÍAS:
-- ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform
-- 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda
-- 🐍 Python, Jenkins, CI/CD
+2. Innfinit SpA (Nov 2022 - Oct 2025) - SRE Consulting
+   - Consultoría SRE para cliente de seguros grande
+   - Plataformas de observabilidad multi-región
+   - Tecnologías: AWS, Grafana, Prometheus, Terraform
 
-PROYECTOS:
-- 🎵 YouTube Music Playlist Creator (40+ stars)
-- 🥊 NutriCombat - PWA con IA
-- 📊 Chile Dashboard en Grafana con datos oficiales
-- 💼 Proyectos web True Q, Ferremás, Psicóloga Valeria Améstica, BYF
+3. Recomin SM (Jul 2022 - Nov 2022) - Desarrollo Fullstack
+   - Desarrollo web inicial
+   - Fundamentos en desarrollo web
+
+TECNOLOGÍAS PRINCIPALES:
+- Cloud: AWS, Kubernetes, Docker, Terraform
+- Monitoreo: Grafana, Prometheus, Datadog, Splunk, AppDynamics, Nagios
+- Otros: Kafka, Python, Jenkins, CI/CD
+
+PROYECTOS PERSONALES:
+- YouTube Music Playlist Creator (40+ stars en GitHub)
+- NutriCombat - PWA con IA para nutrición deportiva
+- Chile Dashboard en Grafana con datos oficiales
+- Proyectos web: True Q, Ferremás, Psicóloga Valeria Améstica, BYF
 
 CONTACTO:
-- 💼 LinkedIn: https://linkedin.com/in/fabianimv
-- 📧 Para contacto directo, usar el formulario de contacto del sitio
-- 🌐 Portfolio: https://fabianimv.github.io/portfolio`;
+- LinkedIn: https://linkedin.com/in/fabianimv
+- Portfolio: https://fabianimv.github.io/portfolio`;
 
 // Contexto del portfolio en inglés
 const PORTFOLIO_CONTEXT_EN = `
 PROFESSIONAL PROFILE:
 - Fabián Muñoz is a Computer Engineer and Analyst Programmer
-- Works as Observability Engineer with 2 years of experience
-- Site Reliability Engineer (SRE) at Innfinit since November 2022
-- Specialized in observability, monitoring and critical system reliability
+- Currently SRE at Banco Falabella since October 2025
+- +3 years of experience in observability and SRE
+- Specialized in digital banking infrastructure monitoring
 
-EXPERIENCE:
-- 2 years as Observability Engineer and SRE
-- Specialist in critical enterprise system monitoring
-- Participating in CN/Delta architecture projects
-- Experience with golden signals and SLI/SLO management
-- Working with cloud infrastructure and automation
+WORK HISTORY:
+1. Banco Falabella (Oct 2025 - Present) - SRE
+   - Digital banking infrastructure
+   - Kafka monitoring, Golden Signals
+   - 24/7 incident response
+   - Technologies: Kubernetes, Datadog, Grafana, Prometheus, Terraform, Kafka, Splunk, Nagios, AppDynamics
 
-TECHNOLOGIES:
-- ☁️ AWS, 🐳 Docker, ⚓ Kubernetes, 🏗️ Terraform
-- 📈 Grafana, 🔥 Prometheus, 🤖 BigPanda
-- 🐍 Python, Jenkins, CI/CD
+2. Innfinit SpA (Nov 2022 - Oct 2025) - SRE Consulting
+   - SRE consulting for large insurance client
+   - Multi-region observability platforms
+   - Technologies: AWS, Grafana, Prometheus, Terraform
 
-PROJECTS:
-- 🎵 YouTube Music Playlist Creator (40+ stars)
-- 🥊 NutriCombat - PWA with AI
-- 📊 Chile Dashboard in Grafana with official data
-- 💼 Web projects True Q, Ferremás, Psychologist Valeria Améstica, BYF
+3. Recomin SM (Jul 2022 - Nov 2022) - Fullstack Development
+   - Initial web development
+   - Solid foundation in web development
+
+MAIN TECHNOLOGIES:
+- Cloud: AWS, Kubernetes, Docker, Terraform
+- Monitoring: Grafana, Prometheus, Datadog, Splunk, AppDynamics, Nagios
+- Other: Kafka, Python, Jenkins, CI/CD
+
+PERSONAL PROJECTS:
+- YouTube Music Playlist Creator (40+ GitHub stars)
+- NutriCombat - PWA with AI for sports nutrition
+- Chile Dashboard in Grafana with official data
+- Web projects: True Q, Ferremás, Psychologist Valeria Améstica, BYF
 
 CONTACT:
-- 💼 LinkedIn: https://linkedin.com/in/fabianimv
-- 📧 For direct contact, use the site's contact form
-- 🌐 Portfolio: https://fabianimv.github.io/portfolio`;
+- LinkedIn: https://linkedin.com/in/fabianimv
+- Portfolio: https://fabianimv.github.io/portfolio`;
 
 /**
  * Normaliza texto removiendo tildes
@@ -323,54 +412,109 @@ exports.handler = async (event) => {
             };
         }
 
+        // Generar sessionId e IP
+        const sessionId = generateSessionId(event);
+        const ipAddress = event.requestContext?.identity?.sourceIp || 'unknown';
+
         // Detectar idioma
         const language = detectLanguage(message);
         const portfolioContext = language === 'es' ? PORTFOLIO_CONTEXT_ES : PORTFOLIO_CONTEXT_EN;
 
-        // Crear el prompt
+        // Verificar si tenemos el nombre del visitante en la sesión
+        let session = await getSession(sessionId);
+        let visitorName = session?.visitorName || null;
+        let response;
+
+        // FLUJO: Si no tenemos nombre, primero lo pedimos
+        if (!visitorName) {
+            // Intentar extraer nombre del mensaje actual (por si ya lo está dando)
+            const extractedName = extractNameFromMessage(message);
+
+            if (extractedName) {
+                // El usuario dio su nombre, guardarlo
+                visitorName = extractedName;
+                await updateSessionName(sessionId, visitorName, ipAddress);
+
+                // Respuesta de bienvenida personalizada
+                response = language === 'es'
+                    ? `¡Mucho gusto, ${visitorName}! 🙌 Bienvenido/a al portfolio de Fabián. Soy su asistente personal y estoy aquí para contarte sobre su experiencia como SRE, sus proyectos, tecnologías que domina... ¡lo que quieras saber! ¿Qué te gustaría conocer primero?`
+                    : `Nice to meet you, ${visitorName}! 🙌 Welcome to Fabián's portfolio. I'm his personal assistant and I'm here to tell you about his experience as an SRE, his projects, technologies he masters... whatever you want to know! What would you like to explore first?`;
+            } else {
+                // Pedimos el nombre primero
+                response = language === 'es'
+                    ? `¡Hola! 👋 Antes de empezar, ¿me podrías decir tu nombre? Me encantaría saber con quién tengo el placer de hablar. 😊`
+                    : `Hello! 👋 Before we start, could you tell me your name? I'd love to know who I have the pleasure of talking to. 😊`;
+
+                // Guardar el mensaje aunque aún no tengamos nombre
+                try {
+                    await saveMessageToDynamoDB(message, response, language, sessionId, ipAddress);
+                } catch (err) {
+                    console.error('Failed to save to DynamoDB:', err);
+                }
+
+                return {
+                    statusCode: 200,
+                    headers,
+                    body: JSON.stringify({
+                        message: response,
+                        language: language,
+                        awaitingName: true
+                    })
+                };
+            }
+        }
+
+        // Ya tenemos el nombre, crear el prompt neutro y factual
         const systemPrompt = language === 'es'
-            ? `Eres un asistente personal de Fabián Muñoz. Responde SIEMPRE EN ESPAÑOL de manera amigable y conversacional sobre su experiencia, proyectos y habilidades.
+            ? `Eres el asistente de Fabián Muñoz. El visitante se llama "${visitorName}".
 
-IMPORTANTE:
-- NUNCA digas "voy a responderte en español" - simplemente responde en español directamente
-- Usa emojis ocasionalmente
-- Mantén las respuestas concisas (máximo 60 palabras)
-- NO repitas saludos en cada respuesta
-- Enfócate en responder la pregunta específica
-- Para contacto, dirige a LinkedIn: https://linkedin.com/in/fabianimv
+ESTILO:
+- Responde de forma directa y factual
+- NO uses frases de autobombo como "un crack", "increíble", "impresionante", "amazing", etc.
+- Solo entrega la información que piden, sin adornos
+- Si preguntan algo muy personal, di "Eso pregúntale directo a Fabián"
+- Sé discreto con info personal (teléfono, dirección, etc.)
 
-Contexto del portfolio:
+FORMATO:
+- Respuestas cortas y al grano (máximo 50 palabras)
+- Pocos emojis, solo si es natural
+- Sin saludos repetitivos
+- Para contacto: LinkedIn https://linkedin.com/in/fabianimv
+
+Contexto:
 ${portfolioContext}
 
-RESPONDE LA PREGUNTA EN ESPAÑOL, siendo directo y útil.`
-            : `You are Fabián Muñoz's personal assistant. ALWAYS RESPOND IN ENGLISH in a friendly and conversational manner about his experience, projects, and skills.
+Responde en español, directo y sin exageraciones.`
+            : `You are Fabián Muñoz's assistant. The visitor is "${visitorName}".
 
-IMPORTANT:
-- NEVER say "I'll respond in English" - just respond in English directly
-- Use emojis occasionally
-- Keep responses concise (max 60 words)
-- DON'T repeat greetings in every response
-- Focus on answering the specific question
-- For contact, direct to LinkedIn: https://linkedin.com/in/fabianimv
+STYLE:
+- Respond directly and factually
+- DO NOT use self-praise phrases like "amazing", "incredible", "impressive", "a pro", etc.
+- Just provide the information requested, no embellishments
+- For overly personal questions, say "Ask Fabián directly"
+- Be discreet with personal info (phone, address, etc.)
 
-Portfolio context:
+FORMAT:
+- Short responses (max 50 words)
+- Few emojis, only if natural
+- No repetitive greetings
+- For contact: LinkedIn https://linkedin.com/in/fabianimv
+
+Context:
 ${portfolioContext}
 
-ANSWER THE QUESTION IN ENGLISH, being direct and helpful.`;
+Respond in English, direct and without exaggerations.`;
 
-        const fullPrompt = `${systemPrompt}\n\nUser: ${message}`;
+        const fullPrompt = `${systemPrompt}\n\nUser (${visitorName}): ${message}`;
 
         // Llamar a la API de Gemini
-        const response = await callGeminiAPI(fullPrompt, apiKey);
+        response = await callGeminiAPI(fullPrompt, apiKey);
 
-        // Guardar mensaje en DynamoDB con sessionId e IP
+        // Guardar mensaje en DynamoDB
         try {
-            const sessionId = generateSessionId(event);
-            const ipAddress = event.requestContext?.identity?.sourceIp || 'unknown';
             await saveMessageToDynamoDB(message, response, language, sessionId, ipAddress);
         } catch (err) {
             console.error('Failed to save to DynamoDB:', err);
-            // Continuar aunque falle el guardado
         }
 
         return {
@@ -378,7 +522,8 @@ ANSWER THE QUESTION IN ENGLISH, being direct and helpful.`;
             headers,
             body: JSON.stringify({
                 message: response,
-                language: language
+                language: language,
+                visitorName: visitorName
             })
         };
 
@@ -395,3 +540,4 @@ ANSWER THE QUESTION IN ENGLISH, being direct and helpful.`;
         };
     }
 };
+

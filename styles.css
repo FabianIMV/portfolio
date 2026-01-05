@@ -2548,7 +2548,7 @@ a {
 /* ========== FLOATING METRICS HUD ========== */
 .hud-overlay {
     position: fixed;
-    z-index: 40;
+    z-index: 150;
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.7rem;
     color: var(--terminal-green);
@@ -2562,8 +2562,8 @@ a {
 }
 
 .hud-bottom-left {
-    bottom: 20px;
-    left: 20px;
+    bottom: 80px;
+    left: 90px;
 }
 
 .hud-item {
