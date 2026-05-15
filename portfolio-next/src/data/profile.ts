@@ -70,9 +70,9 @@ export const skills = {
         { name: 'Docker', level: 80 },
     ],
     development: [
-        { name: 'Python', level: 90, note: 'Improving day by day' },
-        { name: 'JavaScript', level: 85, note: 'Improving day by day' },
-        { name: 'Bash', level: 80, note: 'Improving day by day' },
+        { name: 'Python', level: 90 },
+        { name: 'JavaScript', level: 85 },
+        { name: 'Bash', level: 80 },
         { name: 'Go', level: 65 },
     ],
 };
