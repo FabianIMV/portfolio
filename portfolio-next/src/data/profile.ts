@@ -48,8 +48,8 @@ export const experience = [
         period: 'Jul 2022 - Nov 2022',
         namespace: 'startup',
         description: {
-            es: 'Desarrollo fullstack inicial. Base sólida en desarrollo web.',
-            en: 'Initial fullstack development. Solid foundation in web development.',
+            es: 'Soporte técnico básico a usuarios internos y continuidad operativa diaria.',
+            en: 'Basic technical support for internal users and day-to-day operational continuity.',
         },
         tags: ['Technical Support', 'Excel', 'Windows'],
     },
@@ -70,9 +70,9 @@ export const skills = {
         { name: 'Docker', level: 80 },
     ],
     development: [
-        { name: 'Python', level: 90 },
-        { name: 'JavaScript', level: 85 },
-        { name: 'Bash', level: 80 },
+        { name: 'Python', level: 90, note: 'Improving day by day' },
+        { name: 'JavaScript', level: 85, note: 'Improving day by day' },
+        { name: 'Bash', level: 80, note: 'Improving day by day' },
         { name: 'Go', level: 65 },
     ],
 };
@@ -117,7 +117,7 @@ export const projects = [
 ];
 
 export const certifications = [
-    'AWS Certified Cloud Practitioner',
     'Microsoft Azure AI Fundamentals',
-    'DevOps Essentials Professional Certificate',
+    'Oracle Cloud Infrastructure Fundamentals (Expired)',
+    'AWS Certified Cloud Practitioner (Active)',
 ];

@@ -232,6 +232,10 @@ ${CYAN}-rw-r--r--${RESET}  fabian  ${WHITE}contact.txt${RESET}
 
             output += `\n${YELLOW}Development:${RESET}\n`;
             skills.development.forEach(s => {
+                if ('note' in s && typeof s.note === 'string') {
+                    output += `  ${s.name.padEnd(14)} ${MAGENTA}${s.note}${RESET}\n`;
+                    return;
+                }
                 const bar = '█'.repeat(Math.floor(s.level / 5)) + '░'.repeat(20 - Math.floor(s.level / 5));
                 output += `  ${s.name.padEnd(14)} ${MAGENTA}${bar}${RESET} ${s.level}%\n`;
             });
