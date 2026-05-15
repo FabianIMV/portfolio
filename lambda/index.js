@@ -148,9 +148,9 @@ HISTORIAL LABORAL:
    - Plataformas de observabilidad multi-región
    - Tecnologías: AWS, Grafana, Prometheus, Terraform
 
-3. Recomin SM (Jul 2022 - Nov 2022) - Desarrollo Fullstack
-   - Desarrollo web inicial
-   - Fundamentos en desarrollo web
+3. Recomin SM (Jul 2022 - Nov 2022) - Soporte Técnico Básico
+   - Soporte técnico a usuarios internos
+   - Continuidad operativa diaria
 
 TECNOLOGÍAS PRINCIPALES:
 - Cloud: AWS, Kubernetes, Docker, Terraform
@@ -187,9 +187,9 @@ WORK HISTORY:
    - Multi-region observability platforms
    - Technologies: AWS, Grafana, Prometheus, Terraform
 
-3. Recomin SM (Jul 2022 - Nov 2022) - Fullstack Development
-   - Initial web development
-   - Solid foundation in web development
+3. Recomin SM (Jul 2022 - Nov 2022) - Basic Technical Support
+   - Technical support for internal users
+   - Day-to-day operational continuity
 
 MAIN TECHNOLOGIES:
 - Cloud: AWS, Kubernetes, Docker, Terraform
@@ -540,4 +540,3 @@ Respond in English, direct and without exaggerations.`;
         };
     }
 };
-
