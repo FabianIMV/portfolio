@@ -18,6 +18,7 @@ const WHITE = '\x1b[37m';
 const BOLD = '\x1b[1m';
 const RESET = '\x1b[0m';
 const DIM = '\x1b[2m';
+const DEVELOPMENT_PROGRESS_LABEL = 'Improving day by day';
 
 // ASCII Art Logo
 const LOGO = `
@@ -234,7 +235,7 @@ ${CYAN}-rw-r--r--${RESET}  fabian  ${WHITE}contact.txt${RESET}
             const conservativeDevelopmentSkills = new Set(['Python', 'JavaScript', 'Bash']);
             skills.development.forEach(s => {
                 if (conservativeDevelopmentSkills.has(s.name)) {
-                    output += `  ${s.name.padEnd(14)} ${MAGENTA}Improving day by day${RESET}\n`;
+                    output += `  ${s.name.padEnd(14)} ${MAGENTA}${DEVELOPMENT_PROGRESS_LABEL}${RESET}\n`;
                 } else {
                     const bar = '█'.repeat(Math.floor(s.level / 5)) + '░'.repeat(20 - Math.floor(s.level / 5));
                     output += `  ${s.name.padEnd(14)} ${MAGENTA}${bar}${RESET} ${s.level}%\n`;
