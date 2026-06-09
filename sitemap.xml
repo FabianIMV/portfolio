@@ -7,7 +7,7 @@
     <!-- Homepage -->
     <url>
         <loc>https://fabianimv.github.io/portfolio/</loc>
-        <lastmod>2025-12-04</lastmod>
+        <lastmod>2026-06-09</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -15,7 +15,7 @@
     <!-- Experience Section -->
     <url>
         <loc>https://fabianimv.github.io/portfolio/#experience</loc>
-        <lastmod>2025-12-04</lastmod>
+        <lastmod>2026-06-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -23,7 +23,7 @@
     <!-- SRE Projects Section -->
     <url>
         <loc>https://fabianimv.github.io/portfolio/#sre-projects</loc>
-        <lastmod>2025-12-04</lastmod>
+        <lastmod>2026-06-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -31,7 +31,7 @@
     <!-- Projects Section -->
     <url>
         <loc>https://fabianimv.github.io/portfolio/#projects</loc>
-        <lastmod>2025-12-04</lastmod>
+        <lastmod>2026-06-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -39,7 +39,7 @@
     <!-- Skills Section -->
     <url>
         <loc>https://fabianimv.github.io/portfolio/#skills</loc>
-        <lastmod>2025-12-04</lastmod>
+        <lastmod>2026-06-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -47,7 +47,7 @@
     <!-- Certifications Section -->
     <url>
         <loc>https://fabianimv.github.io/portfolio/#certifications</loc>
-        <lastmod>2025-12-04</lastmod>
+        <lastmod>2026-06-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -55,7 +55,7 @@
     <!-- Contact Section -->
     <url>
         <loc>https://fabianimv.github.io/portfolio/#contact</loc>
-        <lastmod>2025-12-04</lastmod>
+        <lastmod>2026-06-09</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
