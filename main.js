@@ -784,7 +784,6 @@
                 { icon: 'GH', label: 'GitHub — FabianIMV', hint: '↗', run: () => window.open('https://github.com/FabianIMV', '_blank', 'noopener') },
                 { icon: 'IN', label: 'LinkedIn — fabianimv', hint: '↗', run: () => window.open('https://linkedin.com/in/fabianimv', '_blank', 'noopener') },
                 { icon: '@', label: es ? 'Enviar email' : 'Send email', hint: 'mailto', run: () => { window.location.href = 'mailto:fabianignaciomv@gmail.com'; } },
-                { icon: '📊', label: es ? 'Dashboard Chile (Grafana, en vivo)' : 'Chile Dashboard (Grafana, live)', hint: '↗', run: () => window.open('https://fabianignaciomv.grafana.net/public-dashboards/33bf370f0531403d9d263556593c06d0', '_blank', 'noopener') },
                 { icon: '🖥', label: es ? 'Modo terminal (versión Next.js)' : 'Terminal mode (Next.js version)', hint: '↗', run: () => { window.location.href = './portfolio-next/out/'; } },
                 { icon: '🔥', label: es ? 'Declarar un incidente (demo)' : 'Declare an incident (demo)', hint: 'SEV-1', run: triggerIncident }
             ];
