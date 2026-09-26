@@ -62,8 +62,10 @@
         const RAMP = ' .:-=+*o#%@';
         const GLITCH = '01<>/\\{}[]#$%&*!?~^;ABCDEFKXZ';
         const COLORS = ['#c8ff2e', '#f1efe8', '#ff4a2b'];   // healthy, healing, broken
-        // Crop of the source photo (drops the black band at the bottom)
+        // Crops of the source photo (both drop the black band at the bottom):
+        // desktop fills the frame with the head, mobile shows head + neck + chest
         const CROP = { x: 58, y: 0, w: 290, h: 330 };
+        const BUST = { x: 20, y: 0, w: 360, h: 336 };
 
         let W = 0, H = 0, dpr = 1, cellW = 0, cellH = 0, cols = 0, rows = 0;
         let atlas = null, slotW = 0, slotH = 0;
@@ -114,27 +116,38 @@
             dpr = Math.min(window.devicePixelRatio || 1, 2);
             canvas.width = Math.round(W * dpr);
             canvas.height = Math.round(H * dpr);
-            canvas.style.width = W + 'px';
-            canvas.style.height = H + 'px';
 
             // Grid density adapts to the frame size
-            const targetCols = W < 420 ? 72 : 96;
+            const targetCols = W < 420 ? 84 : 96;
             cellW = W / targetCols;
             cellH = cellW * 1.32;
             cols = targetCols;
             rows = Math.floor(H / cellH);
 
-            // Sample the photo into the grid, with a cover fit
+            // Sample the photo into the grid
             const off = document.createElement('canvas');
             off.width = cols;
             off.height = rows;
             const o = off.getContext('2d', { willReadFrequently: true });
-            const gridAspect = (cols * cellW) / (rows * cellH);
-            const cropAspect = CROP.w / CROP.h;
-            let sx = CROP.x, sy = CROP.y, sw = CROP.w, sh = CROP.h;
-            if (gridAspect > cropAspect) { sh = CROP.w / gridAspect; sy = CROP.y + (CROP.h - sh) * 0.2; }
-            else { sw = CROP.h * gridAspect; sx = CROP.x + (CROP.w - sw) / 2; }
-            o.drawImage(source, sx, sy, sw, sh, 0, 0, cols, rows);
+            if (W < 600) {
+                // Contain fit, bottom-aligned, leaving room for the top HUD.
+                // Unused cells stay white, so they are masked out as background.
+                o.fillStyle = '#fff';
+                o.fillRect(0, 0, cols, rows);
+                const top = Math.ceil(34 / cellH);
+                const availW = cols * cellW, availH = (rows - top) * cellH;
+                const scale = Math.min(availW / BUST.w, availH / BUST.h);
+                const dw = (BUST.w * scale) / cellW, dh = (BUST.h * scale) / cellH;
+                o.drawImage(source, BUST.x, BUST.y, BUST.w, BUST.h, (cols - dw) / 2, rows - dh, dw, dh);
+            } else {
+                // Cover fit on the head crop
+                const gridAspect = (cols * cellW) / (rows * cellH);
+                const cropAspect = CROP.w / CROP.h;
+                let sx = CROP.x, sy = CROP.y, sw = CROP.w, sh = CROP.h;
+                if (gridAspect > cropAspect) { sh = CROP.w / gridAspect; sy = CROP.y + (CROP.h - sh) * 0.2; }
+                else { sw = CROP.h * gridAspect; sx = CROP.x + (CROP.w - sw) / 2; }
+                o.drawImage(source, sx, sy, sw, sh, 0, 0, cols, rows);
+            }
             const data = o.getImageData(0, 0, cols, rows).data;
 
             // Luminance grid + background mask (bright, desaturated pixels)
@@ -374,17 +387,26 @@
         }
         document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
 
-        let resizeTimer = 0, lastWidth = window.innerWidth;
-        window.addEventListener('resize', () => {
-            // Mobile browsers fire resize when the URL bar hides; only rebuild on width changes
-            if (window.innerWidth === lastWidth) return;
-            lastWidth = window.innerWidth;
+        // Rebuild when the frame itself changes width (rotation, layout shifts).
+        // Height-only changes (mobile URL bar) are ignored.
+        let resizeTimer = 0, builtWidth = 0;
+        function rebuildIfNeeded() {
+            if (!builtWidth) return;
+            const w = Math.round(frame.getBoundingClientRect().width);
+            if (Math.abs(w - builtWidth) < 2) return;
             clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => { build(); started = performance.now() - 3000; }, 180);
-        });
+            resizeTimer = setTimeout(() => {
+                build();
+                builtWidth = W;
+                started = performance.now() - 3000;
+            }, 150);
+        }
+        if ('ResizeObserver' in window) new ResizeObserver(rebuildIfNeeded).observe(frame);
+        else window.addEventListener('resize', rebuildIfNeeded);
 
         Promise.all([loadImage(), loadFont()]).then(() => {
             build();
+            builtWidth = W;
             figure.classList.add('is-live');
             started = performance.now();
             start();
