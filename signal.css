@@ -1122,15 +1122,37 @@ main {
         margin-top: 36px;
     }
 
+    /* On phones the stack is a static, wrapped list: nothing cut at the edges */
+    .sx-marquee {
+        -webkit-mask-image: none;
+        mask-image: none;
+        padding: 18px 16px;
+    }
+
+    .sx-marquee-track {
+        width: auto;
+        animation: none;
+    }
+
+    .sx-marquee-list[aria-hidden='true'] {
+        display: none;
+    }
+
+    .sx-marquee-list {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px 8px;
+    }
+
     .sx-marquee-list li {
-        font-size: 1.4rem;
-        padding: 14px 22px;
+        font-size: 1.25rem;
+        padding: 8px 14px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
     }
 
     .sx-marquee-list li::after {
-        margin-left: 22px;
-        width: 6px;
-        height: 6px;
+        display: none;
     }
 
     .section {
