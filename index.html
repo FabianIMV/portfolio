@@ -42,8 +42,8 @@
     <meta name="twitter:creator" content="@fabianimv">
 
     <!-- ========== ADDITIONAL SEO ========== -->
-    <meta name="theme-color" content="#00d4ff">
-    <meta name="msapplication-TileColor" content="#00d4ff">
+    <meta name="theme-color" content="#0a0a0b">
+    <meta name="msapplication-TileColor" content="#0a0a0b">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Fabián M. Portfolio">
@@ -168,12 +168,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Fira+Code:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap"
         rel="stylesheet">
 
     <!-- Config and Styles -->
     <script src="./chatbot-config.js" defer></script>
     <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./signal.css">
 </head>
 
 <body>
@@ -289,9 +290,9 @@
     </div>
 
     <!-- ========== BACKGROUND LAYERS ========== -->
-    <div class="bg-gradient-animated" aria-hidden="true"></div>
-    <div class="grid-bg" aria-hidden="true"></div>
-    <canvas id="bgCanvas" aria-hidden="true"></canvas>
+    <div class="sx-bg" aria-hidden="true"></div>
+    <div class="sx-grain" aria-hidden="true"></div>
+    <div class="sx-cursor" id="sxCursor" aria-hidden="true"><span class="sx-cursor-dot"></span><span class="sx-cursor-ring"></span><span class="sx-cursor-label" id="sxCursorLabel"></span></div>
 
     <!-- Scroll progress -->
     <div class="scroll-indicator" aria-hidden="true">
@@ -353,118 +354,128 @@
 
     <main>
         <!-- ========== HERO ========== -->
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <div class="status-badge reveal">
-                    <span class="status-badge-dot"></span>
-                    <span class="l-es">Disponible para proyectos</span>
-                    <span class="l-en">Available for work</span>
+        <!-- ========== HERO: self-healing portrait ========== -->
+        <section id="home" class="hero sx-hero">
+            <div class="sx-hero-grid">
+                <div class="sx-hero-copy">
+                    <div class="status-badge reveal">
+                        <span class="status-badge-dot"></span>
+                        <span class="l-es">Disponible para proyectos</span>
+                        <span class="l-en">Available for work</span>
+                    </div>
+
+                    <p class="sx-kicker reveal">
+                        <span>Site Reliability Engineer</span>
+                        <span class="sx-kicker-sep">/</span>
+                        <span class="sx-kicker-loc"><svg width="12" height="12" aria-hidden="true"><use href="#i-pin"></use></svg>Santiago, Chile</span>
+                    </p>
+
+                    <h1 class="sx-name reveal" aria-label="Fabián Muñoz">
+                        <span class="sx-name-a" data-scramble>Fabián</span>
+                        <span class="sx-name-b">Muñoz<span class="sx-name-dot">.</span></span>
+                    </h1>
+
+                    <div class="typing-container reveal" aria-hidden="true">
+                        <span class="typing-prompt">$</span>
+                        <span class="typing-text" id="typingText"></span>
+                        <span class="typing-cursor">▋</span>
+                    </div>
+
+                    <p class="hero-desc reveal">
+                        <span class="l-es">Ingeniero en Informática. 3+ años manteniendo vivos sistemas que no se pueden caer.
+                            Observabilidad, Argo CD, Kubernetes y Cloud Reliability.</span>
+                        <span class="l-en">Computer Engineer. 3+ years keeping systems alive that simply can't go down.
+                            Observability, Argo CD, Kubernetes and Cloud Reliability.</span>
+                    </p>
+
+                    <div class="hero-ctas reveal">
+                        <a href="#projects" class="btn btn-primary sx-magnetic">
+                            <span class="l-es">Ver Proyectos</span><span class="l-en">View Projects</span>
+                            <svg width="16" height="16" aria-hidden="true">
+                                <use href="#i-arrow"></use>
+                            </svg>
+                        </a>
+                        <a href="#contact" class="btn btn-ghost sx-magnetic">
+                            <span class="l-es">Contacto</span><span class="l-en">Contact</span>
+                        </a>
+                    </div>
+
+                    <div class="sx-hero-foot reveal">
+                        <div class="hero-socials">
+                            <a href="https://linkedin.com/in/fabianimv" target="_blank" rel="noopener" class="social-icon"
+                                aria-label="LinkedIn">
+                                <svg width="18" height="18" aria-hidden="true"><use href="#i-linkedin"></use></svg>
+                            </a>
+                            <a href="https://github.com/FabianIMV" target="_blank" rel="noopener" class="social-icon"
+                                aria-label="GitHub">
+                                <svg width="18" height="18" aria-hidden="true"><use href="#i-github"></use></svg>
+                            </a>
+                            <a href="mailto:fabianignaciomv@gmail.com" class="social-icon" aria-label="Email">
+                                <svg width="18" height="18" aria-hidden="true"><use href="#i-mail"></use></svg>
+                            </a>
+                        </div>
+                        <!-- Live GitHub stats (fetched, graceful fallback) -->
+                        <div class="gh-stats" id="ghStats" hidden>
+                            <span class="gh-stat"><svg width="13" height="13" aria-hidden="true">
+                                    <use href="#i-github"></use>
+                                </svg> <span id="ghRepos">—</span> <span class="l-es">repos públicos</span><span
+                                    class="l-en">public repos</span></span>
+                            <span class="gh-stat">★ <span id="ghFollowers">—</span> followers</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="profile-wrap reveal">
-                    <img src="./profilepic.jpeg" alt="Fabián Muñoz" class="profile-photo" width="160" height="160"
-                        fetchpriority="high">
-                    <div class="profile-ring" aria-hidden="true"></div>
+                <!-- The portrait is a living system: thousands of glyphs that
+                     break under your cursor and self-heal back into place. -->
+                <figure class="sx-portrait reveal" id="sxPortrait">
+                    <div class="sx-portrait-frame">
+                        <canvas id="healCanvas" aria-label="Retrato ASCII interactivo de Fabián Muñoz" role="img"></canvas>
+                        <img src="./profilepic.jpeg" alt="Fabián Muñoz" class="sx-portrait-fallback" width="400" height="400"
+                            fetchpriority="high" id="healSource">
+                        <span class="sx-corner tl" aria-hidden="true"></span><span class="sx-corner tr" aria-hidden="true"></span>
+                        <span class="sx-corner bl" aria-hidden="true"></span><span class="sx-corner br" aria-hidden="true"></span>
+                        <div class="sx-hud sx-hud-top" aria-hidden="true">
+                            <span>pod/fabian-munoz-7f9c</span>
+                            <span class="sx-state" id="healState"><i></i><b>HEALTHY</b></span>
+                        </div>
+                        <div class="sx-hud sx-hud-bottom" aria-hidden="true">
+                            <span>HEALTH <b id="healHealth">100.0</b>%</span>
+                            <span>INCIDENTS <b id="healIncidents">0</b></span>
+                            <span>MTTR <b id="healMttr">—</b></span>
+                        </div>
+                    </div>
+                    <figcaption class="sx-portrait-hint">
+                        <span class="sx-hint-desk">
+                            <span class="l-es">Pasa el cursor para provocar un incidente. Haz clic para un SEV-1. <em>Me auto-reparo.</em></span>
+                            <span class="l-en">Hover to cause an incident. Click for a SEV-1. <em>I self-heal.</em></span>
+                        </span>
+                        <span class="sx-hint-touch">
+                            <span class="l-es">Toca y arrastra sobre mí para romperme. <em>Me auto-reparo.</em></span>
+                            <span class="l-en">Tap and drag across me to break me. <em>I self-heal.</em></span>
+                        </span>
+                    </figcaption>
+                </figure>
+            </div>
+
+            <div class="sx-marquee" aria-label="Tech stack">
+                <div class="sx-marquee-track">
+                    <ul class="sx-marquee-list">
+                        <li>AWS</li>
+                        <li>Datadog</li>
+                        <li>Grafana</li>
+                        <li>Prometheus</li>
+                        <li>Kubernetes</li>
+                        <li>Argo CD</li>
+                        <li>Terraform</li>
+                        <li>Python</li>
+                        <li>Kafka</li>
+                    </ul>
                 </div>
+            </div>
 
-                <h1 class="hero-title reveal">
-                    <span class="gradient-text">Fabián</span> <span class="text-stroke">Muñoz</span>
-                </h1>
-
-                <p class="hero-subtitle reveal">Site Reliability Engineer<span class="blinking-cursor">|</span></p>
-
-                <div class="typing-container reveal" aria-hidden="true">
-                    <span class="typing-prompt">$</span>
-                    <span class="typing-text" id="typingText"></span>
-                    <span class="typing-cursor">▋</span>
-                </div>
-
-                <div class="location-badge reveal">
-                    <svg width="14" height="14" aria-hidden="true">
-                        <use href="#i-pin"></use>
-                    </svg>
-                    <span>Santiago, Chile</span>
-                </div>
-
-                <p class="hero-desc reveal">
-                    <span class="l-es">Ingeniero en Informática. 3+ años construyendo sistemas de alta disponibilidad.
-                        Especializado en Observabilidad, Argo CD, Kubernetes y Cloud Reliability.</span>
-                    <span class="l-en">Computer Engineer. 3+ years building high-availability systems. Specialized in
-                        Observability, Argo CD, Kubernetes and Cloud Reliability.</span>
-                </p>
-
-                <div class="hero-ctas reveal">
-                    <a href="#projects" class="btn btn-primary">
-                        <span class="l-es">Ver Proyectos</span><span class="l-en">View Projects</span>
-                        <svg width="16" height="16" aria-hidden="true">
-                            <use href="#i-arrow"></use>
-                        </svg>
-                    </a>
-                    <a href="#contact" class="btn btn-ghost">
-                        <span class="l-es">Contacto</span><span class="l-en">Contact</span>
-                    </a>
-                </div>
-
-                <div class="hero-socials reveal">
-                    <a href="https://linkedin.com/in/fabianimv" target="_blank" rel="noopener" class="social-icon"
-                        aria-label="LinkedIn">
-                        <svg width="20" height="20" aria-hidden="true">
-                            <use href="#i-linkedin"></use>
-                        </svg>
-                    </a>
-                    <a href="https://github.com/FabianIMV" target="_blank" rel="noopener" class="social-icon"
-                        aria-label="GitHub">
-                        <svg width="20" height="20" aria-hidden="true">
-                            <use href="#i-github"></use>
-                        </svg>
-                    </a>
-                    <a href="mailto:fabianignaciomv@gmail.com" class="social-icon" aria-label="Email">
-                        <svg width="20" height="20" aria-hidden="true">
-                            <use href="#i-mail"></use>
-                        </svg>
-                    </a>
-                </div>
-
-                <!-- Live GitHub stats (fetched, graceful fallback) -->
-                <div class="gh-stats reveal" id="ghStats" hidden>
-                    <span class="gh-stat"><svg width="13" height="13" aria-hidden="true">
-                            <use href="#i-github"></use>
-                        </svg> <span id="ghRepos">—</span> <span class="l-es">repos públicos</span><span
-                            class="l-en">public repos</span></span>
-                    <span class="gh-stat">★ <span id="ghFollowers">—</span> followers</span>
-                </div>
-
-                <div class="tech-row reveal">
-                    <div class="tech-item"><img
-                            src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg"
-                            alt="AWS" width="44" height="44" loading="lazy"><span>AWS</span></div>
-                    <div class="tech-item"><img
-                            src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/datadog/datadog-original.svg"
-                            alt="Datadog" width="44" height="44" loading="lazy"><span>Datadog</span></div>
-                    <div class="tech-item"><img
-                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg"
-                            alt="Grafana" width="44" height="44" loading="lazy"><span>Grafana</span></div>
-                    <div class="tech-item"><img
-                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg"
-                            alt="Prometheus" width="44" height="44" loading="lazy"><span>Prometheus</span></div>
-                    <div class="tech-item"><img
-                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg"
-                            alt="Kubernetes" width="44" height="44" loading="lazy"><span>Kubernetes</span></div>
-                    <div class="tech-item"><img
-                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/argocd/argocd-original.svg"
-                            alt="Argo CD" width="44" height="44" loading="lazy"><span>Argo CD</span></div>
-                    <div class="tech-item"><img
-                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg"
-                            alt="Terraform" width="44" height="44" loading="lazy"><span>Terraform</span></div>
-                    <div class="tech-item"><img
-                            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-                            alt="Python" width="44" height="44" loading="lazy"><span>Python</span></div>
-                </div>
-
-                <div class="hero-hint reveal" aria-hidden="true">
-                    <span class="l-es">Tip: presiona <kbd>Ctrl</kbd>+<kbd>K</kbd> o abre la terminal <kbd>&gt;_</kbd></span>
-                    <span class="l-en">Tip: press <kbd>Ctrl</kbd>+<kbd>K</kbd> or open the terminal <kbd>&gt;_</kbd></span>
-                </div>
+            <div class="hero-hint" aria-hidden="true">
+                <span class="l-es">Tip: presiona <kbd>Ctrl</kbd>+<kbd>K</kbd> o abre la terminal <kbd>&gt;_</kbd></span>
+                <span class="l-en">Tip: press <kbd>Ctrl</kbd>+<kbd>K</kbd> or open the terminal <kbd>&gt;_</kbd></span>
             </div>
         </section>
 
@@ -1140,7 +1151,7 @@
         <div class="footer-inner">
             <p class="footer-line">
                 <span class="footer-prompt">$</span> echo "<span class="l-es">Hecho con</span><span class="l-en">Built
-                    with</span> <span class="footer-heart">♥</span> + Fira Code · Santiago, Chile"
+                    with</span> <span class="footer-heart">♥</span> + Geist Mono · Santiago, Chile"
             </p>
             <p class="footer-meta">
                 © <span id="footerYear">2026</span> Fabián Muñoz ·
@@ -1243,6 +1254,7 @@
 
     <!-- Main Script -->
     <script src="./main.js" defer></script>
+    <script src="./signal.js" defer></script>
 </body>
 
 </html>
