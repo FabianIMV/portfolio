@@ -292,6 +292,9 @@ a {
 
 .sx-hero .typing-container {
     margin: 0;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
     font-family: var(--mono);
     font-size: 0.95rem;
     color: var(--text-dim);
@@ -567,11 +570,14 @@ a {
 }
 
 .sx-marquee-list li::after {
-    content: '✳';
+    /* Drawn with CSS: iOS renders the ✳ glyph as a green emoji */
+    content: '';
+    width: 7px;
+    height: 7px;
     margin-left: 34px;
-    font-style: normal;
-    font-size: 1rem;
-    color: var(--acid);
+    background: var(--acid);
+    transform: rotate(45deg);
+    flex: none;
 }
 
 @keyframes sx-marquee {
@@ -1032,7 +1038,7 @@ main {
 /* ---------- Responsive ---------- */
 @media (max-width: 980px) {
     .sx-hero-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         gap: 28px;
         padding: 0 20px;
     }
@@ -1058,6 +1064,7 @@ main {
 
     .sx-portrait-frame {
         max-height: none;
+        aspect-ratio: 1;
     }
 
     .sx-portrait-hint {
@@ -1122,6 +1129,8 @@ main {
 
     .sx-marquee-list li::after {
         margin-left: 22px;
+        width: 6px;
+        height: 6px;
     }
 
     .section {
