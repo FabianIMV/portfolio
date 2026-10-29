@@ -6,8 +6,10 @@ GitHub: github.com/FabianIMV
 Location: Santiago, Chile
 
 /* SITE */
-Last update: 2025/12/04
+Last update: 2026/10/29
 Language: English / Spanish
 Standards: HTML5, CSS3, ES6+
-Components: Three.js, GSAP, Alpine.js, Tailwind CSS
-Software: VS Code, GitHub Copilot
+Components: Vanilla HTML/CSS/JS (no framework, no build step)
+Terminal mode: Next.js, three.js
+Hosting: GitHub Pages
+Software: VS Code, GitHub Copilot, Claude Code
