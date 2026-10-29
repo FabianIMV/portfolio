@@ -159,15 +159,6 @@ html[data-lang="es"] .l-en {
     -webkit-mask-image: radial-gradient(ellipse 90% 75% at 50% 30%, black 30%, transparent 100%);
 }
 
-#bgCanvas {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
 /* ---------- Scroll progress ---------- */
 .scroll-indicator {
     position: fixed;
@@ -2384,10 +2375,6 @@ main {
     .reveal {
         opacity: 1;
         transform: none;
-    }
-
-    #bgCanvas {
-        display: none;
     }
 
     .alert-stream-scroll {

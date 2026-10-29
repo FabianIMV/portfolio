@@ -34,7 +34,7 @@ Muestra:
 ```bash
 aws dynamodb scan --table-name portfolio-chatbot-messages \
   --filter-expression "ipAddress = :ip" \
-  --expression-attribute-values '{":ip":{"S":"190.22.39.239"}}'
+  --expression-attribute-values '{":ip":{"S":"<IP>"}}'
 ```
 
 ### Ver mensajes de hoy:
@@ -62,14 +62,14 @@ aws dynamodb scan --table-name portfolio-chatbot-messages | \
 Cada mensaje tiene:
 ```json
 {
-  "messageId": "1764103085447-ntw2p9iur",
-  "sessionId": "MTkwLjIyLjM5LjIz",       // Hash de IP+UserAgent
-  "ipAddress": "190.22.39.239",          // IP del usuario
-  "timestamp": "2025-11-25T20:38:05.447Z",
-  "userMessage": "cuentame de fabian",
+  "messageId": "<timestamp>-<random>",
+  "sessionId": "<sessionId>",            // Hash de IP+UserAgent
+  "ipAddress": "<IP>",                   // IP del usuario
+  "timestamp": "2025-01-01T00:00:00.000Z",
+  "userMessage": "<mensaje del visitante>",
   "botResponse": "Fabián es...",
   "language": "es",
-  "createdAt": 1764103085                // Unix timestamp
+  "createdAt": 1735689600                // Unix timestamp
 }
 ```
 

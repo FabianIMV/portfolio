@@ -18,7 +18,6 @@
         initGauges();
         initSpotlight();
         initTypingEffect();
-        initBackgroundCanvas();
         initGitHubStats();
         initAlertStream();
         initChatbot();
@@ -265,67 +264,6 @@
             setTimeout(type, delay);
         }
         setTimeout(type, 900);
-    }
-
-    // ========== BACKGROUND CANVAS (lightweight starfield) ==========
-    function initBackgroundCanvas() {
-        const canvas = $('#bgCanvas');
-        if (!canvas || prefersReducedMotion) return;
-        if (navigator.connection && navigator.connection.saveData) return;
-
-        const ctx = canvas.getContext('2d');
-        const isMobile = window.innerWidth < 700;
-        const STAR_COUNT = isMobile ? 50 : 110;
-        let width, height, stars = [];
-        let running = true;
-
-        function resize() {
-            const dpr = Math.min(window.devicePixelRatio || 1, 2);
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width * dpr;
-            canvas.height = height * dpr;
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        }
-
-        function makeStar() {
-            const palette = ['rgba(0,212,255,', 'rgba(0,255,136,', 'rgba(139,92,246,', 'rgba(232,236,244,'];
-            return {
-                x: Math.random() * width,
-                y: Math.random() * height,
-                r: Math.random() * 1.4 + 0.3,
-                vy: Math.random() * 0.16 + 0.03,
-                color: palette[Math.floor(Math.random() * palette.length)],
-                alpha: Math.random() * 0.5 + 0.15,
-                pulse: Math.random() * Math.PI * 2
-            };
-        }
-
-        function frame(t) {
-            if (!running) return;
-            ctx.clearRect(0, 0, width, height);
-            for (const s of stars) {
-                s.y -= s.vy;
-                if (s.y < -4) { s.y = height + 4; s.x = Math.random() * width; }
-                const tw = s.alpha * (0.7 + 0.3 * Math.sin(t / 900 + s.pulse));
-                ctx.beginPath();
-                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-                ctx.fillStyle = s.color + tw + ')';
-                ctx.fill();
-            }
-            requestAnimationFrame(frame);
-        }
-
-        resize();
-        stars = Array.from({ length: STAR_COUNT }, makeStar);
-        requestAnimationFrame(frame);
-
-        window.addEventListener('resize', resize);
-        document.addEventListener('visibilitychange', () => {
-            const wasRunning = running;
-            running = !document.hidden;
-            if (running && !wasRunning) requestAnimationFrame(frame);
-        });
     }
 
     // ========== GITHUB STATS (live, cached, graceful) ==========
