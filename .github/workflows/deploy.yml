@@ -22,13 +22,6 @@ jobs:
     - name: Checkout 🛎️
       uses: actions/checkout@v4
 
-    - name: Build with API Key
-      env:
-        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      run: |
-        # Crear el archivo de configuración con la API key
-        echo "window.GEMINI_CONFIG = { apiKey: '$GEMINI_API_KEY' };" > config.js
-
     - name: Setup Pages
       uses: actions/configure-pages@v4
 
